@@ -1,0 +1,110 @@
+// Investigate inverted savings attribution drivers.
+// Purpose: Identify the rows and dimensions where ContractedCost < EffectiveCost
+// (and optionally ListCost < ContractedCost) so data engineering can remediate source quality.
+//
+// Usage:
+// 1) Set targetMonthStart to the month you want to investigate.
+// 2) Run each section top-to-bottom.
+
+let targetMonthStart = datetime(2026-02-01);
+let targetMonthEnd = startofmonth(datetime_add('month', 1, targetMonthStart));
+
+let scoped =
+    CostsByMonth
+    | where BillingPeriodStart >= targetMonthStart and BillingPeriodStart < targetMonthEnd
+    | where x_AmortizationClass != 'Principal'
+    | extend
+        ListCost = todouble(ListCost),
+        ContractedCost = todouble(ContractedCost),
+        EffectiveCost = todouble(EffectiveCost),
+        EffectiveCostAbs = abs(todouble(EffectiveCost)),
+        ProviderName = tostring(column_ifexists('ProviderName', '')),
+        BillingAccountId = tostring(column_ifexists('BillingAccountId', '')),
+        BillingProfileId = tostring(column_ifexists('x_BillingProfileId', '')),
+        SubAccountId = tostring(column_ifexists('SubAccountId', '')),
+        SubAccountName = tostring(column_ifexists('SubAccountName', '')),
+        ChargeCategory = tostring(column_ifexists('ChargeCategory', '')),
+        PricingCategory = tostring(column_ifexists('PricingCategory', '')),
+        CommitmentDiscountCategory = tostring(column_ifexists('CommitmentDiscountCategory', '')),
+        CommitmentDiscountType = tostring(column_ifexists('CommitmentDiscountType', '')),
+        CommitmentDiscountStatus = tostring(column_ifexists('CommitmentDiscountStatus', '')),
+        ResourceType = tostring(column_ifexists('ResourceType', '')),
+        ServiceName = tostring(column_ifexists('ServiceName', ''));
+
+// Section A: high-level month health.
+scoped
+| summarize
+    Rows = count(),
+    ListLtContracted = countif(ListCost < ContractedCost),
+    ContractedLtEffective = countif(ContractedCost < EffectiveCost),
+    InvertedRows = countif(ListCost < ContractedCost or ContractedCost < EffectiveCost),
+    InvertedEffectiveCost = sumif(EffectiveCostAbs, ListCost < ContractedCost or ContractedCost < EffectiveCost),
+    TotalEffectiveCost = sum(EffectiveCostAbs)
+| extend
+    InvertedRowPercent = round(100.0 * todouble(InvertedRows) / todouble(Rows), 2),
+    InvertedCostPercent = round(100.0 * InvertedEffectiveCost / TotalEffectiveCost, 2),
+    Month = format_datetime(targetMonthStart, 'yyyy-MM')
+;
+
+// Section B: top drivers by provider/account and discount attributes.
+scoped
+| where ContractedCost < EffectiveCost
+| summarize
+    Rows = count(),
+    EffectiveCost = round(sum(EffectiveCostAbs), 2),
+    ContractedMinusEffective = round(sum(ContractedCost - EffectiveCost), 2)
+    by
+    ProviderName,
+    BillingAccountId,
+    BillingProfileId,
+    SubAccountId,
+    SubAccountName,
+    PricingCategory,
+    ChargeCategory,
+    CommitmentDiscountCategory,
+    CommitmentDiscountType,
+    CommitmentDiscountStatus
+| order by EffectiveCost desc
+| take 200
+;
+
+// Section C: top service/resource drivers.
+scoped
+| where ContractedCost < EffectiveCost
+| summarize
+    Rows = count(),
+    EffectiveCost = round(sum(EffectiveCostAbs), 2)
+    by
+    ServiceName,
+    ResourceType,
+    PricingCategory,
+    CommitmentDiscountType,
+    CommitmentDiscountStatus
+| order by EffectiveCost desc
+| take 200
+;
+
+// Section D: sample anomalous rows for debugging mappings.
+scoped
+| where ListCost < ContractedCost or ContractedCost < EffectiveCost
+| project
+    BillingPeriodStart,
+    ProviderName,
+    BillingAccountId,
+    BillingProfileId,
+    SubAccountId,
+    SubAccountName,
+    ServiceName,
+    ResourceType,
+    ChargeCategory,
+    PricingCategory,
+    CommitmentDiscountCategory,
+    CommitmentDiscountType,
+    CommitmentDiscountStatus,
+    ListCost,
+    ContractedCost,
+    EffectiveCost,
+    DeltaListVsContracted = round(ListCost - ContractedCost, 4),
+    DeltaContractedVsEffective = round(ContractedCost - EffectiveCost, 4)
+| take 200
+;
