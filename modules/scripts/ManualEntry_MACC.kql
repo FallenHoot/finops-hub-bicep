@@ -1,0 +1,26 @@
+// Manual MACC data entry template for customers without API-based MACC ingestion.
+// Update the values in the datatable row below, then run this script in your ADX database.
+
+.create table ifnotexists MACC_ManualEntry (
+    Description:string,
+    Currency:string,
+    StartDate:datetime,
+    ExpirationDate:datetime,
+    CommitmentAmount:real
+)
+
+.set-or-replace MACC_ManualEntry <|
+datatable(
+    Description:string,
+    Currency:string,
+    StartDate:datetime,
+    ExpirationDate:datetime,
+    CommitmentAmount:real
+)
+[
+    "Example MACC commitment", "USD", datetime(2026-01-01), datetime(2026-12-31), 1000000.0
+]
+
+// Optional quick check
+MACC_ManualEntry
+| project Description, Currency, StartDate, ExpirationDate, CommitmentAmount
