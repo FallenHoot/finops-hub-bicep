@@ -1868,7 +1868,7 @@
         "width": 22,
         "height": 3
       },
-      "markdownText": "**12 Rate Optimization questions answered on this page:**\n\n[How much are we saving overall?](?tile=9513d9d7-be4a-468c-aed0-f0076c9bf3c4) &nbsp;&middot;&nbsp; [What are reservations & savings plans saving me?](?tile=e8018da4-7269-4e91-9f32-4bcf390746af) &nbsp;&middot;&nbsp; [What is my Effective Savings Rate?](?tile=961b8980-213f-4bc7-9512-8a08614229e0) &nbsp;&middot;&nbsp; [Am I actually using my commitments?](?tile=36c1dede-49c9-4ae3-a19a-a230f87e9197) &nbsp;&middot;&nbsp; [Who gets the commitment benefit (chargeback)?](?tile=e22f49e5-766c-4b35-8b4c-b99bef142d42) &nbsp;&middot;&nbsp; [What did we purchase?](?tile=84da605b-6a0d-4a2a-aac3-a4160f9de10d) &nbsp;&middot;&nbsp; [Which SKUs are we using most?](?tile=a3d814b8-ff20-4919-ae2a-f1caec997edf) &nbsp;&middot;&nbsp; [Which SKUs have negotiated discounts?](?tile=72aa5a62-e129-4ffa-be62-82c833282d27) &nbsp;&middot;&nbsp; [Which SKUs have commitment discounts?](?tile=3d7688f7-0a1c-4564-b851-f380a22817bf) &nbsp;&middot;&nbsp; [Am I maximizing Azure Hybrid Benefit?](?tile=d2e4a321-9c2c-411b-8a20-19fd86dab3fe) &nbsp;&middot;&nbsp; [What SaaS am I spending on?](?tile=3c4196e1-4ee6-4269-9232-819f9c874952) &nbsp;&middot;&nbsp; [Am I using Spot VMs to save money?](?tile=78ddd908-bed3-480e-b736-263e5719ded1)",
+      "markdownText": "**13 Rate Optimization questions answered on this page:**\n\n[How much are we saving overall?](?tile=9513d9d7-be4a-468c-aed0-f0076c9bf3c4) &nbsp;&middot;&nbsp; [What are reservations & savings plans saving me?](?tile=e8018da4-7269-4e91-9f32-4bcf390746af) &nbsp;&middot;&nbsp; [What is my Effective Savings Rate?](?tile=961b8980-213f-4bc7-9512-8a08614229e0) &nbsp;&middot;&nbsp; [Am I actually using my commitments?](?tile=36c1dede-49c9-4ae3-a19a-a230f87e9197) &nbsp;&middot;&nbsp; [Who gets the commitment benefit (chargeback)?](?tile=e22f49e5-766c-4b35-8b4c-b99bef142d42) &nbsp;&middot;&nbsp; [What did we purchase?](?tile=84da605b-6a0d-4a2a-aac3-a4160f9de10d) &nbsp;&middot;&nbsp; [Which SKUs are we using most?](?tile=a3d814b8-ff20-4919-ae2a-f1caec997edf) &nbsp;&middot;&nbsp; [Which SKUs have negotiated discounts?](?tile=72aa5a62-e129-4ffa-be62-82c833282d27) &nbsp;&middot;&nbsp; [Which SKUs have commitment discounts?](?tile=3d7688f7-0a1c-4564-b851-f380a22817bf) &nbsp;&middot;&nbsp; [Am I maximizing Azure Hybrid Benefit?](?tile=d2e4a321-9c2c-411b-8a20-19fd86dab3fe) &nbsp;&middot;&nbsp; [What SaaS am I spending on?](?tile=3c4196e1-4ee6-4269-9232-819f9c874952) &nbsp;&middot;&nbsp; [Am I using Spot VMs to save money?](?tile=78ddd908-bed3-480e-b736-263e5719ded1) &nbsp;&middot;&nbsp; [Can I save on Premium SSD v1 vs v2?](?tile=c8f2a3b4-5d6e-7f8a-9b0c-1d2e3f4a5b6c)",
       "visualOptions": {}
     },
     {
@@ -2004,6 +2004,76 @@
           "all": false,
           "limit": 1
         }
+      }
+    },
+    {
+      "id": "b7e1f2a3-4c5d-6e7f-8a9b-0c1d2e3f4a5b",
+      "title": "",
+      "visualType": "markdownCard",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "layout": {
+        "x": 0,
+        "y": 140,
+        "width": 22,
+        "height": 3
+      },
+      "markdownText": "# Disk SKU comparison (Preview)\nCompare Premium SSD v1 vs Premium SSD v2 costs to identify potential savings from migrating disk tiers. Premium SSD v2 offers lower cost per provisioned IOPS and throughput for workloads that don't need guaranteed burst performance.\n\n[Learn more about Premium SSD v2](https://learn.microsoft.com/azure/virtual-machines/disks-types#premium-ssd-v2)",
+      "visualOptions": {}
+    },
+    {
+      "id": "c8f2a3b4-5d6e-7f8a-9b0c-1d2e3f4a5b6c",
+      "title": "Disk tier cost comparison (last n days)",
+      "visualType": "multistat",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "layout": {
+        "x": 0,
+        "y": 143,
+        "width": 10,
+        "height": 6
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "d9a3b4c5-6e7f-8a9b-0c1d-2e3f4a5b6c7d"
+      },
+      "description": "Summary comparison of Premium SSD v1 vs v2 costs. Shows total spend, disk count, and average cost per disk for each tier. If v1 cost is significantly higher, migration to v2 could save money.",
+      "visualOptions": {
+        "multiStat__textSize": "large",
+        "multiStat__valueColumn": "Value",
+        "colorRulesDisabled": false,
+        "multiStat__displayOrientation": "horizontal",
+        "multiStat__labelColumn": "Label",
+        "multiStat__slot": {
+          "width": 5,
+          "height": 1
+        },
+        "colorRules": []
+      }
+    },
+    {
+      "id": "d9a4b5c6-7e8f-9a0b-1c2d-3e4f5a6b7c8d",
+      "title": "Disk tier detail by SKU (last n days)",
+      "visualType": "table",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "layout": {
+        "x": 10,
+        "y": 143,
+        "width": 12,
+        "height": 6
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "e0b4c5d6-7f8a-9b0c-1d2e-3f4a5b6c7d8e"
+      },
+      "description": "Detail breakdown of disk costs by SKU description and tier. Shows each disk SKU, its tier classification (Premium SSD v1/v2), resource count, total cost, and cost per disk.",
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
       }
     },
     {
@@ -7177,6 +7247,170 @@
         "table__renderLinks": [],
         "colorRules": []
       }
+    },
+    {
+      "id": "93c19a0c-9055-4eee-bf18-b1a4d6dbb1ec",
+      "title": "Commitment burn by type",
+      "visualType": "table",
+      "pageId": "979769b6-1072-422e-a7d3-3ae24ee70970",
+      "layout": {
+        "x": 0,
+        "y": 3,
+        "width": 8,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "8fa76309-d610-40aa-95b5-4b6fcb246d4a"
+      },
+      "description": "Historical commitment purchase charges by type. This gives you the monthly add-on Azure portal forecasts usually miss during the month.",
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
+    },
+    {
+      "id": "d8bbf356-f32a-42ed-8de9-0195ed199a40",
+      "title": "Commitment burn trend",
+      "visualType": "column",
+      "pageId": "979769b6-1072-422e-a7d3-3ae24ee70970",
+      "layout": {
+        "x": 8,
+        "y": 3,
+        "width": 14,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "1c675228-2420-4f27-b1ac-3ff4191bdf22"
+      },
+      "description": "Monthly purchase charges over time. Stable patterns make the historical burn a usable enrichment for mid-month forecasting.",
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "right",
+        "xColumnTitle": "",
+        "xColumn": "BillingPeriodStart",
+        "yColumns": [
+          "CommitmentBurn"
+        ],
+        "seriesColumns": [
+          "CommitmentType"
+        ],
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "selectedDataOnLoad": {
+          "all": true,
+          "limit": 10
+        },
+        "dataPointsTooltip": {
+          "all": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "id": "f91c3496-ae9d-456e-8bd0-efe14958cb17",
+      "title": "Usage vs commitment mix",
+      "visualType": "bar",
+      "pageId": "979769b6-1072-422e-a7d3-3ae24ee70970",
+      "layout": {
+        "x": 0,
+        "y": 10,
+        "width": 8,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "64a2fc85-7054-43df-8b8b-58e26af98e22"
+      },
+      "description": "Shows how much of the recent bill comes from usage versus commitment purchases so customers can quantify the forecast blind spot.",
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": true,
+        "legendLocation": "right",
+        "xColumnTitle": "",
+        "xColumn": "SpendType",
+        "yColumns": [
+          "Amount"
+        ],
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "selectedDataOnLoad": {
+          "all": true,
+          "limit": 10
+        },
+        "dataPointsTooltip": {
+          "all": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "id": "52f99b4c-3190-4086-8057-656cf0e73e4b",
+      "title": "Forecast gap analysis",
+      "visualType": "table",
+      "pageId": "979769b6-1072-422e-a7d3-3ae24ee70970",
+      "layout": {
+        "x": 8,
+        "y": 10,
+        "width": 14,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "d5e3631a-345b-4310-ac9b-b1970d694929"
+      },
+      "description": "A practical explanation tile for customers: usage-only forecast proxy, commitment add-on, and expected monthly total.",
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
     }
   ],
   "baseQueries": [
@@ -7479,6 +7713,10 @@
     {
       "name": "Rightsizing (Preview)",
       "id": "e2b6c7d5-9a0f-4e1b-f1d4-5b6c7d8e9f0a"
+    },
+    {
+      "name": "Forecast Enrichment (Preview)",
+      "id": "979769b6-1072-422e-a7d3-3ae24ee70970"
     }
   ],
   "queries": [
@@ -7601,7 +7839,7 @@
         "kind": "inline",
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
-      "text": "let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);\nCostsPlus\n| where startofmonth(ChargePeriodStart) >= startofmonth(now(), -1)\n| where x_AmortizationClass != 'Principal'\n| summarize \n    EffectiveCost = sum(EffectiveCost),\n    ContractedCost = sum(ContractedCost),\n    ListCost = sum(ListCost)\n    by\n    ChargePeriodStart,\n    Month = strcat(format_datetime(ChargePeriodStart, 'MM '), monthname[monthofyear(ChargePeriodStart)])\n| extend ContractedCostNormalized = min_of(ContractedCost, ListCost)\n    | extend EffectiveCostNormalized = min_of(EffectiveCost, ContractedCostNormalized)\n    | extend CommitmentDiscountSavings = ContractedCostNormalized - EffectiveCostNormalized\n    | extend NegotiatedDiscountSavings = ListCost - ContractedCostNormalized\n| order by ChargePeriodStart asc\n| extend EffectiveCostRunningTotal = row_cumsum(EffectiveCost, prev(Month) != Month)\n| extend CommitmentDiscountSavingsRunningTotal = row_cumsum(CommitmentDiscountSavings, prev(Month) != Month)\n| extend NegotiatedDiscountSavingsRunningTotal = row_cumsum(NegotiatedDiscountSavings, prev(Month) != Month)\n| project ChargePeriodStart, CommitmentDiscountSavingsRunningTotal, NegotiatedDiscountSavingsRunningTotal, EffectiveCostRunningTotal, Month\n| render areachart  ",
+      "text": "let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);\nCostsPlus\n| where startofmonth(ChargePeriodStart) >= startofmonth(now(), -1)\n| where x_AmortizationClass != 'Principal'\n// FX fix: reconstruct ContractedCost in billing currency from USD unit prices\n| extend ContractedCostFX = ContractedUnitPrice * ConsumedQuantity * coalesce(x_BillingExchangeRate, real(1))\n| summarize \n    EffectiveCost = sum(EffectiveCost),\n    ContractedCost = sum(ContractedCostFX),\n    ListCost = sum(ListCost)\n    by\n    ChargePeriodStart,\n    Month = strcat(format_datetime(ChargePeriodStart, 'MM '), monthname[monthofyear(ChargePeriodStart)])\n| extend CommitmentDiscountSavings = max_of(ContractedCost - EffectiveCost, real(0))\n| extend NegotiatedDiscountSavings = max_of(ListCost - ContractedCost, real(0))\n| order by ChargePeriodStart asc\n| extend EffectiveCostRunningTotal = row_cumsum(EffectiveCost, prev(Month) != Month)\n| extend CommitmentDiscountSavingsRunningTotal = row_cumsum(CommitmentDiscountSavings, prev(Month) != Month)\n| extend NegotiatedDiscountSavingsRunningTotal = row_cumsum(NegotiatedDiscountSavings, prev(Month) != Month)\n| project ChargePeriodStart, CommitmentDiscountSavingsRunningTotal, NegotiatedDiscountSavingsRunningTotal, EffectiveCostRunningTotal, Month\n| render areachart  ",
       "id": "dcc1f533-e5f9-4855-9e4c-21e21fcdf943",
       "usedVariables": [
         "CostsPlus"
@@ -7612,7 +7850,7 @@
         "kind": "inline",
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
-      "text": "let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);\nlet data = materialize(\n    CostsByMonth\n    | where BillingPeriodStart >= startofmonth(now(), -1)\n    | where x_AmortizationClass != 'Principal'\n    | summarize \n        BilledCost = sum(BilledCost),\n        EffectiveCost = sum(EffectiveCost),\n        ContractedCost = sum(ContractedCost),\n        ListCost = sum(ListCost)\n        by\n        BillingPeriodStart\n    | order by BillingPeriodStart asc\n    | extend ContractedCostNormalized = min_of(ContractedCost, ListCost)\n    | extend EffectiveCostNormalized = min_of(EffectiveCost, ContractedCostNormalized)\n    | extend CommitmentDiscountSavings = ContractedCostNormalized - EffectiveCostNormalized\n    | extend NegotiatedDiscountSavings = ListCost - ContractedCostNormalized\n    | extend Month = monthname[monthofyear(BillingPeriodStart)]\n    | project json = todynamic(strcat('[{ \"Type\":\"Billed cost\", \"Count\":', BilledCost, ' }, { \"Type\":\"Effective cost\", \"Count\":', EffectiveCost, ' }, { \"Type\":\"Commitment savings\", \"Count\":', CommitmentDiscountSavings, ' }, { \"Type\":\"Negotiated savings\", \"Count\":', NegotiatedDiscountSavings, ' }]')), Month, IsThisMonth = BillingPeriodStart >= startofmonth(now())\n    | mv-expand json\n    | project Label = strcat(json.Type, ' (', Month, ')'), Count = tolong(json.Count), IsThisMonth\n);\ndata",
+      "text": "let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);\nlet data = materialize(\n    CostsByMonth\n    | where BillingPeriodStart >= startofmonth(now(), -1)\n    | where x_AmortizationClass != 'Principal'\n    // FX fix: reconstruct ContractedCost in billing currency from USD unit prices\n    | extend ContractedCostFX = ContractedUnitPrice * ConsumedQuantity * coalesce(x_BillingExchangeRate, real(1))\n    | summarize \n        BilledCost = sum(BilledCost),\n        EffectiveCost = sum(EffectiveCost),\n        ContractedCost = sum(ContractedCostFX),\n        ListCost = sum(ListCost)\n        by\n        BillingPeriodStart\n    | order by BillingPeriodStart asc\n    | extend CommitmentDiscountSavings = max_of(ContractedCost - EffectiveCost, real(0))\n    | extend NegotiatedDiscountSavings = max_of(ListCost - ContractedCost, real(0))\n    | extend Month = monthname[monthofyear(BillingPeriodStart)]\n    | project json = todynamic(strcat('[{ \"Type\":\"Billed cost\", \"Count\":', BilledCost, ' }, { \"Type\":\"Effective cost\", \"Count\":', EffectiveCost, ' }, { \"Type\":\"Commitment savings\", \"Count\":', CommitmentDiscountSavings, ' }, { \"Type\":\"Negotiated savings\", \"Count\":', NegotiatedDiscountSavings, ' }]')), Month, IsThisMonth = BillingPeriodStart >= startofmonth(now())\n    | mv-expand json\n    | project Label = strcat(json.Type, ' (', Month, ')'), Count = tolong(json.Count), IsThisMonth\n);\ndata",
       "id": "e8b343dc-7430-4487-8d44-ef48ac454f2d",
       "usedVariables": [
         "CostsByMonth"
@@ -7623,7 +7861,7 @@
         "kind": "inline",
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
-      "text": "let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);\nlet data = (\n    CostsByMonth\n    | where x_AmortizationClass != 'Principal'\n    | extend ContractedCostNormalized = min_of(todouble(ContractedCost), todouble(ListCost))\n    | extend EffectiveCostNormalized = min_of(todouble(EffectiveCost), ContractedCostNormalized)\n    | summarize \n        BilledCost     = todouble(round(sum(BilledCost), 2)),\n        EffectiveCost  = todouble(round(sum(EffectiveCostNormalized), 2)),\n        ContractedCost = todouble(round(sum(ContractedCostNormalized), 2)),\n        ListCost       = todouble(round(sum(ListCost), 2)),\n        CommitmentDiscountSavings = todouble(round(sum(ContractedCostNormalized - EffectiveCostNormalized), 2)),\n        NegotiatedDiscountSavings = todouble(round(sum(ListCost - ContractedCostNormalized), 2)),\n        CommitmentDiscountSavingsRaw = todouble(round(sum(todouble(ContractedCost) - todouble(EffectiveCost)), 2)),\n        NegotiatedDiscountSavingsRaw = todouble(round(sum(todouble(ListCost) - todouble(ContractedCost)), 2)),\n        TotalSavingsRaw = todouble(round(sum(todouble(ListCost) - todouble(EffectiveCost)), 2))\n        by\n        BillingPeriodStart\n    | order by BillingPeriodStart asc\n    | extend AttributedSavingsNormalized = todouble(round(NegotiatedDiscountSavings + CommitmentDiscountSavings, 2))\n    | extend InvertedAdjustment = todouble(round(TotalSavingsRaw - AttributedSavingsNormalized, 2))\n    | extend BillingPeriod = strcat(format_datetime(BillingPeriodStart, 'yyyy-MM - '), monthname[monthofyear(BillingPeriodStart)])\n);\ndata | extend Data = 'Billed cost' | evaluate pivot(BillingPeriod, sum(BilledCost), Data)\n| union (data | extend Data = 'Effective cost'                  | evaluate pivot(BillingPeriod, sum(EffectiveCost), Data))\n| union (data | extend Data = 'Negotiated savings (normalized)' | evaluate pivot(BillingPeriod, sum(NegotiatedDiscountSavings), Data))\n| union (data | extend Data = 'Commitment savings (normalized)' | evaluate pivot(BillingPeriod, sum(CommitmentDiscountSavings), Data))\n| union (data | extend Data = 'Negotiated savings (raw)'        | evaluate pivot(BillingPeriod, sum(NegotiatedDiscountSavingsRaw), Data))\n| union (data | extend Data = 'Commitment savings (raw)'        | evaluate pivot(BillingPeriod, sum(CommitmentDiscountSavingsRaw), Data))\n| union (data | extend Data = 'Inverted adjustment'             | evaluate pivot(BillingPeriod, sum(InvertedAdjustment), Data))\n",
+      "text": "let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);\nlet data = (\n    CostsByMonth\n    | where x_AmortizationClass != 'Principal'\n    // FX fix: reconstruct ContractedCost in billing currency from USD unit prices\n    | extend ContractedCostFX = ContractedUnitPrice * ConsumedQuantity * coalesce(x_BillingExchangeRate, real(1))\n    | summarize \n        BilledCost     = todouble(round(sum(BilledCost), 2)),\n        EffectiveCost  = todouble(round(sum(EffectiveCost), 2)),\n        ContractedCostFX = todouble(round(sum(ContractedCostFX), 2)),\n        ListCost       = todouble(round(sum(ListCost), 2)),\n        CommitmentDiscountSavingsRaw = todouble(round(sum(todouble(ContractedCost) - todouble(EffectiveCost)), 2)),\n        NegotiatedDiscountSavingsRaw = todouble(round(sum(todouble(ListCost) - todouble(ContractedCost)), 2)),\n        TotalSavingsRaw = todouble(round(sum(todouble(ListCost) - todouble(EffectiveCost)), 2))\n        by\n        BillingPeriodStart\n    | order by BillingPeriodStart asc\n    | extend CommitmentDiscountSavingsFX = todouble(round(max_of(ContractedCostFX - EffectiveCost, real(0)), 2))\n    | extend NegotiatedDiscountSavingsFX = todouble(round(max_of(ListCost - ContractedCostFX, real(0)), 2))\n    | extend AttributedSavingsFX = todouble(round(NegotiatedDiscountSavingsFX + CommitmentDiscountSavingsFX, 2))\n    | extend FXAdjustment = todouble(round(TotalSavingsRaw - AttributedSavingsFX, 2))\n    | extend BillingPeriod = strcat(format_datetime(BillingPeriodStart, 'yyyy-MM - '), monthname[monthofyear(BillingPeriodStart)])\n);\ndata | extend Data = 'Billed cost' | evaluate pivot(BillingPeriod, first(BilledCost), Data)\n| union (data | extend Data = 'Effective cost'                  | evaluate pivot(BillingPeriod, first(EffectiveCost), Data))\n| union (data | extend Data = 'ContractedCost (FX-adjusted)'    | evaluate pivot(BillingPeriod, first(ContractedCostFX), Data))\n| union (data | extend Data = 'Negotiated savings (FX)'         | evaluate pivot(BillingPeriod, first(NegotiatedDiscountSavingsFX), Data))\n| union (data | extend Data = 'Commitment savings (FX)'         | evaluate pivot(BillingPeriod, first(CommitmentDiscountSavingsFX), Data))\n| union (data | extend Data = 'Negotiated savings (raw)'        | evaluate pivot(BillingPeriod, first(NegotiatedDiscountSavingsRaw), Data))\n| union (data | extend Data = 'Commitment savings (raw)'        | evaluate pivot(BillingPeriod, first(CommitmentDiscountSavingsRaw), Data))\n| union (data | extend Data = 'FX adjustment'                   | evaluate pivot(BillingPeriod, first(FXAdjustment), Data))\n",
       "id": "c077a6d4-719f-42fe-b39b-36f77dc68976",
       "usedVariables": [
         "CostsByMonth"
@@ -7634,7 +7872,7 @@
         "kind": "inline",
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
-      "text": "let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);\nlet data = (\n    CostsByMonth\n    | where x_AmortizationClass != 'Principal'\n    | extend ContractedCostNormalized = min_of(todouble(ContractedCost), todouble(ListCost))\n    | extend EffectiveCostNormalized = min_of(todouble(EffectiveCost), ContractedCostNormalized)\n    | summarize \n        BilledCost     = todouble(round(sum(BilledCost), 2)),\n        EffectiveCost  = todouble(round(sum(EffectiveCostNormalized), 2)),\n        ContractedCost = todouble(round(sum(ContractedCostNormalized), 2)),\n        ListCost       = todouble(round(sum(ListCost), 2)),\n        CommitmentDiscountSavings = todouble(round(sum(ContractedCostNormalized - EffectiveCostNormalized), 2)),\n        NegotiatedDiscountSavings = todouble(round(sum(ListCost - ContractedCostNormalized), 2)),\n        CommitmentDiscountSavingsRaw = todouble(round(sum(todouble(ContractedCost) - todouble(EffectiveCost)), 2)),\n        NegotiatedDiscountSavingsRaw = todouble(round(sum(todouble(ListCost) - todouble(ContractedCost)), 2)),\n        TotalSavingsRaw = todouble(round(sum(todouble(ListCost) - todouble(EffectiveCost)), 2))\n        by\n        BillingPeriodStart\n    | order by BillingPeriodStart asc\n    | extend AttributedSavingsNormalized = todouble(round(NegotiatedDiscountSavings + CommitmentDiscountSavings, 2))\n    | extend InvertedAdjustment = todouble(round(TotalSavingsRaw - AttributedSavingsNormalized, 2))\n    | extend BillingPeriod = strcat(format_datetime(BillingPeriodStart, 'yyyy-MM - '), monthname[monthofyear(BillingPeriodStart)])\n);\ndata | extend Data = 'Billed cost' | evaluate pivot(BillingPeriod, sum(BilledCost), Data)\n| union (data | extend Data = 'Effective cost'                  | evaluate pivot(BillingPeriod, sum(EffectiveCost), Data))\n| union (data | extend Data = 'Negotiated savings (normalized)' | evaluate pivot(BillingPeriod, sum(NegotiatedDiscountSavings), Data))\n| union (data | extend Data = 'Commitment savings (normalized)' | evaluate pivot(BillingPeriod, sum(CommitmentDiscountSavings), Data))\n| union (data | extend Data = 'Negotiated savings (raw)'        | evaluate pivot(BillingPeriod, sum(NegotiatedDiscountSavingsRaw), Data))\n| union (data | extend Data = 'Commitment savings (raw)'        | evaluate pivot(BillingPeriod, sum(CommitmentDiscountSavingsRaw), Data))\n| union (data | extend Data = 'Inverted adjustment'             | evaluate pivot(BillingPeriod, sum(InvertedAdjustment), Data))\n",
+      "text": "let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);\nlet data = (\n    CostsByMonth\n    | where x_AmortizationClass != 'Principal'\n    // FX fix: reconstruct ContractedCost in billing currency from USD unit prices\n    | extend ContractedCostFX = ContractedUnitPrice * ConsumedQuantity * coalesce(x_BillingExchangeRate, real(1))\n    | summarize \n        BilledCost     = todouble(round(sum(BilledCost), 2)),\n        EffectiveCost  = todouble(round(sum(EffectiveCost), 2)),\n        ContractedCostFX = todouble(round(sum(ContractedCostFX), 2)),\n        ListCost       = todouble(round(sum(ListCost), 2)),\n        CommitmentDiscountSavingsRaw = todouble(round(sum(todouble(ContractedCost) - todouble(EffectiveCost)), 2)),\n        NegotiatedDiscountSavingsRaw = todouble(round(sum(todouble(ListCost) - todouble(ContractedCost)), 2)),\n        TotalSavingsRaw = todouble(round(sum(todouble(ListCost) - todouble(EffectiveCost)), 2))\n        by\n        BillingPeriodStart\n    | order by BillingPeriodStart asc\n    | extend CommitmentDiscountSavingsFX = todouble(round(max_of(ContractedCostFX - EffectiveCost, real(0)), 2))\n    | extend NegotiatedDiscountSavingsFX = todouble(round(max_of(ListCost - ContractedCostFX, real(0)), 2))\n    | extend AttributedSavingsFX = todouble(round(NegotiatedDiscountSavingsFX + CommitmentDiscountSavingsFX, 2))\n    | extend FXAdjustment = todouble(round(TotalSavingsRaw - AttributedSavingsFX, 2))\n    | extend BillingPeriod = strcat(format_datetime(BillingPeriodStart, 'yyyy-MM - '), monthname[monthofyear(BillingPeriodStart)])\n);\ndata | extend Data = 'Billed cost' | evaluate pivot(BillingPeriod, first(BilledCost), Data)\n| union (data | extend Data = 'Effective cost'                  | evaluate pivot(BillingPeriod, first(EffectiveCost), Data))\n| union (data | extend Data = 'ContractedCost (FX-adjusted)'    | evaluate pivot(BillingPeriod, first(ContractedCostFX), Data))\n| union (data | extend Data = 'Negotiated savings (FX)'         | evaluate pivot(BillingPeriod, first(NegotiatedDiscountSavingsFX), Data))\n| union (data | extend Data = 'Commitment savings (FX)'         | evaluate pivot(BillingPeriod, first(CommitmentDiscountSavingsFX), Data))\n| union (data | extend Data = 'Negotiated savings (raw)'        | evaluate pivot(BillingPeriod, first(NegotiatedDiscountSavingsRaw), Data))\n| union (data | extend Data = 'Commitment savings (raw)'        | evaluate pivot(BillingPeriod, first(CommitmentDiscountSavingsRaw), Data))\n| union (data | extend Data = 'FX adjustment'                   | evaluate pivot(BillingPeriod, first(FXAdjustment), Data))\n",
       "id": "9d6635cd-503a-49bc-80c8-ac8157c6e923",
       "usedVariables": [
         "CostsByMonth"
@@ -7934,6 +8172,28 @@
         "kind": "inline",
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
+      "text": "// Disk tier cost comparison: Premium SSD v1 vs v2\nlet disks = CostsByDay\n| where x_ResourceType =~ 'Microsoft.Compute/disks'\n| where isnotempty(x_SkuDescription)\n| extend DiskTier = case(\n    x_SkuDescription has 'Premium SSD v2' or x_SkuMeterSubcategory has 'Premium SSD v2', 'Premium SSD v2',\n    x_SkuDescription has 'Premium SSD' or x_SkuMeterSubcategory has 'Premium SSD', 'Premium SSD v1',\n    x_SkuDescription has 'Standard SSD' or x_SkuMeterSubcategory has 'Standard SSD', 'Standard SSD',\n    x_SkuDescription has 'Ultra' or x_SkuMeterSubcategory has 'Ultra Disk', 'Ultra Disk',\n    x_SkuDescription has 'Standard HDD' or x_SkuMeterSubcategory has 'Standard HDD', 'Standard HDD',\n    'Other'\n);\nlet v1Cost = toscalar(disks | where DiskTier == 'Premium SSD v1' | summarize round(sum(EffectiveCost), 2));\nlet v2Cost = toscalar(disks | where DiskTier == 'Premium SSD v2' | summarize round(sum(EffectiveCost), 2));\nlet v1Count = toscalar(disks | where DiskTier == 'Premium SSD v1' | summarize dcount(ResourceId));\nlet v2Count = toscalar(disks | where DiskTier == 'Premium SSD v2' | summarize dcount(ResourceId));\nlet totalDiskCost = toscalar(disks | summarize round(sum(EffectiveCost), 2));\nprint json = pack_array(\n    pack('Label', 'Premium SSD v1 cost', 'Value', iff(isnull(v1Cost), '0', tostring(v1Cost))),\n    pack('Label', 'Premium SSD v1 disks', 'Value', iff(isnull(v1Count), '0', tostring(v1Count))),\n    pack('Label', 'Premium SSD v2 cost', 'Value', iff(isnull(v2Cost), '0', tostring(v2Cost))),\n    pack('Label', 'Premium SSD v2 disks', 'Value', iff(isnull(v2Count), '0', tostring(v2Count))),\n    pack('Label', 'Total disk cost', 'Value', iff(isnull(totalDiskCost), '0', tostring(totalDiskCost)))\n)\n| mv-expand json\n| evaluate bag_unpack(json)\n| project Label = tostring(Label), Value = tostring(Value)\n",
+      "id": "d9a3b4c5-6e7f-8a9b-0c1d-2e3f4a5b6c7d",
+      "usedVariables": [
+        "CostsByDay"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "// Disk tier detail by SKU\nCostsByDay\n| where x_ResourceType =~ 'Microsoft.Compute/disks'\n| where isnotempty(x_SkuDescription)\n| extend DiskTier = case(\n    x_SkuDescription has 'Premium SSD v2' or x_SkuMeterSubcategory has 'Premium SSD v2', 'Premium SSD v2',\n    x_SkuDescription has 'Premium SSD' or x_SkuMeterSubcategory has 'Premium SSD', 'Premium SSD v1',\n    x_SkuDescription has 'Standard SSD' or x_SkuMeterSubcategory has 'Standard SSD', 'Standard SSD',\n    x_SkuDescription has 'Ultra' or x_SkuMeterSubcategory has 'Ultra Disk', 'Ultra Disk',\n    x_SkuDescription has 'Standard HDD' or x_SkuMeterSubcategory has 'Standard HDD', 'Standard HDD',\n    'Other'\n)\n| summarize \n    DiskCount = dcount(ResourceId),\n    TotalCost = round(sum(EffectiveCost), 2),\n    ListCost = round(sum(ListCost), 2)\n    by DiskTier, x_SkuDescription\n| extend CostPerDisk = round(TotalCost / DiskCount, 2)\n| extend ListDelta = round(ListCost - TotalCost, 2)\n| order by TotalCost desc\n| project \n    Tier = DiskTier,\n    SKU = x_SkuDescription,\n    Disks = DiskCount,\n    [\\\"Effective cost\\\"] = TotalCost,\n    [\\\"Cost / disk\\\"] = CostPerDisk,\n    [\\\"List delta\\\"] = ListDelta\n",
+      "id": "e0b4c5d6-7f8a-9b0c-1d2e-3f4a5b6c7d8e",
+      "usedVariables": [
+        "CostsByDay"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
       "text": "let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);\nCostsByMonth\n| where ChargeCategory == 'Purchase'\n| project\n    ChargePeriodStart = substring(ChargePeriodStart, 0, 10),\n    x_SkuDescription,\n    CommitmentDiscountType,\n    Term = case(isempty(x_SkuTerm) or x_SkuTerm <= 0, '', x_SkuTerm < 12, strcat(x_SkuTerm, ' month', iff(x_SkuTerm != 1, 's', '')), strcat(x_SkuTerm / 12, ' year', iff(x_SkuTerm != 12, 's', ''))),\n    PricingQuantity,\n    BilledCost,\n    BillingCurrency\n| order by ChargePeriodStart desc\n",
       "id": "98c9b9b5-bebf-41f8-8319-5fa2523f9dd0",
       "usedVariables": [
@@ -7968,7 +8228,7 @@
         "kind": "inline",
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
-      "text": "let data = materialize(\n    CostsByMonth | extend Period = 'Last n months'\n    | union (CostsByDay | extend Period = 'Last n days')\n    | summarize\n        ListCost = round(sum(ListCost), 2),\n        ContractedCost = round(sum(ContractedCost), 2),\n        EffectiveCost = round(sum(EffectiveCost), 2)\n        by\n        Period\n    | project Period, json = todynamic(strcat('[{ \"Label\":\"Total\", \"Value\":', ListCost - EffectiveCost, ' }, { \"Label\":\"Negotiated\", \"Value\":', ListCost - ContractedCost, ' }, { \"Label\":\"Commitment\", \"Value\":', ContractedCost - EffectiveCost, ' }]'))\n    | mv-expand json\n    | project Label = tostring(json.Label), Value = tolong(json.Value), Period\n);\ndata\n",
+      "text": "let data = materialize(\n    CostsByMonth | extend Period = 'Last n months'\n    | union (CostsByDay | extend Period = 'Last n days')\n    | summarize\n        ListCost = round(sum(ListCost), 2),\n        ContractedCost = round(sum(ContractedCost), 2),\n        EffectiveCost = round(sum(EffectiveCost), 2)\n        by\n        Period\n    | project Period, json = todynamic(strcat('[{ \"Label\":\"Total delta\", \"Value\":', ListCost - EffectiveCost, ' }, { \"Label\":\"Negotiated delta\", \"Value\":', ListCost - ContractedCost, ' }, { \"Label\":\"Commitment delta\", \"Value\":', ContractedCost - EffectiveCost, ' }]'))\n    | mv-expand json\n    | project Label = tostring(json.Label), Value = tolong(json.Value), Period\n);\ndata\n",
       "id": "f5f240a8-a818-4f27-bdfb-e96fcfe433bd",
       "usedVariables": [
         "CostsByDay",
@@ -7991,7 +8251,7 @@
         "kind": "inline",
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
-      "text": "let data = materialize(\n    CostsByMonth\n    //\n    // Don't double-count commitment discount purchases\n    | where x_AmortizationClass != 'Principal'\n    //\n    | summarize \n        ListCost = sum(ListCost),\n        ContractedCost = sum(ContractedCost),\n        EffectiveCost = sum(EffectiveCost)\n    | extend ContractedCostNormalized = min_of(ContractedCost, ListCost)\n    | extend EffectiveCostNormalized = min_of(EffectiveCost, ContractedCostNormalized)\n    | extend CommitmentDiscountSavings = ContractedCostNormalized - EffectiveCostNormalized\n    | extend NegotiatedDiscountSavings = ListCost - ContractedCostNormalized\n    | extend TotalSavings = ListCost - EffectiveCost\n    | project json = todynamic(strcat('[',\n        '{ \"order\":11, \"type\":\"List\", \"label\":\"Cost without discounts\", \"value\":\"', numberstring(round(ListCost, 2)), '\" },',\n        '{ \"order\":12, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":13, \"type\":\"Contracted\", \"label\":\"After negotiated discounts\", \"value\":\"', numberstring(round(ContractedCost, 2)), '\" },',\n        '{ \"order\":14, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":15, \"type\":\"PartialSavings\", \"label\":\"Negotiated savings\", \"value\":\"', numberstring(round(NegotiatedDiscountSavings, 2)), '\" },',\n        //\n        '{ \"order\":21, \"type\":\"Contracted\", \"label\":\"After negotiated discounts\", \"value\":\"', numberstring(round(ContractedCost, 2)), '\" },',\n        '{ \"order\":22, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":23, \"type\":\"Effective\", \"label\":\"After commitment discounts\", \"value\":\"', numberstring(round(EffectiveCost, 2)), '\" },',\n        '{ \"order\":24, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":25, \"type\":\"PartialSavings\", \"label\":\"Commitment savings\", \"value\":\"', numberstring(round(CommitmentDiscountSavings, 2)), '\" },',\n        //\n        '{ \"order\":31, \"type\":\"List\", \"label\":\"Cost without discounts\", \"value\":\"', numberstring(round(ListCost, 2)), '\" },',\n        '{ \"order\":32, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":33, \"type\":\"Effective\", \"label\":\"After commitment discounts\", \"value\":\"', numberstring(round(EffectiveCost, 2)), '\" },',\n        '{ \"order\":34, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":35, \"type\":\"TotalSavings\", \"label\":\"Total savings\", \"value\":\"', numberstring(round(TotalSavings, 2)), '\" }',\n    ']'))\n    | mv-expand json\n    | order by toint(json.order) asc\n    | project Label = tostring(json.label), Value = tostring(json.value), Type = tostring(json.type)\n);\ndata",
+      "text": "let data = materialize(\n    CostsByMonth\n    //\n    // Don't double-count commitment discount purchases\n    | where x_AmortizationClass != 'Principal'\n    //\n    // FX fix: reconstruct ContractedCost in billing currency from USD unit prices\n    | extend ContractedCostFX = ContractedUnitPrice * ConsumedQuantity * coalesce(x_BillingExchangeRate, real(1))\n    | summarize \n        ListCost = sum(ListCost),\n        ContractedCost = sum(ContractedCostFX),\n        EffectiveCost = sum(EffectiveCost)\n    | extend NegotiatedDiscountDelta = max_of(ListCost - ContractedCost, real(0))\n    | extend CommitmentDiscountDelta = max_of(ContractedCost - EffectiveCost, real(0))\n    | extend TotalDiscountDelta = ListCost - EffectiveCost\n    | project json = todynamic(strcat('[',\n        '{ \"order\":11, \"type\":\"List\", \"label\":\"Cost without discounts\", \"value\":\"', numberstring(round(ListCost, 2)), '\" },',\n        '{ \"order\":12, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":13, \"type\":\"Contracted\", \"label\":\"After negotiated discounts\", \"value\":\"', numberstring(round(ContractedCost, 2)), '\" },',\n        '{ \"order\":14, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":15, \"type\":\"PartialSavings\", \"label\":\"Negotiated discount delta\", \"value\":\"', numberstring(round(NegotiatedDiscountDelta, 2)), '\" },',\n        //\n        '{ \"order\":21, \"type\":\"Contracted\", \"label\":\"After negotiated discounts\", \"value\":\"', numberstring(round(ContractedCost, 2)), '\" },',\n        '{ \"order\":22, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":23, \"type\":\"Effective\", \"label\":\"After commitment discounts\", \"value\":\"', numberstring(round(EffectiveCost, 2)), '\" },',\n        '{ \"order\":24, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":25, \"type\":\"PartialSavings\", \"label\":\"Commitment discount delta\", \"value\":\"', numberstring(round(CommitmentDiscountDelta, 2)), '\" },',\n        //\n        '{ \"order\":31, \"type\":\"List\", \"label\":\"Cost without discounts\", \"value\":\"', numberstring(round(ListCost, 2)), '\" },',\n        '{ \"order\":32, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":33, \"type\":\"Effective\", \"label\":\"After commitment discounts\", \"value\":\"', numberstring(round(EffectiveCost, 2)), '\" },',\n        '{ \"order\":34, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":35, \"type\":\"TotalSavings\", \"label\":\"Total discount delta\", \"value\":\"', numberstring(round(TotalDiscountDelta, 2)), '\" }',\n    ']'))\n    | mv-expand json\n    | order by toint(json.order) asc\n    | project Label = tostring(json.label), Value = tostring(json.value), Type = tostring(json.type)\n);\ndata",
       "id": "e17346d1-0227-4aa4-8765-f9b4bf43bed5",
       "usedVariables": [
         "CostsByMonth"
@@ -8002,7 +8262,7 @@
         "kind": "inline",
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
-      "text": "let data = materialize(\n    CostsByDay\n    //\n    // Don't double-count commitment discount purchases\n    | where ChargeCategory == 'Usage' or isempty(CommitmentDiscountId)\n    //\n    | summarize \n        ListCost = sum(ListCost),\n        ContractedCost = sum(ContractedCost),\n        EffectiveCost = sum(EffectiveCost)\n    | extend ContractedCostNormalized = min_of(ContractedCost, ListCost)\n    | extend EffectiveCostNormalized = min_of(EffectiveCost, ContractedCostNormalized)\n    | extend CommitmentDiscountSavings = ContractedCostNormalized - EffectiveCostNormalized\n    | extend NegotiatedDiscountSavings = ListCost - ContractedCostNormalized\n    | extend TotalSavings = ListCost - EffectiveCost\n    | project json = todynamic(strcat('[',\n        '{ \"order\":11, \"type\":\"List\", \"label\":\"Cost without discounts\", \"value\":\"', numberstring(round(ListCost, 2)), '\" },',\n        '{ \"order\":12, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":13, \"type\":\"Contracted\", \"label\":\"After negotiated discounts\", \"value\":\"', numberstring(round(ContractedCost, 2)), '\" },',\n        '{ \"order\":14, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":15, \"type\":\"PartialSavings\", \"label\":\"Negotiated savings\", \"value\":\"', numberstring(round(NegotiatedDiscountSavings, 2)), '\" },',\n        //\n        '{ \"order\":21, \"type\":\"Contracted\", \"label\":\"After negotiated discounts\", \"value\":\"', numberstring(round(ContractedCost, 2)), '\" },',\n        '{ \"order\":22, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":23, \"type\":\"Effective\", \"label\":\"After commitment discounts\", \"value\":\"', numberstring(round(EffectiveCost, 2)), '\" },',\n        '{ \"order\":24, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":25, \"type\":\"PartialSavings\", \"label\":\"Commitment savings\", \"value\":\"', numberstring(round(CommitmentDiscountSavings, 2)), '\" },',\n        //\n        '{ \"order\":31, \"type\":\"List\", \"label\":\"Cost without discounts\", \"value\":\"', numberstring(round(ListCost, 2)), '\" },',\n        '{ \"order\":32, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":33, \"type\":\"Effective\", \"label\":\"After commitment discounts\", \"value\":\"', numberstring(round(EffectiveCost, 2)), '\" },',\n        '{ \"order\":34, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":35, \"type\":\"TotalSavings\", \"label\":\"Total savings\", \"value\":\"', numberstring(round(TotalSavings, 2)), '\" }',\n    ']'))\n    | mv-expand json\n    | order by toint(json.order) asc\n    | project Label = tostring(json.label), Value = tostring(json.value), Type = tostring(json.type)\n);\ndata",
+      "text": "let data = materialize(\n    CostsByDay\n    //\n    // Don't double-count commitment discount purchases\n    | where ChargeCategory == 'Usage' or isempty(CommitmentDiscountId)\n    //\n    // FX fix: reconstruct ContractedCost in billing currency from USD unit prices\n    | extend ContractedCostFX = ContractedUnitPrice * ConsumedQuantity * coalesce(x_BillingExchangeRate, real(1))\n    | summarize \n        ListCost = sum(ListCost),\n        ContractedCost = sum(ContractedCostFX),\n        EffectiveCost = sum(EffectiveCost)\n    | extend NegotiatedDiscountDelta = max_of(ListCost - ContractedCost, real(0))\n    | extend CommitmentDiscountDelta = max_of(ContractedCost - EffectiveCost, real(0))\n    | extend TotalDiscountDelta = ListCost - EffectiveCost\n    | project json = todynamic(strcat('[',\n        '{ \"order\":11, \"type\":\"List\", \"label\":\"Cost without discounts\", \"value\":\"', numberstring(round(ListCost, 2)), '\" },',\n        '{ \"order\":12, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":13, \"type\":\"Contracted\", \"label\":\"After negotiated discounts\", \"value\":\"', numberstring(round(ContractedCost, 2)), '\" },',\n        '{ \"order\":14, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":15, \"type\":\"PartialSavings\", \"label\":\"Negotiated discount delta\", \"value\":\"', numberstring(round(NegotiatedDiscountDelta, 2)), '\" },',\n        //\n        '{ \"order\":21, \"type\":\"Contracted\", \"label\":\"After negotiated discounts\", \"value\":\"', numberstring(round(ContractedCost, 2)), '\" },',\n        '{ \"order\":22, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":23, \"type\":\"Effective\", \"label\":\"After commitment discounts\", \"value\":\"', numberstring(round(EffectiveCost, 2)), '\" },',\n        '{ \"order\":24, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":25, \"type\":\"PartialSavings\", \"label\":\"Commitment discount delta\", \"value\":\"', numberstring(round(CommitmentDiscountDelta, 2)), '\" },',\n        //\n        '{ \"order\":31, \"type\":\"List\", \"label\":\"Cost without discounts\", \"value\":\"', numberstring(round(ListCost, 2)), '\" },',\n        '{ \"order\":32, \"type\":\"\", \"label\":\"\", \"value\":\"-\" },',\n        '{ \"order\":33, \"type\":\"Effective\", \"label\":\"After commitment discounts\", \"value\":\"', numberstring(round(EffectiveCost, 2)), '\" },',\n        '{ \"order\":34, \"type\":\"\", \"label\":\"\", \"value\":\"=\" },',\n        '{ \"order\":35, \"type\":\"TotalSavings\", \"label\":\"Total discount delta\", \"value\":\"', numberstring(round(TotalDiscountDelta, 2)), '\" }',\n    ']'))\n    | mv-expand json\n    | order by toint(json.order) asc\n    | project Label = tostring(json.label), Value = tostring(json.value), Type = tostring(json.type)\n);\ndata",
       "id": "f1ef29df-7a1d-4dd0-8619-0c0164707b31",
       "usedVariables": [
         "CostsByDay"
@@ -9330,9 +9590,58 @@
       "usedVariables": [
         "CostsByMonth"
       ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "let lookbackMonths = 6;\nlet analysisStart = startofmonth(now(), -lookbackMonths);\nCostsByMonth\n| where BillingPeriodStart >= analysisStart\n| where ChargeCategory == 'Purchase'\n| summarize TotalCommitmentCharge = round(sum(BilledCost), 2), MonthsWithCharges = dcount(startofmonth(BillingPeriodStart)) by CommitmentType = coalesce(CommitmentDiscountType, 'Other purchases')\n| extend AvgMonthlyCommitmentBurn = round(TotalCommitmentCharge / toreal(lookbackMonths), 2)\n| order by AvgMonthlyCommitmentBurn desc",
+      "id": "8fa76309-d610-40aa-95b5-4b6fcb246d4a",
+      "usedVariables": [
+        "CostsByMonth"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "let lookbackMonths = 6;\nlet analysisStart = startofmonth(now(), -lookbackMonths);\nCostsByMonth\n| where BillingPeriodStart >= analysisStart\n| where ChargeCategory == 'Purchase'\n| summarize CommitmentBurn = round(sum(BilledCost), 2) by BillingPeriodStart = startofmonth(BillingPeriodStart), CommitmentType = coalesce(CommitmentDiscountType, 'Other purchases')\n| order by BillingPeriodStart asc",
+      "id": "1c675228-2420-4f27-b1ac-3ff4191bdf22",
+      "usedVariables": [
+        "CostsByMonth"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "let lookbackMonths = 6;\nlet analysisStart = startofmonth(now(), -lookbackMonths);\nlet usageCost = toscalar(\n    CostsByMonth\n    | where BillingPeriodStart >= analysisStart\n    | summarize sum(iif(ChargeCategory == 'Usage', todouble(BilledCost), 0.0))\n);\nlet commitmentCost = toscalar(\n    CostsByMonth\n    | where BillingPeriodStart >= analysisStart\n    | summarize sum(iif(ChargeCategory == 'Purchase', todouble(BilledCost), 0.0))\n);\nprint SpendType = 'Usage', Amount = round(todouble(coalesce(usageCost, 0.0)), 2)\n| union (print SpendType = 'Commitment purchases', Amount = round(todouble(coalesce(commitmentCost, 0.0)), 2))",
+      "id": "64a2fc85-7054-43df-8b8b-58e26af98e22",
+      "usedVariables": [
+        "CostsByMonth"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "let lookbackMonths = 6;\nlet analysisStart = startofmonth(now(), -lookbackMonths);\nlet lastMonthStart = startofmonth(now(), -1);\nlet thisMonthStart = startofmonth(now());\nlet usageLastMonth = toscalar(\n    CostsByMonth\n    | where BillingPeriodStart >= lastMonthStart and BillingPeriodStart < thisMonthStart\n    | where ChargeCategory == 'Usage'\n    | summarize round(sum(BilledCost), 2)\n);\nlet commitmentLastMonth = toscalar(\n    CostsByMonth\n    | where BillingPeriodStart >= lastMonthStart and BillingPeriodStart < thisMonthStart\n    | where ChargeCategory == 'Purchase'\n    | summarize round(sum(BilledCost), 2)\n);\nlet avgCommitmentBurn = toscalar(\n    CostsByMonth\n    | where BillingPeriodStart >= analysisStart and BillingPeriodStart < thisMonthStart\n    | where ChargeCategory == 'Purchase'\n    | summarize round(sum(BilledCost) / toreal(lookbackMonths), 2)\n);\nprint Metric = 'Azure mid-month forecast proxy (usage only)', Amount = todouble(coalesce(usageLastMonth, 0.0)), Note = 'Matches the common portal behavior described by customers'\n| union (print Metric = 'Historical commitment add-on', Amount = todouble(coalesce(avgCommitmentBurn, 0.0)), Note = 'Average purchase charges from the historical lookback window')\n| union (print Metric = 'Expected monthly total', Amount = todouble(coalesce(usageLastMonth, 0.0) + coalesce(avgCommitmentBurn, 0.0)), Note = 'Usage proxy plus historical commitment burn')\n| union (print Metric = 'Last month posted commitments', Amount = todouble(coalesce(commitmentLastMonth, 0.0)), Note = 'Sanity check against the most recent closed month')",
+      "id": "d5e3631a-345b-4310-ac9b-b1970d694929",
+      "usedVariables": [
+        "CostsByMonth"
+      ]
     }
   ]
 }
+
+
+
+
+
 
 
 
