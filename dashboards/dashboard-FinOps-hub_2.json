@@ -4553,6 +4553,41 @@
       }
     },
     {
+      "id": "1f0d7f8d-65aa-4f7f-95bd-4f1bf5e2d8b1",
+      "title": "",
+      "visualType": "markdownCard",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "layout": {
+        "x": 0,
+        "y": 84,
+        "width": 22,
+        "height": 3
+      },
+      "markdownText": "### Sentinel Spend\nCompare Sentinel spend for current month, last month, and the month before, with delta vs last month.",
+      "visualOptions": {}
+    },
+    {
+      "id": "9cbb9f47-6c8c-4ad6-8f6b-5ed31bf42a6f",
+      "title": "Sentinel spend comparison (current vs previous months)",
+      "visualType": "table",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "layout": {
+        "x": 0,
+        "y": 87,
+        "width": 22,
+        "height": 6
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "f2a1e4c8-3b47-4e65-9f7d-4a1c0dbf7f11"
+      },
+      "description": "Month-over-month Sentinel spend comparison for current month (MTD), last month, and month-2, including absolute and percent delta vs last month.",
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "crossFilterDisabled": false
+      }
+    },
+    {
       "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
       "title": "",
       "visualType": "markdownCard",
@@ -4563,7 +4598,7 @@
         "width": 22,
         "height": 10
       },
-      "markdownText": "**3 MACC Tracking questions answered on this page:**\n\n[What is our current MACC commitment status?](?tile=c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f) &nbsp;&middot;&nbsp; [How is monthly consumption trending?](?tile=e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b) &nbsp;&middot;&nbsp; [Will we fulfill our MACC commitment on time?](?tile=a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d)\n\n---\n# MACC (Microsoft Azure Consumption Commitment) Tracking\n\nTrack your MACC commitment progress, consumption trends, and forecast completion.\n\n## Manual Entry Instructions\n\nIf you don't have API access to MACC data, you can manually enter your commitment details from your MACC contract document.\n\n### What You Need From Your Contract:\n| Item | Where to Find |\n|------|---------------|\n| **Commitment Amount** | Look for \"Azure Consumption Commitment\" or \"Minimum Consumption Commitment\" |\n| **Start Date** | When your MACC term begins |\n| **End Date** | When your MACC expires (typically 1-3 years) |\n| **Monthly Consumption** | Azure Portal -> Cost Management + Billing -> Invoices |\n\n### How to Enter Data:\n1. Open **ManualEntry_MACC.kql** in the scripts folder\n2. Update the values in Step 1 with your MACC details\n3. Run the script in Azure Data Explorer\n4. Use the queries below to track your progress\n\n[Learn about MACC](https://learn.microsoft.com/azure/cost-management-billing/manage/track-consumption-commitment) &nbsp; &nbsp; [Give feedback](https://aka.ms/finops/hubs/feedback)",
+      "markdownText": "**7 MACC Tracking questions answered on this page:**\n\n[What is our current MACC commitment status?](?tile=c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f) &nbsp;&middot;&nbsp; [How is monthly consumption trending?](?tile=e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b) &nbsp;&middot;&nbsp; [Will we fulfill our MACC commitment on time?](?tile=a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d) &nbsp;&middot;&nbsp; [Are we pacing ahead or behind the linear target?](?tile=mc01e2f3-a4b5-4c6d-7e8f-9a0b1c2d3e4f) &nbsp;&middot;&nbsp; [Which subscriptions are contributing to MACC decrement?](?tile=mc02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a) &nbsp;&middot;&nbsp; [How confident are we in MACC burn classification?](?tile=mc03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b) &nbsp;&middot;&nbsp; [How does our calculated burn compare to the API balance?](?tile=mc04b5c6-d7e8-4f9a-0b1c-2d3e4f5a6b7c)\n\n---\n# MACC (Microsoft Azure Consumption Commitment) Tracking\n\nTrack your MACC commitment progress, consumption trends, and forecast completion.\n\n## Manual Entry Instructions\n\nIf you don't have API access to MACC data, you can manually enter your commitment details from your MACC contract document.\n\n### What You Need From Your Contract:\n| Item | Where to Find |\n|------|---------------|\n| **Commitment Amount** | Look for \"Azure Consumption Commitment\" or \"Minimum Consumption Commitment\" |\n| **Start Date** | When your MACC term begins |\n| **End Date** | When your MACC expires (typically 1-3 years) |\n| **Monthly Consumption** | Azure Portal -> Cost Management + Billing -> Invoices |\n\n### How to Enter Data:\n1. Open **ManualEntry_MACC.kql** in the scripts folder\n2. Update the values in Step 1 with your MACC details\n3. Run the script in Azure Data Explorer\n4. Use the queries below to track your progress\n\n[Learn about MACC](https://learn.microsoft.com/azure/cost-management-billing/manage/track-consumption-commitment) &nbsp; &nbsp; [Give feedback](https://aka.ms/finops/hubs/feedback)",
       "visualOptions": {}
     },
     {
@@ -4661,6 +4696,133 @@
         "queryId": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e"
       },
       "description": "At your current consumption rate, will you meet your MACC commitment? If projected completion is after the deadline, you need a plan to increase eligible Azure consumption.",
+      "visualOptions": {
+        "multiStat__textSize": "large",
+        "multiStat__valueColumn": null,
+        "colorRulesDisabled": false,
+        "multiStat__displayOrientation": "horizontal",
+        "multiStat__labelColumn": null,
+        "multiStat__slot": {
+          "width": 2,
+          "height": 2
+        },
+        "colorRules": []
+      }
+    },
+    {
+      "id": "mc01e2f3-a4b5-4c6d-7e8f-9a0b1c2d3e4f",
+      "title": "MACC Pacing vs Linear Target (Preview)",
+      "visualType": "line",
+      "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+      "layout": {
+        "x": 0,
+        "y": 20,
+        "width": 22,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "mc01e2f3-a4b5-4c6d-7e8f-9a0b1c2d3e4f"
+      },
+      "description": "Are you pacing ahead or behind the straight-line commitment target? The linear target line shows where you should be if you consumed evenly across the term. If your actual cumulative spend is below the target line, you need to accelerate.",
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "right",
+        "xColumnTitle": "",
+        "xColumn": "Month",
+        "yColumns": ["ActualCumulative", "LinearTarget"],
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false,
+        "crossFilter": [],
+        "drillthrough": []
+      }
+    },
+    {
+      "id": "mc02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a",
+      "title": "MACC Decrement by Subscription (Preview)",
+      "visualType": "table",
+      "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+      "layout": {
+        "x": 0,
+        "y": 27,
+        "width": 22,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "mc02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a"
+      },
+      "description": "Which subscriptions are contributing the most to your MACC decrement? Use this to identify which teams or workloads are driving consumption and where you can accelerate if behind.",
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
+    },
+    {
+      "id": "mc03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b",
+      "title": "MACC Burn by Confidence Layer (Preview)",
+      "visualType": "table",
+      "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+      "layout": {
+        "x": 0,
+        "y": 34,
+        "width": 14,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "mc03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b"
+      },
+      "description": "How confident are we in each portion of MACC burn? Layer 1 (Native Azure) is 95%+ reliable. Layer 3 (Marketplace) needs manual verification. Layer 4 requires Finance review. When FOCUS 1.3 ContractApplied is available, this becomes provider-confirmed ground truth.",
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
+    },
+    {
+      "id": "mc04b5c6-d7e8-4f9a-0b1c-2d3e4f5a6b7c",
+      "title": "Presumed vs Actual Reconciliation (Preview)",
+      "visualType": "multistat",
+      "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+      "layout": {
+        "x": 14,
+        "y": 34,
+        "width": 8,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "mc04b5c6-d7e8-4f9a-0b1c-2d3e4f5a6b7c"
+      },
+      "description": "How does our FOCUS-calculated presumed burn compare to the Billing API reported balance? Gap under 5% is normal billing timing. Gap over 10% means escalate to Finance. Requires MACC Lots API with ClosedBalance.",
       "visualOptions": {
         "multiStat__textSize": "large",
         "multiStat__valueColumn": null,
@@ -7092,7 +7254,7 @@
         "width": 22,
         "height": 4
       },
-      "markdownText": "# Licensing & SaaS\nTrack software licensing optimization (Azure Hybrid Benefit), SaaS marketplace spending, and Spot instance savings.\n\n**6 questions answered on this page:**\n\n[Am I maximizing Azure Hybrid Benefit?](?tile=d2e4a321-9c2c-411b-8a20-19fd86dab3fe) &nbsp;&middot;&nbsp; [Which VMs are underutilizing AHB?](?tile=80e1ecb4-69f6-451d-9e1c-f90d17b7f865) &nbsp;&middot;&nbsp; [What SaaS am I spending on?](?tile=3c4196e1-4ee6-4269-9232-819f9c874952) &nbsp;&middot;&nbsp; [Who are my top publishers?](?tile=903b7a84-e206-4ec4-8924-21ff8ce63c82) &nbsp;&middot;&nbsp; [Am I using Spot VMs to save money?](?tile=78ddd908-bed3-480e-b736-263e5719ded1) &nbsp;&middot;&nbsp; [What is my Spot savings rate?](?tile=629459f2-df5f-43df-9b5e-d01a62dc1b33)",
+      "markdownText": "# Licensing & SaaS\nTrack software licensing optimization (Azure Hybrid Benefit), SaaS marketplace spending, and Spot instance savings.\n\n**7 questions answered on this page:**\n\n[Am I maximizing Azure Hybrid Benefit?](?tile=d2e4a321-9c2c-411b-8a20-19fd86dab3fe) &nbsp;&middot;&nbsp; [Which VMs are underutilizing AHB?](?tile=80e1ecb4-69f6-451d-9e1c-f90d17b7f865) &nbsp;&middot;&nbsp; [What SaaS am I spending on?](?tile=3c4196e1-4ee6-4269-9232-819f9c874952) &nbsp;&middot;&nbsp; [Who are my top publishers?](?tile=903b7a84-e206-4ec4-8924-21ff8ce63c82) &nbsp;&middot;&nbsp; [Am I using Spot VMs to save money?](?tile=78ddd908-bed3-480e-b736-263e5719ded1) &nbsp;&middot;&nbsp; [What is my Spot savings rate?](?tile=629459f2-df5f-43df-9b5e-d01a62dc1b33) &nbsp;&middot;&nbsp; [How is Sentinel spend changing month to month?](?tile=9cbb9f47-6c8c-4ad6-8f6b-5ed31bf42a6f)",
       "visualOptions": {}
     },
     {
@@ -8801,6 +8963,50 @@
         "kind": "inline",
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
+      "text": "// MACC Pacing vs Linear Target - Actual cumulative vs straight-line commitment target\r\nlet MACCData = union isfuzzy=true\r\n    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),\r\n    (print Description='No MACC data configured', Currency='', StartDate=datetime(null), ExpirationDate=datetime(null), CommitmentAmount=0.0, DataSource='Fallback', SourcePriority=0)\r\n| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null)), startofmonth(now())))\r\n| extend ExpirationDate = todatetime(coalesce(column_ifexists('ExpirationDate', datetime(null)), endofmonth(now())))\r\n| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))\r\n| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)\r\n| top 1 by SourcePriority desc, IsActive desc, StartDate desc;\r\nlet StartDate = toscalar(MACCData | project StartDate);\r\nlet EndDate = toscalar(MACCData | project ExpirationDate);\r\nlet Commitment = toscalar(MACCData | project CommitmentAmount);\r\nlet TotalMonths = max_of(datetime_diff('month', EndDate, StartDate), 1);\r\nlet MonthlyTarget = Commitment / todouble(TotalMonths);\r\nCosts\r\n| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n| summarize MonthlyConsumption = sum(EffectiveCost) by Month = startofmonth(ChargePeriodStart)\r\n| order by Month asc\r\n| extend ActualCumulative = row_cumsum(MonthlyConsumption)\r\n| extend MonthIndex = row_number()\r\n| extend LinearTarget = MonthlyTarget * todouble(MonthIndex)\r\n| project Month, ActualCumulative = round(ActualCumulative, 0), LinearTarget = round(LinearTarget, 0)",
+      "id": "mc01e2f3-a4b5-4c6d-7e8f-9a0b1c2d3e4f",
+      "usedVariables": [
+        "currencyFilter"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "// MACC Decrement by Subscription - Top subscriptions contributing to MACC consumption\r\nlet MACCData = union isfuzzy=true\r\n    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),\r\n    (print Description='No MACC data configured', Currency='', StartDate=datetime(null), ExpirationDate=datetime(null), CommitmentAmount=0.0, DataSource='Fallback', SourcePriority=0)\r\n| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null)), startofmonth(now())))\r\n| extend ExpirationDate = todatetime(coalesce(column_ifexists('ExpirationDate', datetime(null)), endofmonth(now())))\r\n| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))\r\n| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)\r\n| top 1 by SourcePriority desc, IsActive desc, StartDate desc;\r\nlet StartDate = toscalar(MACCData | project StartDate);\r\nlet EndDate = toscalar(MACCData | project ExpirationDate);\r\nlet Commitment = toscalar(MACCData | project CommitmentAmount);\r\nlet TotalConsumed = toscalar(\r\n    Costs\r\n    | where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n    | extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n    | where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n    | summarize sum(EffectiveCost)\r\n);\r\nlet TotalConsumed2 = iff(isnull(TotalConsumed), 0.0, TotalConsumed);\r\nCosts\r\n| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n| extend SubscriptionName = coalesce(column_ifexists('SubAccountName', ''), 'Unknown')\r\n| summarize EffectiveCost = sum(EffectiveCost) by SubscriptionName\r\n| extend PercentOfTotal = round(100.0 * EffectiveCost / TotalConsumed2, 1)\r\n| extend PercentOfCommitment = round(100.0 * EffectiveCost / Commitment, 1)\r\n| order by EffectiveCost desc\r\n| take 20\r\n| project SubscriptionName, EffectiveCost = round(EffectiveCost, 0), PercentOfTotal = strcat(PercentOfTotal, '%'), PercentOfCommitment = strcat(PercentOfCommitment, '%')",
+      "id": "mc02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a",
+      "usedVariables": [
+        "currencyFilter"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "// MACC Burn by Confidence Layer - Classifies costs by MACC eligibility confidence\r\nlet MACCData = union isfuzzy=true\r\n    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),\r\n    (print Description='No MACC data configured', Currency='', StartDate=datetime(null), ExpirationDate=datetime(null), CommitmentAmount=0.0, DataSource='Fallback', SourcePriority=0)\r\n| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null)), startofmonth(now())))\r\n| extend ExpirationDate = todatetime(coalesce(column_ifexists('ExpirationDate', datetime(null)), endofmonth(now())))\r\n| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))\r\n| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)\r\n| top 1 by SourcePriority desc, IsActive desc, StartDate desc;\r\nlet StartDate = toscalar(MACCData | project StartDate);\r\nlet EndDate = toscalar(MACCData | project ExpirationDate);\r\nCosts\r\n| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n| extend ConfidenceLayer = case(\r\n    ProviderName == 'Microsoft' and ChargeCategory == 'Usage'\r\n        and not(tolower(ServiceName) has_any ('microsoft 365', 'dynamics 365', 'power bi', 'power apps', 'power automate', 'github')),\r\n    'Layer 1: Native Azure (95%+)',\r\n    ChargeCategory == 'Purchase' and isnotempty(column_ifexists('CommitmentDiscountId', '')),\r\n    'Layer 2: Commitments (90%+)',\r\n    ProviderName != 'Microsoft' and InvoiceIssuerName == 'Microsoft'\r\n        and EffectiveCost > 0,\r\n    'Layer 3: Marketplace (70-75%)',\r\n    'Layer 4: Unclassified (review)')\r\n| summarize\r\n    EffectiveCost = round(sum(EffectiveCost), 0),\r\n    BilledCost = round(sum(BilledCost), 0),\r\n    LineItems = count()\r\n    by ConfidenceLayer\r\n| order by ConfidenceLayer asc\r\n| project ConfidenceLayer, EffectiveCost, BilledCost, LineItems",
+      "id": "mc03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b",
+      "usedVariables": [
+        "currencyFilter"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "// Presumed vs Actual MACC Reconciliation\r\nlet MACCData = union isfuzzy=true\r\n    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),\r\n    (print Description='No MACC data configured', Currency='', StartDate=datetime(null), ExpirationDate=datetime(null), CommitmentAmount=0.0, DataSource='Fallback', SourcePriority=0)\r\n| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null)), startofmonth(now())))\r\n| extend ExpirationDate = todatetime(coalesce(column_ifexists('ExpirationDate', datetime(null)), endofmonth(now())))\r\n| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))\r\n| extend ClosedBalance = todouble(coalesce(column_ifexists('ClosedBalance', real(null)), real(null)))\r\n| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)\r\n| top 1 by SourcePriority desc, IsActive desc, StartDate desc;\r\nlet StartDate = toscalar(MACCData | project StartDate);\r\nlet EndDate = toscalar(MACCData | project ExpirationDate);\r\nlet Commitment = toscalar(MACCData | project CommitmentAmount);\r\nlet APIBalance = toscalar(MACCData | project ClosedBalance);\r\nlet APIConsumed = iff(isnotnull(APIBalance) and isnotnull(Commitment), Commitment - APIBalance, real(null));\r\nlet PresumedBurn = toscalar(\r\n    Costs\r\n    | where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n    | extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n    | where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n    | summarize sum(EffectiveCost)\r\n);\r\nlet PresumedBurn2 = iff(isnull(PresumedBurn), 0.0, PresumedBurn);\r\nlet GapAmount = iff(isnotnull(APIConsumed), PresumedBurn2 - APIConsumed, real(null));\r\nlet GapPercent = iff(isnotnull(APIConsumed) and APIConsumed > 0, round(100.0 * GapAmount / APIConsumed, 1), real(null));\r\nlet GapStatus = case(\r\n    isnull(GapPercent), 'No API data',\r\n    abs(GapPercent) <= 5.0, 'Normal (<= 5%)',\r\n    abs(GapPercent) <= 10.0, 'Review (5-10%)',\r\n    'Escalate (> 10%)');\r\nprint\r\n    PresumedBurn = round(PresumedBurn2, 0),\r\n    ActualDecrement = iff(isnotnull(APIConsumed), round(APIConsumed, 0), real(null)),\r\n    Gap = iff(isnotnull(GapAmount), round(GapAmount, 0), real(null)),\r\n    GapPct = iff(isnotnull(GapPercent), strcat(tostring(GapPercent), '%'), 'N/A'),\r\n    GapStatus = GapStatus\r\n| project json = pack_array(\r\n    pack('Label', 'Presumed Burn (FOCUS)', 'Value', tostring(PresumedBurn)),\r\n    pack('Label', 'Actual Decrement (API)', 'Value', iff(isnotnull(ActualDecrement), tostring(ActualDecrement), 'No API data')),\r\n    pack('Label', 'Gap', 'Value', iff(isnotnull(Gap), tostring(Gap), 'N/A')),\r\n    pack('Label', 'Gap %', 'Value', GapPct),\r\n    pack('Label', 'Gap Status', 'Value', GapStatus))\r\n| mv-expand json\r\n| project Label = tostring(json.Label), Value = tostring(json.Value)",
+      "id": "mc04b5c6-d7e8-4f9a-0b1c-2d3e4f5a6b7c",
+      "usedVariables": [
+        "currencyFilter"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
       "text": "// Tag Coverage Summary\nlet data = materialize(\n    CostsByMonth\n    | where ChargeCategory == 'Usage'\n    | extend TagBag = iff(isnotempty(Tags), todynamic(tostring(Tags)), dynamic({}))\n    | extend HasTags = array_length(bag_keys(TagBag)) > 0\n    | summarize\n        TaggedCost = round(sumif(EffectiveCost, HasTags), 0),\n        UntaggedCost = round(sumif(EffectiveCost, not(HasTags)), 0),\n        TaggedResources = dcountif(ResourceId, HasTags and isnotempty(ResourceId)),\n        UntaggedResources = dcountif(ResourceId, not(HasTags) and isnotempty(ResourceId)),\n        TotalResources = dcountif(ResourceId, isnotempty(ResourceId))\n    | extend TagCoveragePercent = round(100.0 * TaggedCost / (TaggedCost + UntaggedCost), 1)\n    | project json = todynamic(strcat('[',\n        '{\"Label\":\"Tagged Cost\",\"Value\":\"', TaggedCost, '\"},',\n        '{\"Label\":\"Untagged Cost\",\"Value\":\"', UntaggedCost, '\"},',\n        '{\"Label\":\"Tag Coverage %\",\"Value\":\"', TagCoveragePercent, '%\"},',\n        '{\"Label\":\"Tagged Resources\",\"Value\":\"', TaggedResources, '\"},',\n        '{\"Label\":\"Untagged Resources\",\"Value\":\"', UntaggedResources, '\"}',\n    ']'))\n    | mv-expand json\n    | project Label = tostring(json.Label), Value = tostring(json.Value)\n);\ndata",
       "id": "f2b3c4d5-1001-4a8b-9c0d-1e2f3a4b5c6d",
       "usedVariables": [
@@ -9566,6 +9772,17 @@
       "id": "109f2279-bec3-4f5b-b6ea-5575f412b868",
       "usedVariables": [
         "numberOfMonths",
+        "currencyFilter"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "let sentinel = Costs\n| where ChargePeriodStart >= startofmonth(now(), -2)\n| extend Currency = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\n| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or Currency == tostring(currencyFilter)\n| extend SentinelSignal = tolower(strcat(\n    tostring(column_ifexists('ServiceName', '')), ' ',\n    tostring(column_ifexists('ServiceCategory', '')), ' ',\n    tostring(column_ifexists('ChargeDescription', '')), ' ',\n    tostring(column_ifexists('ResourceType', '')), ' ',\n    tostring(column_ifexists('x_ResourceType', '')), ' ',\n    tostring(column_ifexists('PublisherName', ''))\n))\n| where SentinelSignal has 'sentinel' or SentinelSignal has 'microsoft.securityinsights'\n| summarize Cost = round(sum(EffectiveCost), 2) by Month = startofmonth(ChargePeriodStart);\nlet currentMonth = toscalar(sentinel | where Month == startofmonth(now()) | summarize sum(Cost));\nlet lastMonth = toscalar(sentinel | where Month == startofmonth(now(), -1) | summarize sum(Cost));\nlet monthBeforeLast = toscalar(sentinel | where Month == startofmonth(now(), -2) | summarize sum(Cost));\nlet current = iff(isnull(currentMonth), 0.0, currentMonth);\nlet last = iff(isnull(lastMonth), 0.0, lastMonth);\nlet prev2 = iff(isnull(monthBeforeLast), 0.0, monthBeforeLast);\nlet delta = round(current - last, 2);\nlet deltaPercent = iff(last > 0, round((current - last) / last * 100.0, 1), real(null));\nprint\n    ['Month -2'] = round(prev2, 2),\n    ['Last month'] = round(last, 2),\n    ['Current month (MTD)'] = round(current, 2),\n    ['Delta vs last month'] = delta,\n    ['Delta vs last month %'] = iff(isnull(deltaPercent), 'n/a', strcat(iff(deltaPercent >= 0, '+', ''), tostring(deltaPercent), '%'))",
+      "id": "f2a1e4c8-3b47-4e65-9f7d-4a1c0dbf7f11",
+      "usedVariables": [
         "currencyFilter"
       ]
     },
