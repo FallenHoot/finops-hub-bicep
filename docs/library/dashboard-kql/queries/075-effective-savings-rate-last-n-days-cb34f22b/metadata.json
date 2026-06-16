@@ -1,0 +1,32 @@
+{
+  "queryId": "cb34f22b-9370-460c-9658-3e73d220bbc7",
+  "folder": "075-effective-savings-rate-last-n-days-cb34f22b",
+  "primaryTitle": "Effective Savings Rate (last n days)",
+  "tiles": [
+    {
+      "tileId": "69e3a7e2-9477-4b63-8c86-9d66a782501b",
+      "title": "Effective Savings Rate (last n days)",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [
+      "x_AmortizationClass"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

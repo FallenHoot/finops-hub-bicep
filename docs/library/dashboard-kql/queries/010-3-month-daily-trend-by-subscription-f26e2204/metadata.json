@@ -1,0 +1,33 @@
+{
+  "queryId": "f26e2204-270e-4219-8f68-5acef1c9393f",
+  "folder": "010-3-month-daily-trend-by-subscription-f26e2204",
+  "primaryTitle": "3-month daily trend by subscription",
+  "tiles": [
+    {
+      "tileId": "97df5060-929c-4457-a7e9-47005c845f16",
+      "title": "3-month daily trend by subscription",
+      "pageId": "a8f2e3d1-5c6b-4a9e-b7f0-1d2e3f4a5b6c",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsPlus",
+    "maxGroupCount",
+    "numberOfDays"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "SubAccountId",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

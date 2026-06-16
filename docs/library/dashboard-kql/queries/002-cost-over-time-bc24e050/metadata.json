@@ -1,0 +1,30 @@
+{
+  "queryId": "bc24e050-f2b9-4b4a-a08d-69fc4a4bb95e",
+  "folder": "002-cost-over-time-bc24e050",
+  "primaryTitle": "Cost over time",
+  "tiles": [
+    {
+      "tileId": "595e39e5-02ff-4ee7-99f9-68694ffd0495",
+      "title": "Cost over time",
+      "pageId": "f416685d-f559-4514-8e45-5e0e09aec286",
+      "visualType": "column"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "BillingPeriodStart",
+      "EffectiveCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

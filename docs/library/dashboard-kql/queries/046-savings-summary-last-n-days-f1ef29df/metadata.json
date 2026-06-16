@@ -1,0 +1,32 @@
+{
+  "queryId": "f1ef29df-7a1d-4dd0-8619-0c0164707b31",
+  "folder": "046-savings-summary-last-n-days-f1ef29df",
+  "primaryTitle": "Savings summary (last n days)",
+  "tiles": [
+    {
+      "tileId": "9aec9f5c-f7cc-48da-8f0d-303137623945",
+      "title": "Savings summary (last n days)",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargeCategory",
+      "CommitmentDiscountId",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

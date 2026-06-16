@@ -1,0 +1,34 @@
+{
+  "queryId": "3886b5cd-34a8-42d7-9e16-33ea4d236953",
+  "folder": "015-effective-cost-by-subscription-3886b5cd",
+  "primaryTitle": "Effective cost by subscription",
+  "tiles": [
+    {
+      "tileId": "890e0366-a9a5-4001-bc6e-f1b7f23fa8a7",
+      "title": "Effective cost by subscription",
+      "pageId": "5c57f940-6f0f-4e39-930b-b6e89bb758ad",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "ChargePeriodStart",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost",
+      "SubAccountId",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

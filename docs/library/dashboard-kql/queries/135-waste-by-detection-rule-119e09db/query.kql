@@ -1,0 +1,17 @@
+// Orphaned Resources - Waste by Type
+let lookback = ago(numberOfDays * 1d);
+let costs = Costs
+    | where ChargePeriodStart >= lookback
+    | where ChargeCategory == 'Usage'
+    | extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+    | where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+    | summarize MonthlyCost = sum(EffectiveCost) by ResourceId, ResourceType, x_ResourceType, SubAccountName, x_ResourceGroupName = column_ifexists('x_ResourceGroupName', '');
+let vmRGs = costs | where x_ResourceType =~ 'Microsoft.Compute/virtualMachines' | distinct x_ResourceGroupName;
+let orphanedDisks = costs | where x_ResourceType =~ 'Microsoft.Compute/disks' | join kind=leftanti vmRGs on x_ResourceGroupName | extend DetectionRule = 'Unattached Disk';
+let vmSubAccounts = costs | where x_ResourceType =~ 'Microsoft.Compute/virtualMachines' | distinct SubAccountName;
+let lbSubAccounts = costs | where x_ResourceType =~ 'Microsoft.Network/loadBalancers' | distinct SubAccountName;
+let ipResources = costs | where x_ResourceType =~ 'Microsoft.Network/publicIPAddresses' | join kind=leftanti (vmSubAccounts | union lbSubAccounts) on SubAccountName | extend DetectionRule = 'Unused Public IP';
+let orphanedLBs = costs | where x_ResourceType =~ 'Microsoft.Network/loadBalancers' | where MonthlyCost < 50 | extend DetectionRule = 'Idle Load Balancer';
+union orphanedDisks, ipResources, orphanedLBs
+| summarize WasteCost = round(sum(MonthlyCost), 2) by DetectionRule
+| order by WasteCost desc

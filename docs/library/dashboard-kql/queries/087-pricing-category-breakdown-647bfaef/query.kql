@@ -1,0 +1,13 @@
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| summarize Cost = round(sum(EffectiveCost), 2) by PricingCategory
+| extend Category = case(
+    PricingCategory == 'Standard', 'On-Demand',
+    PricingCategory == 'Dynamic', 'Spot/Preemptible',
+    PricingCategory == 'Committed', 'Commitment Discounts',
+    coalesce(PricingCategory, 'Other')
+)
+| project Category, Cost
+| order by Cost desc

@@ -1,0 +1,6 @@
+Costs
+| where PricingCategory in ('Standard', 'Dynamic')
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| summarize Cost = round(sum(EffectiveCost), 2) by Month = startofmonth(ChargePeriodStart), PricingCategory
+| extend Category = case(PricingCategory == 'Dynamic', 'Spot', 'On-Demand')
+| project Month, Cost, Category

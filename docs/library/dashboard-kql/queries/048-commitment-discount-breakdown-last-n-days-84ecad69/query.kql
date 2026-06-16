@@ -1,0 +1,24 @@
+let data = materialize(
+    CostsByDay
+    //
+    // Don't double-count commitment discount purchases
+    | where isnotempty(CommitmentDiscountStatus)
+    //
+    // Guarantee there's a row for every combination
+    | union (
+        print json = dynamic([
+            {"order": 11, "CommitmentDiscountType": "Reservation", "CommitmentDiscountStatus": "Used"},
+            {"order": 12, "CommitmentDiscountType": "Reservation", "CommitmentDiscountStatus": "Unused"},
+            {"order": 21, "CommitmentDiscountType": "Savings Plan", "CommitmentDiscountStatus": "Used"},
+            {"order": 22, "CommitmentDiscountType": "Savings Plan", "CommitmentDiscountStatus": "Unused"}
+        ])
+        | mv-expand json
+        | evaluate bag_unpack(json)
+        | extend EffectiveCost = toreal(0)
+    )
+    //
+    | summarize Value = sum(EffectiveCost), order = sum(order) by CommitmentDiscountStatus, CommitmentDiscountType
+    | order by order asc
+    | project Label = strcat(CommitmentDiscountStatus, ' ', tolower(CommitmentDiscountType), 's'), Value
+);
+data

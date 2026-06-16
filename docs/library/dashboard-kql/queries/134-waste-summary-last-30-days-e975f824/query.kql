@@ -1,0 +1,38 @@
+// Orphaned Resources - Summary KPIs (heuristic from Costs data)
+let lookback = ago(numberOfDays * 1d);
+let costs = Costs
+    | where ChargePeriodStart >= lookback
+    | where ChargeCategory == 'Usage'
+    | extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+    | where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+    | summarize MonthlyCost = sum(EffectiveCost) by ResourceId, ResourceType, x_ResourceType, SubAccountName, x_ResourceGroupName = column_ifexists('x_ResourceGroupName', '');
+// Unattached disks: disks with cost but no VM compute in same resource group
+let vmRGs = costs | where x_ResourceType =~ 'Microsoft.Compute/virtualMachines' | distinct x_ResourceGroupName;
+let orphanedDisks = costs
+    | where x_ResourceType =~ 'Microsoft.Compute/disks'
+    | join kind=leftanti vmRGs on x_ResourceGroupName
+    | extend DetectionRule = 'Unattached Disk';
+// Unused public IPs: public IPs with no associated VM/LB
+let vmSubAccounts = costs | where x_ResourceType =~ 'Microsoft.Compute/virtualMachines' | distinct SubAccountName;
+let lbSubAccounts = costs | where x_ResourceType =~ 'Microsoft.Network/loadBalancers' | distinct SubAccountName;
+let ipResources = costs
+    | where x_ResourceType =~ 'Microsoft.Network/publicIPAddresses'
+    | join kind=leftanti (vmSubAccounts | union lbSubAccounts) on SubAccountName
+    | extend DetectionRule = 'Unused Public IP';
+// Idle load balancers: LBs with minimal cost and no backend traffic
+let orphanedLBs = costs
+    | where x_ResourceType =~ 'Microsoft.Network/loadBalancers'
+    | where MonthlyCost < 50
+    | extend DetectionRule = 'Idle Load Balancer';
+// Union all orphans
+let allOrphans = union orphanedDisks, ipResources, orphanedLBs;
+let totalWaste = toscalar(allOrphans | summarize round(sum(MonthlyCost), 2));
+let resourceCount = toscalar(allOrphans | summarize dcount(ResourceId));
+let topType = toscalar(allOrphans | summarize count() by ResourceType | top 1 by count_ | project ResourceType);
+print json = pack_array(
+    pack('Label', 'Monthly Waste Estimate', 'Value', strcat('$', iff(isnull(totalWaste), '0', tostring(totalWaste)))),
+    pack('Label', 'Orphaned Resources', 'Value', tostring(iff(isnull(resourceCount), 0, resourceCount))),
+    pack('Label', 'Top Orphan Type', 'Value', iff(isempty(topType), 'None detected', tostring(topType)))
+)
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

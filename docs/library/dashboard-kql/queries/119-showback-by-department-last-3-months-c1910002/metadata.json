@@ -1,0 +1,35 @@
+{
+  "queryId": "c1910002-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+  "folder": "119-showback-by-department-last-3-months-c1910002",
+  "primaryTitle": "Showback by department (last 3 months)",
+  "tiles": [
+    {
+      "tileId": "c191a002-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+      "title": "Showback by department (last 3 months)",
+      "pageId": "f416685d-f559-4514-8e45-5e0e09aec286",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ResourceId",
+      "SubAccountName",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

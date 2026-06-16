@@ -1,0 +1,21 @@
+let costs = CostsPlus | where ChargePeriodStart >= startofmonth(ago(numberOfDays * 1d));
+let all = costs | summarize sum(EffectiveCost) by SubAccountId;
+let count = toscalar(all | order by sum_EffectiveCost desc | count);
+let topX = all | order by sum_EffectiveCost desc | limit maxGroupCount;
+let otherId = '(others)';
+costs
+//
+// Group rows after max count
+| extend inTopX = SubAccountId in (topX)
+| extend SubAccountId = iff(inTopX, SubAccountId, otherId)
+| extend SubAccountName = iff(inTopX, SubAccountName, strcat('(', (count - maxGroupCount), ' others)'))
+//
+| summarize 
+    EffectiveCost = round(sum(EffectiveCost), 2),
+    SubAccountName = take_any(SubAccountName)
+    by
+    ChargePeriodStart,
+    SubAccountId
+| project ChargePeriodStart, EffectiveCost, Sub = iff(SubAccountId == otherId, SubAccountName, strcat(SubAccountName, ' (', split(SubAccountId, '/')[2], ')'))
+| order by EffectiveCost desc
+| render columnchart

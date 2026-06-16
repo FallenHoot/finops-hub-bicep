@@ -1,0 +1,30 @@
+{
+  "queryId": "d5ed469a-45ea-49a2-b305-b841050213cf",
+  "folder": "007-3-month-running-total-trend-d5ed469a",
+  "primaryTitle": "3-month running total trend",
+  "tiles": [
+    {
+      "tileId": "570e40a5-f67a-4c4b-84f6-c207ed021812",
+      "title": "3-month running total trend",
+      "pageId": "a8f2e3d1-5c6b-4a9e-b7f0-1d2e3f4a5b6c",
+      "visualType": "column"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsPlus",
+    "numberOfDays"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "queryId": "cd6c86fa-ea12-4b8a-a094-44963282cc8f",
+  "folder": "157-top-databricks-products-cd6c86fa",
+  "primaryTitle": "Top Databricks Products",
+  "tiles": [
+    {
+      "tileId": "e9d5bfa0-e1e3-482b-831b-2f837f47639d",
+      "title": "Top Databricks Products",
+      "pageId": "ba68a8d7-df68-4c33-b17d-4e9e67596337",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargeDescription",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "PublisherName",
+      "ServiceName"
+    ],
+    "extensionColumnsUsed": [
+      "x_PublisherCategory"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

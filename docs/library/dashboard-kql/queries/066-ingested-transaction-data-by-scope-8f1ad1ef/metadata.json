@@ -1,0 +1,29 @@
+{
+  "queryId": "8f1ad1ef-6f5e-4f20-a1c4-3941e871d0cd",
+  "folder": "066-ingested-transaction-data-by-scope-8f1ad1ef",
+  "primaryTitle": "Ingested transaction data by scope",
+  "tiles": [
+    {
+      "tileId": "47471816-9569-4ff3-816b-98fbc47b5c17",
+      "title": "Ingested transaction data by scope",
+      "pageId": "9e099251-9658-48da-b416-80422a2a47c7",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "metadata-query",
+    "focusColumnsUsed": [
+      "ResourceName",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

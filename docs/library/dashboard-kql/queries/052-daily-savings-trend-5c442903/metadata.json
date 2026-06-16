@@ -1,0 +1,34 @@
+{
+  "queryId": "5c442903-65b0-4b53-9e7c-3ea9c1af7be5",
+  "folder": "052-daily-savings-trend-5c442903",
+  "primaryTitle": "Daily savings trend",
+  "tiles": [
+    {
+      "tileId": "b28fdb79-8d7a-414a-9da4-75ab9bffe134",
+      "title": "Daily savings trend",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "CommitmentDiscountId",
+      "CommitmentDiscountType",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

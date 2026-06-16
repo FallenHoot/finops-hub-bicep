@@ -1,0 +1,18 @@
+CostsByMonth
+| extend x_AmortizationClass = case(
+    ChargeCategory == 'Purchase' and isnotempty(CommitmentDiscountCategory), 'Principal',
+    isnotempty(CommitmentDiscountCategory), 'Amortized Charge',
+    ''
+)
+| extend x_CommitmentDiscountSavings = iff(ContractedCost == 0,      real(0), ContractedCost - EffectiveCost)
+| extend x_NegotiatedDiscountSavings = iff(ListCost == 0,            real(0), ListCost - ContractedCost)
+| extend x_TotalSavings              = iff(ListCost == 0,            real(0), ListCost - EffectiveCost)
+| summarize
+    ['List cost']      = round(sumif(ListCost, x_AmortizationClass != 'Principal'), 2),
+    ['Effective cost'] = round(sum(EffectiveCost), 2),
+    Savings            = round(sum(x_TotalSavings), 2)
+    by
+    Account = x_BillingProfileId,
+    Month   = substring(startofmonth(ChargePeriodStart), 0, 7)
+| extend ESR = percentstring(Savings/ ['List cost'])
+| order by Month desc

@@ -1,0 +1,30 @@
+{
+  "queryId": "a35b4c05-8ecb-4c51-9aaf-980af3d7923e",
+  "folder": "031-most-cost-last-n-days-a35b4c05",
+  "primaryTitle": "Most cost (last n days)",
+  "tiles": [
+    {
+      "tileId": "011c2b2c-a232-4459-acf4-8db4055f4f70",
+      "title": "Most cost (last n days)",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "bar"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay",
+    "maxGroupCount"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "EffectiveCost",
+      "ResourceType"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+let history = Costs
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| summarize Actual = sum(EffectiveCost) by Month = startofmonth(ChargePeriodStart);
+let recentAvg = toscalar(history | top maxGroupCount by Month desc | summarize avg(Actual));
+history
+| project Month, Actual = round(Actual, 0), Forecast = real(null)
+| union (print Month = startofmonth(datetime_add('month', 1, now())), Actual = real(null), Forecast = round(recentAvg, 0))
+| union (print Month = startofmonth(datetime_add('month', 2, now())), Actual = real(null), Forecast = round(recentAvg * 1.02, 0))
+| union (print Month = startofmonth(datetime_add('month', 3, now())), Actual = real(null), Forecast = round(recentAvg * 1.04, 0))
+| order by Month asc
+| project Month, Actual, Forecast

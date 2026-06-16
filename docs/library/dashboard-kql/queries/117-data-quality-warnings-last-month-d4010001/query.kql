@@ -1,0 +1,8 @@
+// Data quality warnings - flag rows where EffectiveCost > ListCost (known MCA issue #1424)
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| where EffectiveCost > ListCost and ListCost > 0
+| summarize AffectedRows = count(), TotalDifference = round(sum(EffectiveCost - ListCost), 2) by ServiceName, SubAccountName
+| project Warning = 'Warning: EffectiveCost > ListCost', ServiceName, SubAccountName, AffectedRows, TotalDifference
+| order by TotalDifference desc
+| take 20

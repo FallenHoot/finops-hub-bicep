@@ -1,0 +1,39 @@
+{
+  "queryId": "3b3f0a58-2d84-4e3e-bebc-3e747a7d5ede",
+  "folder": "074-savings-breakdown-by-month-3b3f0a58",
+  "primaryTitle": "Savings breakdown by month",
+  "tiles": [
+    {
+      "tileId": "6367a5d7-99ca-4afc-b9d4-4c77ec259a07",
+      "title": "Savings breakdown by month",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "CommitmentDiscountCategory",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [
+      "x_AmortizationClass",
+      "x_BillingProfileId",
+      "x_CommitmentDiscountSavings",
+      "x_NegotiatedDiscountSavings",
+      "x_TotalSavings"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

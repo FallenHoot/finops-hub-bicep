@@ -1,0 +1,21 @@
+// Top Resources by Subscription - Nested drilldown table
+CostsByMonth
+| where isnotempty(ResourceId)
+| summarize
+    EffectiveCost = round(sum(EffectiveCost), 2),
+    BilledCost = round(sum(BilledCost), 2),
+    ResourceName = take_any(ResourceName),
+    ServiceName = take_any(ServiceName),
+    x_ResourceType = take_any(x_ResourceType),
+    x_ResourceGroupName = take_any(x_ResourceGroupName),
+    SubAccountName = take_any(SubAccountName)
+    by SubAccountId, ResourceId
+| project
+    Subscription = strcat(SubAccountName, ' (', split(SubAccountId, '/')[2], ')'),
+    ResourceGroup = x_ResourceGroupName,
+    ResourceName,
+    ServiceName,
+    ResourceType = x_ResourceType,
+    EffectiveCost,
+    BilledCost
+| order by Subscription asc, EffectiveCost desc

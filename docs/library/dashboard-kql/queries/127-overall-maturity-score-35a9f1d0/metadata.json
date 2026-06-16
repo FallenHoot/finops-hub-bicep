@@ -1,0 +1,33 @@
+{
+  "queryId": "35a9f1d0-3dd1-4ca5-b40b-47a104f48386",
+  "folder": "127-overall-maturity-score-35a9f1d0",
+  "primaryTitle": "Overall Maturity Score",
+  "tiles": [
+    {
+      "tileId": "94ebe664-a687-4309-b0ce-d52a73fa85f0",
+      "title": "Overall Maturity Score",
+      "pageId": "e9130d68-dfe9-450c-a861-53fbd6e7e4ae",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "CommitmentDiscountId",
+      "CommitmentDiscountStatus",
+      "EffectiveCost",
+      "ListCost",
+      "ProviderName",
+      "SubAccountId",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

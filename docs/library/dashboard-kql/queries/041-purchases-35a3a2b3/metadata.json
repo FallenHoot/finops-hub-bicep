@@ -1,0 +1,46 @@
+{
+  "queryId": "35a3a2b3-4ab0-4449-96f7-c78db789089e",
+  "folder": "041-purchases-35a3a2b3",
+  "primaryTitle": "Purchases",
+  "tiles": [
+    {
+      "tileId": "84da605b-6a0d-4a2a-aac3-a4160f9de10d",
+      "title": "Purchases",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "ChargeCategory",
+      "ChargeClass",
+      "ChargeFrequency",
+      "ChargePeriodStart",
+      "CommitmentDiscountCategory",
+      "CommitmentDiscountId",
+      "CommitmentDiscountStatus",
+      "CommitmentDiscountType",
+      "ConsumedQuantity",
+      "EffectiveCost",
+      "PricingQuantity",
+      "ProviderName"
+    ],
+    "extensionColumnsUsed": [
+      "x_CommitmentDiscountUtilizationAmount",
+      "x_CommitmentDiscountUtilizationPotential",
+      "x_SkuDescription",
+      "x_SkuOrderId",
+      "x_SkuTerm"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+let costs = CostsByMonth
+| extend x_ToolkitTool = tostring(Tags['ftk-tool'])
+| where x_ToolkitTool == 'FinOps hubs'
+| extend x_ToolkitVersion = tostring(Tags['ftk-version'])
+| extend x_ResourceParentId = tostring(Tags['cm-resource-parent'])
+| extend x_ResourceParentName = database('Ingestion').parse_resourceid(x_ResourceParentId).ResourceName
+;
+let all = costs | summarize sum(EffectiveCost) by x_ResourceParentId;
+let count = toscalar(all | order by sum_EffectiveCost desc | count);
+let topX = all | order by sum_EffectiveCost desc | limit maxGroupCount;
+let otherId = '(others)';
+costs
+//
+// Group rows after max count
+| extend inTopX = x_ResourceParentId in (topX)
+| extend x_ResourceParentId = iff(inTopX, x_ResourceParentId, otherId)
+| extend x_ResourceParentName = iff(inTopX, x_ResourceParentName, strcat('(', (count - maxGroupCount), ' others)'))
+//
+| summarize 
+    EffectiveCost = round(sum(EffectiveCost), 2),
+    ResourceType = take_any(ResourceType),
+    x_ResourceParentName = take_any(x_ResourceParentName),
+    x_ResourceGroupName = take_any(x_ResourceGroupName),
+    SubAccountName = take_any(SubAccountName)
+    by
+    ChargePeriodStart,
+    x_ResourceParentId
+| project ChargePeriodStart, EffectiveCost, Hub = iff(x_ResourceParentId == otherId, x_ResourceParentName, strcat(x_ResourceParentName, ' (', x_ResourceGroupName, ' / ', SubAccountName, ')'))
+| order by EffectiveCost desc
+

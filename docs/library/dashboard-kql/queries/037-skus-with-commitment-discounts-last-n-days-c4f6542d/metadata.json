@@ -1,0 +1,40 @@
+{
+  "queryId": "c4f6542d-a9cb-4284-bd4e-b9f94ad02192",
+  "folder": "037-skus-with-commitment-discounts-last-n-days-c4f6542d",
+  "primaryTitle": "SKUs with commitment discounts (last n days)",
+  "tiles": [
+    {
+      "tileId": "3d7688f7-0a1c-4564-b851-f380a22817bf",
+      "title": "SKUs with commitment discounts (last n days)",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "CommitmentDiscountStatus",
+      "CommitmentDiscountType",
+      "ContractedUnitPrice",
+      "EffectiveCost",
+      "ListUnitPrice",
+      "PricingQuantity",
+      "PricingUnit",
+      "ResourceId"
+    ],
+    "extensionColumnsUsed": [
+      "x_EffectiveUnitPrice",
+      "x_SkuDescription",
+      "x_SkuTerm"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

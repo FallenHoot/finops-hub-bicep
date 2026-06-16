@@ -1,0 +1,10 @@
+Costs
+| where ChargePeriodStart >= monthsago(numberOfMonths)
+| summarize
+    BilledCost = round(sum(BilledCost), 2),
+    EffectiveCost = round(sum(EffectiveCost), 2)
+    by Provider = coalesce(ProviderName, 'Unknown'),
+       InvoiceIssuer = coalesce(InvoiceIssuerName, ProviderName, 'Unknown'),
+       Month = startofmonth(ChargePeriodStart)
+| order by Month desc, BilledCost desc
+| project Month, Provider, InvoiceIssuer, BilledCost, EffectiveCost

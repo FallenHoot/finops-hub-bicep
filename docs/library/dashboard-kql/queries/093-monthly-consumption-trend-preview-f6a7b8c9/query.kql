@@ -1,0 +1,24 @@
+// MACC Monthly Consumption Trend from FOCUS data
+let MACCData = union isfuzzy=true
+    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),
+    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),
+    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),
+    (print Description='No MACC data configured', Currency='', StartDate=datetime(null), ExpirationDate=datetime(null), CommitmentAmount=0.0, DataSource='Fallback', SourcePriority=0)
+| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null)), startofmonth(now())))
+| extend ExpirationDate = todatetime(coalesce(column_ifexists('ExpirationDate', datetime(null)), endofmonth(now())))
+| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))
+| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)
+| top 1 by SourcePriority desc, IsActive desc, StartDate desc;
+let StartDate = toscalar(MACCData | project StartDate);
+let EndDate = toscalar(MACCData | project ExpirationDate);
+let Commitment = toscalar(MACCData | project CommitmentAmount);
+Costs
+| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| summarize MonthlyConsumption = sum(EffectiveCost) by Month = startofmonth(ChargePeriodStart)
+| order by Month asc
+| extend RunningTotal = row_cumsum(MonthlyConsumption)
+| extend CommitmentLine = Commitment
+| extend RemainingBalance = Commitment - RunningTotal
+| project Month, MonthlyConsumption = round(MonthlyConsumption, 0), RunningTotal = round(RunningTotal, 0), RemainingBalance = round(RemainingBalance, 0)

@@ -1,0 +1,32 @@
+{
+  "queryId": "5fd3ea2a-8882-4438-9103-fa3945240604",
+  "folder": "072-forecast-next-n-days-5fd3ea2a",
+  "primaryTitle": "Forecast (next n days)",
+  "tiles": [
+    {
+      "tileId": "6fb4c25e-ae84-495b-88ae-6dd2035500d1",
+      "title": "Forecast (next n days)",
+      "pageId": "a8f2e3d1-5c6b-4a9e-b7f0-1d2e3f4a5b6c",
+      "visualType": "timechart"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsPlus",
+    "numberOfDays",
+    "numberOfMonths"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "SubAccountId"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "queryId": "49e24ee0-91de-4b1c-973f-036a3c060aca",
+  "folder": "026-daily-trend-by-resource-49e24ee0",
+  "primaryTitle": "Daily trend by resource",
+  "tiles": [
+    {
+      "tileId": "c03c1e57-5e66-4eb1-a20b-10c887eb2140",
+      "title": "Daily trend by resource",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay",
+    "maxGroupCount"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "ResourceId",
+      "ResourceName",
+      "ResourceType"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

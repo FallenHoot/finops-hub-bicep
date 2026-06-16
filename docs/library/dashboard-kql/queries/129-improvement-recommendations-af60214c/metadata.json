@@ -1,0 +1,31 @@
+{
+  "queryId": "af60214c-a4d9-4d9f-8b61-a5ac3ed42960",
+  "folder": "129-improvement-recommendations-af60214c",
+  "primaryTitle": "Improvement Recommendations",
+  "tiles": [
+    {
+      "tileId": "a76e5d07-b38d-4b1a-992a-f1ed1b7e1c0e",
+      "title": "Improvement Recommendations",
+      "pageId": "e9130d68-dfe9-450c-a861-53fbd6e7e4ae",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "CommitmentDiscountId",
+      "CommitmentDiscountStatus",
+      "EffectiveCost",
+      "ListCost",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "queryId": "8e010001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+  "folder": "110-cost-efficiency-kpis-last-month-8e010001",
+  "primaryTitle": "Cost efficiency KPIs (last month)",
+  "tiles": [
+    {
+      "tileId": "8e01a001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+      "title": "Cost efficiency KPIs (last month)",
+      "pageId": "5c57f940-6f0f-4e39-930b-b6e89bb758ad",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ResourceId",
+      "SubAccountId"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

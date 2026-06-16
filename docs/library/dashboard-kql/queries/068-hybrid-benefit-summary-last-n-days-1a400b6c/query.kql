@@ -1,0 +1,36 @@
+let costs = CostsByDayAHB
+| where isnotempty(x_SkuLicenseStatus)
+//
+// Get the latest resource record first to guarrantee we have the latest status
+| summarize arg_max(ChargePeriodStart, *) by ResourceId
+| summarize
+    x_ResourceCount = dcount(ResourceId),
+    x_SkuLicenseUnusedQuantity = sum(x_SkuLicenseUnusedQuantity)
+    by
+    x_SkuLicenseStatus,
+    x_SkuLicenseQuantity,
+    x_SkuCoreCount
+| union (
+    print json = dynamic([
+        { "x_SkuLicenseStatus": "Enabled" },
+        { "x_SkuLicenseStatus": "Not Enabled" }
+    ])
+    | mv-expand json
+    | evaluate bag_unpack(json)
+);
+//
+// Coverage first
+costs
+| summarize covered = sumif(x_ResourceCount, x_SkuLicenseStatus == 'Enabled'), all = sum(x_ResourceCount)
+| project Order = 1, Label = 'Coverage %', Value = percentstring(covered, all, 1)
+//
+// First column
+| union (costs | where x_SkuLicenseStatus == 'Enabled'     | summarize Value = numberstring(sum(x_ResourceCount)) by Order = 3, Label = 'Covered resources')
+| union (costs | where x_SkuLicenseStatus == 'Not Enabled' | summarize Value = numberstring(sum(x_ResourceCount)) by Order = 5, Label = 'Eligible resources')
+//
+// Second column
+| union (costs | where x_SkuLicenseStatus == 'Enabled'     | summarize Value = numberstring(sum(x_SkuLicenseUnusedQuantity)) by Order = 2, Label = 'Underutilized vCPU capacity')
+| union (costs | where x_SkuLicenseStatus == 'Enabled'     | summarize Value = numberstring(sum(x_SkuLicenseQuantity)) by Order = 4, Label = 'Covered vCPU capacity')
+| union (costs | where x_SkuLicenseStatus == 'Not Enabled' | summarize Value = numberstring(sum(x_SkuLicenseQuantity)) by Order = 6, Label = 'Eligible vCPU capacity')
+| order by Order asc
+

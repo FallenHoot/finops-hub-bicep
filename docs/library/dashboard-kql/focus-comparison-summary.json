@@ -1,0 +1,15 @@
+{
+  "generatedAtUtc": "2026-03-24T22:17:13.5835205Z",
+  "dashboardPath": "dashboards/dashboard-FinOps-hub_2.json",
+  "schemaScriptPath": "C:\\Users\\zaolinsk\\source\\repos\\finops-hub-bicep\\modules\\scripts\\IngestionSetup_v1_2.kql",
+  "totalQueries": 162,
+  "totalTileBoundQueries": 151,
+  "assessmentBreakdown": {
+    "focus-aligned": 153,
+    "metadata-query": 9
+  },
+  "notes": [
+    "This is a heuristic FOCUS comparison and not a formal validator run.",
+    "Repository is currently behind FOCUS v1.3; use docs/library/focus/focus-upgrade-backlog.md for migration planning."
+  ]
+}

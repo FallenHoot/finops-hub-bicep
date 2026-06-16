@@ -1,0 +1,19 @@
+// CPU architecture cost breakdown (community request #1594)
+// Heuristic based on Azure VM SKU naming conventions
+// Excludes N-series GPU VMs (shown in separate GPU tile)
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| where ServiceCategory == 'Compute' or ServiceName has 'Virtual Machines' or ResourceType =~ 'Virtual machine'
+| extend SkuRaw = tostring(coalesce(column_ifexists('SkuMeter', ''), column_ifexists('SkuPriceId', ''), column_ifexists('x_SkuName', ''), column_ifexists('SkuId', ''), column_ifexists('ChargeDescription', ''), column_ifexists('ServiceName', '')))
+| where isnotempty(SkuRaw)
+| extend NormalizedSku = tolower(SkuRaw)
+| where not(NormalizedSku matches regex @'(^|[^a-z0-9])n[cdv][0-9]')
+| extend Architecture = case(
+    NormalizedSku matches regex @'(^|[^a-z0-9])[a-z]{1,3}[0-9]+p(s|d|v)?(_|[^a-z0-9]|$)', 'Arm64 (Cobalt/Ampere)',
+    NormalizedSku matches regex @'(^|[^a-z0-9])[a-z]{1,3}[0-9]+a(s|d|v)?(_|[^a-z0-9]|$)', 'AMD',
+    NormalizedSku matches regex @'(^|[^a-z0-9])[a-z]{1,3}[0-9]+(s|d|v)?(_|[^a-z0-9]|$)', 'Intel',
+    'Unknown')
+| summarize TotalCost = round(sum(EffectiveCost), 0), VMs = dcount(ResourceId) by Architecture
+| order by TotalCost desc

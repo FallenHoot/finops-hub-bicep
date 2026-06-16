@@ -1,0 +1,12 @@
+let mkt = Costs
+| where x_PublisherCategory == 'Marketplace'
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| where tolower(strcat(PublisherName, ' ', ServiceName, ' ', ChargeDescription)) has 'fabric'
+| extend Currency = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or Currency == tostring(currencyFilter);
+let total = toscalar(mkt | summarize round(sum(EffectiveCost), 2));
+let subs = toscalar(mkt | summarize dcount(SubAccountName));
+let products = toscalar(mkt | summarize dcount(ServiceName));
+print json = pack_array(pack('Label', 'Fabric spend', 'Value', tostring(total)), pack('Label', 'Subscriptions', 'Value', tostring(subs)), pack('Label', 'Products', 'Value', tostring(products)))
+| mv-expand json
+| project Label=tostring(json.Label), Value=tostring(json.Value)

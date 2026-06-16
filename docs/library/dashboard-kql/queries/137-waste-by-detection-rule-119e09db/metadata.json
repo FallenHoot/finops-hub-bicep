@@ -1,0 +1,39 @@
+{
+  "queryId": "119e09db-a213-4ff2-95a9-da3894623da6",
+  "folder": "137-waste-by-detection-rule-119e09db",
+  "primaryTitle": "Waste by detection rule",
+  "tiles": [
+    {
+      "tileId": "f081b178-493c-43b8-a7fb-12299a8966ee",
+      "title": "Waste by detection rule",
+      "pageId": "fb47b0be-7563-4ca6-8b8c-cf01f9a8a3c8",
+      "visualType": "pie"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfDays",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ResourceId",
+      "ResourceType",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName",
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

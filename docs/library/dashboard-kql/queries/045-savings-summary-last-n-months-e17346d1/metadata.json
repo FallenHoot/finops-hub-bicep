@@ -1,0 +1,32 @@
+{
+  "queryId": "e17346d1-0227-4aa4-8765-f9b4bf43bed5",
+  "folder": "045-savings-summary-last-n-months-e17346d1",
+  "primaryTitle": "Savings summary (last n months)",
+  "tiles": [
+    {
+      "tileId": "9513d9d7-be4a-468c-aed0-f0076c9bf3c4",
+      "title": "Savings summary (last n months)",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [
+      "x_AmortizationClass"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "queryId": "0341b3e4-eccc-4924-9555-9835b128c543",
+  "folder": "077-effective-cost-breakdown-by-month-0341b3e4",
+  "primaryTitle": "Effective cost breakdown by month",
+  "tiles": [
+    {
+      "tileId": "2e9d6a7f-6393-41ad-83df-51faddbe3b8e",
+      "title": "Effective cost breakdown by month",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "CommitmentDiscountCategory",
+      "CommitmentDiscountType",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost",
+      "PricingCategory"
+    ],
+    "extensionColumnsUsed": [
+      "x_AmortizationClass",
+      "x_BillingProfileId",
+      "x_CommitmentDiscountSavings",
+      "x_NegotiatedDiscountSavings",
+      "x_TotalSavings"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+CostsByDay
+| summarize EffectiveCost = sum(EffectiveCost) by ChargePeriodStart = startofday(ChargePeriodStart)
+| order by ChargePeriodStart asc
+| extend PreviousEffectiveCost = prev(EffectiveCost)
+| project ChargePeriodStart, EffectiveCost, Change = iif(isempty(PreviousEffectiveCost), todouble(0), todouble((EffectiveCost - PreviousEffectiveCost) / PreviousEffectiveCost)) * 100
+

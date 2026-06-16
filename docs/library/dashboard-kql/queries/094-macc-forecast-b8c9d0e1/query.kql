@@ -1,0 +1,32 @@
+// MACC Forecast from FOCUS cost data
+let MACCData = union isfuzzy=true
+    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),
+    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),
+    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),
+    (datatable(Description:string, Currency:string, StartDate:datetime, ExpirationDate:datetime, CommitmentAmount:real, DataSource:string, SourcePriority:int) [ 'No MACC data configured', '', startofmonth(now()), endofmonth(now()), 0.0, 'Fallback', 0 ])
+| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null))))
+| extend ExpirationDate = todatetime(column_ifexists('ExpirationDate', datetime(null)))
+| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))
+| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)
+| top 1 by SourcePriority desc, IsActive desc, StartDate desc;
+let StartDate = toscalar(MACCData | project StartDate);
+let EndDate = toscalar(MACCData | project ExpirationDate);
+let Commitment = toscalar(MACCData | project CommitmentAmount);
+let FilteredCosts = Costs
+| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter);
+let TotalConsumed = toscalar(FilteredCosts | summarize sum(EffectiveCost));
+let TotalConsumed2 = iff(isnull(TotalConsumed), 0.0, TotalConsumed);
+let MonthsOfData = toscalar(FilteredCosts | summarize dcount(startofmonth(ChargePeriodStart)));
+let MonthsOfData2 = iff(isnull(MonthsOfData) or MonthsOfData < 1, 1, MonthsOfData);
+let AvgMonthlyBurn = TotalConsumed2 / todouble(MonthsOfData2);
+let RemainingBalance = iff(Commitment > TotalConsumed2, Commitment - TotalConsumed2, 0.0);
+let MonthsUntilExpiration = datetime_diff('month', EndDate, now());
+let MonthsUntilExp2 = iff(MonthsUntilExpiration < 1, 1, MonthsUntilExpiration);
+let RequiredMonthlySpend = iff(RemainingBalance > 0, RemainingBalance / todouble(MonthsUntilExp2), 0.0);
+let SpendGap = RequiredMonthlySpend - AvgMonthlyBurn;
+print Remaining=round(RemainingBalance, 0), AvgMonthly=round(AvgMonthlyBurn, 0), Required=round(RequiredMonthlySpend, 0), Gap=round(SpendGap, 0)
+| project json = pack_array(pack('Label', 'Remaining Balance', 'Value', tostring(Remaining)), pack('Label', 'Avg Monthly Burn', 'Value', tostring(AvgMonthly)), pack('Label', 'Required Monthly', 'Value', tostring(Required)), pack('Label', 'Spend Gap', 'Value', tostring(Gap)))
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

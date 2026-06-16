@@ -1,0 +1,12 @@
+// Base query: CostsByDayAHB
+// Returns cost records enriched with Azure Hybrid Benefit (AHB) columns
+// Used by 4 tile queries analyzing license utilization
+Costs()
+| where ChargePeriodStart >= ago(numberOfDays * 1d)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| extend x_SkuCoreCount = toint(column_ifexists('x_SkuCoreCount', 0))
+| extend x_SkuLicenseUnusedQuantity = case(
+    column_ifexists('x_SkuLicenseStatus', '') == 'Enabled' and column_ifexists('x_SkuLicenseQuantity', 0) > 0,
+    max_of(0, toint(column_ifexists('x_SkuLicenseQuantity', 0)) - toint(coalesce(column_ifexists('ConsumedQuantity', 0), 0))),
+    0)

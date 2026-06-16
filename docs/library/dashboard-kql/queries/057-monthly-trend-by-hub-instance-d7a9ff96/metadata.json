@@ -1,0 +1,36 @@
+{
+  "queryId": "d7a9ff96-da17-4826-9fb5-b23f4c7b938d",
+  "folder": "057-monthly-trend-by-hub-instance-d7a9ff96",
+  "primaryTitle": "Monthly trend by hub instance",
+  "tiles": [
+    {
+      "tileId": "05764729-51e4-4048-8cf8-2ac56eb3e643",
+      "title": "Monthly trend by hub instance",
+      "pageId": "9e099251-9658-48da-b416-80422a2a47c7",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth",
+    "maxGroupCount"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "ResourceName",
+      "ResourceType",
+      "SubAccountName",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

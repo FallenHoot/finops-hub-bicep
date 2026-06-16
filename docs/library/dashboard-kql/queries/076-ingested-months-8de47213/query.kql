@@ -1,0 +1,9 @@
+database('Ingestion').HubSettings
+| extend temp = todynamic(strcat('[',
+    '{"Label":"Version","Value":', version, '},',
+    '{"Label":"Managed scopes","Value":', array_length(scopes), '},',
+    '{"Label":"Data retention","Value":"', toint(retention.final.months), 'mo"}',
+']'))
+| mvexpand temp
+| project Label = tostring(temp.Label), Value = tostring(temp.Value)
+

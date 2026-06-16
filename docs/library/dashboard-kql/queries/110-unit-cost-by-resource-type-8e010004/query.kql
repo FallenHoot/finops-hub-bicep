@@ -1,0 +1,8 @@
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| summarize TotalCost = sum(EffectiveCost), ResourceCount = dcount(ResourceId) by ResourceType
+| where isnotempty(ResourceType) and ResourceCount > 0
+| extend CostPerResource = round(TotalCost / todouble(ResourceCount), 2)
+| project ResourceType, TotalCost = round(TotalCost, 0), ResourceCount, CostPerResource
+| order by TotalCost desc
+| take 20

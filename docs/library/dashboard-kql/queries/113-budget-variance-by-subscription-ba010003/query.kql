@@ -1,0 +1,14 @@
+let currentMonth = startofmonth(now());
+let budget = todouble(monthlyBudget);
+let subCount = toscalar(Costs | where ChargePeriodStart >= currentMonth | summarize dcount(SubAccountId));
+let subCountSafe = iff(isnull(subCount) or subCount < 1, 1, subCount);
+let budgetPerSub = iff(budget > 0, budget / todouble(subCountSafe), 0.0);
+Costs
+| where ChargePeriodStart >= currentMonth
+| summarize ActualCost = sum(EffectiveCost) by SubAccountName
+| extend EqualShareBudget = round(budgetPerSub, 0)
+| extend Variance = round(ActualCost - budgetPerSub, 0)
+| extend VariancePct = iff(budgetPerSub > 0, round((ActualCost - budgetPerSub) / budgetPerSub * 100, 1), 0.0)
+| extend Status = iff(budgetPerSub == 0, 'No Budget', iff(VariancePct > 15, 'At Risk', iff(VariancePct > 5, 'Watch', 'On Track')))
+| project Status, SubAccountName, ActualCost = round(ActualCost, 0), EqualShareBudget, Variance, VariancePct
+| order by ActualCost desc

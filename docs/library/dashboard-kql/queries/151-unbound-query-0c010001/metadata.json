@@ -1,0 +1,22 @@
+{
+  "queryId": "0c010001-3529-4e5f-6a7b-8c9d0e1f2a3b",
+  "folder": "151-unbound-query-0c010001",
+  "primaryTitle": "unbound-query",
+  "tiles": [],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "ProviderName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

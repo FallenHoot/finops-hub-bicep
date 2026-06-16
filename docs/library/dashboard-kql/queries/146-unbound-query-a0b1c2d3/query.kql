@@ -1,0 +1,6 @@
+Costs
+| where ChargePeriodStart >= monthsago(numberOfMonths)
+| where isnotempty(SubAccountName)
+| distinct SubAccountName, SubAccountId
+| project Value = SubAccountId, Label = SubAccountName
+| order by Label asc

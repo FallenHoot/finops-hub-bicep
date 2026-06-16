@@ -1,0 +1,6 @@
+Costs
+| where ChargePeriodStart >= monthsago(numberOfMonths)
+| where isnotempty(ProviderName)
+| distinct ProviderName
+| project Value = ProviderName, Label = ProviderName
+| order by Label asc

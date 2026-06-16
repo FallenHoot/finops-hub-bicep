@@ -1,0 +1,18 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+CostsPlus
+| where startofmonth(ChargePeriodStart) >= startofmonth(now(), -1)
+| summarize 
+    EffectiveCost = sum(EffectiveCost),
+    ContractedCost = sum(ContractedCost),
+    ListCost = sum(ListCost)
+    by
+    ChargePeriodStart,
+    Month = strcat(format_datetime(ChargePeriodStart, 'MM '), monthname[monthofyear(ChargePeriodStart)])
+| extend CommitmentDiscountSavings = ContractedCost - EffectiveCost
+| extend NegotiatedDiscountSavings = ListCost - ContractedCost
+| order by ChargePeriodStart asc
+| extend EffectiveCostRunningTotal = row_cumsum(EffectiveCost, prev(Month) != Month)
+| extend CommitmentDiscountSavingsRunningTotal = row_cumsum(CommitmentDiscountSavings, prev(Month) != Month)
+| extend NegotiatedDiscountSavingsRunningTotal = row_cumsum(NegotiatedDiscountSavings, prev(Month) != Month)
+| project ChargePeriodStart, CommitmentDiscountSavingsRunningTotal, NegotiatedDiscountSavingsRunningTotal, EffectiveCostRunningTotal, Month
+| render areachart  

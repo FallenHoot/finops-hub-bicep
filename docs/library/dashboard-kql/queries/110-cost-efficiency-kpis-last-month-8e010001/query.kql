@@ -1,0 +1,18 @@
+let data = Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter);
+let totalCost = toscalar(data | summarize sum(EffectiveCost));
+let resourceCount = toscalar(data | summarize dcount(ResourceId));
+let subCount = toscalar(data | summarize dcount(SubAccountId));
+let rgCount = toscalar(data | summarize dcount(x_ResourceGroupName));
+let costPerResource = iff(resourceCount > 0, round(totalCost / todouble(resourceCount), 2), 0.0);
+let costPerSub = iff(subCount > 0, round(totalCost / todouble(subCount), 0), 0.0);
+let costPerRG = iff(rgCount > 0, round(totalCost / todouble(rgCount), 0), 0.0);
+print json = pack_array(
+    pack('Label', 'Cost / Resource', 'Value', tostring(costPerResource)),
+    pack('Label', 'Cost / Subscription', 'Value', tostring(costPerSub)),
+    pack('Label', 'Cost / Resource Group', 'Value', tostring(costPerRG)),
+    pack('Label', 'Total Resources', 'Value', tostring(resourceCount)))
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

@@ -1,0 +1,37 @@
+{
+  "queryId": "5d9101af-c2b0-4acf-abfa-be16bed80a69",
+  "folder": "154-databricks-spend-by-month-5d9101af",
+  "primaryTitle": "Databricks Spend by Month",
+  "tiles": [
+    {
+      "tileId": "03b9a6d8-31af-46c1-b3e9-c36e0dba3aef",
+      "title": "Databricks Spend by Month",
+      "pageId": "ba68a8d7-df68-4c33-b17d-4e9e67596337",
+      "visualType": "column"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargeDescription",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "PublisherName",
+      "ServiceName"
+    ],
+    "extensionColumnsUsed": [
+      "x_PublisherCategory"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

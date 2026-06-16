@@ -1,0 +1,44 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+CostsByMonth
+| as costs
+| where ChargeCategory == 'Purchase'
+| where isnotempty(CommitmentDiscountType)
+| project
+    ChargePeriodStart = substring(ChargePeriodStart, 0, 10),
+    x_SkuDescription,
+    CommitmentDiscountType,
+    Term = case(isempty(x_SkuTerm) or x_SkuTerm <= 0, '', x_SkuTerm < 12, strcat(x_SkuTerm, ' month', iff(x_SkuTerm != 1, 's', '')), strcat(x_SkuTerm / 12, ' year', iff(x_SkuTerm != 12, 's', ''))),
+    ChargeFrequency,
+    ChargeClass,
+    PricingQuantity,
+    Utilization = real(0),
+    BilledCost,
+    x_SkuOrderId
+| join kind=leftouter (
+    costs
+    | where ChargeCategory == 'Usage'
+    | where isnotempty(CommitmentDiscountId)
+    //
+    | extend x_CommitmentDiscountUtilizationPotential = case(
+        ProviderName == 'Microsoft', EffectiveCost,
+        CommitmentDiscountCategory == 'Usage', ConsumedQuantity,
+        CommitmentDiscountCategory == 'Spend', EffectiveCost,
+        real(0)
+    )
+    | extend x_CommitmentDiscountUtilizationAmount = iff(CommitmentDiscountStatus == 'Used', x_CommitmentDiscountUtilizationPotential, real(0))
+    //
+    | summarize
+        x_CommitmentDiscountUtilizationAmount    = sum(x_CommitmentDiscountUtilizationAmount),
+        x_CommitmentDiscountUtilizationPotential = sum(x_CommitmentDiscountUtilizationPotential)
+        by
+        x_SkuOrderId
+    | project
+        x_SkuOrderId,
+        Utilization = round(x_CommitmentDiscountUtilizationAmount / x_CommitmentDiscountUtilizationPotential * 100, 1)
+) on x_SkuOrderId
+| extend Utilization = coalesce(Utilization1, real(0))
+| project-away x_SkuOrderId, x_SkuOrderId1, Utilization1
+| order by ChargePeriodStart desc
+
+
+

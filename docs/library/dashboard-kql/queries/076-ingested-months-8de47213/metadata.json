@@ -1,0 +1,24 @@
+{
+  "queryId": "8de47213-8327-44da-9d1b-8ba5de74c44a",
+  "folder": "076-ingested-months-8de47213",
+  "primaryTitle": "Ingested months",
+  "tiles": [
+    {
+      "tileId": "fc2e27cf-57be-486f-afa5-6a93d6e9c6a7",
+      "title": "Ingested months",
+      "pageId": "9e099251-9658-48da-b416-80422a2a47c7",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "metadata-query",
+    "focusColumnsUsed": [],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+CostsByDay
+| where isnotempty(x_SkuDescription)
+//
+// Only include SKUs with effective prices
+| where x_EffectiveUnitPrice != 0 and isnotempty(x_EffectiveUnitPrice)
+//
+// Only include SKUs with commitment discounts
+| where isnotempty(CommitmentDiscountStatus)
+//
+| summarize 
+    x_ResourceCount = dcount(ResourceId),
+    EffectiveCost = round(sum(EffectiveCost), 2),
+    BilledCost = round(sum(BilledCost), 2),
+    ListUnitPrice = round(take_any(ListUnitPrice), 4),
+    ContractedUnitPrice = round(take_any(ContractedUnitPrice), 4),
+    x_EffectiveUnitPrice = round(take_any(x_EffectiveUnitPrice), 4),
+    PricingQuantity = sum(PricingQuantity)
+    by
+    x_SkuDescription,
+    PricingUnit,
+    CommitmentDiscountType,
+    x_SkuTerm
+| order by EffectiveCost desc
+| project 
+    x_SkuDescription,
+    CommitmentDiscountType,
+    Term = case(
+        isempty(x_SkuTerm) or x_SkuTerm <= 0, '',
+        x_SkuTerm < 12, strcat(x_SkuTerm, ' month', iff(x_SkuTerm != 1, 's', '')),
+        strcat(x_SkuTerm / 12, ' year', iff(x_SkuTerm != 12, 's', ''))
+    ),
+    Quantity = round(PricingQuantity, 4),
+    Unit = PricingUnit,
+    // Resources = x_ResourceCount,
+    List = ListUnitPrice,
+    // ContractedUnitPrice,
+    // x_EffectiveUnitPrice,
+    Discount = round(ListUnitPrice - x_EffectiveUnitPrice, 4),
+    // BilledCost,
+    Cost = EffectiveCost
+//| where Discount > 0
+

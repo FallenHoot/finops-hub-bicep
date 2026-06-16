@@ -1,0 +1,27 @@
+{
+  "queryId": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
+  "folder": "090-macc-forecast-b8c9d0e1",
+  "primaryTitle": "MACC Forecast",
+  "tiles": [
+    {
+      "tileId": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
+      "title": "MACC Forecast",
+      "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

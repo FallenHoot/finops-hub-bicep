@@ -1,0 +1,19 @@
+let costs = CostsByMonth;
+let all = costs | where isnotempty(ServiceName) | summarize sum(EffectiveCost) by ServiceName;
+let count = toscalar(all | order by sum_EffectiveCost desc | count);
+let topX = all | order by sum_EffectiveCost desc | limit maxGroupCount;
+let otherId = '(others)';
+costs
+//
+// Group rows after max count
+| extend inTopX = ServiceName in (topX)
+| extend ServiceName = iff(inTopX, ServiceName, otherId)
+//
+| summarize 
+    EffectiveCost = round(sum(EffectiveCost), 2)
+    by
+    ChargePeriodStart,
+    ServiceName
+| project ChargePeriodStart, EffectiveCost, Category = ServiceName
+| order by EffectiveCost desc
+| render columnchart

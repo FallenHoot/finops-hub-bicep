@@ -1,0 +1,6 @@
+// Project Budgets - Monthly cost trend by subscription
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| summarize EffectiveCost = round(sum(EffectiveCost), 2) by Month = startofmonth(ChargePeriodStart), SubAccountName
+| order by Month asc
+| render stackedcolumnchart

@@ -1,0 +1,2002 @@
+[
+  {
+    "queryId": "152f2041-bbc1-41e4-b155-271b2e0cf6e9",
+    "folder": "001-cost-last-month-152f2041",
+    "primaryTitle": "Cost last month",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsLastMonth"
+    ]
+  },
+  {
+    "queryId": "bc24e050-f2b9-4b4a-a08d-69fc4a4bb95e",
+    "folder": "002-cost-over-time-bc24e050",
+    "primaryTitle": "Cost over time",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "0d91ea4a-c81d-4a21-b708-b6af37be1eec",
+    "folder": "003-change-over-time-0d91ea4a",
+    "primaryTitle": "Change over time",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "f2cecbb0-13f8-4642-afa4-bbcc0558f777",
+    "folder": "004-counts-f2cecbb0",
+    "primaryTitle": "Counts",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsLastMonth"
+    ]
+  },
+  {
+    "queryId": "5d63e04d-1a11-4307-96f1-ebbf68e09be0",
+    "folder": "005-counts-last-n-days-5d63e04d",
+    "primaryTitle": "Counts (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "290e7eab-8159-4338-8531-85e2718cedb1",
+    "folder": "006-effective-cost-290e7eab",
+    "primaryTitle": "Effective cost",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "d5ed469a-45ea-49a2-b305-b841050213cf",
+    "folder": "007-3-month-running-total-trend-d5ed469a",
+    "primaryTitle": "3-month running total trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsPlus",
+      "numberOfDays"
+    ]
+  },
+  {
+    "queryId": "10300876-866a-40d7-836d-b3a8783ecece",
+    "folder": "008-running-total-this-month-and-last-10300876",
+    "primaryTitle": "Running total - This month and last",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsPlus"
+    ]
+  },
+  {
+    "queryId": "9e41a624-d5f9-40c6-b47f-fef4b50ec3dd",
+    "folder": "009-3-month-daily-trend-9e41a624",
+    "primaryTitle": "3-month daily trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsPlus",
+      "numberOfDays"
+    ]
+  },
+  {
+    "queryId": "f26e2204-270e-4219-8f68-5acef1c9393f",
+    "folder": "010-3-month-daily-trend-by-subscription-f26e2204",
+    "primaryTitle": "3-month daily trend by subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsPlus",
+      "maxGroupCount",
+      "numberOfDays"
+    ]
+  },
+  {
+    "queryId": "dcc1f533-e5f9-4855-9e4c-21e21fcdf943",
+    "folder": "011-cost-savings-running-total-this-month-and-last-dcc1f533",
+    "primaryTitle": "Cost + savings running total (this month and last)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsPlus"
+    ]
+  },
+  {
+    "queryId": "e8b343dc-7430-4487-8d44-ef48ac454f2d",
+    "folder": "012-summary-e8b343dc",
+    "primaryTitle": "Summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "c077a6d4-719f-42fe-b39b-36f77dc68976",
+    "folder": "013-summary-c077a6d4",
+    "primaryTitle": "Summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "9d6635cd-503a-49bc-80c8-ac8157c6e923",
+    "folder": "014-summary-9d6635cd",
+    "primaryTitle": "Summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "3886b5cd-34a8-42d7-9e16-33ea4d236953",
+    "folder": "015-effective-cost-by-subscription-3886b5cd",
+    "primaryTitle": "Effective cost by subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "d5224d06-c8e7-4dd9-afec-595b39712f5a",
+    "folder": "016-monthly-trend-by-region-d5224d06",
+    "primaryTitle": "Monthly trend by region",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "0dcf2c54-7f1d-45e9-a53b-d598a24493a4",
+    "folder": "017-monthly-trend-by-region-0dcf2c54",
+    "primaryTitle": "Monthly trend by region",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "30644718-defd-4c6c-9ffa-a9c2cd1f871f",
+    "folder": "018-monthly-trend-by-service-name-30644718",
+    "primaryTitle": "Monthly trend by service name",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "6259f773-593c-4953-898c-15aa5ff6e53a",
+    "folder": "019-monthly-trend-by-service-name-6259f773",
+    "primaryTitle": "Monthly trend by service name",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "21a87abe-19e2-44ec-8298-ba872e66c162",
+    "folder": "020-monthly-trend-by-subscription-21a87abe",
+    "primaryTitle": "Monthly trend by subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "90502e9a-2d0d-4ae4-8d9d-cc21f9b72d5d",
+    "folder": "021-monthly-trend-by-subscription-90502e9a",
+    "primaryTitle": "Monthly trend by subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "c2c65ec0-e57d-4834-8a6b-b5975afeb9a0",
+    "folder": "022-monthly-trend-by-resource-group-c2c65ec0",
+    "primaryTitle": "Monthly trend by resource group",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "61b26784-6a73-4e80-85b2-9c5cfbd2dd06",
+    "folder": "023-monthly-trend-by-resource-group-61b26784",
+    "primaryTitle": "Monthly trend by resource group",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "3924981c-23e4-464d-a872-045df1752750",
+    "folder": "024-monthly-trend-by-resource-3924981c",
+    "primaryTitle": "Monthly trend by resource",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "c7be613e-deb4-4779-ad75-4445e8d5e01f",
+    "folder": "025-monthly-trend-by-resource-c7be613e",
+    "primaryTitle": "Monthly trend by resource",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "49e24ee0-91de-4b1c-973f-036a3c060aca",
+    "folder": "026-daily-trend-by-resource-49e24ee0",
+    "primaryTitle": "Daily trend by resource",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "4c7a7614-9b8c-415b-a4e1-d2d53c023d31",
+    "folder": "027-monthly-trend-by-service-category-4c7a7614",
+    "primaryTitle": "Monthly trend by service category",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "1d273b55-d2ea-427c-8a5f-01f6c240e98a",
+    "folder": "028-monthly-trend-by-service-category-1d273b55",
+    "primaryTitle": "Monthly trend by service category",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "90e30901-a931-4a1d-b81e-0a1821032c3c",
+    "folder": "029-monthly-trend-by-resource-type-90e30901",
+    "primaryTitle": "Monthly trend by resource type",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "ebe41e27-e9f9-478e-ab90-fd1f87906766",
+    "folder": "030-daily-trend-by-resource-type-last-n-days-ebe41e27",
+    "primaryTitle": "Daily trend by resource type (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "a35b4c05-8ecb-4c51-9aaf-980af3d7923e",
+    "folder": "031-most-cost-last-n-days-a35b4c05",
+    "primaryTitle": "Most cost (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "9c5d3cf0-b6cb-45a2-acfd-b19df425bddf",
+    "folder": "032-most-used-last-n-days-9c5d3cf0",
+    "primaryTitle": "Most used (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "2d7b6447-2769-40b8-958a-f252dab68b1e",
+    "folder": "033-resource-type-summary-last-n-days-2d7b6447",
+    "primaryTitle": "Resource type summary (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "f062533b-8c94-412f-bf83-0eb5cd06063d",
+    "folder": "034-resource-inventory-summary-last-n-days-f062533b",
+    "primaryTitle": "Resource inventory summary (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay",
+      "CostsPlus",
+      "numberOfDays"
+    ]
+  },
+  {
+    "queryId": "1d9c166d-22b6-48fd-9a90-9f983083ecc7",
+    "folder": "035-daily-trend-1d9c166d",
+    "primaryTitle": "Daily trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "af6424d4-8f73-4b81-bfdd-f0287ebcaaca",
+    "folder": "036-skus-with-negotiated-discounts-last-n-days-af6424d4",
+    "primaryTitle": "SKUs with negotiated discounts (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 9,
+    "extensionColumnsUsed": 3,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "c4f6542d-a9cb-4284-bd4e-b9f94ad02192",
+    "folder": "037-skus-with-commitment-discounts-last-n-days-c4f6542d",
+    "primaryTitle": "SKUs with commitment discounts (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 9,
+    "extensionColumnsUsed": 3,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "00ae3917-c783-45f6-a04e-9113e4c5d445",
+    "folder": "038-skus-with-no-discounts-last-n-days-00ae3917",
+    "primaryTitle": "SKUs with no discounts (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 9,
+    "extensionColumnsUsed": 3,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "d8a4634e-7ebe-47ce-83b5-ff7f50f6bee6",
+    "folder": "039-most-used-skus-last-n-days-d8a4634e",
+    "primaryTitle": "Most used SKUs (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 1,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByDay",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "98c9b9b5-bebf-41f8-8319-5fa2523f9dd0",
+    "folder": "040-purchases-98c9b9b5",
+    "primaryTitle": "Purchases",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 2,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "35a3a2b3-4ab0-4449-96f7-c78db789089e",
+    "folder": "041-purchases-35a3a2b3",
+    "primaryTitle": "Purchases",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 13,
+    "extensionColumnsUsed": 5,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "5ff29428-de83-4a2c-8f86-d8beebe68750",
+    "folder": "042-cost-summary-5ff29428",
+    "primaryTitle": "Cost summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay",
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "f5f240a8-a818-4f27-bdfb-e96fcfe433bd",
+    "folder": "043-savings-summary-f5f240a8",
+    "primaryTitle": "Savings summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay",
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "d7f31381-ba44-46a1-ad3e-dc6b8826706d",
+    "folder": "044-commitment-discount-usage-last-n-days-d7f31381",
+    "primaryTitle": "Commitment discount usage (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 11,
+    "extensionColumnsUsed": 3,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "e17346d1-0227-4aa4-8765-f9b4bf43bed5",
+    "folder": "045-savings-summary-last-n-months-e17346d1",
+    "primaryTitle": "Savings summary (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "f1ef29df-7a1d-4dd0-8619-0c0164707b31",
+    "folder": "046-savings-summary-last-n-days-f1ef29df",
+    "primaryTitle": "Savings summary (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "7d0c2c1f-338b-4534-b173-36b284779131",
+    "folder": "047-commitment-discount-breakdown-last-n-months-7d0c2c1f",
+    "primaryTitle": "Commitment discount breakdown (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "84ecad69-79ac-45b9-a8af-60be28dcc748",
+    "folder": "048-commitment-discount-breakdown-last-n-days-84ecad69",
+    "primaryTitle": "Commitment discount breakdown (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "a7843e1d-7c76-4e4d-9a92-bc642d2f8506",
+    "folder": "049-monthly-trend-by-service-category-a7843e1d",
+    "primaryTitle": "Monthly trend by service category",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "5bbb5369-ac95-45fc-853c-a6a2ce6a9e7b",
+    "folder": "050-monthly-savings-trend-5bbb5369",
+    "primaryTitle": "Monthly savings trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "93f0eb9f-fa4d-4c54-96c2-8c1d3387d13a",
+    "folder": "051-total-savings-last-n-months-93f0eb9f",
+    "primaryTitle": "Total savings (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "5c442903-65b0-4b53-9e7c-3ea9c1af7be5",
+    "folder": "052-daily-savings-trend-5c442903",
+    "primaryTitle": "Daily savings trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "9a9ee4b0-a37d-475f-bf1d-f51573243491",
+    "folder": "053-total-savings-last-n-days-9a9ee4b0",
+    "primaryTitle": "Total savings (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "377e3693-0738-45d7-97d9-4b6e71ec5b36",
+    "folder": "054-commitment-discount-chargeback-by-resource-group-377e3693",
+    "primaryTitle": "Commitment discount chargeback by resource group",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 9,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "13cad52d-91e7-4ab4-aad5-4aae21c1019a",
+    "folder": "055-commitment-discount-chargeback-by-subscription-13cad52d",
+    "primaryTitle": "Commitment discount chargeback by subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 12,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "dcf69b47-233e-4bc4-b914-3f6f09f4cb82",
+    "folder": "056-commitment-discount-usage-by-resource-last-n-day-dcf69b47",
+    "primaryTitle": "Commitment discount usage by resource (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 10,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "d7a9ff96-da17-4826-9fb5-b23f4c7b938d",
+    "folder": "057-monthly-trend-by-hub-instance-d7a9ff96",
+    "primaryTitle": "Monthly trend by hub instance",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "13813a00-e634-4428-9eac-ea255fd1eaca",
+    "folder": "058-daily-trend-by-hub-instance-13813a00",
+    "primaryTitle": "Daily trend by hub instance",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByDay",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "62bbceee-c089-45db-822c-0b4745358aa4",
+    "folder": "059-monthly-trend-by-hub-instance-62bbceee",
+    "primaryTitle": "Monthly trend by hub instance",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "b98c9ed7-47b3-41c1-a596-fd9d32725b33",
+    "folder": "060-ingested-data-by-table-b98c9ed7",
+    "primaryTitle": "Ingested data by table",
+    "tileCount": 1,
+    "assessment": "metadata-query",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "187e22fe-3d78-45a2-a2bf-090ece144fd1",
+    "folder": "061-ingested-cost-data-by-scope-187e22fe",
+    "primaryTitle": "Ingested cost data by scope",
+    "tileCount": 1,
+    "assessment": "metadata-query",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "d2c522dc-ef4b-4714-a473-09350e275557",
+    "folder": "062-ingested-scopes-d2c522dc",
+    "primaryTitle": "Ingested scopes",
+    "tileCount": 1,
+    "assessment": "metadata-query",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "6fe11b78-82ef-4e9a-8411-a65e5b0d8bba",
+    "folder": "063-ingested-months-6fe11b78",
+    "primaryTitle": "Ingested months",
+    "tileCount": 1,
+    "assessment": "metadata-query",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "b3621977-59be-4f98-a034-a94479612115",
+    "folder": "064-ingested-price-data-by-scope-b3621977",
+    "primaryTitle": "Ingested price data by scope",
+    "tileCount": 1,
+    "assessment": "metadata-query",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "4a2a77fe-e819-4059-b027-dab0a1770a0a",
+    "folder": "065-ingested-recommendation-data-by-scope-4a2a77fe",
+    "primaryTitle": "Ingested recommendation data by scope",
+    "tileCount": 1,
+    "assessment": "metadata-query",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "8f1ad1ef-6f5e-4f20-a1c4-3941e871d0cd",
+    "folder": "066-ingested-transaction-data-by-scope-8f1ad1ef",
+    "primaryTitle": "Ingested transaction data by scope",
+    "tileCount": 1,
+    "assessment": "metadata-query",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "e9a9a135-6a74-4463-b69f-eac6930ff1f2",
+    "folder": "067-ingested-commitment-discount-usage-data-by-scope-e9a9a135",
+    "primaryTitle": "Ingested commitment discount usage data by scope",
+    "tileCount": 1,
+    "assessment": "metadata-query",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "1a400b6c-9204-434d-88ff-2dc5260a95bf",
+    "folder": "068-hybrid-benefit-summary-last-n-days-1a400b6c",
+    "primaryTitle": "Hybrid Benefit summary (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 3,
+    "usedVariables": [
+      "CostsByDayAHB"
+    ]
+  },
+  {
+    "queryId": "c2ad5370-f4df-4a13-ac31-2c095f88754d",
+    "folder": "069-underutilized-vcpu-capacity-last-n-days-c2ad5370",
+    "primaryTitle": "Underutilized vCPU capacity (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 6,
+    "usedVariables": [
+      "CostsByDayAHB"
+    ]
+  },
+  {
+    "queryId": "4614acfb-2288-4a71-97f7-32845a9ddcb2",
+    "folder": "070-fully-utilized-vcpu-capacity-last-n-days-4614acfb",
+    "primaryTitle": "Fully utilized vCPU capacity (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 6,
+    "usedVariables": [
+      "CostsByDayAHB"
+    ]
+  },
+  {
+    "queryId": "99d44f1f-c53a-40ee-b749-8e5557ec58c7",
+    "folder": "071-eligible-resources-last-n-days-99d44f1f",
+    "primaryTitle": "Eligible resources (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 6,
+    "usedVariables": [
+      "CostsByDayAHB"
+    ]
+  },
+  {
+    "queryId": "5fd3ea2a-8882-4438-9103-fa3945240604",
+    "folder": "072-forecast-next-n-days-5fd3ea2a",
+    "primaryTitle": "Forecast (next n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsPlus",
+      "numberOfDays",
+      "numberOfMonths"
+    ]
+  },
+  {
+    "queryId": "e1bc2d51-44af-4dd9-8b0d-a71088b551f5",
+    "folder": "073-effective-savings-rate-last-n-months-e1bc2d51",
+    "primaryTitle": "Effective Savings Rate (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "3b3f0a58-2d84-4e3e-bebc-3e747a7d5ede",
+    "folder": "074-savings-breakdown-by-month-3b3f0a58",
+    "primaryTitle": "Savings breakdown by month",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 5,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "cb34f22b-9370-460c-9658-3e73d220bbc7",
+    "folder": "075-effective-savings-rate-last-n-days-cb34f22b",
+    "primaryTitle": "Effective Savings Rate (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByDay"
+    ]
+  },
+  {
+    "queryId": "8de47213-8327-44da-9d1b-8ba5de74c44a",
+    "folder": "076-ingested-months-8de47213",
+    "primaryTitle": "Ingested months",
+    "tileCount": 1,
+    "assessment": "metadata-query",
+    "focusColumnsUsed": 0,
+    "extensionColumnsUsed": 0,
+    "usedVariables": []
+  },
+  {
+    "queryId": "0341b3e4-eccc-4924-9555-9835b128c543",
+    "folder": "077-effective-cost-breakdown-by-month-0341b3e4",
+    "primaryTitle": "Effective cost breakdown by month",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 5,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "56fd8707-bbb3-4f7e-8e37-8dd90ada3baa",
+    "folder": "078-summary-of-list-contracted-and-effective-cost-al-56fd8707",
+    "primaryTitle": "Summary of list, contracted, and effective cost alignment",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 13,
+    "extensionColumnsUsed": 7,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "ed34de1f-3e00-467f-bc70-304e2c25262a",
+    "folder": "079-saas-spend-summary-ed34de1f",
+    "primaryTitle": "SaaS Spend Summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "891f3114-1466-42d7-8c3d-6f329ba9b816",
+    "folder": "080-saas-spend-by-month-891f3114",
+    "primaryTitle": "SaaS Spend by Month",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "61be1ce6-fd98-4961-bc00-ee23c5ade3eb",
+    "folder": "081-top-publishers-61be1ce6",
+    "primaryTitle": "Top Publishers",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "e2be6de9-ae28-46ca-a974-be2d014d4542",
+    "folder": "082-top-products-e2be6de9",
+    "primaryTitle": "Top Products",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "3159144e-e894-4fd3-9320-eeeaa5fabd0c",
+    "folder": "083-saas-spend-by-subscription-3159144e",
+    "primaryTitle": "SaaS Spend by Subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "cf020001-3529-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "084-databricks-spend-summary-preview-cf020001",
+    "primaryTitle": "Databricks Spend Summary (Preview)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "cf120001-3529-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "085-databricks-spend-summary-cf120001",
+    "primaryTitle": "Databricks Spend Summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "cf020002-3529-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "086-fabric-spend-summary-preview-cf020002",
+    "primaryTitle": "Fabric Spend Summary (Preview)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "cf120002-3529-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "087-fabric-spend-summary-cf120002",
+    "primaryTitle": "Fabric Spend Summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "886ef328-6a85-4f47-8a52-4261281a0c4f",
+    "folder": "088-spot-summary-886ef328",
+    "primaryTitle": "Spot Summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "647bfaef-4a54-42c0-aaeb-186b8dea47ee",
+    "folder": "089-pricing-category-breakdown-647bfaef",
+    "primaryTitle": "Pricing Category Breakdown",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "e60a2844-d918-481a-81bc-ebf9bef4fd2c",
+    "folder": "090-spot-vs-on-demand-trend-e60a2844",
+    "primaryTitle": "Spot vs On-Demand Trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "cf56343c-7597-43b7-bebe-4e86ea7d3da7",
+    "folder": "091-top-spot-resources-cf56343c",
+    "primaryTitle": "Top Spot Resources",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 10,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
+    "folder": "092-macc-current-status-preview-d4e5f6a7",
+    "primaryTitle": "MACC Current Status (Preview)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
+    "folder": "093-monthly-consumption-trend-preview-f6a7b8c9",
+    "primaryTitle": "Monthly Consumption Trend (Preview)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
+    "folder": "094-macc-forecast-preview-b8c9d0e1",
+    "primaryTitle": "MACC Forecast (Preview)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "f2b3c4d5-1001-4a8b-9c0d-1e2f3a4b5c6d",
+    "folder": "095-tag-coverage-f2b3c4d5",
+    "primaryTitle": "Tag Coverage",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "f2b3c4d5-1002-4a8b-9c0d-1e2f3a4b5c6d",
+    "folder": "096-cost-by-tag-key-last-n-months-f2b3c4d5",
+    "primaryTitle": "Cost by tag key (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "f2b3c4d5-1003-4a8b-9c0d-1e2f3a4b5c6d",
+    "folder": "097-cost-by-tag-value-last-n-months-f2b3c4d5",
+    "primaryTitle": "Cost by tag value (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "f2b3c4d5-1004-4a8b-9c0d-1e2f3a4b5c6d",
+    "folder": "098-tag-detail-last-n-months-f2b3c4d5",
+    "primaryTitle": "Tag detail (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "f2b3c4d5-1005-4a8b-9c0d-1e2f3a4b5c6d",
+    "folder": "099-monthly-tag-coverage-trend-f2b3c4d5",
+    "primaryTitle": "Monthly tag coverage trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "a3b4c5d6-1001-4a9b-0c1d-2e3f4a5b6c7d",
+    "folder": "100-subscription-summary-last-n-months-a3b4c5d6",
+    "primaryTitle": "Subscription summary (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "a3b4c5d6-1002-4a9b-0c1d-2e3f4a5b6c7d",
+    "folder": "101-cost-by-subscription-last-n-months-a3b4c5d6",
+    "primaryTitle": "Cost by subscription (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "a3b4c5d6-1003-4a9b-0c1d-2e3f4a5b6c7d",
+    "folder": "102-top-resources-by-subscription-last-n-months-a3b4c5d6",
+    "primaryTitle": "Top resources by subscription (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 2,
+    "usedVariables": [
+      "CostsByMonth"
+    ]
+  },
+  {
+    "queryId": "a3b4c5d6-1004-4a9b-0c1d-2e3f4a5b6c7d",
+    "folder": "103-resource-cost-by-service-last-n-months-a3b4c5d6",
+    "primaryTitle": "Resource cost by service (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "a3b4c5d6-1005-4a9b-0c1d-2e3f4a5b6c7d",
+    "folder": "104-resource-cost-by-resource-group-last-n-months-a3b4c5d6",
+    "primaryTitle": "Resource cost by resource group (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 1,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "CostsByMonth",
+      "maxGroupCount"
+    ]
+  },
+  {
+    "queryId": "fc010002-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "105-current-month-projection-fc010002",
+    "primaryTitle": "Current month projection",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "fc010001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "106-90-day-cost-forecast-fc010001",
+    "primaryTitle": "90-day cost forecast",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "fc010003-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "107-monthly-forecast-vs-actual-fc010003",
+    "primaryTitle": "Monthly forecast vs actual",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "maxGroupCount",
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "fc010004-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "108-projected-cost-by-subscription-fc010004",
+    "primaryTitle": "Projected cost by subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "maxGroupCount",
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "fc010005-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "109-monthly-cost-trend-fc010005",
+    "primaryTitle": "Monthly cost trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "8e010001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "110-cost-efficiency-kpis-last-month-8e010001",
+    "primaryTitle": "Cost efficiency KPIs (last month)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "8e010002-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "111-cost-efficiency-by-subscription-8e010002",
+    "primaryTitle": "Cost efficiency by subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "8e010005-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "112-monthly-efficiency-trend-8e010005",
+    "primaryTitle": "Monthly efficiency trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "8e010003-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "113-cost-efficiency-by-resource-group-8e010003",
+    "primaryTitle": "Cost efficiency by resource group",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "8e010004-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "114-unit-cost-by-resource-type-8e010004",
+    "primaryTitle": "Unit cost by resource type",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "ba010001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "115-budget-vs-actual-ba010001",
+    "primaryTitle": "Budget vs actual",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "monthlyBudget",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "ba010002-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "116-budget-burn-rate-this-month-ba010002",
+    "primaryTitle": "Budget burn rate (this month)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "monthlyBudget",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "ba010003-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "117-budget-variance-by-subscription-ba010003",
+    "primaryTitle": "Budget variance by subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "monthlyBudget",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "c1910001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "118-chargeback-by-tag-value-last-month-c1910001",
+    "primaryTitle": "Chargeback by tag value (last month)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 6,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "tagKeyFilter",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "c1910002-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "119-showback-by-department-last-3-months-c1910002",
+    "primaryTitle": "Showback by department (last 3 months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "c3810001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "120-cost-by-cpu-architecture-last-month-c3810001",
+    "primaryTitle": "Cost by CPU architecture (last month)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 12,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "d4010001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "121-data-quality-warnings-last-month-d4010001",
+    "primaryTitle": "Data quality warnings (last month)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "0c030001-6800-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "122-cost-by-provider-0c030001",
+    "primaryTitle": "Cost by provider",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "0c030002-6800-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "123-monthly-trend-by-provider-0c030002",
+    "primaryTitle": "Monthly trend by provider",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "0c040001-5d01-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "124-top-resources-by-provider-last-n-months-0c040001",
+    "primaryTitle": "Top resources by provider (last n months)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "0c040003-c191-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "125-cost-by-provider-and-invoice-issuer-0c040003",
+    "primaryTitle": "Cost by provider and invoice issuer",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "0c090001-c203-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "126-monthly-cost-by-provider-0c090001",
+    "primaryTitle": "Monthly cost by provider",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "0c090002-c203-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "127-daily-cost-by-provider-last-n-days-0c090002",
+    "primaryTitle": "Daily cost by provider (last n days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfDays",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "0c090003-c203-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "128-top-services-across-providers-0c090003",
+    "primaryTitle": "Top services across providers",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "0c090004-c203-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "129-sub-accounts-by-provider-0c090004",
+    "primaryTitle": "Sub accounts by provider",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "0c090005-c203-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "130-savings-rate-by-provider-0c090005",
+    "primaryTitle": "Savings rate by provider",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "35a9f1d0-3dd1-4ca5-b40b-47a104f48386",
+    "folder": "131-overall-maturity-score-35a9f1d0",
+    "primaryTitle": "Overall Maturity Score",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 10,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "782dcff0-e4bd-4279-8af0-c7e22bc2f02d",
+    "folder": "132-capability-maturity-detail-782dcff0",
+    "primaryTitle": "Capability Maturity Detail",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 9,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "af60214c-a4d9-4d9f-8b61-a5ac3ed42960",
+    "folder": "133-improvement-recommendations-af60214c",
+    "primaryTitle": "Improvement Recommendations",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "e50149e0-aa35-4666-ac62-178904d8c719",
+    "folder": "134-cost-by-subscription-last-month-e50149e0",
+    "primaryTitle": "Cost by subscription (last month)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "582a801f-88e7-4005-95bc-2d750473bdf5",
+    "folder": "135-monthly-cost-trend-by-subscription-582a801f",
+    "primaryTitle": "Monthly cost trend by subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "e975f824-6c9e-44ce-a539-083dadae47fd",
+    "folder": "136-waste-summary-last-30-days-e975f824",
+    "primaryTitle": "Waste summary (last 30 days)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 2,
+    "usedVariables": [
+      "numberOfDays",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "119e09db-a213-4ff2-95a9-da3894623da6",
+    "folder": "137-waste-by-detection-rule-119e09db",
+    "primaryTitle": "Waste by detection rule",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 2,
+    "usedVariables": [
+      "numberOfDays",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "a4e65583-94aa-498c-96cc-1155248a167e",
+    "folder": "138-projected-annual-waste-a4e65583",
+    "primaryTitle": "Projected annual waste",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 2,
+    "usedVariables": [
+      "numberOfDays",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "69fedb94-871f-4cac-a171-56156c9ad7d0",
+    "folder": "139-orphaned-resources-detail-69fedb94",
+    "primaryTitle": "Orphaned resources detail",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 9,
+    "extensionColumnsUsed": 2,
+    "usedVariables": [
+      "numberOfDays",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "ace6d8d9-df64-4a64-9b1c-55fcc7481eef",
+    "folder": "140-monthly-waste-trend-ace6d8d9",
+    "primaryTitle": "Monthly waste trend",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 2,
+    "usedVariables": [
+      "numberOfDays",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "5c84ca05-0265-4b47-ab19-4fa1cd79b542",
+    "folder": "141-cost-by-gpu-family-last-month-5c84ca05",
+    "primaryTitle": "Cost by GPU family (last month)",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 9,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "43612ae4-c475-4f22-bb50-ce9d995abb8f",
+    "folder": "142-unbound-query-43612ae4",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "cb1f5404-c0b1-42fd-99fb-3cff7b08daaa",
+    "folder": "143-unbound-query-cb1f5404",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "4ce0f587-2d45-436c-8f79-102c6b382439",
+    "folder": "144-unbound-query-4ce0f587",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "6b598467-8c31-4693-b1eb-7ed683fcfc3a",
+    "folder": "145-unbound-query-6b598467",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfDays",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "4a1973bf-08e9-4e82-b8e6-6edff81cf0a5",
+    "folder": "146-unbound-query-4a1973bf",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 4,
+    "extensionColumnsUsed": 3,
+    "usedVariables": [
+      "numberOfDays",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "eb9259cc-05b7-4441-a66d-a29026fe371b",
+    "folder": "147-unbound-query-eb9259cc",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "a0b1c2d3-68b1-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "148-unbound-query-a0b1c2d3",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths"
+    ]
+  },
+  {
+    "queryId": "a0b1c2d3-5a11-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "149-unbound-query-a0b1c2d3",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths"
+    ]
+  },
+  {
+    "queryId": "7e010001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+    "folder": "150-unbound-query-7e010001",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths"
+    ]
+  },
+  {
+    "queryId": "0c010001-3529-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "151-unbound-query-0c010001",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths"
+    ]
+  },
+  {
+    "queryId": "cf010001-3529-4e5f-6a7b-8c9d0e1f2a3b",
+    "folder": "152-unbound-query-cf010001",
+    "primaryTitle": "unbound-query",
+    "tileCount": 0,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 3,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "numberOfMonths"
+    ]
+  },
+  {
+    "queryId": "b5e9f0a8-2d3c-4b4e-c4a7-8e9f0a1b2c3d",
+    "folder": "153-rightsizing-recommendations-summary-b5e9f0a8",
+    "primaryTitle": "Rightsizing recommendations summary",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 1,
+    "extensionColumnsUsed": 0,
+    "usedVariables": []
+  },
+  {
+    "queryId": "d7a1b2c0-4f5e-4d6a-e6c9-0a1b2c3d4e5f",
+    "folder": "154-top-rightsizing-recommendations-d7a1b2c0",
+    "primaryTitle": "Top rightsizing recommendations",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 2,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "f9c3d4e2-6b7a-4f8c-a8e1-2c3d4e5f6a7b",
+    "folder": "155-est-savings-by-resource-type-f9c3d4e2",
+    "primaryTitle": "Est. savings by resource type",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 1,
+    "extensionColumnsUsed": 1,
+    "usedVariables": []
+  },
+  {
+    "queryId": "5d9101af-c2b0-4acf-abfa-be16bed80a69",
+    "folder": "156-databricks-spend-by-month-5d9101af",
+    "primaryTitle": "Databricks Spend by Month",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "cd6c86fa-ea12-4b8a-a094-44963282cc8f",
+    "folder": "157-top-databricks-products-cd6c86fa",
+    "primaryTitle": "Top Databricks Products",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "9bbe203f-434e-472d-bc70-12707f5b9386",
+    "folder": "158-databricks-spend-by-subscription-9bbe203f",
+    "primaryTitle": "Databricks Spend by Subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "32c8d1ab-d976-4a57-a57c-57562d180897",
+    "folder": "159-fabric-spend-by-month-32c8d1ab",
+    "primaryTitle": "Fabric Spend by Month",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "ccda6751-82d9-4854-963d-5e6af90ced41",
+    "folder": "160-top-fabric-products-ccda6751",
+    "primaryTitle": "Top Fabric Products",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 7,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "109f2279-bec3-4f5b-b6ea-5575f412b868",
+    "folder": "161-fabric-spend-by-subscription-109f2279",
+    "primaryTitle": "Fabric Spend by Subscription",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 8,
+    "extensionColumnsUsed": 1,
+    "usedVariables": [
+      "numberOfMonths",
+      "currencyFilter"
+    ]
+  },
+  {
+    "queryId": "8baecfdf-eedc-4ae1-9a4c-8d6a599ed539",
+    "folder": "162-cost-by-cloud-region-8baecfdf",
+    "primaryTitle": "Cost by cloud region",
+    "tileCount": 1,
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": 5,
+    "extensionColumnsUsed": 0,
+    "usedVariables": [
+      "CostsByMonth",
+      "currencyFilter"
+    ]
+  }
+]

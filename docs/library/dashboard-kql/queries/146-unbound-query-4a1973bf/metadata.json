@@ -1,0 +1,29 @@
+{
+  "queryId": "4a1973bf-08e9-4e82-b8e6-6edff81cf0a5",
+  "folder": "146-unbound-query-4a1973bf",
+  "primaryTitle": "unbound-query",
+  "tiles": [],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfDays",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "ConsumedQuantity",
+      "PricingCurrency"
+    ],
+    "extensionColumnsUsed": [
+      "x_SkuCoreCount",
+      "x_SkuLicenseQuantity",
+      "x_SkuLicenseStatus"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

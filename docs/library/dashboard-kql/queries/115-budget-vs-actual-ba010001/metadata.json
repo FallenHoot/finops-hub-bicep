@@ -1,0 +1,32 @@
+{
+  "queryId": "ba010001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+  "folder": "115-budget-vs-actual-ba010001",
+  "primaryTitle": "Budget vs actual",
+  "tiles": [
+    {
+      "tileId": "ba01a001-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+      "title": "Budget vs actual",
+      "pageId": "5c57f940-6f0f-4e39-930b-b6e89bb758ad",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "monthlyBudget",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

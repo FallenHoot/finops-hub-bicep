@@ -1,0 +1,10 @@
+// Rightsizing - Top recommendations
+Recommendations
+| summarize
+    EstSavings = round(sum(x_EffectiveCostSavings), 2),
+    ResourceCount = dcount(ResourceId),
+    LastSeen = max(x_RecommendationDate)
+    by ResourceType, x_RecommendationDescription, x_RecommendationCategory
+| order by EstSavings desc
+| take 20
+| project x_RecommendationCategory, x_RecommendationDescription, ResourceType, ResourceCount, EstSavings, LastSeen

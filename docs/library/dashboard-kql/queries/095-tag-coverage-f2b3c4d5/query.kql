@@ -1,0 +1,24 @@
+// Tag Coverage Summary
+let data = materialize(
+    CostsByMonth
+    | where ChargeCategory == 'Usage'
+    | extend TagBag = iff(isnotempty(Tags), todynamic(tostring(Tags)), dynamic({}))
+    | extend HasTags = array_length(bag_keys(TagBag)) > 0
+    | summarize
+        TaggedCost = round(sumif(EffectiveCost, HasTags), 0),
+        UntaggedCost = round(sumif(EffectiveCost, not(HasTags)), 0),
+        TaggedResources = dcountif(ResourceId, HasTags and isnotempty(ResourceId)),
+        UntaggedResources = dcountif(ResourceId, not(HasTags) and isnotempty(ResourceId)),
+        TotalResources = dcountif(ResourceId, isnotempty(ResourceId))
+    | extend TagCoveragePercent = round(100.0 * TaggedCost / (TaggedCost + UntaggedCost), 1)
+    | project json = todynamic(strcat('[',
+        '{"Label":"Tagged Cost","Value":"', TaggedCost, '"},',
+        '{"Label":"Untagged Cost","Value":"', UntaggedCost, '"},',
+        '{"Label":"Tag Coverage %","Value":"', TagCoveragePercent, '%"},',
+        '{"Label":"Tagged Resources","Value":"', TaggedResources, '"},',
+        '{"Label":"Untagged Resources","Value":"', UntaggedResources, '"}',
+    ']'))
+    | mv-expand json
+    | project Label = tostring(json.Label), Value = tostring(json.Value)
+);
+data

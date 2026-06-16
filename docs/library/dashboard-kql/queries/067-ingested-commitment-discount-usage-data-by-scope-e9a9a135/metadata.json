@@ -1,0 +1,29 @@
+{
+  "queryId": "e9a9a135-6a74-4463-b69f-eac6930ff1f2",
+  "folder": "067-ingested-commitment-discount-usage-data-by-scope-e9a9a135",
+  "primaryTitle": "Ingested commitment discount usage data by scope",
+  "tiles": [
+    {
+      "tileId": "fcedcd3b-cd11-42ab-8363-de9619fc2018",
+      "title": "Ingested commitment discount usage data by scope",
+      "pageId": "9e099251-9658-48da-b416-80422a2a47c7",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "metadata-query",
+    "focusColumnsUsed": [
+      "ResourceName",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

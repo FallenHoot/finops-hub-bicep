@@ -1,0 +1,34 @@
+{
+  "queryId": "5bbb5369-ac95-45fc-853c-a6a2ce6a9e7b",
+  "folder": "050-monthly-savings-trend-5bbb5369",
+  "primaryTitle": "Monthly savings trend",
+  "tiles": [
+    {
+      "tileId": "df06246e-5feb-4fd1-bcb0-c04448ac4c80",
+      "title": "Monthly savings trend",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "CommitmentDiscountId",
+      "CommitmentDiscountType",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

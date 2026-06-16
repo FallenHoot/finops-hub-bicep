@@ -1,0 +1,24 @@
+let data = materialize(
+    CostsByDay
+    //
+    // Don't double-count commitment discount purchases
+    | where x_AmortizationClass != 'Principal'
+    //
+    | summarize 
+        ListCost = sum(ListCost),
+        ContractedCost = sum(ContractedCost),
+        EffectiveCost = sum(EffectiveCost)
+    | extend TotalSavings = ListCost - EffectiveCost
+    | extend EffectiveSavingsRate = TotalSavings / ListCost
+    | project json = todynamic(strcat('[',
+        '{ "order":11, "type":"TotalSavings", "label":"Total savings", "value":"', numberstring(round(TotalSavings, 2)), '" },',
+        '{ "order":12, "type":"", "label":"", "value":"/" },',
+        '{ "order":13, "type":"List", "label":"Cost without discounts", "value":"', numberstring(round(ListCost, 2)), '" },',
+        '{ "order":14, "type":"", "label":"", "value":"=" },',
+        '{ "order":15, "type":"EffectiveSavingsRate", "label":"Effective savings rate", "value":"', percentstring(EffectiveSavingsRate), '" }',
+    ']'))
+    | mv-expand json
+    | order by toint(json.order) asc
+    | project Label = tostring(json.label), Value = tostring(json.value), Type = tostring(json.type)
+);
+data

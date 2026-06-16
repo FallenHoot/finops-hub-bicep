@@ -1,0 +1,3 @@
+CostsByMonth
+| summarize BilledCost = round(sum(BilledCost), 2), EffectiveCost = round(sum(EffectiveCost), 2) by BillingPeriodStart = startofmonth(BillingPeriodStart)
+| render timechart

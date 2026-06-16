@@ -1,0 +1,34 @@
+{
+  "queryId": "782dcff0-e4bd-4279-8af0-c7e22bc2f02d",
+  "folder": "128-capability-maturity-detail-782dcff0",
+  "primaryTitle": "Capability Maturity Detail",
+  "tiles": [
+    {
+      "tileId": "7bdc738f-24af-4732-8c6f-8ced6b068959",
+      "title": "Capability Maturity Detail",
+      "pageId": "e9130d68-dfe9-450c-a861-53fbd6e7e4ae",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "CommitmentDiscountId",
+      "CommitmentDiscountStatus",
+      "EffectiveCost",
+      "ListCost",
+      "SubAccountId",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

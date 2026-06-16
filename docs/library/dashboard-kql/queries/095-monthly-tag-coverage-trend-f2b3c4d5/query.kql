@@ -1,0 +1,11 @@
+// Monthly Tag Coverage Trend - Tagged vs Untagged cost over time
+CostsByMonth
+| where ChargeCategory == 'Usage'
+| extend TagBag = iff(isnotempty(Tags), todynamic(tostring(Tags)), dynamic({}))
+| extend HasTags = array_length(bag_keys(TagBag)) > 0
+| summarize
+    TaggedCost = round(sumif(EffectiveCost, HasTags), 2),
+    UntaggedCost = round(sumif(EffectiveCost, not(HasTags)), 2)
+    by BillingPeriodStart
+| order by BillingPeriodStart asc
+| project BillingPeriodStart, TaggedCost, UntaggedCost

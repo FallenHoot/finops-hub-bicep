@@ -1,0 +1,10 @@
+Costs
+| where ChargePeriodStart >= monthsago(numberOfMonths)
+| summarize Cost = round(sum(EffectiveCost), 2) by
+    Provider = coalesce(ProviderName, 'Unknown'),
+    SubAccountName,
+    ServiceName,
+    ResourceName = coalesce(ResourceName, '(unnamed)')
+| order by Cost desc
+| take 100
+| project Provider, SubAccountName, ServiceName, ResourceName, Cost

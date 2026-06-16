@@ -1,0 +1,29 @@
+{
+  "queryId": "b3621977-59be-4f98-a034-a94479612115",
+  "folder": "064-ingested-price-data-by-scope-b3621977",
+  "primaryTitle": "Ingested price data by scope",
+  "tiles": [
+    {
+      "tileId": "71b29fd4-2999-45dc-9e4b-14152c48a4f4",
+      "title": "Ingested price data by scope",
+      "pageId": "9e099251-9658-48da-b416-80422a2a47c7",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "metadata-query",
+    "focusColumnsUsed": [
+      "ResourceName",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+let costs = CostsByMonth
+| extend x_ToolkitTool = tostring(Tags['ftk-tool'])
+| where x_ToolkitTool == 'FinOps hubs'
+| extend x_ToolkitVersion = tostring(Tags['ftk-version'])
+| extend x_ResourceParentId = tostring(Tags['cm-resource-parent'])
+| extend x_ResourceParentName = tostring(database('Ingestion').parse_resourceid(x_ResourceParentId).ResourceName)
+;
+let data = (
+    costs
+    | summarize 
+        EffectiveCost  = sum(EffectiveCost),
+        x_ResourceParentName = take_any(x_ResourceParentName),
+        RegionName = take_any(RegionName),
+        x_ResourceGroupName = take_any(x_ResourceGroupName),
+        SubAccountName = take_any(SubAccountName),
+        x_ToolkitVersion = take_any(x_ToolkitVersion)
+        by
+        ChargePeriodStart,
+        x_ResourceParentId
+    | as per
+    //
+    // Append total
+    | union (
+        per
+        | summarize 
+            EffectiveCost  = sum(EffectiveCost)
+            by
+            x_ResourceParentId,
+            x_ResourceParentName,
+            x_ToolkitVersion,
+            RegionName,
+            x_ResourceGroupName,
+            SubAccountName
+    )
+    | order by ChargePeriodStart asc
+    | extend EffectiveCost = todouble(round(EffectiveCost, 2))
+    | extend ChargePeriod = iff(isempty(ChargePeriodStart), strcat('Total'), strcat(format_datetime(ChargePeriodStart, 'yyyy-MM - '), monthname[monthofyear(ChargePeriodStart)]))
+);
+data | evaluate pivot(ChargePeriod, sum(EffectiveCost), x_ResourceParentName, x_ToolkitVersion, RegionName, x_ResourceGroupName, SubAccountName)
+| project-rename Name = x_ResourceParentName, Version = x_ToolkitVersion
+| order by column_ifexists('Total', 0.0) desc
+

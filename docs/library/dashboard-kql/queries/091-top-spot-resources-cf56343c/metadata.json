@@ -1,0 +1,38 @@
+{
+  "queryId": "cf56343c-7597-43b7-bebe-4e86ea7d3da7",
+  "folder": "091-top-spot-resources-cf56343c",
+  "primaryTitle": "Top Spot Resources",
+  "tiles": [
+    {
+      "tileId": "3d5aa022-877b-4dfc-a6c0-1de2c582be92",
+      "title": "Top Spot Resources",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "ListCost",
+      "PricingCategory",
+      "PricingCurrency",
+      "RegionName",
+      "ResourceId",
+      "ResourceName",
+      "ResourceType"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

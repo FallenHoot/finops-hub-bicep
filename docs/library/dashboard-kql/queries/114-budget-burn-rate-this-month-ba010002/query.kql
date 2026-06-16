@@ -1,0 +1,11 @@
+let currentMonth = startofmonth(now());
+let budget = todouble(monthlyBudget);
+Costs
+| where ChargePeriodStart >= currentMonth and ChargePeriodStart < startofday(now())
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| summarize DailyCost = sum(EffectiveCost) by Day = startofday(ChargePeriodStart)
+| order by Day asc
+| extend CumulativeCost = row_cumsum(DailyCost)
+| extend BudgetLine = budget
+| project Day, CumulativeCost = round(CumulativeCost, 0), BudgetLine = round(BudgetLine, 0)

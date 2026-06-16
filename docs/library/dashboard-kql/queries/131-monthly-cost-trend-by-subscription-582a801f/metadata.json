@@ -1,0 +1,30 @@
+{
+  "queryId": "582a801f-88e7-4005-95bc-2d750473bdf5",
+  "folder": "131-monthly-cost-trend-by-subscription-582a801f",
+  "primaryTitle": "Monthly cost trend by subscription",
+  "tiles": [
+    {
+      "tileId": "c30b769c-22cb-4388-b9d5-ec40f0814349",
+      "title": "Monthly cost trend by subscription",
+      "pageId": "d9d88432-617f-445b-8f4b-d70c8a421507",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+// Rightsizing - Est. savings by resource type
+Recommendations
+| where x_EffectiveCostSavings > 0
+| summarize EstSavings = round(sum(x_EffectiveCostSavings), 2) by ResourceType
+| order by EstSavings desc
+| take 15
+| project ResourceType, EstSavings

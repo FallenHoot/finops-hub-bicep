@@ -1,0 +1,7 @@
+// Base query: CostsByMonth
+// Returns all cost records for the last numberOfMonths months (used by 44 tile queries)
+// Tiles aggregate this data by month, subscription, service, region, etc.
+Costs()
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)

@@ -1,0 +1,33 @@
+{
+  "queryId": "e60a2844-d918-481a-81bc-ebf9bef4fd2c",
+  "folder": "090-spot-vs-on-demand-trend-e60a2844",
+  "primaryTitle": "Spot vs On-Demand Trend",
+  "tiles": [
+    {
+      "tileId": "629459f2-df5f-43df-9b5e-d01a62dc1b33",
+      "title": "Spot vs On-Demand Trend",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "visualType": "stackedarea"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCategory",
+      "PricingCurrency"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

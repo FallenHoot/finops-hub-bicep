@@ -1,0 +1,23 @@
+// FinOps Capability Maturity Detail
+let lastMonth = Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now());
+let totalRows = toscalar(lastMonth | summarize count());
+let taggedRows = toscalar(lastMonth | summarize countif(isnotempty(Tags) and Tags != '{}'));
+let tagPct = iif(totalRows > 0, round(100.0 * taggedRows / totalRows, 0), 0.0);
+let totalList = toscalar(lastMonth | where ListCost > 0 | summarize sum(ListCost));
+let totalEffective = toscalar(lastMonth | where ListCost > 0 | summarize sum(EffectiveCost));
+let esr = iif(totalList > 0, round(100.0 * (totalList - totalEffective) / totalList, 0), 0.0);
+let commitTotal = toscalar(lastMonth | where isnotempty(CommitmentDiscountId) | summarize sum(EffectiveCost));
+let commitUsed = toscalar(lastMonth | where isnotempty(CommitmentDiscountId) | summarize sumif(EffectiveCost, CommitmentDiscountStatus == 'Used'));
+let commitUtil = iif(commitTotal > 0, round(100.0 * commitUsed / commitTotal, 0), 0.0);
+let subCount = toreal(toscalar(lastMonth | summarize dcount(SubAccountId)));
+let rgCount = toreal(toscalar(lastMonth | summarize dcount(column_ifexists('x_ResourceGroupName', ''))));
+union
+(print Domain='Understand', Capability='Cost Visibility', Metric='Subscriptions tracked', Value=subCount, WalkThreshold=3.0, RunThreshold=10.0),
+(print Domain='Manage', Capability='Cost Allocation', Metric='Tag coverage %', Value=tagPct, WalkThreshold=50.0, RunThreshold=80.0),
+(print Domain='Optimize', Capability='Rate Optimization', Metric='Effective savings rate %', Value=esr, WalkThreshold=10.0, RunThreshold=20.0),
+(print Domain='Optimize', Capability='Commitment Discounts', Metric='Utilization %', Value=commitUtil, WalkThreshold=50.0, RunThreshold=80.0),
+(print Domain='Manage', Capability='Resource Groups', Metric='Resource groups tracked', Value=rgCount, WalkThreshold=10.0, RunThreshold=50.0)
+| extend Level = case(Value >= RunThreshold, 'Run', Value >= WalkThreshold, 'Walk', 'Crawl')
+| project Level, Domain, Capability, Metric, Value=round(Value, 0), WalkThreshold=round(WalkThreshold, 0), RunThreshold=round(RunThreshold, 0)
+| order by Domain asc, Capability asc

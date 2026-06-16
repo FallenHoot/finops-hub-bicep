@@ -1,0 +1,11 @@
+Costs
+| where ChargePeriodStart >= monthsago(numberOfMonths)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| summarize Cost = round(sum(EffectiveCost), 2)
+    by Provider = coalesce(ProviderName, 'Unknown'),
+       ServiceCategory = coalesce(ServiceCategory, 'Other'),
+       ServiceName = coalesce(ServiceName, 'Unknown')
+| order by Cost desc
+| take 50
+| project Provider, ServiceCategory, ServiceName, Cost

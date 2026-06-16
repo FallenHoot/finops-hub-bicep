@@ -1,0 +1,32 @@
+{
+  "queryId": "e1bc2d51-44af-4dd9-8b0d-a71088b551f5",
+  "folder": "073-effective-savings-rate-last-n-months-e1bc2d51",
+  "primaryTitle": "Effective Savings Rate (last n months)",
+  "tiles": [
+    {
+      "tileId": "961b8980-213f-4bc7-9512-8a08614229e0",
+      "title": "Effective Savings Rate (last n months)",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [
+      "x_AmortizationClass"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+// Cost by cloud region with geo coordinates for interactive map visualization
+// Azure region name -> lat/lon lookup (covers all generally-available Azure regions)
+let AzureRegionGeo = datatable(RegionName:string, Latitude:real, Longitude:real) [
+    // Americas
+    'East US',             37.3719,   -79.8164,
+    'East US 2',           36.6681,   -78.3889,
+    'West US',             37.7833,  -122.4167,
+    'West US 2',           47.2330,  -119.8520,
+    'West US 3',           33.4484,  -112.0740,
+    'Central US',          41.5908,   -93.6208,
+    'North Central US',    41.8819,   -87.6278,
+    'South Central US',    29.4167,   -98.5000,
+    'West Central US',     40.8900,  -110.2340,
+    'Canada Central',      43.6532,   -79.3832,
+    'Canada East',         46.8170,   -71.2170,
+    'Brazil South',       -23.5505,   -46.6333,
+    'Brazil Southeast',   -22.9068,   -43.1729,
+    'Mexico Central',      20.5888,  -100.3899,
+    // Europe
+    'North Europe',        53.3478,    -6.2597,
+    'West Europe',         52.3667,     4.9000,
+    'UK South',            50.9413,    -0.7990,
+    'UK West',             53.4269,    -3.0840,
+    'France Central',      46.3772,     2.3730,
+    'France South',        43.8345,     2.1972,
+    'Germany West Central',50.1109,     8.6821,
+    'Germany North',       53.0736,     8.8064,
+    'Norway East',         59.9139,    10.7522,
+    'Norway West',         58.9700,     5.7330,
+    'Switzerland North',   47.4515,     8.5646,
+    'Switzerland West',    46.2044,     6.1432,
+    'Sweden Central',      60.6749,    17.1413,
+    'Poland Central',      52.2318,    21.0062,
+    'Italy North',         45.4688,     9.1813,
+    'Spain Central',       40.4163,    -3.6998,
+    // Asia Pacific
+    'East Asia',           22.2670,   114.1880,
+    'Southeast Asia',       1.2830,   103.8330,
+    'Japan East',          35.6812,   139.7671,
+    'Japan West',          34.6939,   135.5022,
+    'Australia East',     -33.8688,   151.2093,
+    'Australia Southeast', -37.8136,   144.9631,
+    'Australia Central',  -35.3075,   149.1244,
+    'Australia Central 2',-35.3075,   149.1345,
+    'Central India',       18.5822,    73.9197,
+    'West India',          19.0885,    72.8682,
+    'South India',         12.9845,    80.1637,
+    'Korea South',         35.1796,   129.0756,
+    'Korea Central',       37.5665,   126.9780,
+    // Middle East & Africa
+    'South Africa North', -25.7312,    28.2184,
+    'South Africa West',  -34.0757,    18.8430,
+    'UAE North',           25.2667,    55.3167,
+    'UAE Central',         24.4667,    54.3667,
+    'Israel Central',      31.5313,    34.8677,
+    'Qatar Central',       25.5514,    51.4232,
+    // Other
+    'New Zealand North',  -36.8485,   174.7633,
+    'Taiwan North',        25.0478,   121.5318,
+    'Malaysia West',        3.1478,   101.6953,
+    'Chile Central',      -33.4489,   -70.6693
+];
+let costs = CostsByMonth;
+costs
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| where isnotempty(RegionName) and RegionName !in ('', 'Unknown', 'Global', 'global')
+| summarize
+    TotalCost     = round(sum(EffectiveCost), 2),
+    ResourceCount = dcount(ResourceId)
+    by RegionName
+| join kind=inner AzureRegionGeo on RegionName
+| project
+    RegionName,
+    Longitude,
+    Latitude,
+    TotalCost,
+    ResourceCount
+| order by TotalCost desc

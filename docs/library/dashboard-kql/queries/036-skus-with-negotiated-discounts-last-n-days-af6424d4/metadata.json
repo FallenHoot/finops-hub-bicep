@@ -1,0 +1,40 @@
+{
+  "queryId": "af6424d4-8f73-4b81-bfdd-f0287ebcaaca",
+  "folder": "036-skus-with-negotiated-discounts-last-n-days-af6424d4",
+  "primaryTitle": "SKUs with negotiated discounts (last n days)",
+  "tiles": [
+    {
+      "tileId": "72aa5a62-e129-4ffa-be62-82c833282d27",
+      "title": "SKUs with negotiated discounts (last n days)",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "CommitmentDiscountStatus",
+      "CommitmentDiscountType",
+      "ContractedUnitPrice",
+      "EffectiveCost",
+      "ListUnitPrice",
+      "PricingQuantity",
+      "PricingUnit",
+      "ResourceId"
+    ],
+    "extensionColumnsUsed": [
+      "x_EffectiveUnitPrice",
+      "x_SkuDescription",
+      "x_SkuTerm"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

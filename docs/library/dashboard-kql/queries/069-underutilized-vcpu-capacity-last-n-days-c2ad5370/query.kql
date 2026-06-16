@@ -1,0 +1,27 @@
+// Underutilized capacity
+// Fully utilized capacity
+// Eligible resources
+CostsByDayAHB
+| where x_SkuLicenseStatus == 'Enabled'
+//
+// Get the latest resource record first to guarrantee we have the latest status
+| summarize
+    arg_max(ChargePeriodStart, *),
+    TotalConsumedQuantity = sum(ConsumedQuantity),
+    TotalEffectiveCost = sum(EffectiveCost)
+    by
+    ResourceId
+| project 
+    ["License type"] = x_SkuLicenseType,
+    ResourceName,
+    ResourceType,
+    SKU = x_SkuInstanceType,
+    ["SKU cores"] = x_SkuCoreCount,
+    ["Required capacity"] = x_SkuLicenseQuantity,
+    ["Unused capacity"] = x_SkuLicenseUnusedQuantity,
+    ["Unused vCore hours"] = x_SkuLicenseUnusedQuantity * ConsumedQuantity,
+    EffectiveCost = TotalEffectiveCost,
+    x_ResourceGroupName,
+    SubAccountName
+| order by ["Unused vCore hours"] desc
+

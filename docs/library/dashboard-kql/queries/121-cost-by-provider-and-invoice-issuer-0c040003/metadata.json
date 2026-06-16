@@ -1,0 +1,32 @@
+{
+  "queryId": "0c040003-c191-4e5f-6a7b-8c9d0e1f2a3b",
+  "folder": "121-cost-by-provider-and-invoice-issuer-0c040003",
+  "primaryTitle": "Cost by provider and invoice issuer",
+  "tiles": [
+    {
+      "tileId": "0c040004-c191-4f5a-6b7c-8d9e0f1a2b3c",
+      "title": "Cost by provider and invoice issuer",
+      "pageId": "f416685d-f559-4514-8e45-5e0e09aec286",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "InvoiceIssuerName",
+      "ProviderName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

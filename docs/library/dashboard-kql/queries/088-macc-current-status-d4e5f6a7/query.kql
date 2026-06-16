@@ -1,0 +1,15 @@
+// MACC Status - Uses FOCUS cost data for consumption
+let MACCData = MACC_ManualEntry | take 1;
+let StartDate = toscalar(MACCData | project StartDate);
+let EndDate = toscalar(MACCData | project ExpirationDate);
+let Commitment = toscalar(MACCData | project CommitmentAmount);
+let TotalConsumed = toscalar(Costs | where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate | summarize sum(EffectiveCost));
+let TotalConsumed2 = iff(isnull(TotalConsumed), 0.0, TotalConsumed);
+let DaysTotal = datetime_diff('day', EndDate, StartDate);
+let DaysElapsed = datetime_diff('day', now(), StartDate);
+let DaysRemaining = datetime_diff('day', EndDate, now());
+let PercentConsumed = iff(Commitment > 0, round(100.0 * TotalConsumed2 / Commitment, 1), 0.0);
+let PercentTimeElapsed = round(100.0 * todouble(DaysElapsed) / todouble(DaysTotal), 1);
+let HealthStatus = case(PercentConsumed >= PercentTimeElapsed - 5 and PercentConsumed <= PercentTimeElapsed + 10, 'On Track', PercentConsumed > PercentTimeElapsed + 10, 'Ahead', PercentConsumed >= PercentTimeElapsed - 15, 'Slightly Behind', PercentConsumed >= PercentTimeElapsed - 25, 'Behind', 'At Risk');
+MACCData
+| project Description, Currency, CommitmentAmount = round(Commitment, 0), TotalConsumed = round(TotalConsumed2, 0), RemainingBalance = round(Commitment - TotalConsumed2, 0), PercentConsumed = strcat(PercentConsumed, '%'), PercentTimeElapsed = strcat(PercentTimeElapsed, '%'), DaysRemaining, ExpirationDate = format_datetime(EndDate, 'yyyy-MM-dd'), HealthStatus

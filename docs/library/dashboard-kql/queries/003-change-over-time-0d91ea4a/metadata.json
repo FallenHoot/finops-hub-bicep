@@ -1,0 +1,30 @@
+{
+  "queryId": "0d91ea4a-c81d-4a21-b708-b6af37be1eec",
+  "folder": "003-change-over-time-0d91ea4a",
+  "primaryTitle": "Change over time",
+  "tiles": [
+    {
+      "tileId": "efd2b03d-c80d-4d78-b77a-efa3f932efdb",
+      "title": "Change over time",
+      "pageId": "f416685d-f559-4514-8e45-5e0e09aec286",
+      "visualType": "column"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "BillingPeriodStart",
+      "EffectiveCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

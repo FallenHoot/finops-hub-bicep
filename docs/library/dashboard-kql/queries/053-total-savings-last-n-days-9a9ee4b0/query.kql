@@ -1,0 +1,12 @@
+CostsByDay
+//
+// Filter out commitment discount purchases
+| where ChargeCategory == 'Usage' or isempty(CommitmentDiscountId)
+//
+| summarize 
+    Savings = round(sum(ListCost - EffectiveCost), 2)
+    by
+    Type = case(
+        isnotempty(CommitmentDiscountType), CommitmentDiscountType,
+        'Negotiated'
+    )

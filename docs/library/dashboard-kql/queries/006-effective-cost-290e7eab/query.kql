@@ -1,0 +1,6 @@
+CostsByMonth
+| summarize EffectiveCost = sum(EffectiveCost) by BillingPeriodStart
+| order by BillingPeriodStart asc
+| extend PreviousEffectiveCost = prev(EffectiveCost)
+| project BillingPeriodStart, EffectiveCost, Change = iif(isempty(PreviousEffectiveCost), todouble(0), todouble((EffectiveCost - PreviousEffectiveCost) / PreviousEffectiveCost)) * 100
+

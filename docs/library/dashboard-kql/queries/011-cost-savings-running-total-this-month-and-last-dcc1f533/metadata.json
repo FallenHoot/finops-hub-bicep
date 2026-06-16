@@ -1,0 +1,31 @@
+{
+  "queryId": "dcc1f533-e5f9-4855-9e4c-21e21fcdf943",
+  "folder": "011-cost-savings-running-total-this-month-and-last-dcc1f533",
+  "primaryTitle": "Cost + savings running total (this month and last)",
+  "tiles": [
+    {
+      "tileId": "dad96fbb-750c-47a3-bd2e-e2bee74ebd22",
+      "title": "Cost + savings running total (this month and last)",
+      "pageId": "f8ee3008-df7e-442f-825e-2e3b46e4c185",
+      "visualType": "stackedarea"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsPlus"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

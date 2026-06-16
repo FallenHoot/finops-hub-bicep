@@ -1,0 +1,26 @@
+// FinOps Maturity Scorecard - Auto-scored from live data
+let lastMonth = Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter);
+let totalRows = toscalar(lastMonth | summarize count());
+let taggedRows = toscalar(lastMonth | summarize countif(isnotempty(Tags) and Tags != '{}'));
+let tagPct = iif(totalRows > 0, round(100.0 * taggedRows / totalRows, 0), 0.0);
+let totalList = toscalar(lastMonth | where ListCost > 0 | summarize sum(ListCost));
+let totalEffective = toscalar(lastMonth | where ListCost > 0 | summarize sum(EffectiveCost));
+let esr = iif(totalList > 0, round(100.0 * (totalList - totalEffective) / totalList, 0), 0.0);
+let commitTotal = toscalar(lastMonth | where isnotempty(CommitmentDiscountId) | summarize sum(EffectiveCost));
+let commitUsed = toscalar(lastMonth | where isnotempty(CommitmentDiscountId) | summarize sumif(EffectiveCost, CommitmentDiscountStatus == 'Used'));
+let commitUtil = iif(commitTotal > 0, round(100.0 * commitUsed / commitTotal, 0), 0.0);
+let providerCount = toscalar(lastMonth | summarize dcount(column_ifexists('ProviderName', '')));
+let subCount = toscalar(lastMonth | summarize dcount(SubAccountId));
+print
+  OverallMaturity = case(
+    tagPct > 70 and esr > 15 and commitUtil > 70, 'Run',
+    tagPct > 40 or esr > 5 or commitUtil > 40, 'Walk',
+    'Crawl'),
+  TagCoverage = strcat(tagPct, '%'),
+  EffectiveSavingsRate = strcat(esr, '%'),
+  CommitmentUtilization = strcat(commitUtil, '%'),
+  CloudProviders = providerCount,
+  Subscriptions = subCount

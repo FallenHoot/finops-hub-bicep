@@ -1,0 +1,33 @@
+{
+  "queryId": "0c030002-6800-4e5f-6a7b-8c9d0e1f2a3b",
+  "folder": "121-monthly-trend-by-provider-0c030002",
+  "primaryTitle": "Monthly trend by provider",
+  "tiles": [
+    {
+      "tileId": "0c030004-6800-4f5a-6b7c-8d9e0f1a2b3c",
+      "title": "Monthly trend by provider",
+      "pageId": "f8ee3008-df7e-442f-825e-2e3b46e4c185",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ProviderName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

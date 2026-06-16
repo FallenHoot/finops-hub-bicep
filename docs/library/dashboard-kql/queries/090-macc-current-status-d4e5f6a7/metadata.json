@@ -1,0 +1,31 @@
+{
+  "queryId": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
+  "folder": "090-macc-current-status-d4e5f6a7",
+  "primaryTitle": "MACC Current Status",
+  "tiles": [
+    {
+      "tileId": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+      "title": "MACC Current Status",
+      "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

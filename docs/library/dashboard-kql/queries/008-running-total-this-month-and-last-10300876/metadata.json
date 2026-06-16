@@ -1,0 +1,29 @@
+{
+  "queryId": "10300876-866a-40d7-836d-b3a8783ecece",
+  "folder": "008-running-total-this-month-and-last-10300876",
+  "primaryTitle": "Running total - This month and last",
+  "tiles": [
+    {
+      "tileId": "1ac02a9f-3c12-4828-a4dd-60a0d411f60c",
+      "title": "Running total - This month and last",
+      "pageId": "5c57f940-6f0f-4e39-930b-b6e89bb758ad",
+      "visualType": "area"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsPlus"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

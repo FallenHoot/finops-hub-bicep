@@ -1,0 +1,40 @@
+{
+  "queryId": "69fedb94-871f-4cac-a171-56156c9ad7d0",
+  "folder": "137-orphaned-resources-detail-69fedb94",
+  "primaryTitle": "Orphaned resources detail",
+  "tiles": [
+    {
+      "tileId": "e8348976-c91e-433a-9482-f68a6daae2dd",
+      "title": "Orphaned resources detail",
+      "pageId": "fb47b0be-7563-4ca6-8b8c-cf01f9a8a3c8",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfDays",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ResourceId",
+      "ResourceName",
+      "ResourceType",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName",
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

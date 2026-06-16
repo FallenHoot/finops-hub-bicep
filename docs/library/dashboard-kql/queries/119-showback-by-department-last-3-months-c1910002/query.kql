@@ -1,0 +1,14 @@
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| extend Department = case(
+    isnotempty(Tags) and bag_has_key(Tags, 'Department'), tostring(Tags['Department']),
+    isnotempty(Tags) and bag_has_key(Tags, 'department'), tostring(Tags['department']),
+    isnotempty(Tags) and bag_has_key(Tags, 'CostCenter'), tostring(Tags['CostCenter']),
+    isnotempty(Tags) and bag_has_key(Tags, 'costcenter'), tostring(Tags['costcenter']),
+    isnotempty(Tags) and bag_has_key(Tags, 'BusinessUnit'), tostring(Tags['BusinessUnit']),
+    'Unassigned')
+| summarize TotalCost = sum(EffectiveCost), Resources = dcount(ResourceId), Subscriptions = dcount(SubAccountName) by Department, Month = startofmonth(ChargePeriodStart)
+| project Month, Department, TotalCost = round(TotalCost, 0), Resources, Subscriptions
+| order by Month desc, TotalCost desc

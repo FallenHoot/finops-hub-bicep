@@ -1,0 +1,13 @@
+// MACC Monthly Consumption Trend from FOCUS data
+let MACCData = MACC_ManualEntry | take 1;
+let StartDate = toscalar(MACCData | project StartDate);
+let EndDate = toscalar(MACCData | project ExpirationDate);
+let Commitment = toscalar(MACCData | project CommitmentAmount);
+Costs
+| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate
+| summarize MonthlyConsumption = sum(EffectiveCost) by Month = startofmonth(ChargePeriodStart)
+| order by Month asc
+| extend RunningTotal = row_cumsum(MonthlyConsumption)
+| extend CommitmentLine = Commitment
+| extend RemainingBalance = Commitment - RunningTotal
+| project Month, MonthlyConsumption = round(MonthlyConsumption, 0), RunningTotal = round(RunningTotal, 0), RemainingBalance = round(RemainingBalance, 0)

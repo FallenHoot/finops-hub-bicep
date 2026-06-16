@@ -1,0 +1,33 @@
+{
+  "queryId": "8baecfdf-eedc-4ae1-9a4c-8d6a599ed539",
+  "folder": "162-cost-by-cloud-region-8baecfdf",
+  "primaryTitle": "Cost by cloud region",
+  "tiles": [
+    {
+      "tileId": "f655d7b0-3274-4bf6-93c2-0d88ac21202e",
+      "title": "Cost by cloud region",
+      "pageId": "f8ee3008-df7e-442f-825e-2e3b46e4c185",
+      "visualType": "map"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "EffectiveCost",
+      "PricingCurrency",
+      "RegionName",
+      "ResourceId"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

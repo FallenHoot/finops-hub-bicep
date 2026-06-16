@@ -1,0 +1,16 @@
+let doubleGroupCount = maxGroupCount * 2;
+let costs = CostsByDay
+| where isnotempty(x_SkuDescription)
+;
+let all = costs | summarize EffectiveCost = round(sum(EffectiveCost), 2) by x_SkuDescription;
+let count = toscalar(all | count);
+let topX = all | order by EffectiveCost desc | limit doubleGroupCount;
+costs
+//
+// Group rows after max count
+| extend inTopX = x_SkuDescription in (topX)
+| extend x_SkuDescription = iff(inTopX, x_SkuDescription, strcat('(', (count - doubleGroupCount), ' others)'))
+//
+| summarize EffectiveCost = round(sum(EffectiveCost), 2) by SKU = x_SkuDescription
+| order by EffectiveCost desc
+

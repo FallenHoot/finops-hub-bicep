@@ -1,0 +1,32 @@
+{
+  "queryId": "5d63e04d-1a11-4307-96f1-ebbf68e09be0",
+  "folder": "005-counts-last-n-days-5d63e04d",
+  "primaryTitle": "Counts (last n days)",
+  "tiles": [
+    {
+      "tileId": "2a1ee947-f1e3-447e-9388-91e318068608",
+      "title": "Counts (last n days)",
+      "pageId": "f8ee3008-df7e-442f-825e-2e3b46e4c185",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ResourceId",
+      "ServiceName",
+      "SubAccountId"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

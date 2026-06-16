@@ -1,0 +1,32 @@
+{
+  "queryId": "a3b4c5d6-1001-4a9b-0c1d-2e3f4a5b6c7d",
+  "folder": "100-subscription-summary-last-n-months-a3b4c5d6",
+  "primaryTitle": "Subscription summary (last n months)",
+  "tiles": [
+    {
+      "tileId": "a3b4c5d6-0002-4a9b-0c1d-2e3f4a5b6c7d",
+      "title": "Subscription summary (last n months)",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "EffectiveCost",
+      "ResourceId",
+      "SubAccountId"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

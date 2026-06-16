@@ -1,0 +1,22 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+let data = (
+    CostsByMonth
+    | summarize 
+        EffectiveCost  = sum(EffectiveCost)
+        by
+        ChargePeriodStart = startofmonth(ChargePeriodStart),
+        RegionName
+    | as per
+    | union (
+        per
+        | summarize 
+            EffectiveCost  = sum(EffectiveCost)
+            by
+            RegionName
+    )
+    | order by ChargePeriodStart asc
+    | extend EffectiveCost = todouble(round(EffectiveCost, 2))
+    | extend ChargePeriod = iff(isempty(ChargePeriodStart), strcat('Total'), strcat(format_datetime(ChargePeriodStart, 'yyyy-MM - '), monthname[monthofyear(ChargePeriodStart)]))
+);
+data | evaluate pivot(ChargePeriod, sum(EffectiveCost), RegionName)
+| order by column_ifexists('Total', 0.0) desc

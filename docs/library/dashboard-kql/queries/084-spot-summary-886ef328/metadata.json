@@ -1,0 +1,32 @@
+{
+  "queryId": "886ef328-6a85-4f47-8a52-4261281a0c4f",
+  "folder": "084-spot-summary-886ef328",
+  "primaryTitle": "Spot Summary",
+  "tiles": [
+    {
+      "tileId": "78ddd908-bed3-480e-b736-263e5719ded1",
+      "title": "Spot Summary",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "ListCost",
+      "PricingCategory",
+      "ResourceId"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

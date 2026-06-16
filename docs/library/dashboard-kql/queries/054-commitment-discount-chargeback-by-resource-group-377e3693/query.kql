@@ -1,0 +1,45 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+let data = (
+    CostsByMonth
+    | where ChargeCategory == 'Usage'
+    | where isnotempty(CommitmentDiscountId)
+    | where EffectiveCost != 0
+    | extend x_ResourceGroupId = strcat(SubAccountId, '/resourcegroups/', x_ResourceGroupName)
+    | summarize 
+        EffectiveCost  = sum(EffectiveCost),
+        SubAccountName = take_anyif(SubAccountName, isnotempty(SubAccountId)),
+        x_ResourceGroupName = take_any(x_ResourceGroupName),
+        CommitmentDiscountName = take_any(CommitmentDiscountName),
+        CommitmentDiscountType = take_any(CommitmentDiscountType)
+        by
+        ChargePeriodStart,
+        SubAccountId,
+        x_ResourceGroupId,
+        CommitmentDiscountId,
+        CommitmentDiscountStatus
+    | as per
+    | union (
+        per
+        | summarize 
+            EffectiveCost  = sum(EffectiveCost),
+            SubAccountName = take_anyif(SubAccountName, isnotempty(SubAccountId)),
+            x_ResourceGroupName = take_any(x_ResourceGroupName),
+            CommitmentDiscountName = take_any(CommitmentDiscountName),
+            CommitmentDiscountType = take_any(CommitmentDiscountType)
+            by
+            x_ResourceGroupId,
+            CommitmentDiscountId,
+            CommitmentDiscountStatus
+    )
+    | order by ChargePeriodStart asc
+    | extend EffectiveCost = todouble(round(EffectiveCost, 2))
+    | extend ChargePeriod = iff(isempty(ChargePeriodStart), strcat('Total'), strcat(format_datetime(ChargePeriodStart, 'yyyy-MM - '), monthname[monthofyear(ChargePeriodStart)]))
+    | extend x_ResourceGroupName = iff(isempty(x_ResourceGroupName) and CommitmentDiscountStatus == 'Unused', '(Unused)', x_ResourceGroupName)
+    | extend SubAccountName = iff(isempty(SubAccountName) and CommitmentDiscountStatus == 'Unused', '(Unused)', SubAccountName)
+);
+percent((
+    data | evaluate pivot(ChargePeriod, sum(EffectiveCost), x_ResourceGroupName, SubAccountName, CommitmentDiscountName, CommitmentDiscountType)
+    | extend Count = tolong(column_ifexists('Total', 0.0) * 1000)
+))
+| project-away Count
+| order by x_ResourceGroupName asc, SubAccountName asc, column_ifexists('Total', 0.0) desc

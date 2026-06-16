@@ -1,0 +1,19 @@
+CostsByMonth
+| extend x_AmortizationClass = case(
+    ChargeCategory == 'Purchase' and isnotempty(CommitmentDiscountCategory), 'Principal',
+    isnotempty(CommitmentDiscountCategory), 'Amortized Charge',
+    ''
+)
+| extend x_CommitmentDiscountSavings = iff(ContractedCost == 0,      real(0), ContractedCost - EffectiveCost)
+| extend x_NegotiatedDiscountSavings = iff(ListCost == 0,            real(0), ListCost - ContractedCost)
+| extend x_TotalSavings              = iff(ListCost == 0,            real(0), ListCost - EffectiveCost)
+| summarize
+    ['On-demand']    = round(sumif(EffectiveCost, PricingCategory == 'Standard'), 2),
+    Spot             = round(sumif(EffectiveCost, PricingCategory == 'Dynamic'), 2),
+    Reservation      = round(sumif(EffectiveCost, CommitmentDiscountType == 'Reservation'), 2),
+    ['Savings plan'] = round(sumif(EffectiveCost, CommitmentDiscountType == 'Savings Plan'), 2),
+    ['Other']        = round(sumif(EffectiveCost, PricingCategory !in ('Standard', 'Dynamic') and isempty(CommitmentDiscountType)), 2)
+    by
+    Account = x_BillingProfileId,
+    Month   = substring(startofmonth(ChargePeriodStart), 0, 7)
+| order by Month desc

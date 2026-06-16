@@ -1,0 +1,12 @@
+let costs = CostsByDay
+| where isnotempty(ResourceType);
+costs | summarize Value = tostring(dcount(ResourceId)) by Label = "Resources", Order = 10
+| union (costs | summarize Value = tostring(dcount(ResourceType)) by Label = "Resource types", Order = 11)
+| union (costs | summarize Count = dcount(ResourceId) by Value = ResourceType | order by Count desc | limit 1 | extend Label = "Most used", Order = 21)
+| union (costs | summarize sum(EffectiveCost) by Value = ResourceType | order by sum_EffectiveCost desc | limit 1 | extend Label = "Most cost", Order = 22)
+| union (costs | summarize AllTypes = dcount(ResourceType), CommittedTypes = dcountif(ResourceType, isnotempty(CommitmentDiscountType)) by Label = "Covered by commitment discounts", Order = 31 | extend Value = strcat(round(1.0 * CommittedTypes / AllTypes * 100, 1), '%'))
+| union (costs | summarize Savings = sum(ListCost - EffectiveCost) by Value = ResourceType | order by Savings desc | limit 1 | extend Label = "Most savings", Order = 32)
+| union (costs | summarize CostPerResource = sum(EffectiveCost) / dcount(ResourceId) by Value = ResourceType | order by CostPerResource desc | limit 1 | extend Label = "Most expensive (cost / resource)", Order = 41)
+| union (costs | where ResourceType !in (CostsPlus | where ChargePeriodStart < ago(numberOfDays * 1d) - 1d | distinct ResourceType) | summarize Count = dcount(ResourceId) by ResourceType | order by Count desc | as d | count | extend Label = "New in last n days", Value = case(Count == 0, '(none)', Count == 1, toscalar(d | project ResourceType), strcat(toscalar(d | limit 1 | project ResourceType), ' and ', (Count - 1), ' more')), Order = 42)
+| order by Order asc
+

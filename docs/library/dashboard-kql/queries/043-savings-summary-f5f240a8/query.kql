@@ -1,0 +1,15 @@
+let data = materialize(
+    CostsByMonth | extend Period = 'Last n months'
+    | union (CostsByDay | extend Period = 'Last n days')
+    | summarize
+        ListCost = round(sum(ListCost), 2),
+        ContractedCost = round(sum(ContractedCost), 2),
+        EffectiveCost = round(sum(EffectiveCost), 2)
+        by
+        Period
+    | project Period, json = todynamic(strcat('[{ "Label":"Total", "Value":', ListCost - EffectiveCost, ' }, { "Label":"Negotiated", "Value":', ListCost - ContractedCost, ' }, { "Label":"Commitment", "Value":', ContractedCost - EffectiveCost, ' }]'))
+    | mv-expand json
+    | project Label = tostring(json.Label), Value = tolong(json.Value), Period
+);
+data
+

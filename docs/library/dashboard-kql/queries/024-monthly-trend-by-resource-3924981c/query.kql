@@ -1,0 +1,22 @@
+let costs = CostsByMonth;
+let all = costs | where isnotempty(ResourceId) | summarize sum(EffectiveCost) by ResourceId;
+let count = toscalar(all | order by sum_EffectiveCost desc | count);
+let topX = all | order by sum_EffectiveCost desc | limit maxGroupCount;
+let otherId = '(others)';
+costs
+//
+// Group rows after max count
+| extend inTopX = ResourceId in (topX)
+| extend ResourceId = iff(inTopX, ResourceId, otherId)
+| extend ResourceName = iff(inTopX, ResourceName, strcat('(', (count - maxGroupCount), ' others)'))
+//
+| summarize 
+    EffectiveCost = round(sum(EffectiveCost), 2),
+    ResourceType = take_any(ResourceType),
+    ResourceName = take_any(ResourceName)
+    by
+    ChargePeriodStart,
+    ResourceId
+| project ChargePeriodStart, EffectiveCost, RG = iff(ResourceId == otherId, ResourceName, strcat(ResourceName, ' (', ResourceType, ')'))
+| order by EffectiveCost desc
+| render columnchart

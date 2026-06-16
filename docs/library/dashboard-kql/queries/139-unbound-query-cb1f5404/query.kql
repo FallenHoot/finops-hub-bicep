@@ -1,0 +1,5 @@
+// Base query: CostsLastMonth
+// Returns all cost records for the previous calendar month
+Costs()
+| where ChargePeriodStart >= startofmonth(now(), -1)
+| where ChargePeriodStart < startofmonth(now())

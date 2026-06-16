@@ -1,0 +1,7 @@
+// Base query: CostsByDay
+// Returns all cost records for the last numberOfDays days (daily analysis)
+// Tiles aggregate by day for resource counts, SKU analysis, etc.
+Costs()
+| where ChargePeriodStart >= ago(numberOfDays * 1d)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)

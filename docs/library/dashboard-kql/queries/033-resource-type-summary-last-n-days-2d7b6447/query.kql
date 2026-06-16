@@ -1,0 +1,20 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+CostsByDay
+| where isnotempty(ResourceType)
+| summarize 
+    Count = dcount(ResourceId),
+    EffectiveCost  = sum(EffectiveCost),
+    ListCost  = sum(ListCost),
+    ContractedCost  = sum(ContractedCost)
+    by
+    ResourceType
+| order by Count desc
+| project 
+    Type = ResourceType,
+    Count,
+    Cost = round(EffectiveCost, 2),
+    // NegotiatedSavings = round(ListCost - ContractedCost, 2),
+    // CommitmentSavings = round(ContractedCost - EffectiveCost, 2),
+    Savings = round(ListCost - EffectiveCost, 2),
+    ["Cost / Resource"] = round(EffectiveCost / Count, 2)
+

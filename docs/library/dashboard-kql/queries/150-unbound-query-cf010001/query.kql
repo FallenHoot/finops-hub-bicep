@@ -1,0 +1,7 @@
+Costs
+| where ChargePeriodStart >= monthsago(numberOfMonths)
+| extend Currency = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnotempty(Currency)
+| distinct Currency
+| project Value = Currency, Label = Currency
+| order by Label asc

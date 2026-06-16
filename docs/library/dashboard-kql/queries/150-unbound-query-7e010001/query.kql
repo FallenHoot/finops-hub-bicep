@@ -1,0 +1,8 @@
+Costs
+| where ChargePeriodStart >= monthsago(numberOfMonths)
+| where ChargeCategory == 'Usage'
+| where isnotempty(Tags)
+| mv-apply TagPair = bag_keys(todynamic(Tags)) on (project TagKey = tostring(TagPair))
+| distinct TagKey
+| project Value = TagKey, Label = TagKey
+| order by Label asc

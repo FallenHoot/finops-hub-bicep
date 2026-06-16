@@ -1,0 +1,31 @@
+{
+  "queryId": "a7843e1d-7c76-4e4d-9a92-bc642d2f8506",
+  "folder": "049-monthly-trend-by-service-category-a7843e1d",
+  "primaryTitle": "Monthly trend by service category",
+  "tiles": [
+    {
+      "tileId": "e69fe03b-606c-4b93-b9b5-6f1048b24deb",
+      "title": "Monthly trend by service category",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "ServiceCategory",
+      "ServiceName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

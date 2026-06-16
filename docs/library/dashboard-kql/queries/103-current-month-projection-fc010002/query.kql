@@ -1,0 +1,19 @@
+let today = startofday(now());
+let monthStart = startofmonth(today);
+let monthEnd = endofmonth(today);
+let daysInMonth = datetime_diff('day', monthEnd, monthStart) + 1;
+let daysSoFar = datetime_diff('day', today, monthStart);
+let spentSoFar = toscalar(Costs | where ChargePeriodStart >= monthStart and ChargePeriodStart < today | extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', ''))) | where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter) | summarize sum(EffectiveCost));
+let spentSafe = iff(isnull(spentSoFar), 0.0, spentSoFar);
+let dailyRate = iff(daysSoFar > 0, spentSafe / todouble(daysSoFar), 0.0);
+let projected = dailyRate * todouble(daysInMonth);
+let lastMonth = toscalar(Costs | where ChargePeriodStart >= startofmonth(today, -1) and ChargePeriodStart < monthStart | extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', ''))) | where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter) | summarize sum(EffectiveCost));
+let lastSafe = iff(isnull(lastMonth), 0.0, lastMonth);
+let change = iff(lastSafe > 0, round((projected - lastSafe) / lastSafe * 100, 1), 0.0);
+print json = pack_array(
+    pack('Label', 'Spent So Far', 'Value', tostring(round(spentSafe, 0))),
+    pack('Label', 'Daily Run Rate', 'Value', tostring(round(dailyRate, 0))),
+    pack('Label', 'Projected This Month', 'Value', tostring(round(projected, 0))),
+    pack('Label', 'vs Last Month', 'Value', strcat(iff(change >= 0, '+', ''), tostring(change), '%')))
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

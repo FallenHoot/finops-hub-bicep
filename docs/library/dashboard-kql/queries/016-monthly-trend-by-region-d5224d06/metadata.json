@@ -1,0 +1,31 @@
+{
+  "queryId": "d5224d06-c8e7-4dd9-afec-595b39712f5a",
+  "folder": "016-monthly-trend-by-region-d5224d06",
+  "primaryTitle": "Monthly trend by region",
+  "tiles": [
+    {
+      "tileId": "d3e265ff-2c5a-4a03-a8b8-e0b4e10cf362",
+      "title": "Monthly trend by region",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth",
+    "maxGroupCount"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "RegionName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

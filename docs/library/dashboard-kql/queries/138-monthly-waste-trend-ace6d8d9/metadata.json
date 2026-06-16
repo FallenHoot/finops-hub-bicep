@@ -1,0 +1,39 @@
+{
+  "queryId": "ace6d8d9-df64-4a64-9b1c-55fcc7481eef",
+  "folder": "138-monthly-waste-trend-ace6d8d9",
+  "primaryTitle": "Monthly waste trend",
+  "tiles": [
+    {
+      "tileId": "68b14c96-92fd-4914-af82-f7817ac7940a",
+      "title": "Monthly waste trend",
+      "pageId": "fb47b0be-7563-4ca6-8b8c-cf01f9a8a3c8",
+      "visualType": "column"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfDays",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ResourceId",
+      "ResourceType",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName",
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

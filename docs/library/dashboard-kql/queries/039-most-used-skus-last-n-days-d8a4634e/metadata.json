@@ -1,0 +1,31 @@
+{
+  "queryId": "d8a4634e-7ebe-47ce-83b5-ff7f50f6bee6",
+  "folder": "039-most-used-skus-last-n-days-d8a4634e",
+  "primaryTitle": "Most used SKUs (last n days)",
+  "tiles": [
+    {
+      "tileId": "a3d814b8-ff20-4919-ae2a-f1caec997edf",
+      "title": "Most used SKUs (last n days)",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "bar"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay",
+    "maxGroupCount"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "EffectiveCost"
+    ],
+    "extensionColumnsUsed": [
+      "x_SkuDescription"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

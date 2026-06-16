@@ -1,0 +1,28 @@
+Costs
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| extend EffectiveOverContracted = iff(ContractedCost < EffectiveCost, ContractedCost - EffectiveCost, real(0))
+| extend ContractedOverList      = iff(ListCost < ContractedCost,      ListCost - ContractedCost,      real(0))
+| extend EffectiveOverList       = iff(ListCost < EffectiveCost,       ListCost - EffectiveCost,       real(0))
+| extend Scenario = case(
+    ListCost == 0 and CommitmentDiscountCategory == 'Usage' and ChargeCategory == 'Usage', 'Reservation usage missing list',
+    ListCost == 0 and CommitmentDiscountCategory == 'Usage' and ChargeCategory == 'Purchase', 'Reservation purchase missing list',
+    ListCost == 0 and CommitmentDiscountCategory == 'Spend' and ChargeCategory == 'Usage', 'Savings plan usage missing list',
+    ListCost == 0 and CommitmentDiscountCategory == 'Spend' and ChargeCategory == 'Purchase', 'Savings plan purchase missing list',
+    ListCost == 0 and ChargeCategory == 'Purchase', 'Other purchase missing list',
+    isnotempty(CommitmentDiscountStatus) and ContractedOverList == 0 and EffectiveOverContracted < 0, 'Commitment cost over contracted',
+    ListCost == 0 and BilledCost == 0 and EffectiveCost == 0 and ContractedCost > 0 and x_SourceChanges !contains 'MissingContractedCost', 'ContractedCost should be 0',
+    ListCost == 0 and ContractedCost == 0 and BilledCost > 0 and EffectiveCost > 0 and x_PublisherCategory == 'Marketplace' and ChargeCategory == 'Usage', 'Marketplace usage missing list/contracted',
+    ContractedOverList < 0 and EffectiveOverContracted == 0 and x_SourceChanges !contains 'MissingListCost', 'ListCost too low',
+    ContractedUnitPrice == x_EffectiveUnitPrice and EffectiveOverContracted < 0 and x_SourceChanges !contains 'MissingContractedCost', 'ContractedCost doesn\'t match price',
+    EffectiveOverContracted != 0 and abs(EffectiveOverContracted) < 0.00000001, 'Rounding error',
+    ContractedOverList != 0 and abs(ContractedOverList) < 0.00000001, 'Rounding error',
+    EffectiveOverList != 0 and abs(EffectiveOverList) < 0.00000001, 'Rounding error',
+    ContractedCost < EffectiveCost or ListCost < ContractedCost or ListCost < EffectiveCost, '',
+    EffectiveCost <= ContractedCost and ContractedCost <= ListCost, 'Good',
+    '')
+| project-reorder ListCost, ContractedCost, BilledCost, EffectiveCost, EffectiveOverList, EffectiveOverContracted, ContractedOverList, x_SourceChanges, ListUnitPrice, ContractedUnitPrice, x_BilledUnitPrice, x_EffectiveUnitPrice, CommitmentDiscountStatus, PricingQuantity, PricingUnit, x_PricingBlockSize, x_PricingUnitDescription
+// DEBUG -- | where isempty(scenario) | limit 1000
+// Summarize -- 
+| summarize Rows = count(), EffectiveCost = round(sum(EffectiveCost), 2), EffectiveOverContracted = abs(sum(EffectiveOverContracted)), ContractedOverList = abs(sum(ContractedOverList)), EffectiveOverList = abs(sum(EffectiveOverList)), Agreement = arraystring(make_set(x_BillingAccountAgreement)) by Scenario | order by Rows desc
+

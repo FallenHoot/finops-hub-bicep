@@ -1,0 +1,6 @@
+Costs
+| where ChargePeriodStart >= ago(numberOfDays * 1d)
+| summarize Cost = round(sum(EffectiveCost), 2)
+    by Day = bin(ChargePeriodStart, 1d),
+       Provider = coalesce(ProviderName, 'Unknown')
+| order by Day asc

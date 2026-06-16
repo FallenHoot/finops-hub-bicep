@@ -1,0 +1,12 @@
+let data = materialize(
+    CostsLastMonth
+    | summarize
+        Subscriptions = dcount(SubAccountId),
+        ResourceGroups = dcount(strcat(SubAccountId, x_ResourceGroupName)),
+        Resources = dcount(ResourceId),
+        Services = dcount(ServiceName)
+    | project json = todynamic(strcat('[{ "Type":"Subscriptions", "Count":', Subscriptions, ' }, { "Type":"Resource groups", "Count":', ResourceGroups, ' }, { "Type":"Resources", "Count":', Resources, ' }, { "Type":"Services", "Count":', Services, ' }]'))
+    | mv-expand json
+    | project Label = tostring(json.Type), Count = tolong(json.Count)
+);
+data

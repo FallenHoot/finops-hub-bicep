@@ -1,0 +1,36 @@
+{
+  "queryId": "13813a00-e634-4428-9eac-ea255fd1eaca",
+  "folder": "058-daily-trend-by-hub-instance-13813a00",
+  "primaryTitle": "Daily trend by hub instance",
+  "tiles": [
+    {
+      "tileId": "37a8bef0-7dfb-42b9-aeab-55f8c9c178b8",
+      "title": "Daily trend by hub instance",
+      "pageId": "9e099251-9658-48da-b416-80422a2a47c7",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay",
+    "maxGroupCount"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "ResourceName",
+      "ResourceType",
+      "SubAccountName",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

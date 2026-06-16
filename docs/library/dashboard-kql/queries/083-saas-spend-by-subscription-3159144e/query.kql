@@ -1,0 +1,11 @@
+Costs
+| where x_PublisherCategory == 'Marketplace'
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| extend Currency = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or Currency == tostring(currencyFilter)
+| summarize 
+    Cost = round(sum(EffectiveCost), 2),
+    Products = dcount(ServiceName),
+    Publishers = dcount(PublisherName)
+by SubAccountName
+| order by Cost desc

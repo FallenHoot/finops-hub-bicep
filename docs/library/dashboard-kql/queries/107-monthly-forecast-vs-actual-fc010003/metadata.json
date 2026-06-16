@@ -1,0 +1,33 @@
+{
+  "queryId": "fc010003-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+  "folder": "107-monthly-forecast-vs-actual-fc010003",
+  "primaryTitle": "Monthly forecast vs actual",
+  "tiles": [
+    {
+      "tileId": "fc01a003-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+      "title": "Monthly forecast vs actual",
+      "pageId": "5c57f940-6f0f-4e39-930b-b6e89bb758ad",
+      "visualType": "column"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "maxGroupCount",
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

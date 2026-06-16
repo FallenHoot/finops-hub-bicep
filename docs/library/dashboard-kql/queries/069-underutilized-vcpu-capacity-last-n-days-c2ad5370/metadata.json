@@ -1,0 +1,41 @@
+{
+  "queryId": "c2ad5370-f4df-4a13-ac31-2c095f88754d",
+  "folder": "069-underutilized-vcpu-capacity-last-n-days-c2ad5370",
+  "primaryTitle": "Underutilized vCPU capacity (last n days)",
+  "tiles": [
+    {
+      "tileId": "80e1ecb4-69f6-451d-9e1c-f90d17b7f865",
+      "title": "Underutilized vCPU capacity (last n days)",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDayAHB"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "ConsumedQuantity",
+      "EffectiveCost",
+      "ResourceId",
+      "ResourceName",
+      "ResourceType",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName",
+      "x_SkuCoreCount",
+      "x_SkuInstanceType",
+      "x_SkuLicenseQuantity",
+      "x_SkuLicenseStatus",
+      "x_SkuLicenseType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

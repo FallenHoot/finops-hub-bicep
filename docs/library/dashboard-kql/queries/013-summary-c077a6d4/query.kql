@@ -1,0 +1,20 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+let data = (
+    CostsByMonth
+    | summarize 
+        BilledCost     = todouble(round(sum(BilledCost), 2)),
+        EffectiveCost  = todouble(round(sum(EffectiveCost), 2)),
+        ContractedCost = todouble(round(sum(ContractedCost), 2)),
+        ListCost       = todouble(round(sum(ListCost), 2))
+        by
+        BillingPeriodStart
+    | order by BillingPeriodStart asc
+    | extend CommitmentDiscountSavings = todouble(round(ContractedCost - EffectiveCost, 2))
+    | extend NegotiatedDiscountSavings = todouble(round(ListCost - ContractedCost, 2))
+    | extend BillingPeriod = strcat(format_datetime(BillingPeriodStart, 'yyyy-MM - '), monthname[monthofyear(BillingPeriodStart)])
+);
+data | extend Data = 'Billed cost' | evaluate pivot(BillingPeriod, sum(BilledCost), Data)
+| union (data | extend Data = 'Effective cost'     | evaluate pivot(BillingPeriod, sum(EffectiveCost), Data))
+| union (data | extend Data = 'Negotiated savings' | evaluate pivot(BillingPeriod, sum(NegotiatedDiscountSavings), Data))
+| union (data | extend Data = 'Commitment savings' | evaluate pivot(BillingPeriod, sum(CommitmentDiscountSavings), Data))
+

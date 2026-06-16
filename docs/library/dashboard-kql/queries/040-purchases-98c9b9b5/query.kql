@@ -1,0 +1,13 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+CostsByMonth
+| where ChargeCategory == 'Purchase'
+| project
+    ChargePeriodStart = substring(ChargePeriodStart, 0, 10),
+    x_SkuDescription,
+    CommitmentDiscountType,
+    Term = case(isempty(x_SkuTerm) or x_SkuTerm <= 0, '', x_SkuTerm < 12, strcat(x_SkuTerm, ' month', iff(x_SkuTerm != 1, 's', '')), strcat(x_SkuTerm / 12, ' year', iff(x_SkuTerm != 12, 's', ''))),
+    PricingQuantity,
+    BilledCost,
+    BillingCurrency
+| order by ChargePeriodStart desc
+

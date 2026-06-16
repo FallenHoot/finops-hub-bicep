@@ -1,0 +1,13 @@
+// Cost by Tag Value - Explode tags into key-value pairs and show top values
+CostsByMonth
+| where ChargeCategory == 'Usage'
+| extend TagBag = iff(isnotempty(Tags), todynamic(tostring(Tags)), dynamic({}))
+| where array_length(bag_keys(TagBag)) > 0
+| mv-apply TagKey = bag_keys(TagBag) to typeof(string) on (
+    extend TagValue = tostring(TagBag[TagKey])
+)
+| where isnotempty(TagKey) and isnotempty(TagValue)
+| summarize EffectiveCost = round(sum(EffectiveCost), 2) by TagLabel = strcat(TagKey, '=', TagValue)
+| order by EffectiveCost desc
+| take maxGroupCount
+| project TagLabel, EffectiveCost

@@ -1,0 +1,36 @@
+{
+  "queryId": "98c9b9b5-bebf-41f8-8319-5fa2523f9dd0",
+  "folder": "040-purchases-98c9b9b5",
+  "primaryTitle": "Purchases",
+  "tiles": [
+    {
+      "tileId": "4383c893-8839-4678-88c6-9a6393595d0a",
+      "title": "Purchases",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "BillingCurrency",
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "CommitmentDiscountType",
+      "PricingQuantity"
+    ],
+    "extensionColumnsUsed": [
+      "x_SkuDescription",
+      "x_SkuTerm"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

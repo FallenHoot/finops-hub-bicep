@@ -1,0 +1,5 @@
+// Base query: CostsByMonth
+// Returns all cost records for the last numberOfMonths months (used by 44 tile queries)
+// Tiles aggregate this data by month, subscription, service, region, etc.
+Costs()
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)

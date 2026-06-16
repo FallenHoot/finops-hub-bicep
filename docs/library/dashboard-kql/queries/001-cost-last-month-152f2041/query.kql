@@ -1,0 +1,9 @@
+let monthname = dynamic(['(ignore)', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+let costs = materialize(
+    CostsLastMonth
+    | summarize BilledCost = round(sum(BilledCost), 2), EffectiveCost = round(sum(EffectiveCost), 2) by BillingPeriodStart = startofmonth(BillingPeriodStart)
+    | extend json = todynamic(strcat('[{"type":"Billed cost", "Cost":', BilledCost, '}, {"type":"Effective cost", "Cost":', EffectiveCost, '}]'))
+    | mv-expand json
+    | project Type = strcat(json.type, ' (', monthname[monthofyear(BillingPeriodStart)], ' ', format_datetime(BillingPeriodStart, 'yyyy'), ')'), Cost = todouble(json.Cost)
+);
+costs

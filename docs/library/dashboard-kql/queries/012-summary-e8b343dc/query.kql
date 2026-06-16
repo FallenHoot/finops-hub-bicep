@@ -1,0 +1,20 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+let data = materialize(
+    CostsByMonth
+    | where BillingPeriodStart >= startofmonth(now(), -1)
+    | summarize 
+        BilledCost = sum(BilledCost),
+        EffectiveCost = sum(EffectiveCost),
+        ContractedCost = sum(ContractedCost),
+        ListCost = sum(ListCost)
+        by
+        BillingPeriodStart
+    | order by BillingPeriodStart asc
+    | extend CommitmentDiscountSavings = ContractedCost - EffectiveCost
+    | extend NegotiatedDiscountSavings = ListCost - ContractedCost
+    | extend Month = monthname[monthofyear(BillingPeriodStart)]
+    | project json = todynamic(strcat('[{ "Type":"Billed cost", "Count":', BilledCost, ' }, { "Type":"Effective cost", "Count":', EffectiveCost, ' }, { "Type":"Commitment savings", "Count":', CommitmentDiscountSavings, ' }, { "Type":"Negotiated savings", "Count":', NegotiatedDiscountSavings, ' }]')), Month, IsThisMonth = BillingPeriodStart >= startofmonth(now())
+    | mv-expand json
+    | project Label = strcat(json.Type, ' (', Month, ')'), Count = tolong(json.Count), IsThisMonth
+);
+data

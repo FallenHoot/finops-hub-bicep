@@ -1,0 +1,21 @@
+// FinOps Improvement Recommendations
+let lastMonth = Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now());
+let totalRows = toscalar(lastMonth | summarize count());
+let taggedRows = toscalar(lastMonth | summarize countif(isnotempty(Tags) and Tags != '{}'));
+let tagPct = iif(totalRows > 0, round(100.0 * taggedRows / totalRows, 0), 0.0);
+let totalList = toscalar(lastMonth | where ListCost > 0 | summarize sum(ListCost));
+let totalEffective = toscalar(lastMonth | where ListCost > 0 | summarize sum(EffectiveCost));
+let esr = iif(totalList > 0, round(100.0 * (totalList - totalEffective) / totalList, 0), 0.0);
+let commitTotal = toscalar(lastMonth | where isnotempty(CommitmentDiscountId) | summarize sum(EffectiveCost));
+let commitUsed = toscalar(lastMonth | where isnotempty(CommitmentDiscountId) | summarize sumif(EffectiveCost, CommitmentDiscountStatus == 'Used'));
+let commitUtil = iif(commitTotal > 0, round(100.0 * commitUsed / commitTotal, 0), 0.0);
+range i from 1 to 3 step 1
+| extend Priority = case(i == 1 and tagPct < 50, 1, i == 1 and tagPct < 80, 2, i == 1, 3, i == 2 and esr < 10, 1, i == 2 and esr < 20, 2, i == 2, 3, commitUtil < 50, 1, commitUtil < 80, 2, 3)
+| extend Area = case(i == 1, 'Cost Allocation', i == 2, 'Rate Optimization', 'Commitment Utilization')
+| extend Recommendation = case(i == 1 and tagPct < 50, 'Warning: Implement mandatory tagging policy for all resources', i == 1 and tagPct < 80, 'Increase tag coverage to 80%+ for accurate chargeback', i == 1, 'Tag coverage is excellent', i == 2 and esr < 10, 'Warning: Evaluate commitment discounts (reservations, savings plans)', i == 2 and esr < 20, 'Expand commitment coverage for higher savings', i == 2, 'Savings rate is strong', commitUtil < 50, 'Warning: Review and reallocate underutilized commitments', commitUtil < 80, 'Optimize commitment allocation across subscriptions', 'Commitment utilization is excellent')
+| extend Current = case(i == 1, strcat(tagPct, '%'), i == 2, strcat(esr, '%'), strcat(commitUtil, '%'))
+| extend Target = case(i == 2, '20%+', '80%+')
+| extend Impact = case(i == 1 and tagPct < 50, 'High', i == 1 and tagPct < 80, 'Medium', i == 1, 'Low', i == 2 and esr < 10, 'High', i == 2 and esr < 20, 'Medium', i == 2, 'Low', commitUtil < 50, 'High', commitUtil < 80, 'Medium', 'Low')
+| project Priority, Area, Recommendation, Current, Target, Impact
+| order by Priority asc

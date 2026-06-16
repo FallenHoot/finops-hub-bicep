@@ -1,0 +1,37 @@
+let data = materialize(
+    CostsByMonth
+    //
+    // Don't double-count commitment discount purchases
+    | where x_AmortizationClass != 'Principal'
+    //
+    | summarize 
+        ListCost = sum(ListCost),
+        ContractedCost = sum(ContractedCost),
+        EffectiveCost = sum(EffectiveCost)
+    | extend CommitmentDiscountSavings = ContractedCost - EffectiveCost
+    | extend NegotiatedDiscountSavings = ListCost - ContractedCost
+    | extend TotalSavings = ListCost - EffectiveCost
+    | project json = todynamic(strcat('[',
+        '{ "order":11, "type":"List", "label":"Cost without discounts", "value":"', numberstring(round(ListCost, 2)), '" },',
+        '{ "order":12, "type":"", "label":"", "value":"-" },',
+        '{ "order":13, "type":"Contracted", "label":"After negotiated discounts", "value":"', numberstring(round(ContractedCost, 2)), '" },',
+        '{ "order":14, "type":"", "label":"", "value":"=" },',
+        '{ "order":15, "type":"PartialSavings", "label":"Negotiated savings", "value":"', numberstring(round(NegotiatedDiscountSavings, 2)), '" },',
+        //
+        '{ "order":21, "type":"Contracted", "label":"After negotiated discounts", "value":"', numberstring(round(ContractedCost, 2)), '" },',
+        '{ "order":22, "type":"", "label":"", "value":"-" },',
+        '{ "order":23, "type":"Effective", "label":"After commitment discounts", "value":"', numberstring(round(EffectiveCost, 2)), '" },',
+        '{ "order":24, "type":"", "label":"", "value":"=" },',
+        '{ "order":25, "type":"PartialSavings", "label":"Commitment savings", "value":"', numberstring(round(CommitmentDiscountSavings, 2)), '" },',
+        //
+        '{ "order":31, "type":"List", "label":"Cost without discounts", "value":"', numberstring(round(ListCost, 2)), '" },',
+        '{ "order":32, "type":"", "label":"", "value":"-" },',
+        '{ "order":33, "type":"Effective", "label":"After commitment discounts", "value":"', numberstring(round(EffectiveCost, 2)), '" },',
+        '{ "order":34, "type":"", "label":"", "value":"=" },',
+        '{ "order":35, "type":"TotalSavings", "label":"Total savings", "value":"', numberstring(round(TotalSavings, 2)), '" }',
+    ']'))
+    | mv-expand json
+    | order by toint(json.order) asc
+    | project Label = tostring(json.label), Value = tostring(json.value), Type = tostring(json.type)
+);
+data

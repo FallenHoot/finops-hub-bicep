@@ -1,0 +1,14 @@
+// 90-day cost forecast using time-series decomposition
+let costs = Costs
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths) and ChargePeriodStart < startofday(now())
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter);
+let startDate = toscalar(costs | summarize min(startofday(ChargePeriodStart)));
+let endDate = toscalar(costs | summarize max(startofday(ChargePeriodStart)));
+costs
+| make-series DailyCost = sum(EffectiveCost) on ChargePeriodStart from startDate to endDate + 90d step 1d
+| extend Forecast = series_decompose_forecast(DailyCost, 90)
+| mv-expand ChargePeriodStart to typeof(datetime), DailyCost to typeof(real), Forecast to typeof(real)
+| project Day = ChargePeriodStart,
+    Actual = iff(ChargePeriodStart <= endDate, round(DailyCost, 2), real(null)),
+    Forecast = iff(ChargePeriodStart >= endDate - 7d, round(Forecast, 2), real(null))

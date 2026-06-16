@@ -1,0 +1,6 @@
+Costs
+| where ChargePeriodStart >= monthsago(numberOfMonths)
+| where isnotempty(RegionName)
+| distinct RegionName
+| project Value = RegionName, Label = RegionName
+| order by Label asc

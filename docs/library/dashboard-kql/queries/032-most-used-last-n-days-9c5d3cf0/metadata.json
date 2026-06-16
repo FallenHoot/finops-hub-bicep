@@ -1,0 +1,30 @@
+{
+  "queryId": "9c5d3cf0-b6cb-45a2-acfd-b19df425bddf",
+  "folder": "032-most-used-last-n-days-9c5d3cf0",
+  "primaryTitle": "Most used (last n days)",
+  "tiles": [
+    {
+      "tileId": "4495e71e-1005-4224-91f4-8103f06981da",
+      "title": "Most used (last n days)",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "bar"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay",
+    "maxGroupCount"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ResourceId",
+      "ResourceType"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

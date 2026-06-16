@@ -1,0 +1,15 @@
+Costs
+| where PricingCategory == 'Dynamic'
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| summarize 
+    Cost = round(sum(EffectiveCost), 2),
+    Savings = round(sum(ListCost - EffectiveCost), 2),
+    ResourceType = take_any(ResourceType),
+    RegionName = take_any(RegionName)
+by ResourceName, ResourceId
+| extend SavingsPercent = iff((Cost + Savings) > 0, round(100.0 * Savings / (Cost + Savings), 1), 0.0)
+| order by Cost desc
+| take 15
+| project ResourceName, ResourceType, RegionName, Cost, Savings, SavingsPercent

@@ -1,0 +1,36 @@
+{
+  "queryId": "e2be6de9-ae28-46ca-a974-be2d014d4542",
+  "folder": "082-top-products-e2be6de9",
+  "primaryTitle": "Top Products",
+  "tiles": [
+    {
+      "tileId": "c2b7f97e-ff16-4ace-8582-216afa688a26",
+      "title": "Top Products",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "PublisherName",
+      "ServiceName"
+    ],
+    "extensionColumnsUsed": [
+      "x_PublisherCategory"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

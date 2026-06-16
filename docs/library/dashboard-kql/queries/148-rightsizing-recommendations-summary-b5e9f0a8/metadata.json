@@ -1,0 +1,26 @@
+{
+  "queryId": "b5e9f0a8-2d3c-4b4e-c4a7-8e9f0a1b2c3d",
+  "folder": "148-rightsizing-recommendations-summary-b5e9f0a8",
+  "primaryTitle": "Rightsizing recommendations summary",
+  "tiles": [
+    {
+      "tileId": "a4d8e9f7-1c2b-4a3d-b3f6-7d8e9f0a1b2c",
+      "title": "Rightsizing recommendations summary",
+      "pageId": "e2b6c7d5-9a0f-4e1b-f1d4-5b6c7d8e9f0a",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ResourceId"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

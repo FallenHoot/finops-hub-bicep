@@ -1,0 +1,17 @@
+.show cluster extents
+| where TableName contains '_final_v'
+| extend Dataset = tostring(split(TableName, '_final_v')[0])
+| where Dataset == 'Transactions'
+| extend FocusVersion = replace_string(tostring(split(TableName, '_final_v')[1]), '_', '.')
+| extend ToolkitVersion = tostring(extract(@'drop-by:ftk-version-([^\s]+)', 1, Tags))
+// | extend Table = tostring(extract(@'drop-by:([^/\s]+)(/[0-9]{4}(/[0-9]{2}(/[0-9]{2})?)?)?(/[^\s]+)', 1, Tags))
+| extend Date  = tostring(extract(@'drop-by:([^/\s]+)(/[0-9]{4}(/[0-9]{2}(/[0-9]{2})?)?)?(/[^\s]+)', 2, Tags))
+| extend Scope = tostring(extract(@'drop-by:([^/\s]+)(/[0-9]{4}(/[0-9]{2}(/[0-9]{2})?)?)?(/[^\s]+)', 5, Tags))
+| extend Date  = todatetime(strcat(replace_string(trim(@'/', Date), '/', '-'), '-01'))
+| extend Scope = replace_regex(Scope, @'/[^/]+$', '')
+| project Dataset, FocusVersion, ToolkitVersion, Date, Scope, LastUpdate = MaxCreatedOn, OriginalSize, RowCount
+| extend ScopeId = tostring(database('Ingestion').parse_resourceid(Scope).ResourceName)
+// TODO: Look up the name from cost data
+| extend ScopeResourceType = database('Ingestion').parse_resourceid(Scope).x_ResourceType
+// TODO: Clean up scope resource type display names -- | extend ScopeType = resource_type(ScopeResourceType).SingularDisplayName
+| summarize Rows = sum(RowCount) by Date, ScopeId

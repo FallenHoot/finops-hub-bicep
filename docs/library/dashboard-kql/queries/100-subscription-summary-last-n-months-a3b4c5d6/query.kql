@@ -1,0 +1,18 @@
+// Subscription Summary - Counts and total cost
+let data = materialize(
+    CostsByMonth
+    | summarize
+        Subscriptions = dcount(SubAccountId),
+        ResourceGroups = dcount(strcat(SubAccountId, x_ResourceGroupName)),
+        Resources = dcount(ResourceId),
+        TotalCost = round(sum(EffectiveCost), 0)
+    | project json = todynamic(strcat('[',
+        '{"Label":"Subscriptions","Value":"', Subscriptions, '"},',
+        '{"Label":"Resource Groups","Value":"', ResourceGroups, '"},',
+        '{"Label":"Resources","Value":"', Resources, '"},',
+        '{"Label":"Total Cost","Value":"', TotalCost, '"}',
+    ']'))
+    | mv-expand json
+    | project Label = tostring(json.Label), Value = tostring(json.Value)
+);
+data

@@ -1,0 +1,12 @@
+// Project Budgets - Cost by subscription (last month)
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| summarize
+    EffectiveCost = round(sum(EffectiveCost), 2),
+    Resources = dcount(ResourceId),
+    Services = dcount(ServiceName),
+    ResourceGroups = dcount(column_ifexists('x_ResourceGroupName', ''))
+    by SubAccountName, SubAccountId
+| order by EffectiveCost desc

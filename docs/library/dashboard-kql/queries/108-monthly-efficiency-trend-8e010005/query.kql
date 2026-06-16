@@ -1,0 +1,6 @@
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| summarize TotalCost = sum(EffectiveCost), Resources = dcount(ResourceId) by Month = startofmonth(ChargePeriodStart)
+| extend CostPerResource = iff(Resources > 0, round(TotalCost / todouble(Resources), 2), 0.0)
+| project Month, CostPerResource, TotalCost = round(TotalCost, 0), Resources
+| order by Month asc

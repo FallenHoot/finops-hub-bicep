@@ -1,0 +1,32 @@
+{
+  "queryId": "21a87abe-19e2-44ec-8298-ba872e66c162",
+  "folder": "020-monthly-trend-by-subscription-21a87abe",
+  "primaryTitle": "Monthly trend by subscription",
+  "tiles": [
+    {
+      "tileId": "b28897e5-0606-4112-a13a-0cd814055ea7",
+      "title": "Monthly trend by subscription",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth",
+    "maxGroupCount"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "SubAccountId",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

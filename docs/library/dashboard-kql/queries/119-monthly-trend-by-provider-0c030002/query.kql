@@ -1,0 +1,4 @@
+Costs
+| where ChargePeriodStart >= monthsago(numberOfMonths)
+| summarize Cost = round(sum(EffectiveCost), 2) by Month = startofmonth(ChargePeriodStart), Provider = coalesce(ProviderName, 'Unknown')
+| order by Month asc

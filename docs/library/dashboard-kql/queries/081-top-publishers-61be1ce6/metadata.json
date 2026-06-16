@@ -1,0 +1,35 @@
+{
+  "queryId": "61be1ce6-fd98-4961-bc00-ee23c5ade3eb",
+  "folder": "081-top-publishers-61be1ce6",
+  "primaryTitle": "Top Publishers",
+  "tiles": [
+    {
+      "tileId": "903b7a84-e206-4ec4-8924-21ff8ce63c82",
+      "title": "Top Publishers",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "visualType": "bar"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "PublisherName"
+    ],
+    "extensionColumnsUsed": [
+      "x_PublisherCategory"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

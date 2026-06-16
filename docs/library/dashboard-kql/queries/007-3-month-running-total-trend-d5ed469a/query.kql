@@ -1,0 +1,8 @@
+let monthname = dynamic(['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+CostsPlus
+| where ChargePeriodStart >= startofmonth(ago(numberOfDays * 1d))
+| summarize EffectiveCost = sum(EffectiveCost) by ChargePeriodStart, Day = dayofmonth(ChargePeriodStart), Month = strcat(format_datetime(ChargePeriodStart, 'MM '), monthname[monthofyear(ChargePeriodStart)])
+| order by ChargePeriodStart asc
+| extend EffectiveCostRunningTotal = row_cumsum(EffectiveCost, prev(Month) != Month)
+| project Day, EffectiveCostRunningTotal, Month
+| render areachart  

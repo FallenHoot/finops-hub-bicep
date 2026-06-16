@@ -1,0 +1,29 @@
+{
+  "queryId": "d2c522dc-ef4b-4714-a473-09350e275557",
+  "folder": "062-ingested-scopes-d2c522dc",
+  "primaryTitle": "Ingested scopes",
+  "tiles": [
+    {
+      "tileId": "c636ea6c-8356-4a69-a4d6-61e6596a3c4e",
+      "title": "Ingested scopes",
+      "pageId": "9e099251-9658-48da-b416-80422a2a47c7",
+      "visualType": "card"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "metadata-query",
+    "focusColumnsUsed": [
+      "ResourceName",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

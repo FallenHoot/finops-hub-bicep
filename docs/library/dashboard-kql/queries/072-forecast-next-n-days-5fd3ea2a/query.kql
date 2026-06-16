@@ -1,0 +1,12 @@
+let costs = CostsPlus | where ChargePeriodStart >= startofmonth(now(), -numberOfMonths) and ChargePeriodStart < startofday(ago(-1d));
+let startOfPeriod = toscalar(costs | summarize min(startofday(ChargePeriodStart)));
+let endOfPeriod = toscalar(costs | summarize max(startofday(ChargePeriodStart)));
+let forecastHorizon = numberOfDays * 1d;
+costs
+| make-series
+    EffectiveCost = sum(EffectiveCost) default=real(null)
+    on ChargePeriodStart
+    from startOfPeriod to endOfPeriod + forecastHorizon step 1d
+    // by SubAccountId
+| extend Forecast = series_decompose_forecast(EffectiveCost, numberOfDays)
+

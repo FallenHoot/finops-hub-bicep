@@ -1,0 +1,31 @@
+{
+  "queryId": "5ff29428-de83-4a2c-8f86-d8beebe68750",
+  "folder": "042-cost-summary-5ff29428",
+  "primaryTitle": "Cost summary",
+  "tiles": [
+    {
+      "tileId": "ea97e18e-5253-4a9d-9eed-0f2fc45b3c5b",
+      "title": "Cost summary",
+      "pageId": "f8ee3008-df7e-442f-825e-2e3b46e4c185",
+      "visualType": "bar"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay",
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

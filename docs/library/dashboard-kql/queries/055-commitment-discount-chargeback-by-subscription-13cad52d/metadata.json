@@ -1,0 +1,39 @@
+{
+  "queryId": "13cad52d-91e7-4ab4-aad5-4aae21c1019a",
+  "folder": "055-commitment-discount-chargeback-by-subscription-13cad52d",
+  "primaryTitle": "Commitment discount chargeback by subscription",
+  "tiles": [
+    {
+      "tileId": "e22f49e5-766c-4b35-8b4c-b99bef142d42",
+      "title": "Commitment discount chargeback by subscription",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "CommitmentDiscountId",
+      "CommitmentDiscountName",
+      "CommitmentDiscountStatus",
+      "CommitmentDiscountType",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost",
+      "SubAccountId",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "queryId": "187e22fe-3d78-45a2-a2bf-090ece144fd1",
+  "folder": "061-ingested-cost-data-by-scope-187e22fe",
+  "primaryTitle": "Ingested cost data by scope",
+  "tiles": [
+    {
+      "tileId": "db78922e-5215-4b93-9762-212eb0e32bf3",
+      "title": "Ingested cost data by scope",
+      "pageId": "9e099251-9658-48da-b416-80422a2a47c7",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "metadata-query",
+    "focusColumnsUsed": [
+      "ResourceName",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

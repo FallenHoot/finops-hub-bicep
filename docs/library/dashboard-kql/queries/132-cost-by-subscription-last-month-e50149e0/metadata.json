@@ -1,0 +1,37 @@
+{
+  "queryId": "e50149e0-aa35-4666-ac62-178904d8c719",
+  "folder": "132-cost-by-subscription-last-month-e50149e0",
+  "primaryTitle": "Cost by subscription (last month)",
+  "tiles": [
+    {
+      "tileId": "6d349a8b-54b4-4117-a71f-b8ac49f84179",
+      "title": "Cost by subscription (last month)",
+      "pageId": "d9d88432-617f-445b-8f4b-d70c8a421507",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ResourceId",
+      "ServiceName",
+      "SubAccountId",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

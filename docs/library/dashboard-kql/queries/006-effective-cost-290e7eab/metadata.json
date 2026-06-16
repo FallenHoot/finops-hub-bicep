@@ -1,0 +1,29 @@
+{
+  "queryId": "290e7eab-8159-4338-8531-85e2718cedb1",
+  "folder": "006-effective-cost-290e7eab",
+  "primaryTitle": "Effective cost",
+  "tiles": [
+    {
+      "tileId": "49534f2e-97ea-4b41-87c2-5e0f4bc26db8",
+      "title": "Effective cost",
+      "pageId": "f8ee3008-df7e-442f-825e-2e3b46e4c185",
+      "visualType": "column"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingPeriodStart",
+      "EffectiveCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "queryId": "2d7b6447-2769-40b8-958a-f252dab68b1e",
+  "folder": "033-resource-type-summary-last-n-days-2d7b6447",
+  "primaryTitle": "Resource type summary (last n days)",
+  "tiles": [
+    {
+      "tileId": "38ffb57b-4646-4944-a92b-6966a3a6a807",
+      "title": "Resource type summary (last n days)",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost",
+      "ResourceId",
+      "ResourceType"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "queryId": "0c090001-c203-4e5f-6a7b-8c9d0e1f2a3b",
+  "folder": "122-monthly-cost-by-provider-0c090001",
+  "primaryTitle": "Monthly cost by provider",
+  "tiles": [
+    {
+      "tileId": "0c090011-c203-4f5a-6b7c-8d9e0f1a2b3c",
+      "title": "Monthly cost by provider",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "ProviderName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

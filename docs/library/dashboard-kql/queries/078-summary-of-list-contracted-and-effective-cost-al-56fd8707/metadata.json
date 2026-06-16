@@ -1,0 +1,48 @@
+{
+  "queryId": "56fd8707-bbb3-4f7e-8e37-8dd90ada3baa",
+  "folder": "078-summary-of-list-contracted-and-effective-cost-al-56fd8707",
+  "primaryTitle": "Summary of list, contracted, and effective cost alignment",
+  "tiles": [
+    {
+      "tileId": "d5ea61ef-d4f5-423e-bfa4-d1ab473867c2",
+      "title": "Summary of list, contracted, and effective cost alignment",
+      "pageId": "9e099251-9658-48da-b416-80422a2a47c7",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "BillingCurrency",
+      "ChargeCategory",
+      "CommitmentDiscountCategory",
+      "CommitmentDiscountStatus",
+      "ContractedCost",
+      "ContractedUnitPrice",
+      "EffectiveCost",
+      "ListCost",
+      "ListUnitPrice",
+      "PricingCurrency",
+      "PricingQuantity",
+      "PricingUnit"
+    ],
+    "extensionColumnsUsed": [
+      "x_BilledUnitPrice",
+      "x_BillingAccountAgreement",
+      "x_EffectiveUnitPrice",
+      "x_PricingBlockSize",
+      "x_PricingUnitDescription",
+      "x_PublisherCategory",
+      "x_SourceChanges"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "queryId": "f2b3c4d5-1005-4a8b-9c0d-1e2f3a4b5c6d",
+  "folder": "097-monthly-tag-coverage-trend-f2b3c4d5",
+  "primaryTitle": "Monthly tag coverage trend",
+  "tiles": [
+    {
+      "tileId": "f2b3c4d5-0006-4a8b-9c0d-1e2f3a4b5c6d",
+      "title": "Monthly tag coverage trend",
+      "pageId": "f416685d-f559-4514-8e45-5e0e09aec286",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingPeriodStart",
+      "ChargeCategory",
+      "EffectiveCost",
+      "Tags"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+let currentMonth = startofmonth(now());
+let lastMonth = startofmonth(now(), -1);
+let budget = todouble(monthlyBudget);
+let actualMTD = toscalar(Costs | where ChargePeriodStart >= currentMonth | summarize sum(EffectiveCost));
+let actualSafe = iff(isnull(actualMTD), 0.0, actualMTD);
+let actualLastMonth = toscalar(Costs | where ChargePeriodStart >= lastMonth and ChargePeriodStart < currentMonth | summarize sum(EffectiveCost));
+let lastSafe = iff(isnull(actualLastMonth), 0.0, actualLastMonth);
+let daysInMonth = datetime_diff('day', endofmonth(now()), currentMonth) + 1;
+let daysElapsed = max_of(1, datetime_diff('day', startofday(now()), currentMonth));
+let projected = round(actualSafe / todouble(daysElapsed) * todouble(daysInMonth), 0);
+let variance = iff(budget > 0, round((projected - budget) / budget * 100, 1), 0.0);
+let status = iff(budget == 0, 'No budget set', iff(variance > 15, 'Over budget', iff(variance > 5, 'At risk', 'On track')));
+print json = pack_array(
+    pack('Label', 'Monthly Budget', 'Value', tostring(round(budget, 0))),
+    pack('Label', 'Spent (MTD)', 'Value', tostring(round(actualSafe, 0))),
+    pack('Label', 'Projected', 'Value', tostring(round(projected, 0))),
+    pack('Label', 'Variance', 'Value', strcat(iff(variance >= 0, '+', ''), tostring(variance), '%')),
+    pack('Label', 'Status', 'Value', status),
+    pack('Label', 'Last Month Actual', 'Value', tostring(round(lastSafe, 0))))
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

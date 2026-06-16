@@ -1,0 +1,39 @@
+{
+  "queryId": "a4e65583-94aa-498c-96cc-1155248a167e",
+  "folder": "138-projected-annual-waste-a4e65583",
+  "primaryTitle": "Projected annual waste",
+  "tiles": [
+    {
+      "tileId": "bdcd2838-ddf4-4f86-9be7-4c01ffc9da31",
+      "title": "Projected annual waste",
+      "pageId": "fb47b0be-7563-4ca6-8b8c-cf01f9a8a3c8",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfDays",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ResourceId",
+      "ResourceType",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName",
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

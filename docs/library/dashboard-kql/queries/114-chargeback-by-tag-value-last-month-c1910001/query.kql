@@ -1,0 +1,7 @@
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| extend TagValue = iff(isnotempty(tagKeyFilter) and isnotempty(Tags) and bag_has_key(Tags, tagKeyFilter), tostring(Tags[tagKeyFilter]), 'Untagged')
+| summarize TotalCost = sum(EffectiveCost), Resources = dcount(ResourceId) by TagValue
+| project TagValue, TotalCost = round(TotalCost, 0), Resources
+| order by TotalCost desc
+| take 15

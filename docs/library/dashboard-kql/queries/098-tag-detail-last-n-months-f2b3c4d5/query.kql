@@ -1,0 +1,17 @@
+// Tag Detail Table - All tag key-value pairs with cost and resource count
+CostsByMonth
+| where ChargeCategory == 'Usage'
+| extend TagBag = iff(isnotempty(Tags), todynamic(tostring(Tags)), dynamic({}))
+| where array_length(bag_keys(TagBag)) > 0
+| mv-apply TagKey = bag_keys(TagBag) to typeof(string) on (
+    extend TagValue = tostring(TagBag[TagKey])
+)
+| where isnotempty(TagKey)
+| summarize
+    EffectiveCost = round(sum(EffectiveCost), 2),
+    BilledCost = round(sum(BilledCost), 2),
+    Resources = dcount(ResourceId)
+    by TagKey, TagValue
+| order by EffectiveCost desc
+| take 50
+| project TagKey, TagValue, EffectiveCost, BilledCost, Resources

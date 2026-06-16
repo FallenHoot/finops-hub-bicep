@@ -1,0 +1,31 @@
+{
+  "queryId": "90e30901-a931-4a1d-b81e-0a1821032c3c",
+  "folder": "029-monthly-trend-by-resource-type-90e30901",
+  "primaryTitle": "Monthly trend by resource type",
+  "tiles": [
+    {
+      "tileId": "e26eb29d-8021-406c-a84e-5568ddd234f4",
+      "title": "Monthly trend by resource type",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "stackedcolumn"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth",
+    "maxGroupCount"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "ResourceType"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

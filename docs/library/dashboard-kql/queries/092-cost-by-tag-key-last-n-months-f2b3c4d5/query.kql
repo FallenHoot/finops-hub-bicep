@@ -1,0 +1,13 @@
+// Cost by Tag Key - Top tag keys by total effective cost
+CostsByMonth
+| where ChargeCategory == 'Usage'
+| extend TagBag = iff(isnotempty(Tags), todynamic(tostring(Tags)), dynamic({}))
+| where array_length(bag_keys(TagBag)) > 0
+| mv-apply TagKey = bag_keys(TagBag) to typeof(string) on (
+    project TagKey
+)
+| where isnotempty(TagKey)
+| summarize EffectiveCost = round(sum(EffectiveCost), 2) by TagKey
+| order by EffectiveCost desc
+| take maxGroupCount
+| project TagKey, EffectiveCost

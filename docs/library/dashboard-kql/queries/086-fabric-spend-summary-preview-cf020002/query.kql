@@ -1,0 +1,19 @@
+let fabric = Costs
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| where x_PublisherCategory == 'Marketplace'
+| where tolower(strcat(PublisherName, ' ', ServiceName, ' ', ChargeDescription)) has 'fabric'
+| extend Currency = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or Currency == tostring(currencyFilter);
+fabric
+| summarize
+    TotalSpend = round(sum(EffectiveCost), 2),
+    Subscriptions = dcount(SubAccountId),
+    Products = dcount(ServiceName)
+| extend TotalSpend = iff(isnull(TotalSpend), 0.0, TotalSpend), Subscriptions = iff(isnull(Subscriptions), 0, Subscriptions), Products = iff(isnull(Products), 0, Products)
+| project json = todynamic(strcat('[',
+    '{"Label":"Total Spend","Value":"', TotalSpend, '"},',
+    '{"Label":"Subscriptions","Value":"', Subscriptions, '"},',
+    '{"Label":"Products","Value":"', Products, '"}',
+']'))
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

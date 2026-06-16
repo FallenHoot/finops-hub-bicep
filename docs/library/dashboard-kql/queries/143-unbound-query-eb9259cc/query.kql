@@ -1,0 +1,5 @@
+// Base query: CostsPlus
+// Returns extended cost records for forecasting and running total analysis
+// Wider time range (numberOfMonths months) for trend projection
+Costs()
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)

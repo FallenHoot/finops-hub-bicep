@@ -1,0 +1,38 @@
+{
+  "queryId": "cf120002-3529-4e5f-6a7b-8c9d0e1f2a3b",
+  "folder": "087-fabric-spend-summary-cf120002",
+  "primaryTitle": "Fabric Spend Summary",
+  "tiles": [
+    {
+      "tileId": "e209f24d-f8c8-414c-aca9-5d9ebffac040",
+      "title": "Fabric Spend Summary",
+      "pageId": "ba13a209-ce7d-4169-a098-e29d4972c664",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargeDescription",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "PublisherName",
+      "ServiceName",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_PublisherCategory"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

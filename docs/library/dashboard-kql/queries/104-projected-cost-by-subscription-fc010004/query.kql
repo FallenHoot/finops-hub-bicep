@@ -1,0 +1,8 @@
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths) and ChargePeriodStart < startofday(now())
+| summarize DailyCost = sum(EffectiveCost) by Day = bin(ChargePeriodStart, 1d), SubAccountName
+| summarize AvgDaily = avg(DailyCost) by SubAccountName
+| top maxGroupCount by AvgDaily desc
+| extend ProjectedMonthly = round(AvgDaily * 30, 0), AvgDaily = round(AvgDaily, 0)
+| project SubAccountName, AvgDaily, ProjectedMonthly
+| order by ProjectedMonthly desc

@@ -1,0 +1,39 @@
+{
+  "queryId": "e975f824-6c9e-44ce-a539-083dadae47fd",
+  "folder": "134-waste-summary-last-30-days-e975f824",
+  "primaryTitle": "Waste summary (last 30 days)",
+  "tiles": [
+    {
+      "tileId": "4361755a-074c-4a52-bb6e-7821ded339a6",
+      "title": "Waste summary (last 30 days)",
+      "pageId": "fb47b0be-7563-4ca6-8b8c-cf01f9a8a3c8",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfDays",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ResourceId",
+      "ResourceType",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName",
+      "x_ResourceType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

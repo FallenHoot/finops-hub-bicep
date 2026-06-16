@@ -1,0 +1,38 @@
+{
+  "queryId": "377e3693-0738-45d7-97d9-4b6e71ec5b36",
+  "folder": "054-commitment-discount-chargeback-by-resource-group-377e3693",
+  "primaryTitle": "Commitment discount chargeback by resource group",
+  "tiles": [
+    {
+      "tileId": "b2c319c7-0ef0-477b-a80f-9b6e022b7e5e",
+      "title": "Commitment discount chargeback by resource group",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargeCategory",
+      "ChargePeriodStart",
+      "CommitmentDiscountId",
+      "CommitmentDiscountName",
+      "CommitmentDiscountStatus",
+      "CommitmentDiscountType",
+      "EffectiveCost",
+      "SubAccountId",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

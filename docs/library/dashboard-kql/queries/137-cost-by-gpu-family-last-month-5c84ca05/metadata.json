@@ -1,0 +1,32 @@
+{
+  "queryId": "5c84ca05-0265-4b47-ab19-4fa1cd79b542",
+  "folder": "137-cost-by-gpu-family-last-month-5c84ca05",
+  "primaryTitle": "Cost by GPU family (last month)",
+  "tiles": [
+    {
+      "tileId": "aed52a69-b686-4da8-9073-e53827eb4d8a",
+      "title": "Cost by GPU family (last month)",
+      "pageId": "f8ee3008-df7e-442f-825e-2e3b46e4c185",
+      "visualType": "pie"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "ResourceId",
+      "ResourceType",
+      "ServiceCategory",
+      "ServiceName",
+      "SkuMeter"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+let costs = CostsByDay | where isnotempty(ResourceType);
+let all = costs | summarize ResourceCount = dcount(ResourceId) by ResourceType;
+let count = toscalar(all | order by ResourceCount desc | count);
+let topX = all | order by ResourceCount desc | limit maxGroupCount;
+let otherId = '(others)';
+costs
+| where isnotempty(ResourceType)
+//
+// Group rows after max count
+| extend inTopX = ResourceType in (topX)
+| extend ResourceType = iff(inTopX, ResourceType, strcat('(', (count - maxGroupCount), ' others)'))
+//
+| summarize 
+    ResourceCount = dcount(ResourceId)
+    by
+    ResourceType
+| order by ResourceCount desc
+| render columnchart

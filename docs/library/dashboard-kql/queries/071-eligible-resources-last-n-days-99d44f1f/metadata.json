@@ -1,0 +1,41 @@
+{
+  "queryId": "99d44f1f-c53a-40ee-b749-8e5557ec58c7",
+  "folder": "071-eligible-resources-last-n-days-99d44f1f",
+  "primaryTitle": "Eligible resources (last n days)",
+  "tiles": [
+    {
+      "tileId": "9197f822-bdf3-42af-8b43-5609c9b91f00",
+      "title": "Eligible resources (last n days)",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDayAHB"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "ConsumedQuantity",
+      "EffectiveCost",
+      "ResourceId",
+      "ResourceName",
+      "ResourceType",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [
+      "x_ResourceGroupName",
+      "x_SkuCoreCount",
+      "x_SkuInstanceType",
+      "x_SkuLicenseQuantity",
+      "x_SkuLicenseStatus",
+      "x_SkuLicenseType"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

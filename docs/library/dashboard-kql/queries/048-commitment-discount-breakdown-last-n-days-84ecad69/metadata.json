@@ -1,0 +1,30 @@
+{
+  "queryId": "84ecad69-79ac-45b9-a8af-60be28dcc748",
+  "folder": "048-commitment-discount-breakdown-last-n-days-84ecad69",
+  "primaryTitle": "Commitment discount breakdown (last n days)",
+  "tiles": [
+    {
+      "tileId": "8dd83ee9-6692-4b94-a8c3-68caa7adbb64",
+      "title": "Commitment discount breakdown (last n days)",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "CommitmentDiscountStatus",
+      "CommitmentDiscountType",
+      "EffectiveCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

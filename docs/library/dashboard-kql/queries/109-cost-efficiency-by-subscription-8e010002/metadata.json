@@ -1,0 +1,33 @@
+{
+  "queryId": "8e010002-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+  "folder": "109-cost-efficiency-by-subscription-8e010002",
+  "primaryTitle": "Cost efficiency by subscription",
+  "tiles": [
+    {
+      "tileId": "8e01a002-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+      "title": "Cost efficiency by subscription",
+      "pageId": "5c57f940-6f0f-4e39-930b-b6e89bb758ad",
+      "visualType": "bar"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCurrency",
+      "ResourceId",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

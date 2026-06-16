@@ -1,0 +1,29 @@
+{
+  "queryId": "1d9c166d-22b6-48fd-9a90-9f983083ecc7",
+  "folder": "035-daily-trend-1d9c166d",
+  "primaryTitle": "Daily trend",
+  "tiles": [
+    {
+      "tileId": "00b9ea3a-3902-4234-806f-1a7bf87b3992",
+      "title": "Daily trend",
+      "pageId": "a8f2e3d1-5c6b-4a9e-b7f0-1d2e3f4a5b6c",
+      "visualType": "column"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

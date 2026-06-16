@@ -1,0 +1,14 @@
+// Rightsizing - Summary KPIs
+let recs = Recommendations
+| extend ResourceIdSafe = tostring(coalesce(column_ifexists('ResourceId', ''), column_ifexists('x_ResourceId', '')));
+let total = toscalar(recs | summarize count());
+let totalSavings = toscalar(recs | summarize sum(x_EffectiveCostSavings));
+let totalSafe = iff(isnull(totalSavings), 0.0, totalSavings);
+let totalRecs = iff(isnull(total), 0, total);
+let resources = toscalar(recs | summarize dcountif(ResourceIdSafe, isnotempty(ResourceIdSafe)));
+print json = pack_array(
+    pack('Label', 'Recommendations', 'Value', tostring(totalRecs)),
+    pack('Label', 'Est. annual savings', 'Value', tostring(round(totalSafe, 2))),
+    pack('Label', 'Resources affected', 'Value', tostring(iff(isnull(resources), 0, resources))))
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

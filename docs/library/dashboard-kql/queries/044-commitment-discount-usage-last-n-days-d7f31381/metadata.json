@@ -1,0 +1,42 @@
+{
+  "queryId": "d7f31381-ba44-46a1-ad3e-dc6b8826706d",
+  "folder": "044-commitment-discount-usage-last-n-days-d7f31381",
+  "primaryTitle": "Commitment discount usage (last n days)",
+  "tiles": [
+    {
+      "tileId": "36c1dede-49c9-4ae3-a19a-a230f87e9197",
+      "title": "Commitment discount usage (last n days)",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargeCategory",
+      "CommitmentDiscountCategory",
+      "CommitmentDiscountId",
+      "CommitmentDiscountName",
+      "CommitmentDiscountStatus",
+      "CommitmentDiscountType",
+      "ConsumedQuantity",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost",
+      "ProviderName"
+    ],
+    "extensionColumnsUsed": [
+      "x_CommitmentDiscountUtilizationAmount",
+      "x_CommitmentDiscountUtilizationPotential",
+      "x_SkuTerm"
+    ],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

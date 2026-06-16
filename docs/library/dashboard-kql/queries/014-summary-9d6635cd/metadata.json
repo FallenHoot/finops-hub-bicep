@@ -1,0 +1,32 @@
+{
+  "queryId": "9d6635cd-503a-49bc-80c8-ac8157c6e923",
+  "folder": "014-summary-9d6635cd",
+  "primaryTitle": "Summary",
+  "tiles": [
+    {
+      "tileId": "4faba5ce-4190-45f9-b41e-5d9c6a9c8098",
+      "title": "Summary",
+      "pageId": "5c57f940-6f0f-4e39-930b-b6e89bb758ad",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByMonth"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BilledCost",
+      "BillingPeriodStart",
+      "ContractedCost",
+      "EffectiveCost",
+      "ListCost"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

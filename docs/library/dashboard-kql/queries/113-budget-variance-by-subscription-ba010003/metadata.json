@@ -1,0 +1,31 @@
+{
+  "queryId": "ba010003-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+  "folder": "113-budget-variance-by-subscription-ba010003",
+  "primaryTitle": "Budget variance by subscription",
+  "tiles": [
+    {
+      "tileId": "ba01a003-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+      "title": "Budget variance by subscription",
+      "pageId": "5c57f940-6f0f-4e39-930b-b6e89bb758ad",
+      "visualType": "table"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "monthlyBudget"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "SubAccountId",
+      "SubAccountName"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

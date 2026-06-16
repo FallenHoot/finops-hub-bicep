@@ -1,0 +1,13 @@
+Costs
+| where PricingCategory == 'Dynamic'
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| summarize 
+    Cost = round(sum(EffectiveCost), 2),
+    Savings = round(sum(ListCost - EffectiveCost), 2),
+    ResourceType = take_any(ResourceType),
+    RegionName = take_any(RegionName)
+by ResourceName, ResourceId
+| extend SavingsPercent = iff((Cost + Savings) > 0, round(100.0 * Savings / (Cost + Savings), 1), 0.0)
+| order by Cost desc
+| take 15
+| project ResourceName, ResourceType, RegionName, Cost, Savings, SavingsPercent

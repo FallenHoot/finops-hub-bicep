@@ -1,0 +1,11 @@
+CostsByMonth
+// | summarize BilledCost = round(sum(BilledCost), 2), EffectiveCost = round(sum(EffectiveCost), 2) by BillingPeriodStart = startofmonth(BillingPeriodStart)
+// | render timechart
+| summarize BilledCost = sum(BilledCost), EffectiveCost = sum(EffectiveCost) by BillingPeriodStart = startofmonth(BillingPeriodStart)
+| order by BillingPeriodStart asc
+| extend PreviousBilledCost = prev(BilledCost)
+| extend PreviousEffectiveCost = prev(EffectiveCost)
+| project BillingPeriodStart
+    , BilledCost = iif(isempty(PreviousBilledCost), todouble(0), todouble((BilledCost - PreviousBilledCost) * 100.0 / PreviousBilledCost))
+    , EffectiveCost = iif(isempty(PreviousEffectiveCost), todouble(0), todouble((EffectiveCost - PreviousEffectiveCost) * 100.0 / PreviousEffectiveCost))
+

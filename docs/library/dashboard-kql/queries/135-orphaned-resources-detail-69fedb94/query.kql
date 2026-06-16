@@ -1,0 +1,15 @@
+// Orphaned Resources - Detail Table
+let lookback = ago(numberOfDays * 1d);
+let costs = Costs
+    | where ChargePeriodStart >= lookback
+    | where ChargeCategory == 'Usage'
+    | summarize MonthlyCost = sum(EffectiveCost) by ResourceId, ResourceName = column_ifexists('ResourceName', ''), ResourceType, x_ResourceType, SubAccountName, x_ResourceGroupName = column_ifexists('x_ResourceGroupName', '');
+let vmRGs = costs | where x_ResourceType =~ 'Microsoft.Compute/virtualMachines' | distinct x_ResourceGroupName;
+let orphanedDisks = costs | where x_ResourceType =~ 'Microsoft.Compute/disks' | join kind=leftanti vmRGs on x_ResourceGroupName | extend DetectionRule = 'Unattached Disk', Confidence = 'Medium';
+let vmSubAccounts = costs | where x_ResourceType =~ 'Microsoft.Compute/virtualMachines' | distinct SubAccountName;
+let lbSubAccounts = costs | where x_ResourceType =~ 'Microsoft.Network/loadBalancers' | distinct SubAccountName;
+let ipResources = costs | where x_ResourceType =~ 'Microsoft.Network/publicIPAddresses' | join kind=leftanti (vmSubAccounts | union lbSubAccounts) on SubAccountName | extend DetectionRule = 'Unused Public IP', Confidence = 'Low';
+let orphanedLBs = costs | where x_ResourceType =~ 'Microsoft.Network/loadBalancers' | where MonthlyCost < 50 | extend DetectionRule = 'Idle Load Balancer', Confidence = 'Low';
+union orphanedDisks, ipResources, orphanedLBs
+| project ResourceName, ResourceType, SubAccountName, ResourceGroup = x_ResourceGroupName, MonthlyCost = round(MonthlyCost, 2), AnnualImpact = round(MonthlyCost * 12, 2), DetectionRule, Confidence
+| order by MonthlyCost desc

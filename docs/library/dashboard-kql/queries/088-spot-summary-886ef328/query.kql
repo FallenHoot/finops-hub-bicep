@@ -1,0 +1,16 @@
+Costs
+| where PricingCategory == 'Dynamic'
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| summarize 
+    SpotCost = round(sum(EffectiveCost), 2),
+    SpotResources = dcount(ResourceId),
+    SpotSavings = round(sum(ListCost - EffectiveCost), 2)
+| project json = todynamic(strcat('[',
+    '{"Label":"Spot Spend","Value":"', SpotCost, '"},',
+    '{"Label":"Resources","Value":"', SpotResources, '"},',
+    '{"Label":"Savings","Value":"', SpotSavings, '"}',
+']'))
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

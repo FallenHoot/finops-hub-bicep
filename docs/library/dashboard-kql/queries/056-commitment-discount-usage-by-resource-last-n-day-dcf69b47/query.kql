@@ -1,0 +1,26 @@
+CostsByDay
+| where ChargeCategory == 'Usage'
+| where isnotempty(CommitmentDiscountId)
+| where EffectiveCost != 0
+| summarize 
+    EffectiveCost  = sum(EffectiveCost),
+    ResourceName = take_any(ResourceName),
+    ResourceType = take_any(ResourceType),
+    RegionName = take_any(RegionName),
+    x_ResourceGroupName = take_any(x_ResourceGroupName),
+    SubAccountName = take_any(SubAccountName),
+    CommitmentDiscountName = take_any(CommitmentDiscountName),
+    CommitmentDiscountType = take_any(CommitmentDiscountType)
+    by
+    ResourceId,
+    CommitmentDiscountId
+| project 
+    CommitmentDiscountType,
+    CommitmentDiscountName,
+    ResourceName,
+    ResourceType,
+    RegionName,
+    x_ResourceGroupName,
+    SubAccountName,
+    EffectiveCost = round(EffectiveCost, 2)
+| order by CommitmentDiscountType asc, CommitmentDiscountName asc, ResourceName asc, ResourceType asc, x_ResourceGroupName asc, SubAccountName asc, EffectiveCost desc

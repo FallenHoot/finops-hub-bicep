@@ -1,0 +1,10 @@
+// Data quality warnings - flag rows where EffectiveCost > ListCost (known MCA issue #1424)
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| where EffectiveCost > ListCost and ListCost > 0
+| summarize AffectedRows = count(), TotalDifference = round(sum(EffectiveCost - ListCost), 2) by ServiceName, SubAccountName
+| project Warning = 'Warning: EffectiveCost > ListCost', ServiceName, SubAccountName, AffectedRows, TotalDifference
+| order by TotalDifference desc
+| take 20

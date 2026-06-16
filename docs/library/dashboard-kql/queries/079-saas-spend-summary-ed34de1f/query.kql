@@ -1,0 +1,17 @@
+let marketplace = Costs
+| where x_PublisherCategory == 'Marketplace'
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| extend Currency = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or Currency == tostring(currencyFilter);
+marketplace
+| summarize 
+    TotalSpend = round(sum(EffectiveCost), 2),
+    Publishers = dcount(PublisherName),
+    Products = dcount(ServiceName)
+| project json = todynamic(strcat('[',
+    '{"Label":"Total Spend","Value":"', TotalSpend, '"},',
+    '{"Label":"Publishers","Value":"', Publishers, '"},',
+    '{"Label":"Products","Value":"', Products, '"}',
+']'))
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

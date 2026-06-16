@@ -1,0 +1,7 @@
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -numberOfMonths)
+| summarize MonthlyCost = sum(EffectiveCost) by Month = startofmonth(ChargePeriodStart)
+| order by Month asc
+| extend PrevMonth = prev(MonthlyCost)
+| extend MoMChange = iff(isnotnull(PrevMonth) and PrevMonth > 0, round((MonthlyCost - PrevMonth) / PrevMonth * 100, 1), 0.0)
+| project Month, MonthlyCost = round(MonthlyCost, 0), MoMChange = strcat(iff(MoMChange >= 0, '+', ''), tostring(MoMChange), '%'), Trend = iff(MonthlyCost > PrevMonth, 'Up', iff(MonthlyCost < PrevMonth, 'Down', 'Flat'))

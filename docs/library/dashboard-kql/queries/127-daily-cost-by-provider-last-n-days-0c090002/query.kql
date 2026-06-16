@@ -1,0 +1,8 @@
+Costs
+| where ChargePeriodStart >= ago(numberOfDays * 1d)
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| summarize Cost = round(sum(EffectiveCost), 2)
+    by Day = bin(ChargePeriodStart, 1d),
+       Provider = coalesce(ProviderName, 'Unknown')
+| order by Day asc

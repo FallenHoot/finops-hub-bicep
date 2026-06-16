@@ -1,0 +1,19 @@
+// MACC Forecast from FOCUS cost data
+let MACCData = MACC_ManualEntry | take 1;
+let StartDate = toscalar(MACCData | project StartDate);
+let EndDate = toscalar(MACCData | project ExpirationDate);
+let Commitment = toscalar(MACCData | project CommitmentAmount);
+let TotalConsumed = toscalar(Costs | where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate | summarize sum(EffectiveCost));
+let TotalConsumed2 = iff(isnull(TotalConsumed), 0.0, TotalConsumed);
+let MonthsOfData = toscalar(Costs | where ChargePeriodStart >= StartDate | summarize dcount(startofmonth(ChargePeriodStart)));
+let MonthsOfData2 = iff(isnull(MonthsOfData) or MonthsOfData < 1, 1, MonthsOfData);
+let AvgMonthlyBurn = TotalConsumed2 / todouble(MonthsOfData2);
+let RemainingBalance = Commitment - TotalConsumed2;
+let MonthsUntilExpiration = datetime_diff('month', EndDate, now());
+let MonthsUntilExp2 = iff(MonthsUntilExpiration < 1, 1, MonthsUntilExpiration);
+let RequiredMonthlySpend = RemainingBalance / todouble(MonthsUntilExp2);
+let SpendGap = RequiredMonthlySpend - AvgMonthlyBurn;
+print Remaining=round(RemainingBalance, 0), AvgMonthly=round(AvgMonthlyBurn, 0), Required=round(RequiredMonthlySpend, 0), Gap=round(SpendGap, 0)
+| project json = pack_array(pack('Label', 'Remaining Balance', 'Value', tostring(Remaining)), pack('Label', 'Avg Monthly Burn', 'Value', tostring(AvgMonthly)), pack('Label', 'Required Monthly', 'Value', tostring(Required)), pack('Label', 'Spend Gap', 'Value', tostring(Gap)))
+| mv-expand json
+| project Label = tostring(json.Label), Value = tostring(json.Value)

@@ -1,0 +1,16 @@
+// CPU architecture cost breakdown (community request #1594)
+// Heuristic based on Azure VM SKU naming conventions
+// Excludes N-series GPU VMs (shown in separate GPU tile)
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| where ServiceCategory == 'Compute' or ServiceName has 'Virtual Machines' or ResourceType =~ 'Virtual machine'
+| where isnotempty(SkuMeter)
+| extend NormalizedSku = tolower(SkuMeter)
+| where not(NormalizedSku matches regex @'n[cdv][0-9]')
+| extend Architecture = case(
+    NormalizedSku matches regex @'[0-9]+a[^r]', 'AMD',
+    NormalizedSku matches regex @'[0-9]+p', 'Arm64 (Cobalt)',
+    NormalizedSku matches regex @'[0-9]+[^ap]', 'Intel',
+    'Other')
+| summarize TotalCost = round(sum(EffectiveCost), 0), VMs = dcount(ResourceId) by Architecture
+| order by TotalCost desc

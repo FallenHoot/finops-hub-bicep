@@ -1,0 +1,33 @@
+{
+  "queryId": "647bfaef-4a54-42c0-aaeb-186b8dea47ee",
+  "folder": "089-pricing-category-breakdown-647bfaef",
+  "primaryTitle": "Pricing Category Breakdown",
+  "tiles": [
+    {
+      "tileId": "a95553d6-7eaf-46af-832a-ec4543afe659",
+      "title": "Pricing Category Breakdown",
+      "pageId": "c0f4a5b3-7e8d-4c9f-d9b2-3f4a5b6c7d8e",
+      "visualType": "pie"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "numberOfMonths",
+    "currencyFilter"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "BillingCurrency",
+      "ChargePeriodStart",
+      "EffectiveCost",
+      "PricingCategory",
+      "PricingCurrency"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "queryId": "f062533b-8c94-412f-bf83-0eb5cd06063d",
+  "folder": "034-resource-inventory-summary-last-n-days-f062533b",
+  "primaryTitle": "Resource inventory summary (last n days)",
+  "tiles": [
+    {
+      "tileId": "a83872cb-44ef-402a-8512-b9d5ba04744e",
+      "title": "Resource inventory summary (last n days)",
+      "pageId": "38170d90-36d5-4978-8e75-d3a6112384e5",
+      "visualType": "multistat"
+    }
+  ],
+  "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6",
+  "usedVariables": [
+    "CostsByDay",
+    "CostsPlus",
+    "numberOfDays"
+  ],
+  "focusComparison": {
+    "assessment": "focus-aligned",
+    "focusColumnsUsed": [
+      "ChargePeriodStart",
+      "CommitmentDiscountType",
+      "EffectiveCost",
+      "ListCost",
+      "ResourceId",
+      "ResourceType"
+    ],
+    "extensionColumnsUsed": [],
+    "heuristicNotes": [
+      "Column-level comparison is heuristic and based on Costs_final_v1_2 schema.",
+      "FOCUS validation should be finalized against official v1.3 sources and migration backlog."
+    ]
+  }
+}

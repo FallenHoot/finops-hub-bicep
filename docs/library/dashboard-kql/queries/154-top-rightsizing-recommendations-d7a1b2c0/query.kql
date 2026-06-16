@@ -1,0 +1,14 @@
+// Rightsizing - Top recommendations
+Recommendations
+| extend ResourceTypeSafe = tostring(coalesce(column_ifexists('ResourceType', ''), column_ifexists('x_ResourceType', ''), 'Unknown'))
+| extend ResourceIdSafe = tostring(coalesce(column_ifexists('ResourceId', ''), column_ifexists('x_ResourceId', '')))
+| extend RecommendationDescription = tostring(coalesce(column_ifexists('x_RecommendationDescription', ''), column_ifexists('RecommendationDescription', ''), 'No description'))
+| extend RecommendationCategory = tostring(coalesce(column_ifexists('x_RecommendationCategory', ''), column_ifexists('RecommendationCategory', ''), 'Uncategorized'))
+| summarize
+    EstSavings = round(sum(x_EffectiveCostSavings), 2),
+    ResourceCount = dcountif(ResourceIdSafe, isnotempty(ResourceIdSafe)),
+    LastSeen = max(x_RecommendationDate)
+    by ResourceType = iff(isnotempty(ResourceTypeSafe), ResourceTypeSafe, 'Unknown'), RecommendationDescription, RecommendationCategory
+| order by EstSavings desc
+| take 20
+| project x_RecommendationCategory = RecommendationCategory, x_RecommendationDescription = RecommendationDescription, ResourceType, ResourceCount, EstSavings, LastSeen

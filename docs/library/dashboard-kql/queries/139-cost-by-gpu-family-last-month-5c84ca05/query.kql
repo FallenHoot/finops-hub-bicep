@@ -1,0 +1,21 @@
+// GPU compute cost breakdown by N-series VM family
+// NC = Training/inference, ND = Distributed training, NV = Visualization
+Costs
+| where ChargePeriodStart >= startofmonth(now(), -1) and ChargePeriodStart < startofmonth(now())
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)
+| where ServiceCategory == 'Compute' or ServiceName has 'Virtual Machines' or ResourceType =~ 'Virtual machine'
+| where isnotempty(SkuMeter)
+| extend NormalizedSku = tolower(SkuMeter)
+| where NormalizedSku matches regex @'n[cdv][0-9]'
+| extend GpuFamily = case(
+    NormalizedSku has 'h100', 'H100',
+    NormalizedSku has 'a100', 'A100',
+    NormalizedSku has 'a10', 'A10',
+    NormalizedSku has 't4', 'T4',
+    NormalizedSku matches regex @'^nc', 'NC (Other)',
+    NormalizedSku matches regex @'^nd', 'ND (Other)',
+    NormalizedSku matches regex @'^nv', 'NV (Other)',
+    'Other GPU')
+| summarize TotalCost = round(sum(EffectiveCost), 0), VMs = dcount(ResourceId) by GpuFamily
+| order by TotalCost desc

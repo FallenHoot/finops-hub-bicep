@@ -1,0 +1,33 @@
+// MACC Status - Supports API-backed lots and manual entry
+let MACCData = union isfuzzy=true
+    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),
+    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),
+    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),
+    (datatable(Description:string, Currency:string, StartDate:datetime, ExpirationDate:datetime, CommitmentAmount:real, DataSource:string, SourcePriority:int) [ 'No MACC data configured', '', startofmonth(now()), endofmonth(now()), 0.0, 'Fallback', 0 ])
+| extend Description = tostring(coalesce(column_ifexists('Description', ''), column_ifexists('LotId', ''), 'MACC commitment'))
+| extend Currency = tostring(coalesce(column_ifexists('Currency', ''), column_ifexists('OriginalCurrency', ''), column_ifexists('ClosedBalanceCurrency', '')))
+| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null))))
+| extend ExpirationDate = todatetime(column_ifexists('ExpirationDate', datetime(null)))
+| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))
+| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)
+| top 1 by SourcePriority desc, IsActive desc, StartDate desc;
+let StartDate = toscalar(MACCData | project StartDate);
+let EndDate = toscalar(MACCData | project ExpirationDate);
+let Commitment = toscalar(MACCData | project CommitmentAmount);
+let ConsumedCosts = Costs
+| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate
+| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))
+| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter);
+let TotalConsumed = toscalar(ConsumedCosts | summarize sum(EffectiveCost));
+let TotalConsumed2 = iff(isnull(TotalConsumed), 0.0, TotalConsumed);
+let DaysTotalRaw = datetime_diff('day', EndDate, StartDate);
+let DaysTotal = iff(isnull(DaysTotalRaw) or DaysTotalRaw < 1, 1, DaysTotalRaw);
+let DaysElapsedRaw = datetime_diff('day', now(), StartDate);
+let DaysElapsed = iff(DaysElapsedRaw < 0, 0, iff(DaysElapsedRaw > DaysTotal, DaysTotal, DaysElapsedRaw));
+let DaysRemainingRaw = datetime_diff('day', EndDate, now());
+let DaysRemaining = iff(DaysRemainingRaw < 0, 0, DaysRemainingRaw);
+let PercentConsumed = iff(Commitment > 0, round(100.0 * TotalConsumed2 / Commitment, 1), 0.0);
+let PercentTimeElapsed = round(100.0 * todouble(DaysElapsed) / todouble(DaysTotal), 1);
+let HealthStatus = case(PercentConsumed >= PercentTimeElapsed - 5 and PercentConsumed <= PercentTimeElapsed + 10, 'On Track', PercentConsumed > PercentTimeElapsed + 10, 'Ahead', PercentConsumed >= PercentTimeElapsed - 15, 'Slightly Behind', PercentConsumed >= PercentTimeElapsed - 25, 'Behind', 'At Risk');
+MACCData
+| project Description, Currency, DataSource, CommitmentAmount = round(Commitment, 0), TotalConsumed = round(TotalConsumed2, 0), RemainingBalance = round(Commitment - TotalConsumed2, 0), PercentConsumed = strcat(PercentConsumed, '%'), PercentTimeElapsed = strcat(PercentTimeElapsed, '%'), DaysRemaining, ExpirationDate = format_datetime(EndDate, 'yyyy-MM-dd'), HealthStatus

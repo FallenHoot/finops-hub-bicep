@@ -1,0 +1,14 @@
+// Orphaned Resources - Monthly Waste Trend
+let costs = Costs
+    | where ChargePeriodStart >= ago(numberOfDays * 1d)
+    | where ChargeCategory == 'Usage'
+    | summarize MonthlyCost = sum(EffectiveCost) by ResourceId, ResourceType, x_ResourceType, SubAccountName, x_ResourceGroupName = column_ifexists('x_ResourceGroupName', ''), Month = startofmonth(ChargePeriodStart);
+let vmRGsByMonth = costs | where x_ResourceType =~ 'Microsoft.Compute/virtualMachines' | distinct x_ResourceGroupName, Month;
+let orphanedDisks = costs | where x_ResourceType =~ 'Microsoft.Compute/disks' | join kind=leftanti vmRGsByMonth on x_ResourceGroupName, Month | extend DetectionRule = 'Unattached Disk';
+let vmSubByMonth = costs | where x_ResourceType =~ 'Microsoft.Compute/virtualMachines' | distinct SubAccountName, Month;
+let lbSubByMonth = costs | where x_ResourceType =~ 'Microsoft.Network/loadBalancers' | distinct SubAccountName, Month;
+let ipResources = costs | where x_ResourceType =~ 'Microsoft.Network/publicIPAddresses' | join kind=leftanti (vmSubByMonth | union lbSubByMonth) on SubAccountName, Month | extend DetectionRule = 'Unused Public IP';
+let orphanedLBs = costs | where x_ResourceType =~ 'Microsoft.Network/loadBalancers' | where MonthlyCost < 50 | extend DetectionRule = 'Idle Load Balancer';
+union orphanedDisks, ipResources, orphanedLBs
+| summarize WasteCost = round(sum(MonthlyCost), 2) by Month, DetectionRule
+| order by Month asc, DetectionRule asc
