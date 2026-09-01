@@ -1,23 +1,32 @@
 # FinOps Hub - Internal Bicep Modules
 
-This folder contains internal helper modules used by the main `main.bicep` template. These are **not** standalone AVMs - they are implementation details that should not be used directly.
+This folder contains internal helper modules used by the main `main.bicep` template. These are **not** standalone AVMs - they are implementation details for the AVM base kit and should not be used directly.
+
+The modules in this folder are limited to foundational deployment concerns:
+resource composition, network isolation, Data Factory orchestration, ADX schema
+bootstrap, and deployment idempotency. Optional FinOps Toolkit add-ons such as
+dashboard packs, recommendation content packs, and advanced analytics experiences
+belong in the official Microsoft FinOps Toolkit repository.
 
 ## Module Architecture
 
 ```
-main.bicep (the AVM entry point)
+main.bicep (the AVM-first entry point)
     │
-    ├── modules/storage.bicep          → Uses: avm/res/storage/storage-account
-    ├── modules/keyVault.bicep         → Uses: avm/res/key-vault/vault
-    ├── modules/dataFactory.bicep      → Uses: avm/res/data-factory/factory
+    ├── br/public:avm/res/managed-identity/user-assigned-identity
+    ├── br/public:avm/res/storage/storage-account
+    ├── br/public:avm/res/key-vault/vault
+    ├── br/public:avm/res/data-factory/factory
+    ├── br/public:avm/res/kusto/cluster
+    ├── br/public:avm/ptn/authorization/resource-role-assignment
     │
     ├── modules/dataFactoryResources.bicep  → ADF child resources (pipelines, datasets, triggers)
-    ├── modules/network.bicep               → Managed VNet, subnets, NSG, Private DNS zones
+    ├── modules/network.bicep               → Composes AVM NSG, VNet, and Private DNS zone modules
     ├── modules/triggerManagement.bicep     → PowerShell deployment scripts for trigger control
     │
     ├── modules/adxSchemaSetup.bicep        → Orchestrates KQL script deployment order
     ├── modules/hub-database.bicep          → Generic KQL script runner for ADX
-    ├── modules/adxManagedIdentityPolicy.bicep   → ADX MI policy configuration
+    ├── modules/adxManagedIdentityPolicy.bicep   → ADX MI policy configuration (reference only)
     ├── modules/adxManagedPrivateEndpoint.bicep  → ADF managed PE to ADX
     ├── modules/adxPrivateEndpointApproval.bicep → PE approval logic
     │
@@ -26,22 +35,36 @@ main.bicep (the AVM entry point)
 
 ## How Modules Work
 
-### 1. AVM Wrapper Modules
-These modules wrap Azure Verified Modules (AVMs) with FinOps Hub-specific configurations:
+### 1. Azure Verified Modules (called directly from `main.bicep`)
 
-| Module | Wraps AVM | Purpose |
-|--------|-----------|---------|
-| `storage.bicep` | `avm/res/storage/storage-account` | Creates storage with FinOps containers |
-| `keyVault.bicep` | `avm/res/key-vault/vault` | Stores storage keys for ADF |
-| `dataFactory.bicep` | `avm/res/data-factory/factory` | Creates ADF with managed identity |
+This solution is AVM-first. `main.bicep` references Azure Verified Modules
+directly rather than wrapping them in local modules. There are no
+`storage.bicep`, `keyVault.bicep`, or `dataFactory.bicep` wrapper modules.
+
+| AVM module | Purpose |
+|------------|---------|
+| `avm/utl/types/avm-common-types` | Shared `lockType` and `diagnosticSettingFullType` |
+| `avm/res/managed-identity/user-assigned-identity` | Hub managed identity |
+| `avm/res/storage/storage-account` | ADLS Gen2 data lake |
+| `avm/res/key-vault/vault` | Secret storage for Data Factory |
+| `avm/res/data-factory/factory` | Ingestion orchestration |
+| `avm/res/kusto/cluster` | Azure Data Explorer cluster |
+| `avm/ptn/authorization/resource-role-assignment` | All RBAC role assignments |
+| `avm/res/network/network-security-group` | Managed network NSG (via `network.bicep`) |
+| `avm/res/network/virtual-network` | Managed VNet and subnets (via `network.bicep`) |
+| `avm/res/network/private-dns-zone` | Blob, DFS, Key Vault, Data Factory, Kusto zones (via `network.bicep`) |
+
+All AVM references are version-pinned. `enableTelemetry` is plumbed from the
+top-level parameter into every AVM module call. Before adding any `resource`
+declaration, check for an existing AVM resource, pattern, or utility module.
 
 ### 2. Custom Resource Modules
 These modules create resources not available as AVMs:
 
 | Module | Purpose |
 |--------|---------|
+| `network.bicep` | Composes AVM network modules into the managed VNet topology |
 | `dataFactoryResources.bicep` | All ADF pipelines, datasets, linked services, triggers |
-| `network.bicep` | Self-contained VNet for "Managed" network isolation |
 | `triggerManagement.bicep` | Deployment scripts to stop/start triggers |
 
 ### 3. ADX Schema Modules
@@ -99,10 +122,11 @@ The `network.bicep` module supports the "Managed" mode:
 
 When adding new functionality:
 
-1. **Prefer AVMs**: If an AVM exists for the resource, create a thin wrapper
-2. **Follow naming**: Use descriptive names that match Azure resource types
-3. **Keep types separate**: Use `types.bicep` for shared type definitions
-4. **Document dependencies**: Add comments explaining module dependencies
+1. **Keep the base-kit boundary**: Add only foundational deployment plumbing here; leave add-on content in FinOps Toolkit
+2. **Prefer AVMs**: If an AVM exists for the resource, create a thin wrapper
+3. **Follow naming**: Use descriptive names that match Azure resource types
+4. **Keep types separate**: Use `types.bicep` for shared type definitions
+5. **Document dependencies**: Add comments explaining module dependencies
 
 ## See Also
 

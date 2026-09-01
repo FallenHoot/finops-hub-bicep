@@ -33,7 +33,7 @@ param fabricQueryUri string = ''
 param integrationRuntimeName string = ''
 
 @description('Optional. FinOps toolkit version.')
-param ftkVersion string = '0.7.0'
+param ftkVersion string = '14.0'
 
 @description('Optional. Billing account ID for MACC tracking. Required for MACC pipelines.')
 param billingAccountId string = ''

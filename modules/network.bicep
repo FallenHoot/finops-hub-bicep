@@ -38,6 +38,12 @@ var uniqueSuffix = uniqueString(resourceGroup().id, hubName)
 var vnetName = 'vnet-${hubName}-${take(uniqueSuffix, 6)}'
 var subnetName = 'snet-private-endpoints'
 var nsgName = 'nsg-${hubName}-pe'
+var adxDnsSuffixLookup = {
+  AzureCloud: 'kusto.windows.net'
+  AzureUSGovernment: 'kusto.usgovcloudapi.net'
+  AzureChinaCloud: 'kusto.windows.cn'
+}
+var adxDnsSuffix = adxDnsSuffixLookup[?environment().name] ?? replace(environment().suffixes.storage, 'core', 'kusto')
 
 // Private DNS zone names for Azure services
 var dnsZoneNames = {
@@ -45,7 +51,7 @@ var dnsZoneNames = {
   dfs: 'privatelink.dfs.${environment().suffixes.storage}'
   vault: replace(environment().suffixes.keyvaultDns, '.', 'privatelink.')
   dataFactory: 'privatelink.datafactory.azure.net'
-  kusto: 'privatelink.${location}.kusto.windows.net'
+  kusto: 'privatelink.${location}.${adxDnsSuffix}'
 }
 
 // ============================================================================
@@ -54,7 +60,7 @@ var dnsZoneNames = {
 
 // --- Network Security Group for Private Endpoints ---
 // Private endpoints only need inbound traffic from the VNet
-module nsg 'br/public:avm/res/network/network-security-group:0.5.2' = {
+module nsg 'br/public:avm/res/network/network-security-group:0.5.3' = {
   name: '${uniqueString(deployment().name, location)}-nsg'
   params: {
     name: nsgName
@@ -95,7 +101,7 @@ module nsg 'br/public:avm/res/network/network-security-group:0.5.2' = {
 }
 
 // --- Virtual Network with Private Endpoint Subnet ---
-module vnet 'br/public:avm/res/network/virtual-network:0.7.2' = {
+module vnet 'br/public:avm/res/network/virtual-network:0.10.2' = {
   name: '${uniqueString(deployment().name, location)}-vnet'
   params: {
     name: vnetName
@@ -120,7 +126,7 @@ module vnet 'br/public:avm/res/network/virtual-network:0.7.2' = {
 // --- Private DNS Zones for Private Link ---
 // Creating individual DNS zones using the AVM resource module
 
-module blobDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.0' = {
+module blobDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.1' = {
   name: '${uniqueString(deployment().name, location)}-dns-blob'
   params: {
     name: dnsZoneNames.blob
@@ -135,7 +141,7 @@ module blobDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.0' = {
   }
 }
 
-module dfsDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.0' = {
+module dfsDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.1' = {
   name: '${uniqueString(deployment().name, location)}-dns-dfs'
   params: {
     name: dnsZoneNames.dfs
@@ -150,7 +156,7 @@ module dfsDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.0' = {
   }
 }
 
-module vaultDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.0' = {
+module vaultDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.1' = {
   name: '${uniqueString(deployment().name, location)}-dns-vault'
   params: {
     name: dnsZoneNames.vault
@@ -165,7 +171,7 @@ module vaultDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.0' = {
   }
 }
 
-module dataFactoryDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.0' = {
+module dataFactoryDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.1' = {
   name: '${uniqueString(deployment().name, location)}-dns-adf'
   params: {
     name: dnsZoneNames.dataFactory
@@ -180,7 +186,7 @@ module dataFactoryDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.0' = {
   }
 }
 
-module kustoDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.0' = {
+module kustoDnsZone 'br/public:avm/res/network/private-dns-zone:0.8.1' = {
   name: '${uniqueString(deployment().name, location)}-dns-kusto'
   params: {
     name: dnsZoneNames.kusto

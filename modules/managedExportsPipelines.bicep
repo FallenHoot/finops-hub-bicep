@@ -4,7 +4,7 @@
 // Creates ADF pipelines for automated Cost Management export management.
 // These pipelines read scopes from settings.json and configure exports automatically.
 //
-// ONLY deployed when billingAccountType supports exports (EA/MCA/MPA).
+// ONLY deployed when billingAccountType supports managed exports automation (EA/MPA).
 // PAYGO/CSP tenants should use the test data scripts instead.
 //
 // Reference: https://github.com/microsoft/finops-toolkit/tree/main/src/templates/finops-hub/modules/Microsoft.CostManagement/ManagedExports
@@ -27,7 +27,7 @@ param storageAccountName string
 param integrationRuntimeName string = ''
 
 @description('Optional. FinOps toolkit version.')
-param ftkVersion string = '0.7.0'
+param ftkVersion string = '14.0'
 
 @description('Required. Hub name for export naming.')
 param hubName string
@@ -113,7 +113,7 @@ resource pipeline_ConfigureExports 'Microsoft.DataFactory/factories/pipelines@20
   name: '${CONFIG}_ConfigureExports'
   parent: dataFactory
   properties: {
-    description: 'Reads scopes from settings.json and creates/updates Cost Management exports for each scope. Only works with EA/MCA/MPA billing accounts.'
+    description: 'Reads scopes from settings.json and creates/updates Cost Management exports for each scope. Only works with EA/MPA billing accounts.'
     activities: [
       {
         // Step 1: Read settings.json to get scopes
@@ -163,7 +163,7 @@ resource pipeline_ConfigureExports 'Microsoft.DataFactory/factories/pipelines@20
         userProperties: []
         typeProperties: {
           expression: {
-            value: '@and(not(empty(activity(\'Get Config\').output.firstRow.deployment.billingType)), or(or(equals(activity(\'Get Config\').output.firstRow.deployment.billingType, \'ea\'), equals(activity(\'Get Config\').output.firstRow.deployment.billingType, \'mca\')), equals(activity(\'Get Config\').output.firstRow.deployment.billingType, \'mpa\')))'
+            value: '@and(not(empty(activity(\'Get Config\').output.firstRow.deployment.billingType)), or(equals(activity(\'Get Config\').output.firstRow.deployment.billingType, \'ea\'), equals(activity(\'Get Config\').output.firstRow.deployment.billingType, \'mpa\')))' 
             type: 'Expression'
           }
           ifTrueActivities: [

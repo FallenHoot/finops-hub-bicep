@@ -1,8 +1,20 @@
-# FinOps Hub - Community Bicep Module
+# FinOps Hub - AVM Foundation Module
 
 > **⚠️ DISCLAIMER**: This is a **community-maintained** project and is **NOT officially supported by Microsoft** or the Microsoft FinOps Toolkit team. For the official FinOps Toolkit, see [microsoft/finops-toolkit](https://github.com/microsoft/finops-toolkit).
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+## Scope
+
+This repository is the **AVM deployment foundation** for FinOps Hub. It deploys
+the base Azure scaffolding needed to run a hub: storage, identity, Key Vault,
+Data Factory, optional Azure Data Explorer or Fabric connectivity, networking,
+and deployment helper scripts.
+
+It is not the feature repository for FinOps Toolkit add-ons. Dashboards,
+Power BI reports, recommendation packs, advanced analytics experiences, sample
+data generators, and customer-facing visualization assets stay in the official
+[Microsoft FinOps Toolkit](https://github.com/microsoft/finops-toolkit).
 
 ## Why This Exists
 
@@ -14,7 +26,7 @@ The [Microsoft FinOps Toolkit](https://github.com/microsoft/finops-toolkit) prov
 - **Enterprise regulatory compliance** — private endpoints, managed VNets, RBAC, and diagnostic settings out of the box
 - **Infrastructure-as-Code best practices** — built on [Azure Verified Modules (AVM)](https://aka.ms/avm) for reliability and consistency
 
-This project takes the architecture patterns from the official FinOps Toolkit and wraps them in a modular, enterprise-ready Bicep deployment that lets you bring or customize your regulatory and security requirements.
+This project takes the foundational hub architecture patterns from the official FinOps Toolkit and expresses them as a modular, enterprise-ready AVM deployment that lets you bring or customize your regulatory and security requirements without copying toolkit add-ons into the deployment module.
 
 ## Official References
 
@@ -32,8 +44,12 @@ This project takes the architecture patterns from the official FinOps Toolkit an
 | Type | Description | Use Case |
 |------|-------------|----------|
 | `storage-only` | ADLS Gen2 + Key Vault + Data Factory | Power BI-only scenarios, getting started |
-| `adx` | + Azure Data Explorer cluster | Real-time analytics, KQL queries, dashboards |
+| `adx` | + Azure Data Explorer cluster | KQL-backed hub data platform and toolkit dashboard connectivity |
 | `fabric` | + Microsoft Fabric Eventhouse | Fabric-native analytics |
+
+Managed exports automation is controlled by `enableManagedExports` and is only
+enabled when the configured billing type and scopes support it. In v14 alignment,
+EA and MPA can use managed exports automation; MCA uses manual export setup.
 
 ## Configuration Profiles
 
@@ -159,7 +175,7 @@ finops-hub-bicep/
 
 ## Relationship to Official FinOps Toolkit
 
-This module deploys **Azure infrastructure only**. For analytics, reporting, and visualization:
+This module deploys the **base Azure infrastructure and orchestration scaffolding only**. For analytics, reporting, visualization, and optional feature packs:
 
 | Asset | Source |
 |-------|--------|
@@ -167,6 +183,20 @@ This module deploys **Azure infrastructure only**. For analytics, reporting, and
 | Power BI Reports | [aka.ms/finops/toolkit/powerbi](https://aka.ms/finops/toolkit/powerbi) |
 | Test Data Generators | [FinOps Toolkit](https://github.com/microsoft/finops-toolkit) |
 | KQL Query Library | [FinOps Toolkit](https://github.com/microsoft/finops-toolkit) |
+| Recommendation Packs | [FinOps Toolkit](https://github.com/microsoft/finops-toolkit) |
+
+### Base Kit Boundary
+
+| Concern | Belongs here? | Notes |
+|---------|---------------|-------|
+| AVM module composition | Yes | Keep pinned, current, and validated |
+| Core storage/identity/ADF/ADX/Fabric scaffolding | Yes | Foundation for hub operation |
+| Private endpoint and WAF-aligned deployment options | Yes | Deployment concern |
+| Cost Management export landing and ingestion plumbing | Yes | Base hub data flow |
+| Managed exports automation switch | Yes | Base deployment control; EA/MPA only |
+| Dashboards and visualization pages | No | Use the official toolkit assets |
+| Recommendation and ARG content packs | No | Add-ons remain upstream unless only base plumbing is needed |
+| Sample/demo data generators | No | Use the official toolkit release |
 
 ## Built With
 

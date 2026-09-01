@@ -10,7 +10,7 @@
 
 metadata name = 'FinOps Hub'
 metadata description = 'Community-maintained modular Bicep deployment for FinOps Hub with enterprise customization support.'
-metadata version = '0.12.0'
+metadata version = '0.14.0'
 metadata owner = 'FallenHoot (Community)'
 
 targetScope = 'resourceGroup'
@@ -19,8 +19,8 @@ targetScope = 'resourceGroup'
 // AVM COMMON TYPE IMPORTS
 // ============================================================================
 
-import { lockType } from 'br/public:avm/utl/types/avm-common-types:0.6.1'
-import { diagnosticSettingFullType } from 'br/public:avm/utl/types/avm-common-types:0.6.1'
+import { lockType } from 'br/public:avm/utl/types/avm-common-types:0.7.0'
+import { diagnosticSettingFullType } from 'br/public:avm/utl/types/avm-common-types:0.7.0'
 
 // ============================================================================
 // PARAMETERS
@@ -92,6 +92,9 @@ param billingAccountType string = 'auto'
 @description('Optional. Billing account ID for MACC tracking. Requires ADF MI to have Billing Account Reader role.')
 param billingAccountId string = ''
 
+@description('Optional. Enable managed exports automation where supported. Aligned with upstream FinOps Toolkit v14; EA and MPA are supported, MCA remains manual export setup. Default: true.')
+param enableManagedExports bool = true
+
 // --- Scope Configuration (Hybrid Mode) ---
 // This section enables both Enterprise mode (with exports) and Demo mode (without billing accounts).
 // The module generates settings.json for compatibility with the official FinOps Toolkit.
@@ -137,7 +140,7 @@ param byoVaultDnsZoneResourceId string = ''
 @description('Conditional. Resource ID of the private DNS zone for Data Factory (privatelink.datafactory.azure.net). Required if networkIsolationMode is "BringYourOwn" and enablePrivateDnsZoneGroups is true.')
 param byoDataFactoryDnsZoneResourceId string = ''
 
-@description('Conditional. Resource ID of the private DNS zone for Kusto/ADX (privatelink.<region>.kusto.windows.net). Required if networkIsolationMode is "BringYourOwn", deploymentType is "adx", and enablePrivateDnsZoneGroups is true.')
+@description('Conditional. Resource ID of the private DNS zone for Kusto/ADX (privatelink.<region>.kusto.<cloud-suffix>). Required if networkIsolationMode is "BringYourOwn", deploymentType is "adx", and enablePrivateDnsZoneGroups is true.')
 param byoKustoDnsZoneResourceId string = ''
 
 // --- Private Endpoint Options ---
@@ -206,8 +209,8 @@ var effectiveAdxCapacity = dataExplorerCapacity > 0
 var effectivePurgeProtection = deploymentConfiguration == 'waf-aligned' ? true : enablePurgeProtection
 var effectivePublicAccess = deploymentConfiguration == 'waf-aligned' ? false : enablePublicAccess
 
-// Managed exports: only for billing types that support Cost Management exports
-var enableManagedExports = contains(['ea', 'mca', 'mpa'], billingAccountType) && !empty(scopesToMonitor)
+// Managed exports: upstream v14 supports EA and MPA. MCA remains manual export setup.
+var deployManagedExports = enableManagedExports && contains(['ea', 'mpa'], billingAccountType) && !empty(scopesToMonitor)
 
 // Network isolation: waf-aligned defaults to Managed, legacy params upgrade to BringYourOwn
 var effectiveNetworkIsolationMode = deploymentConfiguration == 'waf-aligned' && networkIsolationMode == 'None'
@@ -239,6 +242,14 @@ var createNewAdx = deploymentType == 'adx' && !empty(dataExplorerClusterName) &&
 var useFabric = deploymentType == 'fabric' && !empty(fabricQueryUri)
 var deployAdxSchema = deploymentType == 'adx' && (createNewAdx || useExistingAdx)
 
+// ADX DNS suffix by cloud environment (fallback keeps compatibility with future clouds)
+var adxDnsSuffixLookup = {
+  AzureCloud: 'kusto.windows.net'
+  AzureUSGovernment: 'kusto.usgovcloudapi.net'
+  AzureChinaCloud: 'kusto.windows.cn'
+}
+var adxDnsSuffix = adxDnsSuffixLookup[?environment().name] ?? replace(environment().suffixes.storage, 'core', 'kusto')
+
 // ADX admin principal assignments
 var adxAdminAssignments = [
   for principalId in adxAdminPrincipalIds: {
@@ -268,8 +279,8 @@ var existingAdxClusterName = useExistingAdx ? last(split(existingDataExplorerClu
 var containers = ['config', 'msexports', 'ingestion']
 
 // Version tracking
-var ftkVersion = '0.7.0'
-var hubModuleVersion = '0.0.12'
+var ftkVersion = '14.0'
+var hubModuleVersion = '0.14.0'
 
 // Merged tags with FinOps Hub identifier
 var allTags = union(tags, {
@@ -357,7 +368,7 @@ resource existingManagedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentiti
   name: existingIdentityName
 }
 
-module managedIdentity 'br/public:avm/res/managed-identity/user-assigned-identity:0.5.0' = if (!useExistingIdentity) {
+module managedIdentity 'br/public:avm/res/managed-identity/user-assigned-identity:0.6.0' = if (!useExistingIdentity) {
   name: '${uniqueString(deployment().name, location)}-managed-identity'
   params: {
     name: managedIdentityName
@@ -382,7 +393,7 @@ var effectiveIdentityResourceId = useExistingIdentity
 var effectiveIdentityName = useExistingIdentity ? existingIdentityName : managedIdentity!.outputs.name
 
 // --- Storage Account (ADLS Gen2) ---
-module storageAccount 'br/public:avm/res/storage/storage-account:0.31.0' = {
+module storageAccount 'br/public:avm/res/storage/storage-account:0.33.0' = {
   name: '${uniqueString(deployment().name, location)}-storage'
   params: {
     name: storageAccountName
@@ -467,7 +478,7 @@ module storageAccount 'br/public:avm/res/storage/storage-account:0.31.0' = {
 }
 
 // --- Key Vault ---
-module keyVault 'br/public:avm/res/key-vault/vault:0.13.3' = {
+module keyVault 'br/public:avm/res/key-vault/vault:0.14.0' = {
   name: '${uniqueString(deployment().name, location)}-keyvault'
   params: {
     name: keyVaultName
@@ -527,7 +538,7 @@ module keyVault 'br/public:avm/res/key-vault/vault:0.13.3' = {
 }
 
 // --- Data Factory ---
-module dataFactory 'br/public:avm/res/data-factory/factory:0.11.0' = {
+module dataFactory 'br/public:avm/res/data-factory/factory:0.12.0' = {
   name: '${uniqueString(deployment().name, location)}-datafactory'
   params: {
     name: dataFactoryName
@@ -647,8 +658,8 @@ module dataFactoryResources 'modules/dataFactoryResources.bicep' = {
     storageAccountName: storageAccount.outputs.name
     keyVaultName: keyVault.outputs.name
     dataExplorerEndpoint: createNewAdx && dataExplorer != null
-      ? 'https://${dataExplorer!.outputs.name}.${location}.kusto.windows.net'
-      : (useExistingAdx ? 'https://${existingAdxClusterName}.${location}.kusto.windows.net' : '')
+      ? 'https://${dataExplorer!.outputs.name}.${location}.${adxDnsSuffix}'
+      : (useExistingAdx ? 'https://${existingAdxClusterName}.${location}.${adxDnsSuffix}' : '')
     dataExplorerPrincipalId: createNewAdx && dataExplorer != null
       ? dataExplorer!.outputs.systemAssignedMIPrincipalId!
       : ''
@@ -659,8 +670,8 @@ module dataFactoryResources 'modules/dataFactoryResources.bicep' = {
   }
 }
 
-// --- Managed Exports Pipelines (EA/MCA/MPA only) ---
-module managedExportsPipelines 'modules/managedExportsPipelines.bicep' = if (enableManagedExports) {
+// --- Managed Exports Pipelines (EA/MPA only) ---
+module managedExportsPipelines 'modules/managedExportsPipelines.bicep' = if (deployManagedExports) {
   name: '${uniqueString(deployment().name, location)}-managed-exports'
   dependsOn: [dataFactoryResources]
   params: {
@@ -673,7 +684,7 @@ module managedExportsPipelines 'modules/managedExportsPipelines.bicep' = if (ena
 }
 
 // --- Azure Data Explorer ---
-module dataExplorer 'br/public:avm/res/kusto/cluster:0.9.1' = if (createNewAdx) {
+module dataExplorer 'br/public:avm/res/kusto/cluster:0.11.0' = if (createNewAdx) {
   name: '${uniqueString(deployment().name, location)}-adx'
   dependsOn: effectiveNetworkIsolationMode == 'Managed' ? [managedNetwork] : []
   params: {
@@ -1021,9 +1032,9 @@ output dataExplorerName string = useExistingAdx
 
 @description('Data Explorer cluster endpoint. For Fabric, returns the Eventhouse query URI.')
 output dataExplorerEndpoint string = useExistingAdx
-  ? 'https://${existingAdxClusterName}.${location}.kusto.windows.net'
+  ? 'https://${existingAdxClusterName}.${location}.${adxDnsSuffix}'
   : (createNewAdx && dataExplorer != null
-      ? 'https://${dataExplorer!.outputs.name}.${location}.kusto.windows.net'
+      ? 'https://${dataExplorer!.outputs.name}.${location}.${adxDnsSuffix}'
       : (useFabric ? fabricQueryUri : ''))
 
 @description('Data Explorer cluster resource ID. Returns existing cluster ID if using existing.')
@@ -1049,16 +1060,16 @@ output dataFactoryPipelines array = dataFactoryResources.outputs.pipelineNames
 output dataFactoryTriggers array = dataFactoryResources.outputs.triggerNames
 
 // Managed Exports outputs (conditional)
-@description('Indicates whether managed export pipelines are deployed. Only true for EA/MCA/MPA with scopes.')
-output managedExportsEnabled bool = enableManagedExports
+@description('Indicates whether managed export pipelines are deployed. Only true for EA/MPA with scopes.')
+output managedExportsEnabled bool = deployManagedExports
 
 @description('List of managed export pipelines. Empty if not using managed exports.')
-#disable-next-line BCP321 // Null safety - module only exists when enableManagedExports is true
-output managedExportsPipelines array = enableManagedExports ? managedExportsPipelines!.outputs.pipelineNames : []
+#disable-next-line BCP321 // Null safety - module only exists when deployManagedExports is true
+output managedExportsPipelines array = deployManagedExports ? managedExportsPipelines!.outputs.pipelineNames : []
 
 @description('List of managed export triggers. Empty if not using managed exports.')
-#disable-next-line BCP321 // Null safety - module only exists when enableManagedExports is true
-output managedExportsTriggers array = enableManagedExports ? managedExportsPipelines!.outputs.triggerNames : []
+#disable-next-line BCP321 // Null safety - module only exists when deployManagedExports is true
+output managedExportsTriggers array = deployManagedExports ? managedExportsPipelines!.outputs.triggerNames : []
 
 @description('Analytics platform configured (adx, fabric, or none).')
 output analyticsPlatform string = dataFactoryResources.outputs.analyticsPlatform
@@ -1148,6 +1159,8 @@ output settingsJson object = {
   deployment: {
     mode: empty(scopesToMonitor) || billingAccountType == 'paygo' ? 'demo' : 'enterprise'
     billingType: billingAccountType
+    managedExportsRequested: enableManagedExports
+    managedExportsEnabled: deployManagedExports
     exportSupported: contains(['ea', 'mca', 'mpa', 'auto'], billingAccountType)
     storageAccount: storageAccount.outputs.name
     resourceGroup: resourceGroup().name
@@ -1157,9 +1170,9 @@ output settingsJson object = {
 
 // Build ADX endpoint for outputs
 var adxEndpointUrl = useExistingAdx
-  ? 'https://${existingAdxClusterName}.${location}.kusto.windows.net'
+  ? 'https://${existingAdxClusterName}.${location}.${adxDnsSuffix}'
   : (createNewAdx && dataExplorer != null
-      ? 'https://${dataExplorer!.outputs.name}.${location}.kusto.windows.net'
+      ? 'https://${dataExplorer!.outputs.name}.${location}.${adxDnsSuffix}'
       : 'N/A')
 
 @description('Getting started guide based on deployment mode.')
@@ -1197,7 +1210,7 @@ output gettingStartedGuide object = {
 
   exportSupportMatrix: {
     ea: 'Full support: FOCUS Costs, Prices, Reservation Details/Recommendations/Transactions'
-    mca: 'Full support: FOCUS Costs, Prices, Reservation Details/Recommendations/Transactions'
+    mca: 'Manual export setup supported. Managed exports pipelines are not deployed by default.'
     subscription: 'Limited: FOCUS Costs only (no pricing or reservation data)'
     resourceGroup: 'Very limited: Resource group costs only'
     paygo: 'Not supported: Use Demo mode with test data scripts'

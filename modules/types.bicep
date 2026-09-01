@@ -6,7 +6,7 @@
 
 // FinOps Toolkit version - update when upgrading
 @export()
-var finOpsToolkitVersion = '0.7.0'
+var finOpsToolkitVersion = '14.0'
 
 // Container names per FinOps toolkit specification
 @export()

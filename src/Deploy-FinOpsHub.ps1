@@ -30,8 +30,17 @@
 .PARAMETER DataExplorerClusterName
     Optional. ADX cluster name (required if DeploymentType is 'adx').
 
+.PARAMETER ExistingDataExplorerClusterId
+    Optional. Resource ID of an existing ADX cluster to use.
+
 .PARAMETER ExistingManagedIdentityResourceId
     Optional. Resource ID of an existing managed identity to use.
+
+.PARAMETER BillingAccountType
+    Optional. Billing account type hint used to decide managed exports support.
+
+.PARAMETER DisableManagedExports
+    Optional. Disable managed exports automation even when the billing type and scopes support it.
 
 .PARAMETER EnablePrivateEndpoints
     Optional. Enable private endpoints (requires subnet and DNS zone IDs).
@@ -86,7 +95,17 @@ param(
     [string]$DataExplorerClusterName = '',
 
     [Parameter(Mandatory = $false)]
+    [string]$ExistingDataExplorerClusterId = '',
+
+    [Parameter(Mandatory = $false)]
     [string]$ExistingManagedIdentityResourceId = '',
+
+    [Parameter(Mandatory = $false)]
+    [ValidateSet('auto', 'ea', 'mca', 'mpa', 'paygo', 'csp')]
+    [string]$BillingAccountType = 'auto',
+
+    [Parameter(Mandatory = $false)]
+    [switch]$DisableManagedExports,
 
     [Parameter(Mandatory = $false)]
     [switch]$EnablePrivateEndpoints,
@@ -109,7 +128,6 @@ $ErrorActionPreference = 'Stop'
 $MinPsVersion = [Version]'7.0.0'
 $MinAzCliVersion = [Version]'2.61.0'
 $MinBicepVersion = [Version]'0.28.0'
-$MinAzModuleVersion = [Version]'12.0.0'
 
 # ============================================================================
 # HELPER FUNCTIONS
@@ -457,6 +475,7 @@ function Get-DeploymentTypeInteractive {
     }
 
     $clusterName = ''
+    $existingClusterId = ''
     $useExisting = $false
 
     if ($deployType -eq 'adx') {
@@ -464,7 +483,12 @@ function Get-DeploymentTypeInteractive {
         $hasExisting = Read-Host '   Do you have an existing ADX cluster to use? [y/N]'
         if ($hasExisting -eq 'y') {
             $useExisting = $true
-            $clusterName = Read-Host '   Enter existing ADX cluster name'
+            $existingClusterId = Read-Host '   Enter existing ADX cluster resource ID'
+            if ([string]::IsNullOrEmpty($existingClusterId)) {
+                Write-Host '   ⚠ No ADX cluster resource ID provided, switching to new cluster deployment' -ForegroundColor Yellow
+                $useExisting = $false
+                $clusterName = Read-Host '   Enter name for new ADX cluster (3-22 chars, lowercase)'
+            }
         } else {
             $clusterName = Read-Host '   Enter name for new ADX cluster (3-22 chars, lowercase)'
             if ([string]::IsNullOrEmpty($clusterName)) {
@@ -539,6 +563,7 @@ function Get-DeploymentTypeInteractive {
     return @{
         Type                    = $deployType
         ClusterName             = $clusterName
+        ExistingClusterId       = $existingClusterId
         UseExisting             = $useExisting
         Configuration           = $configProfile
         ExistingIdentityId      = $existingIdentityId
@@ -580,8 +605,9 @@ if (-not $SkipPrerequisiteCheck) {
 # Interactive deployment type selection (unless already specified via parameter)
 $finalDeploymentType = $DeploymentType
 $finalClusterName = $DataExplorerClusterName
+$finalExistingAdxId = $ExistingDataExplorerClusterId
 $finalConfiguration = $Configuration
-$useExistingResource = $false
+$useExistingResource = -not [string]::IsNullOrEmpty($ExistingDataExplorerClusterId)
 $finalExistingIdentityId = $ExistingManagedIdentityResourceId
 $finalPrivateSubnetId = $PrivateEndpointSubnetId
 $finalEnablePrivateEndpoints = $EnablePrivateEndpoints.IsPresent
@@ -591,6 +617,7 @@ if ($DeploymentType -eq 'storage-only' -and [string]::IsNullOrEmpty($DataExplore
     $deployConfig = Get-DeploymentTypeInteractive -CurrentType $DeploymentType -CurrentClusterName $DataExplorerClusterName -CurrentConfiguration $Configuration
     $finalDeploymentType = $deployConfig.Type
     $finalClusterName = $deployConfig.ClusterName
+    $finalExistingAdxId = $deployConfig.ExistingClusterId
     $useExistingResource = $deployConfig.UseExisting
     $finalConfiguration = $deployConfig.Configuration
     $finalExistingIdentityId = $deployConfig.ExistingIdentityId
@@ -599,8 +626,8 @@ if ($DeploymentType -eq 'storage-only' -and [string]::IsNullOrEmpty($DataExplore
 }
 
 # Validate ADX requirements
-if ($finalDeploymentType -eq 'adx' -and [string]::IsNullOrEmpty($finalClusterName)) {
-    throw 'ADX cluster name is required for ADX deployment type'
+if ($finalDeploymentType -eq 'adx' -and [string]::IsNullOrEmpty($finalClusterName) -and [string]::IsNullOrEmpty($finalExistingAdxId)) {
+    throw 'For ADX deployment, either DataExplorerClusterName (new cluster) or ExistingDataExplorerClusterId must be provided.'
 }
 
 # Display configuration
@@ -613,7 +640,8 @@ Write-Host "   Configuration:  $finalConfiguration"
 Write-Host "   Subscription:   $($account.name)"
 if ($finalDeploymentType -eq 'adx') {
     $adxStatus = if ($useExistingResource) { '(existing)' } else { '(new)' }
-    Write-Host "   ADX Cluster:    $finalClusterName $adxStatus"
+    $adxDisplay = if ($useExistingResource) { $finalExistingAdxId } else { $finalClusterName }
+    Write-Host "   ADX Cluster:    $adxDisplay $adxStatus"
 }
 if ($finalDeploymentType -eq 'fabric') {
     $fabricStatus = if ($useExistingResource) { '(will connect existing)' } else { '(new reference)' }
@@ -662,12 +690,15 @@ $params = @(
     "location=$Location"
     "deploymentType=$finalDeploymentType"
     "deploymentConfiguration=$finalConfiguration"
+    "billingAccountType=$BillingAccountType"
+    "enableManagedExports=$(-not $DisableManagedExports.IsPresent)"
 )
 
-if ($finalDeploymentType -eq 'adx' -and -not [string]::IsNullOrEmpty($finalClusterName)) {
-    $params += "dataExplorerClusterName=$finalClusterName"
-    if ($useExistingResource) {
-        $params += 'useExistingDataExplorer=true'
+if ($finalDeploymentType -eq 'adx') {
+    if (-not [string]::IsNullOrEmpty($finalExistingAdxId)) {
+        $params += "existingDataExplorerClusterId=$finalExistingAdxId"
+    } elseif (-not [string]::IsNullOrEmpty($finalClusterName)) {
+        $params += "dataExplorerClusterName=$finalClusterName"
     }
 }
 
@@ -678,7 +709,8 @@ if (-not [string]::IsNullOrEmpty($finalExistingIdentityId)) {
 
 # Add private endpoint configuration if enabled
 if ($finalEnablePrivateEndpoints -and -not [string]::IsNullOrEmpty($finalPrivateSubnetId)) {
-    $params += "privateEndpointSubnetId=$finalPrivateSubnetId"
+    $params += 'networkIsolationMode=BringYourOwn'
+    $params += "byoSubnetResourceId=$finalPrivateSubnetId"
 }
 
 # Get deployer's principal ID for storage access (enables test data upload)

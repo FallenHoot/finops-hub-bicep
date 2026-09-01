@@ -254,6 +254,45 @@ import { lockType, diagnosticSettingFullType } from 'br/public:avm/utl/types/avm
 
 ---
 
+## ADR-016: Upstream v14 Deployment Contract Alignment
+
+**Date**: August 2026  
+**Status**: Accepted  
+**Context**: This repository is an AVM-first fork and must remain deployable while tracking upstream FinOps toolkit behavior. During drift review against upstream `dev` (v14 cycle), two deployment contract mismatches were identified in the local helper script: legacy parameters (`useExistingDataExplorer`, `privateEndpointSubnetId`) no longer match `main.bicep`. Managed export automation rules also diverged from upstream support guidance.
+
+**Decision**:
+
+1. Align deployment script parameter passing to `main.bicep`:
+  - Use `existingDataExplorerClusterId` for existing ADX deployments.
+  - Use `networkIsolationMode=BringYourOwn` with `byoSubnetResourceId` for BYO private endpoint subnet flows.
+2. Align managed exports automation to upstream v14 operational guidance:
+  - Deploy managed exports pipelines only for EA and MPA billing-account types.
+  - Keep MCA as supported for manual exports and ingestion, but do not auto-deploy managed export pipelines.
+3. Update local FinOps toolkit version constants and tags to `14.0` for traceability.
+
+**Options Considered**:
+
+1. Preserve local behavior and keep legacy script parameters.
+  - Pros: no user-facing change.
+  - Cons: deployment helper can send invalid parameters and fail runtime deployment.
+2. Full upstream app-model port (`Core`, `Analytics`, `IngestionQueries`, `Recommendations`) into this fork.
+  - Pros: maximal parity.
+  - Cons: large structural rewrite, high merge risk, delays remediation of immediate deployment failures.
+3. Targeted contract alignment and safe incremental parity updates.
+  - Pros: unblocks deployments now, additive and reversible, low-risk AVM-preserving change.
+  - Cons: does not yet fully port optional upstream app decomposition.
+
+**Consequences**:
+
+- Deployment helper is compatible with current Bicep parameter contracts.
+- Existing ADX and BYO private endpoint scenarios are less error-prone during scripted deployments.
+- Managed exports behavior now matches upstream support expectations for v14.
+- Further upstream feature parity work (for example ARG recommendations pipeline stack) can proceed as a separate additive ADR.
+
+**Attribution**: Adapted from the official Microsoft FinOps toolkit deployment behavior and release guidance (MIT licensed): <https://github.com/microsoft/finops-toolkit>.
+
+---
+
 ## ADR-007: ADX Dashboard vs Power BI Strategy
 
 **Date**: February 2026
@@ -266,7 +305,7 @@ import { lockType, diagnosticSettingFullType } from 'br/public:avm/utl/types/avm
 
 | Visualization | Included In | Maintained By |
 |--------------|-------------|---------------|
-| ADX Dashboard v13.0 | FinOps Toolkit | FinOps Toolkit |
+| ADX Dashboard v14.0 | FinOps Toolkit | FinOps Toolkit |
 | Power BI Reports v17 | FinOps Toolkit | FinOps Toolkit |
 
 **Rationale** (updated):
