@@ -1790,7 +1790,7 @@
         "width": 22,
         "height": 4
       },
-      "markdownText": "**7 FinOps questions answered on this page:**\n\n[How much did we spend this month?](?tile=66dcd731-a141-47b2-b36a-53a138cb75f2) &nbsp;&middot;&nbsp; [Is spending going up or down?](?tile=49534f2e-97ea-4b41-87c2-5e0f4bc26db8) &nbsp;&middot;&nbsp; [How much are we saving?](?tile=d9959281-dc89-44fc-a2b3-b4f5227e0179) &nbsp;&middot;&nbsp; [Cost vs list price?](?tile=ea97e18e-5253-4a9d-9eed-0f2fc45b3c5b) &nbsp;&middot;&nbsp; [Are we pacing faster than last month?](?tile=dad96fbb-750c-47a3-bd2e-e2bee74ebd22) &nbsp;&middot;&nbsp; [How much are we spending on AI?](?tile=49bf46b3-b834-4534-b880-3be601a8f6a5) &nbsp;&middot;&nbsp; [How big is our cloud footprint?](?tile=2a1ee947-f1e3-447e-9388-91e318068608)\n\n> Currency All monetary values are shown in the **billing currency** reported by each billing account.",
+      "markdownText": "**7 FinOps questions answered on this page:**\n\n[How much did we spend this month?](?tile=66dcd731-a141-47b2-b36a-53a138cb75f2) &nbsp;&middot;&nbsp; [Is spending going up or down?](?tile=49534f2e-97ea-4b41-87c2-5e0f4bc26db8) &nbsp;&middot;&nbsp; [How much are we saving?](?tile=d9959281-dc89-44fc-a2b3-b4f5227e0179) &nbsp;&middot;&nbsp; [Cost vs list price?](?tile=ea97e18e-5253-4a9d-9eed-0f2fc45b3c5b) &nbsp;&middot;&nbsp; [Are we pacing faster than last month?](?tile=dad96fbb-750c-47a3-bd2e-e2bee74ebd22) &nbsp;&middot;&nbsp; [How much are we spending on AI?](?tile=aa12bb34-cc56-47dd-88ee-9012ff34aa56) &nbsp;&middot;&nbsp; [How big is our cloud footprint?](?tile=2a1ee947-f1e3-447e-9388-91e318068608)\n\n> Currency All monetary values are shown in the **billing currency** reported by each billing account.",
       "visualOptions": {}
     },
     {
@@ -1868,7 +1868,7 @@
         "width": 22,
         "height": 3
       },
-      "markdownText": "**13 Rate Optimization questions answered on this page:**\n\n[How much are we saving overall?](?tile=9513d9d7-be4a-468c-aed0-f0076c9bf3c4) &nbsp;&middot;&nbsp; [What are reservations & savings plans saving me?](?tile=e8018da4-7269-4e91-9f32-4bcf390746af) &nbsp;&middot;&nbsp; [What is my Effective Savings Rate?](?tile=961b8980-213f-4bc7-9512-8a08614229e0) &nbsp;&middot;&nbsp; [Am I actually using my commitments?](?tile=36c1dede-49c9-4ae3-a19a-a230f87e9197) &nbsp;&middot;&nbsp; [Who gets the commitment benefit (chargeback)?](?tile=e22f49e5-766c-4b35-8b4c-b99bef142d42) &nbsp;&middot;&nbsp; [What did we purchase?](?tile=84da605b-6a0d-4a2a-aac3-a4160f9de10d) &nbsp;&middot;&nbsp; [Which SKUs are we using most?](?tile=a3d814b8-ff20-4919-ae2a-f1caec997edf) &nbsp;&middot;&nbsp; [Which SKUs have negotiated discounts?](?tile=72aa5a62-e129-4ffa-be62-82c833282d27) &nbsp;&middot;&nbsp; [Which SKUs have commitment discounts?](?tile=3d7688f7-0a1c-4564-b851-f380a22817bf) &nbsp;&middot;&nbsp; [Am I maximizing Azure Hybrid Benefit?](?tile=d2e4a321-9c2c-411b-8a20-19fd86dab3fe) &nbsp;&middot;&nbsp; [What SaaS am I spending on?](?tile=3c4196e1-4ee6-4269-9232-819f9c874952) &nbsp;&middot;&nbsp; [Am I using Spot VMs to save money?](?tile=78ddd908-bed3-480e-b736-263e5719ded1) &nbsp;&middot;&nbsp; [Can I save on Premium SSD v1 vs v2?](?tile=c8f2a3b4-5d6e-7f8a-9b0c-1d2e3f4a5b6c)",
+      "markdownText": "**14 Rate Optimization questions answered on this page:**\n\n[How much are we saving overall?](?tile=9513d9d7-be4a-468c-aed0-f0076c9bf3c4) &nbsp;&middot;&nbsp; [What are reservations & savings plans saving me?](?tile=e8018da4-7269-4e91-9f32-4bcf390746af) &nbsp;&middot;&nbsp; [What is my Effective Savings Rate?](?tile=961b8980-213f-4bc7-9512-8a08614229e0) &nbsp;&middot;&nbsp; [Am I actually using my commitments?](?tile=36c1dede-49c9-4ae3-a19a-a230f87e9197) &nbsp;&middot;&nbsp; [Who gets the commitment benefit (chargeback)?](?tile=e22f49e5-766c-4b35-8b4c-b99bef142d42) &nbsp;&middot;&nbsp; [What did we purchase?](?tile=84da605b-6a0d-4a2a-aac3-a4160f9de10d) &nbsp;&middot;&nbsp; [Which SKUs are we using most?](?tile=a3d814b8-ff20-4919-ae2a-f1caec997edf) &nbsp;&middot;&nbsp; [Which SKUs have negotiated discounts?](?tile=72aa5a62-e129-4ffa-be62-82c833282d27) &nbsp;&middot;&nbsp; [Which SKUs have commitment discounts?](?tile=3d7688f7-0a1c-4564-b851-f380a22817bf) &nbsp;&middot;&nbsp; [Where is ODCR capacity unused?](?tile=1b5e6f70-2a3b-4c5d-8e9f-0123456789ab) &nbsp;&middot;&nbsp; [Am I maximizing Azure Hybrid Benefit?](?tile=d2e4a321-9c2c-411b-8a20-19fd86dab3fe) &nbsp;&middot;&nbsp; [What SaaS am I spending on?](?tile=3c4196e1-4ee6-4269-9232-819f9c874952) &nbsp;&middot;&nbsp; [Am I using Spot VMs to save money?](?tile=78ddd908-bed3-480e-b736-263e5719ded1) &nbsp;&middot;&nbsp; [Can I save on Premium SSD v1 vs v2?](?tile=c8f2a3b4-5d6e-7f8a-9b0c-1d2e3f4a5b6c)",
       "visualOptions": {}
     },
     {
@@ -2065,6 +2065,159 @@
         "queryId": "e0b4c5d6-7f8a-9b0c-1d2e-3f4a5b6c7d8e"
       },
       "description": "Detail breakdown of disk costs by SKU description and tier. Shows each disk SKU, its tier classification (Premium SSD v1/v2), resource count, total cost, and cost per disk.",
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
+    },
+    {
+      "id": "7a4f04c1-38e2-4f3d-9a1b-0c2d3e4f5a60",
+      "title": "",
+      "visualType": "markdownCard",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "layout": {
+        "x": 0,
+        "y": 149,
+        "width": 22,
+        "height": 4
+      },
+      "markdownText": "# ODCR financial optimization (Preview)\nThis dashboard is the historical financial layer for ODCR. It shows used and unused EffectiveCost, unused cost share, daily trend, persistence, and the CRGs and reservations driving billed waste. Running VM charges follow the consuming subscription; unused ODCR capacity remains billed to the provider subscription. When a workload releases reserved capacity, that capacity becomes available for another eligible workload associated with the shared CRG.\n\nUse the ODCR operations workbook for what is reserved, provider subscription, resource group, region, zone, ownership tags, authorized consumer subscriptions, compute references, and current allocation. Azure Resource Graph is the inventory and relationship source; ARM Capacity Reservation Group Instance View is the source for current allocated units, available SLA-backed capacity, and overallocation. Do not interpret billing cost share as operational utilization. Shared CRGs are Preview, and SKU, region, zone, placement, and constrained-capacity viability must be validated before changing reservations. This repository is community-maintained and is not officially supported by Microsoft.",
+      "visualOptions": {}
+    },
+    {
+      "id": "1b5e6f70-2a3b-4c5d-8e9f-0123456789ab",
+      "title": "ODCR financial summary (last n days)",
+      "visualType": "multistat",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "layout": {
+        "x": 0,
+        "y": 153,
+        "width": 8,
+        "height": 6
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "5f92a3b4-6e7f-4a80-8c2d-456789abcdef"
+      },
+      "description": "Billing-backed ODCR used and unused EffectiveCost, unused cost share, and distinct billed reservation resources. This is financial evidence, not current CRG allocation.",
+      "visualOptions": {
+        "multiStat__textSize": "large",
+        "multiStat__valueColumn": "Value",
+        "colorRulesDisabled": false,
+        "multiStat__displayOrientation": "horizontal",
+        "multiStat__labelColumn": "Label",
+        "multiStat__slot": {
+          "width": 4,
+          "height": 1
+        },
+        "colorRules": []
+      }
+    },
+    {
+      "id": "2c6f7081-3b4c-4d5e-9f0a-123456789abc",
+      "title": "ODCR cost trend (last n days)",
+      "visualType": "stackedcolumn",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "layout": {
+        "x": 8,
+        "y": 153,
+        "width": 14,
+        "height": 6
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "60a3b4c5-7f80-4b91-9d3e-56789abcdef0"
+      },
+      "description": "Daily billing-backed ODCR cost split into used and unused charges. Use the persistence table to distinguish isolated, recurring, and persistent waste.",
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "Effective cost",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "right",
+        "xColumnTitle": "",
+        "xColumn": "Day",
+        "yColumns": [
+          "Cost"
+        ],
+        "seriesColumns": [
+          "Status"
+        ],
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "selectedDataOnLoad": {
+          "all": true,
+          "limit": 10
+        },
+        "dataPointsTooltip": {
+          "all": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "id": "3d708192-4c5d-4e6f-8a0b-23456789abcd",
+      "title": "ODCR cost and persistence by CRG (last n days)",
+      "visualType": "table",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "layout": {
+        "x": 0,
+        "y": 159,
+        "width": 22,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "71b4c5d6-8a91-4ca2-8e4f-6789abcdef01"
+      },
+      "description": "Capacity reservation groups ranked by unused EffectiveCost, with unused billing-day share and a workbook-policy persistence classification. Use ARM Instance View in the workbook before changing capacity.",
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
+    },
+    {
+      "id": "4e8192a3-5d6e-4f70-9b1c-3456789abcde",
+      "title": "ODCR resource detail (last n days)",
+      "visualType": "table",
+      "pageId": "306fef9a-c760-4559-a326-7c25d196b616",
+      "layout": {
+        "x": 0,
+        "y": 167,
+        "width": 22,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "82c5d6e7-9ba2-4db3-9f50-789abcdef012"
+      },
+      "description": "Billing-resource detail for used and unused ODCR charges, tied to CRG, reservation, SKU, region, subscription, and resource group. This does not show current allocation.",
       "visualOptions": {
         "table__enableRenderLinks": true,
         "colorRulesDisabled": false,
@@ -4598,7 +4751,7 @@
         "width": 22,
         "height": 10
       },
-      "markdownText": "**7 MACC Tracking questions answered on this page:**\n\n[What is our current MACC commitment status?](?tile=c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f) &nbsp;&middot;&nbsp; [How is monthly consumption trending?](?tile=e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b) &nbsp;&middot;&nbsp; [Will we fulfill our MACC commitment on time?](?tile=a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d) &nbsp;&middot;&nbsp; [Are we pacing ahead or behind the linear target?](?tile=mc01e2f3-a4b5-4c6d-7e8f-9a0b1c2d3e4f) &nbsp;&middot;&nbsp; [Which subscriptions are contributing to MACC decrement?](?tile=mc02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a) &nbsp;&middot;&nbsp; [How confident are we in MACC burn classification?](?tile=mc03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b) &nbsp;&middot;&nbsp; [How does our calculated burn compare to the API balance?](?tile=mc04b5c6-d7e8-4f9a-0b1c-2d3e4f5a6b7c)\n\n---\n# MACC (Microsoft Azure Consumption Commitment) Tracking\n\nTrack your MACC commitment progress, consumption trends, and forecast completion.\n\n## Manual Entry Instructions\n\nIf you don't have API access to MACC data, you can manually enter your commitment details from your MACC contract document.\n\n### What You Need From Your Contract:\n| Item | Where to Find |\n|------|---------------|\n| **Commitment Amount** | Look for \"Azure Consumption Commitment\" or \"Minimum Consumption Commitment\" |\n| **Start Date** | When your MACC term begins |\n| **End Date** | When your MACC expires (typically 1-3 years) |\n| **Monthly Consumption** | Azure Portal -> Cost Management + Billing -> Invoices |\n\n### How to Enter Data:\n1. Open **ManualEntry_MACC.kql** in the scripts folder\n2. Update the values in Step 1 with your MACC details\n3. Run the script in Azure Data Explorer\n4. Use the queries below to track your progress\n\n[Learn about MACC](https://learn.microsoft.com/azure/cost-management-billing/manage/track-consumption-commitment) &nbsp; &nbsp; [Give feedback](https://aka.ms/finops/hubs/feedback)",
+      "markdownText": "**7 MACC Tracking questions answered on this page:**\n\n[What is our current MACC commitment status?](?tile=c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f) &nbsp;&middot;&nbsp; [How is monthly consumption trending?](?tile=e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b) &nbsp;&middot;&nbsp; [Will we fulfill our MACC commitment on time?](?tile=a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d) &nbsp;&middot;&nbsp; [Are we pacing ahead or behind the linear target?](?tile=0c01e2f3-a4b5-4c6d-8e8f-9a0b1c2d3e4f) &nbsp;&middot;&nbsp; [Which subscriptions are contributing to MACC decrement?](?tile=0c02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a) &nbsp;&middot;&nbsp; [How confident are we in MACC burn classification?](?tile=0c03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b) &nbsp;&middot;&nbsp; [How does our calculated burn compare to the API balance?](?tile=0c04b5c6-d7e8-4f9a-8b1c-2d3e4f5a6b7c)\n\n---\n# MACC (Microsoft Azure Consumption Commitment) Tracking\n\nTrack your MACC commitment progress, consumption trends, and forecast completion.\n\n## Manual Entry Instructions\n\nIf you don't have API access to MACC data, you can manually enter your commitment details from your MACC contract document.\n\n### What You Need From Your Contract:\n| Item | Where to Find |\n|------|---------------|\n| **Commitment Amount** | Look for \"Azure Consumption Commitment\" or \"Minimum Consumption Commitment\" |\n| **Start Date** | When your MACC term begins |\n| **End Date** | When your MACC expires (typically 1-3 years) |\n| **Monthly Consumption** | Azure Portal -> Cost Management + Billing -> Invoices |\n\n### How to Enter Data:\n1. Open **ManualEntry_MACC.kql** in the scripts folder\n2. Update the values in Step 1 with your MACC details\n3. Run the script in Azure Data Explorer\n4. Use the queries below to track your progress\n\n[Learn about MACC](https://learn.microsoft.com/azure/cost-management-billing/manage/track-consumption-commitment) &nbsp; &nbsp; [Give feedback](https://aka.ms/finops/hubs/feedback)",
       "visualOptions": {}
     },
     {
@@ -4710,7 +4863,7 @@
       }
     },
     {
-      "id": "mc01e2f3-a4b5-4c6d-7e8f-9a0b1c2d3e4f",
+      "id": "0c01e2f3-a4b5-4c6d-8e8f-9a0b1c2d3e4f",
       "title": "MACC Pacing vs Linear Target (Preview)",
       "visualType": "line",
       "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
@@ -4722,7 +4875,7 @@
       },
       "queryRef": {
         "kind": "query",
-        "queryId": "mc01e2f3-a4b5-4c6d-7e8f-9a0b1c2d3e4f"
+        "queryId": "0c01e2f3-a4b5-4c6d-8e8f-9a0b1c2d3e4f"
       },
       "description": "Are you pacing ahead or behind the straight-line commitment target? The linear target line shows where you should be if you consumed evenly across the term. If your actual cumulative spend is below the target line, you need to accelerate.",
       "visualOptions": {
@@ -4754,7 +4907,7 @@
       }
     },
     {
-      "id": "mc02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a",
+      "id": "0c02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a",
       "title": "MACC Decrement by Subscription (Preview)",
       "visualType": "table",
       "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
@@ -4766,7 +4919,7 @@
       },
       "queryRef": {
         "kind": "query",
-        "queryId": "mc02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a"
+        "queryId": "0c02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a"
       },
       "description": "Which subscriptions are contributing the most to your MACC decrement? Use this to identify which teams or workloads are driving consumption and where you can accelerate if behind.",
       "visualOptions": {
@@ -4781,7 +4934,7 @@
       }
     },
     {
-      "id": "mc03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b",
+      "id": "0c03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b",
       "title": "MACC Burn by Confidence Layer (Preview)",
       "visualType": "table",
       "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
@@ -4793,7 +4946,7 @@
       },
       "queryRef": {
         "kind": "query",
-        "queryId": "mc03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b"
+        "queryId": "0c03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b"
       },
       "description": "How confident are we in each portion of MACC burn? Layer 1 (Native Azure) is 95%+ reliable. Layer 3 (Marketplace) needs manual verification. Layer 4 requires Finance review. When FOCUS 1.3 ContractApplied is available, this becomes provider-confirmed ground truth.",
       "visualOptions": {
@@ -4808,7 +4961,7 @@
       }
     },
     {
-      "id": "mc04b5c6-d7e8-4f9a-0b1c-2d3e4f5a6b7c",
+      "id": "0c04b5c6-d7e8-4f9a-8b1c-2d3e4f5a6b7c",
       "title": "Presumed vs Actual Reconciliation (Preview)",
       "visualType": "multistat",
       "pageId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
@@ -4820,7 +4973,7 @@
       },
       "queryRef": {
         "kind": "query",
-        "queryId": "mc04b5c6-d7e8-4f9a-0b1c-2d3e4f5a6b7c"
+        "queryId": "0c04b5c6-d7e8-4f9a-8b1c-2d3e4f5a6b7c"
       },
       "description": "How does our FOCUS-calculated presumed burn compare to the Billing API reported balance? Gap under 5% is normal billing timing. Gap over 10% means escalate to Finance. Requires MACC Lots API with ClosedBalance.",
       "visualOptions": {
@@ -7573,6 +7726,180 @@
         "table__renderLinks": [],
         "colorRules": []
       }
+    },
+    {
+      "id": "aa11bb22-cc33-44dd-88ee-ff0011223344",
+      "title": "About AI billing",
+      "visualType": "markdownCard",
+      "pageId": "9a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 22,
+        "height": 4
+      },
+      "markdownText": "# AI Billing\nTrack AI-specific cloud spending across Azure AI Services, Azure Machine Learning, and Azure AI Search.\n\nSetup guide: docs/library/dashboard/AI-PROVIDER-FOCUS-SETUP.md\n\n**4 questions answered on this page:**\n\n[How much are we spending on AI?](?tile=aa12bb34-cc56-47dd-88ee-9012ff34aa56) &nbsp;&middot;&nbsp; [How is AI cost trending daily?](?tile=aa23cc45-dd67-48ee-99ff-0123aa45bb67) &nbsp;&middot;&nbsp; [Which AI services cost the most?](?tile=aa34dd56-ee78-49ff-a001-1234bb56cc78) &nbsp;&middot;&nbsp; [Which AI resources are top spenders?](?tile=aa45ee67-ff89-4a00-b112-2345cc67dd89)",
+      "visualOptions": {}
+    },
+    {
+      "id": "aa12bb34-cc56-47dd-88ee-9012ff34aa56",
+      "title": "AI cost KPIs",
+      "visualType": "multistat",
+      "pageId": "9a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+      "layout": {
+        "x": 0,
+        "y": 4,
+        "width": 22,
+        "height": 5
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "1fa4b3c2-d5e6-47f8-a901-b234c567d890"
+      },
+      "description": "High-level AI spend metrics for this month, including share of total cloud cost and distinct AI resource count.",
+      "visualOptions": {
+        "multiStat__textSize": "large",
+        "multiStat__valueColumn": null,
+        "colorRulesDisabled": true,
+        "multiStat__displayOrientation": "horizontal",
+        "multiStat__labelColumn": null,
+        "multiStat__slot": {
+          "width": 4,
+          "height": 1
+        },
+        "colorRules": []
+      }
+    },
+    {
+      "id": "aa23cc45-dd67-48ee-99ff-0123aa45bb67",
+      "title": "AI cost per day (last n days)",
+      "visualType": "area",
+      "pageId": "9a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+      "layout": {
+        "x": 0,
+        "y": 9,
+        "width": 11,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "2fb5c4d3-e6f7-48a9-b012-c345d678e901"
+      },
+      "description": "Daily effective-cost trend for AI workloads using the current dashboard filters.",
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "AI effective cost",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": true,
+        "legendLocation": "right",
+        "xColumnTitle": "",
+        "xColumn": null,
+        "yColumns": null,
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "selectedDataOnLoad": {
+          "all": true,
+          "limit": 10
+        },
+        "dataPointsTooltip": {
+          "all": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "id": "aa34dd56-ee78-49ff-a001-1234bb56cc78",
+      "title": "AI cost by service",
+      "visualType": "bar",
+      "pageId": "9a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+      "layout": {
+        "x": 11,
+        "y": 9,
+        "width": 11,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "3ac6d5e4-f708-49ba-c123-d456e789f012"
+      },
+      "description": "Breakdown of AI spend by service with share of total AI cost and active resource counts.",
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": true,
+        "legendLocation": "right",
+        "xColumnTitle": "",
+        "xColumn": null,
+        "yColumns": null,
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "selectedDataOnLoad": {
+          "all": true,
+          "limit": 10
+        },
+        "dataPointsTooltip": {
+          "all": false,
+          "limit": 1
+        }
+      }
+    },
+    {
+      "id": "aa45ee67-ff89-4a00-b112-2345cc67dd89",
+      "title": "Top AI resources",
+      "visualType": "table",
+      "pageId": "9a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d",
+      "layout": {
+        "x": 0,
+        "y": 17,
+        "width": 22,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "4bd7e6f5-0819-4acb-d234-e567f890a123"
+      },
+      "description": "Top AI resources by spend in the selected daily lookback window.",
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": false,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
     }
   ],
   "baseQueries": [
@@ -7879,6 +8206,10 @@
     {
       "name": "Forecast Enrichment (Preview)",
       "id": "979769b6-1072-422e-a7d3-3ae24ee70970"
+    },
+    {
+      "name": "AI Billing (Preview)",
+      "id": "9a3b4c5d-6e7f-4a8b-9c0d-1e2f3a4b5c6d"
     }
   ],
   "queries": [
@@ -8964,7 +9295,7 @@
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
       "text": "// MACC Pacing vs Linear Target - Actual cumulative vs straight-line commitment target\r\nlet MACCData = union isfuzzy=true\r\n    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),\r\n    (print Description='No MACC data configured', Currency='', StartDate=datetime(null), ExpirationDate=datetime(null), CommitmentAmount=0.0, DataSource='Fallback', SourcePriority=0)\r\n| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null)), startofmonth(now())))\r\n| extend ExpirationDate = todatetime(coalesce(column_ifexists('ExpirationDate', datetime(null)), endofmonth(now())))\r\n| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))\r\n| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)\r\n| top 1 by SourcePriority desc, IsActive desc, StartDate desc;\r\nlet StartDate = toscalar(MACCData | project StartDate);\r\nlet EndDate = toscalar(MACCData | project ExpirationDate);\r\nlet Commitment = toscalar(MACCData | project CommitmentAmount);\r\nlet TotalMonths = max_of(datetime_diff('month', EndDate, StartDate), 1);\r\nlet MonthlyTarget = Commitment / todouble(TotalMonths);\r\nCosts\r\n| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n| summarize MonthlyConsumption = sum(EffectiveCost) by Month = startofmonth(ChargePeriodStart)\r\n| order by Month asc\r\n| extend ActualCumulative = row_cumsum(MonthlyConsumption)\r\n| extend MonthIndex = row_number()\r\n| extend LinearTarget = MonthlyTarget * todouble(MonthIndex)\r\n| project Month, ActualCumulative = round(ActualCumulative, 0), LinearTarget = round(LinearTarget, 0)",
-      "id": "mc01e2f3-a4b5-4c6d-7e8f-9a0b1c2d3e4f",
+      "id": "0c01e2f3-a4b5-4c6d-8e8f-9a0b1c2d3e4f",
       "usedVariables": [
         "currencyFilter"
       ]
@@ -8975,7 +9306,7 @@
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
       "text": "// MACC Decrement by Subscription - Top subscriptions contributing to MACC consumption\r\nlet MACCData = union isfuzzy=true\r\n    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),\r\n    (print Description='No MACC data configured', Currency='', StartDate=datetime(null), ExpirationDate=datetime(null), CommitmentAmount=0.0, DataSource='Fallback', SourcePriority=0)\r\n| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null)), startofmonth(now())))\r\n| extend ExpirationDate = todatetime(coalesce(column_ifexists('ExpirationDate', datetime(null)), endofmonth(now())))\r\n| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))\r\n| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)\r\n| top 1 by SourcePriority desc, IsActive desc, StartDate desc;\r\nlet StartDate = toscalar(MACCData | project StartDate);\r\nlet EndDate = toscalar(MACCData | project ExpirationDate);\r\nlet Commitment = toscalar(MACCData | project CommitmentAmount);\r\nlet TotalConsumed = toscalar(\r\n    Costs\r\n    | where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n    | extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n    | where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n    | summarize sum(EffectiveCost)\r\n);\r\nlet TotalConsumed2 = iff(isnull(TotalConsumed), 0.0, TotalConsumed);\r\nCosts\r\n| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n| extend SubscriptionName = coalesce(column_ifexists('SubAccountName', ''), 'Unknown')\r\n| summarize EffectiveCost = sum(EffectiveCost) by SubscriptionName\r\n| extend PercentOfTotal = round(100.0 * EffectiveCost / TotalConsumed2, 1)\r\n| extend PercentOfCommitment = round(100.0 * EffectiveCost / Commitment, 1)\r\n| order by EffectiveCost desc\r\n| take 20\r\n| project SubscriptionName, EffectiveCost = round(EffectiveCost, 0), PercentOfTotal = strcat(PercentOfTotal, '%'), PercentOfCommitment = strcat(PercentOfCommitment, '%')",
-      "id": "mc02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a",
+      "id": "0c02f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a",
       "usedVariables": [
         "currencyFilter"
       ]
@@ -8986,7 +9317,7 @@
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
       "text": "// MACC Burn by Confidence Layer - Classifies costs by MACC eligibility confidence\r\nlet MACCData = union isfuzzy=true\r\n    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),\r\n    (print Description='No MACC data configured', Currency='', StartDate=datetime(null), ExpirationDate=datetime(null), CommitmentAmount=0.0, DataSource='Fallback', SourcePriority=0)\r\n| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null)), startofmonth(now())))\r\n| extend ExpirationDate = todatetime(coalesce(column_ifexists('ExpirationDate', datetime(null)), endofmonth(now())))\r\n| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))\r\n| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)\r\n| top 1 by SourcePriority desc, IsActive desc, StartDate desc;\r\nlet StartDate = toscalar(MACCData | project StartDate);\r\nlet EndDate = toscalar(MACCData | project ExpirationDate);\r\nCosts\r\n| where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n| extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n| where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n| extend ConfidenceLayer = case(\r\n    ProviderName == 'Microsoft' and ChargeCategory == 'Usage'\r\n        and not(tolower(ServiceName) has_any ('microsoft 365', 'dynamics 365', 'power bi', 'power apps', 'power automate', 'github')),\r\n    'Layer 1: Native Azure (95%+)',\r\n    ChargeCategory == 'Purchase' and isnotempty(column_ifexists('CommitmentDiscountId', '')),\r\n    'Layer 2: Commitments (90%+)',\r\n    ProviderName != 'Microsoft' and InvoiceIssuerName == 'Microsoft'\r\n        and EffectiveCost > 0,\r\n    'Layer 3: Marketplace (70-75%)',\r\n    'Layer 4: Unclassified (review)')\r\n| summarize\r\n    EffectiveCost = round(sum(EffectiveCost), 0),\r\n    BilledCost = round(sum(BilledCost), 0),\r\n    LineItems = count()\r\n    by ConfidenceLayer\r\n| order by ConfidenceLayer asc\r\n| project ConfidenceLayer, EffectiveCost, BilledCost, LineItems",
-      "id": "mc03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b",
+      "id": "0c03a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b",
       "usedVariables": [
         "currencyFilter"
       ]
@@ -8997,7 +9328,7 @@
         "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
       },
       "text": "// Presumed vs Actual MACC Reconciliation\r\nlet MACCData = union isfuzzy=true\r\n    (MACC_Lots | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_Lots_raw | extend DataSource = 'API', SourcePriority = 2),\r\n    (MACC_ManualEntry | extend DataSource = 'Manual', SourcePriority = 1),\r\n    (print Description='No MACC data configured', Currency='', StartDate=datetime(null), ExpirationDate=datetime(null), CommitmentAmount=0.0, DataSource='Fallback', SourcePriority=0)\r\n| extend StartDate = todatetime(coalesce(column_ifexists('StartDate', datetime(null)), column_ifexists('PurchasedDate', datetime(null)), startofmonth(now())))\r\n| extend ExpirationDate = todatetime(coalesce(column_ifexists('ExpirationDate', datetime(null)), endofmonth(now())))\r\n| extend CommitmentAmount = todouble(coalesce(column_ifexists('CommitmentAmount', real(null)), column_ifexists('OriginalAmount', real(null))))\r\n| extend ClosedBalance = todouble(coalesce(column_ifexists('ClosedBalance', real(null)), real(null)))\r\n| extend IsActive = iff(isnotnull(ExpirationDate) and ExpirationDate >= now(), 1, 0)\r\n| top 1 by SourcePriority desc, IsActive desc, StartDate desc;\r\nlet StartDate = toscalar(MACCData | project StartDate);\r\nlet EndDate = toscalar(MACCData | project ExpirationDate);\r\nlet Commitment = toscalar(MACCData | project CommitmentAmount);\r\nlet APIBalance = toscalar(MACCData | project ClosedBalance);\r\nlet APIConsumed = iff(isnotnull(APIBalance) and isnotnull(Commitment), Commitment - APIBalance, real(null));\r\nlet PresumedBurn = toscalar(\r\n    Costs\r\n    | where ChargePeriodStart >= StartDate and ChargePeriodStart < EndDate\r\n    | extend CurrencyCode = tostring(coalesce(column_ifexists('BillingCurrency', ''), column_ifexists('PricingCurrency', '')))\r\n    | where isnull(currencyFilter) or tostring(currencyFilter) in ('', '*', 'All', 'all') or CurrencyCode == tostring(currencyFilter)\r\n    | summarize sum(EffectiveCost)\r\n);\r\nlet PresumedBurn2 = iff(isnull(PresumedBurn), 0.0, PresumedBurn);\r\nlet GapAmount = iff(isnotnull(APIConsumed), PresumedBurn2 - APIConsumed, real(null));\r\nlet GapPercent = iff(isnotnull(APIConsumed) and APIConsumed > 0, round(100.0 * GapAmount / APIConsumed, 1), real(null));\r\nlet GapStatus = case(\r\n    isnull(GapPercent), 'No API data',\r\n    abs(GapPercent) <= 5.0, 'Normal (<= 5%)',\r\n    abs(GapPercent) <= 10.0, 'Review (5-10%)',\r\n    'Escalate (> 10%)');\r\nprint\r\n    PresumedBurn = round(PresumedBurn2, 0),\r\n    ActualDecrement = iff(isnotnull(APIConsumed), round(APIConsumed, 0), real(null)),\r\n    Gap = iff(isnotnull(GapAmount), round(GapAmount, 0), real(null)),\r\n    GapPct = iff(isnotnull(GapPercent), strcat(tostring(GapPercent), '%'), 'N/A'),\r\n    GapStatus = GapStatus\r\n| project json = pack_array(\r\n    pack('Label', 'Presumed Burn (FOCUS)', 'Value', tostring(PresumedBurn)),\r\n    pack('Label', 'Actual Decrement (API)', 'Value', iff(isnotnull(ActualDecrement), tostring(ActualDecrement), 'No API data')),\r\n    pack('Label', 'Gap', 'Value', iff(isnotnull(Gap), tostring(Gap), 'N/A')),\r\n    pack('Label', 'Gap %', 'Value', GapPct),\r\n    pack('Label', 'Gap Status', 'Value', GapStatus))\r\n| mv-expand json\r\n| project Label = tostring(json.Label), Value = tostring(json.Value)",
-      "id": "mc04b5c6-d7e8-4f9a-0b1c-2d3e4f5a6b7c",
+      "id": "0c04b5c6-d7e8-4f9a-8b1c-2d3e4f5a6b7c",
       "usedVariables": [
         "currencyFilter"
       ]
@@ -9851,6 +10182,95 @@
       "id": "d5e3631a-345b-4310-ac9b-b1970d694929",
       "usedVariables": [
         "CostsByMonth"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "let startThisMonth = startofmonth(now());\nlet startLastMonth = startofmonth(now(), -1);\nlet aiMonth = CostsByMonth\n| where (ServiceCategory == 'AI and Machine Learning' or ServiceName == 'Azure AI Search')\n| where BillingPeriodStart >= startLastMonth;\nlet allMonth = CostsByMonth\n| where BillingPeriodStart >= startLastMonth;\nlet aiCurrent = toscalar(aiMonth | where BillingPeriodStart >= startThisMonth | summarize sum(EffectiveCost));\nlet aiPrevious = toscalar(aiMonth | where BillingPeriodStart < startThisMonth | summarize sum(EffectiveCost));\nlet allCurrent = toscalar(allMonth | where BillingPeriodStart >= startThisMonth | summarize sum(EffectiveCost));\nlet aiResourceCount = toscalar(aiMonth | where BillingPeriodStart >= startThisMonth | summarize dcount(ResourceId));\nlet aiCurrentValue = todouble(coalesce(aiCurrent, 0.0));\nlet aiPreviousValue = todouble(coalesce(aiPrevious, 0.0));\nlet allCurrentValue = todouble(coalesce(allCurrent, 0.0));\nlet momPercent = iff(aiPreviousValue == 0, real(0), 100.0 * (aiCurrentValue - aiPreviousValue) / aiPreviousValue);\nlet aiShare = iff(allCurrentValue == 0, real(0), 100.0 * aiCurrentValue / allCurrentValue);\nprint json = dynamic([\n    pack('Label', 'Total AI cost (MTD)', 'Value', round(aiCurrentValue, 2)),\n    pack('Label', 'AI % of cloud (MTD)', 'Value', strcat(round(aiShare, 1), '%')),\n    pack('Label', 'MoM change %', 'Value', strcat(round(momPercent, 1), '%')),\n    pack('Label', 'AI resources', 'Value', tolong(coalesce(aiResourceCount, 0)))\n])\n| mv-expand json\n| project Label = tostring(json.Label), Value = tostring(json.Value)",
+      "id": "1fa4b3c2-d5e6-47f8-a901-b234c567d890",
+      "usedVariables": [
+        "CostsByMonth"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "CostsByDay\n| where (ServiceCategory == 'AI and Machine Learning' or ServiceName == 'Azure AI Search')\n| summarize AICost = round(sum(EffectiveCost), 2) by Day = startofday(ChargePeriodStart)\n| order by Day asc",
+      "id": "2fb5c4d3-e6f7-48a9-b012-c345d678e901",
+      "usedVariables": [
+        "CostsByDay"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "let ai = CostsByMonth\n| where (ServiceCategory == 'AI and Machine Learning' or ServiceName == 'Azure AI Search')\n| summarize Cost = round(sum(EffectiveCost), 2), Resources = dcount(ResourceId) by ServiceName;\nlet total = toscalar(ai | summarize sum(Cost));\nai\n| extend SharePercent = iff(todouble(coalesce(total, 0.0)) == 0, real(0), round(100.0 * Cost / todouble(total), 1))\n| order by Cost desc\n| take maxGroupCount",
+      "id": "3ac6d5e4-f708-49ba-c123-d456e789f012",
+      "usedVariables": [
+        "CostsByMonth",
+        "maxGroupCount"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "CostsByDay\n| where (ServiceCategory == 'AI and Machine Learning' or ServiceName == 'Azure AI Search')\n| summarize\n    Cost = round(sum(EffectiveCost), 2),\n    DailyAverage = round(avg(EffectiveCost), 2),\n    Service = take_any(ServiceName),\n    ResourceType = take_any(ResourceType),\n    Region = take_any(RegionName),\n    Subscription = take_any(SubAccountName)\n    by ResourceId, ResourceName\n| order by Cost desc\n| take 5\n| project ResourceName, Service, Subscription, Region, ResourceType, Cost, DailyAverage",
+      "id": "4bd7e6f5-0819-4acb-d234-e567f890a123",
+      "usedVariables": [
+        "CostsByDay"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "// Purpose: summarize billing-backed ODCR used and unused cost\n// FOCUS: 1.2 columns consumed: ProviderName, ChargeCategory, EffectiveCost, CapacityReservationId, CapacityReservationStatus, ResourceId\n// Cost metric: EffectiveCost\n// Charge filter: Microsoft Usage only; Purchase excluded; Credit excluded by ChargeCategory filter\n// Consumers: Rate Optimization - ODCR financial summary (last n days)\n// Guards: division guard on UnusedCostShare\nlet odcr = CostsByDay\n| where ProviderName == 'Microsoft'\n| where ChargeCategory == 'Usage'\n| where isnotempty(CapacityReservationId)\n| where CapacityReservationStatus in~ ('Used', 'Unused')\n| extend ODCRStatus = case(CapacityReservationStatus =~ 'Unused', 'Unused ODCR', CapacityReservationStatus =~ 'Used', 'Used ODCR', 'Unknown');\nlet totals = odcr\n| summarize\n    TotalCost = sum(EffectiveCost),\n    UnusedCost = sumif(EffectiveCost, ODCRStatus == 'Unused ODCR'),\n    UsedCost = sumif(EffectiveCost, ODCRStatus == 'Used ODCR'),\n    ReservationCount = dcount(CapacityReservationId),\n    ResourceCount = dcount(ResourceId);\ntotals\n| extend UnusedCostShare = iff(TotalCost > 0, UnusedCost / TotalCost * 100.0, 0.0)\n| extend json = pack_array(\n    pack('Label', 'Unused ODCR cost', 'Value', round(UnusedCost, 2)),\n    pack('Label', 'Used ODCR cost', 'Value', round(UsedCost, 2)),\n    pack('Label', 'Unused cost share', 'Value', strcat(round(UnusedCostShare, 1), '%')),\n    pack('Label', 'Billed reservations', 'Value', ReservationCount),\n    pack('Label', 'Billed resources', 'Value', ResourceCount)\n)\n| mv-expand json\n| project Label = tostring(json.Label), Value = tostring(json.Value)",
+      "id": "5f92a3b4-6e7f-4a80-8c2d-456789abcdef",
+      "usedVariables": [
+        "CostsByDay"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "// Purpose: trend billing-backed ODCR used and unused cost over time\n// FOCUS: 1.2 columns consumed: ProviderName, ChargeCategory, ChargePeriodStart, EffectiveCost, CapacityReservationId, CapacityReservationStatus\n// Cost metric: EffectiveCost\n// Charge filter: Microsoft Usage only; Purchase excluded; Credit excluded by ChargeCategory filter\n// Consumers: Rate Optimization - ODCR cost trend (last n days)\n// Guards: no division\nCostsByDay\n| where ProviderName == 'Microsoft'\n| where ChargeCategory == 'Usage'\n| where isnotempty(CapacityReservationId)\n| where CapacityReservationStatus in~ ('Used', 'Unused')\n| extend Status = case(CapacityReservationStatus =~ 'Unused', 'Unused ODCR', CapacityReservationStatus =~ 'Used', 'Used ODCR', 'Unknown')\n| summarize Cost = round(sum(EffectiveCost), 2) by Day = startofday(ChargePeriodStart), Status\n| order by Day asc, Status asc",
+      "id": "60a3b4c5-7f80-4b91-9d3e-56789abcdef0",
+      "usedVariables": [
+        "CostsByDay"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "// Purpose: rank capacity reservation groups by unused ODCR cost and billing persistence\n// FOCUS: 1.2 columns consumed: ProviderName, ChargeCategory, ChargePeriodStart, EffectiveCost, CapacityReservationId, CapacityReservationStatus, RegionName, SubAccountName, x_ResourceGroupName, x_SkuInstanceType, x_SkuMeterSubcategory, SkuMeter\n// Cost metric: EffectiveCost\n// Charge filter: Microsoft Usage only; Purchase excluded; Credit excluded by ChargeCategory filter\n// Consumers: Rate Optimization - ODCR cost and persistence by CRG (last n days)\n// Guards: division guards on UsedCostShare and UnusedObservedDayShare\nCostsByDay\n| where ProviderName == 'Microsoft'\n| where ChargeCategory == 'Usage'\n| where isnotempty(CapacityReservationId)\n| where CapacityReservationStatus in~ ('Used', 'Unused')\n| extend ODCRStatus = case(CapacityReservationStatus =~ 'Unused', 'Unused ODCR', CapacityReservationStatus =~ 'Used', 'Used ODCR', 'Unknown')\n| extend Day = startofday(ChargePeriodStart)\n| extend CapacityReservationGroupId = tolower(tostring(extract(@'(?i)^(.*/capacityreservationgroups/[^/]+)', 1, CapacityReservationId)))\n| extend CapacityReservationGroup = tostring(extract(@'(?i)/capacityreservationgroups/([^/]+)', 1, CapacityReservationId))\n| extend CapacityReservationGroup = iff(isempty(CapacityReservationGroup), 'Unallocated', CapacityReservationGroup)\n| extend SKU = tostring(coalesce(x_SkuInstanceType, x_SkuMeterSubcategory, SkuMeter, 'Unknown'))\n| summarize\n    UsedCost = round(sumif(EffectiveCost, ODCRStatus == 'Used ODCR'), 2),\n    UnusedCost = round(sumif(EffectiveCost, ODCRStatus == 'Unused ODCR'), 2),\n    TotalCost = round(sum(EffectiveCost), 2),\n    ObservedDays = dcount(Day),\n    UnusedDays = dcountif(Day, ODCRStatus == 'Unused ODCR'),\n    FirstUnusedDay = minif(Day, ODCRStatus == 'Unused ODCR'),\n    LastUnusedDay = maxif(Day, ODCRStatus == 'Unused ODCR'),\n    Reservations = dcount(CapacityReservationId),\n    Resources = dcount(ResourceId),\n    Subscription = take_any(SubAccountName),\n    ResourceGroup = take_any(x_ResourceGroupName),\n    Region = take_any(RegionName),\n    SKUs = make_set(SKU, 5),\n    CapacityReservationGroup = take_any(CapacityReservationGroup)\n    by CapacityReservationGroupId\n| extend UsedCostShare = iff(TotalCost > 0, round(UsedCost / TotalCost * 100.0, 1), 0.0)\n| extend UnusedObservedDayShare = iff(ObservedDays > 0, round(100.0 * todouble(UnusedDays) / todouble(ObservedDays), 1), 0.0)\n| extend WastePattern = case(UnusedDays >= 7 and UnusedObservedDayShare >= 50.0, 'Persistent', UnusedDays >= 2, 'Recurring', UnusedDays == 1, 'Isolated', 'No unused cost')\n| extend Action = case(WastePattern == 'Persistent', 'Review reservation quantity and placement in workbook', WastePattern == 'Recurring', 'Investigate workload schedule and scale behavior', WastePattern == 'Isolated', 'Monitor for recurrence', 'None')\n| order by UnusedCost desc\n| take 25\n| project CapacityReservationGroup, CapacityReservationGroupId, Subscription, ResourceGroup, Region, SKUs, Reservations, Resources, UsedCost, UnusedCost, TotalCost, UsedCostShare, ObservedDays, UnusedDays, UnusedObservedDayShare, WastePattern, FirstUnusedDay, LastUnusedDay, Action",
+      "id": "71b4c5d6-8a91-4ca2-8e4f-6789abcdef01",
+      "usedVariables": [
+        "CostsByDay"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "23540be2-ffc9-4b61-8c4c-05e493e682a6"
+      },
+      "text": "// Purpose: show billing-backed unused and used ODCR charges by resource\n// FOCUS: 1.2 columns consumed: ProviderName, ChargeCategory, EffectiveCost, CapacityReservationId, CapacityReservationStatus, ResourceName, ResourceType, RegionName, SubAccountName, x_ResourceGroupName, x_SkuInstanceType, x_SkuMeterSubcategory, SkuMeter\n// Cost metric: EffectiveCost\n// Charge filter: Microsoft Usage only; Purchase excluded; Credit excluded by ChargeCategory filter\n// Consumers: Rate Optimization - ODCR resource detail (last n days)\n// Guards: no division\nCostsByDay\n| where ProviderName == 'Microsoft'\n| where ChargeCategory == 'Usage'\n| where isnotempty(CapacityReservationId)\n| where CapacityReservationStatus in~ ('Used', 'Unused')\n| extend Status = case(CapacityReservationStatus =~ 'Unused', 'Unused ODCR', CapacityReservationStatus =~ 'Used', 'Used ODCR', 'Unknown')\n| extend CapacityReservationGroupId = tolower(tostring(extract(@'(?i)^(.*/capacityreservationgroups/[^/]+)', 1, CapacityReservationId)))\n| extend CapacityReservationGroup = tostring(extract(@'(?i)/capacityreservationgroups/([^/]+)', 1, CapacityReservationId))\n| extend CapacityReservationGroup = iff(isempty(CapacityReservationGroup), 'Unallocated', CapacityReservationGroup)\n| extend CapacityReservation = tostring(extract(@'(?i)/capacityreservations/([^/]+)', 1, CapacityReservationId))\n| extend CapacityReservation = iff(isempty(CapacityReservation), ResourceName, CapacityReservation)\n| extend SKU = tostring(coalesce(x_SkuInstanceType, x_SkuMeterSubcategory, SkuMeter, 'Unknown'))\n| summarize\n    Cost = round(sum(EffectiveCost), 2),\n    ResourceName = take_any(ResourceName),\n    ResourceType = take_any(ResourceType),\n    Subscription = take_any(SubAccountName),\n    ResourceGroup = take_any(x_ResourceGroupName),\n    Region = take_any(RegionName),\n    SKU = take_any(SKU)\n    by Status, CapacityReservationGroupId, CapacityReservationGroup, CapacityReservation, ResourceId\n| order by Status asc, Cost desc\n| take 50\n| project Status, CapacityReservationGroup, CapacityReservationGroupId, CapacityReservation, ResourceName, ResourceType, Subscription, ResourceGroup, Region, SKU, Cost",
+      "id": "82c5d6e7-9ba2-4db3-9f50-789abcdef012",
+      "usedVariables": [
+        "CostsByDay"
       ]
     }
   ]

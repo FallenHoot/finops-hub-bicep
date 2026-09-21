@@ -1,0 +1,890 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "# ODCR operations\n\nUse Azure Resource Graph and ARM Instance View to manage capacity reservation groups (CRGs), reservation inventory, ownership, consumer relationships, and current allocation. FinOps hub is an optional enrichment layer for historical used and unused ODCR cost.\n\nFor supported pools, provider subscriptions can own and share CRGs with eligible workload subscriptions. Running VM charges follow the consuming subscription; unused ODCR capacity remains billed to the provider subscription."
+      },
+      "name": "text - workbook-title"
+    },
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "parameters": [
+          {
+            "id": "1d3c2b1a-8f7e-4d6c-9b0a-1234567890ab",
+            "version": "KqlParameterItem/1.0",
+            "name": "AdxClusterName",
+            "label": "ADX cluster name",
+            "type": 1,
+            "isRequired": false,
+            "description": "Optional. Required only when FinOps hub billing data is enabled. Use the cluster name with region suffix, for example mycluster.eastus2. Do not include the protocol prefix.",
+            "value": "replace-with-cluster.region"
+          },
+          {
+            "id": "2e4d3c2b-9f8e-4d7c-8a1b-234567890abc",
+            "version": "KqlParameterItem/1.0",
+            "name": "AdxDatabaseName",
+            "label": "ADX database name",
+            "type": 1,
+            "isRequired": false,
+            "value": "Hub"
+          },
+          {
+            "id": "9ac4b392-605f-44e3-9b82-90abcdef1234",
+            "version": "KqlParameterItem/1.0",
+            "name": "UseFinOpsHub",
+            "label": "Use FinOps hub billing data",
+            "type": 10,
+            "description": "Set to Yes when the FinOps hub ADX database is available. Set to No to use Azure Resource Graph inventory and ARM Instance View without financial enrichment.",
+            "isRequired": true,
+            "typeSettings": {
+              "additionalResourceOptions": [],
+              "showDefault": false
+            },
+            "jsonData": "[\"No\", \"Yes\"]",
+            "value": "No"
+          },
+          {
+            "id": "1ce6d5b4-8271-4605-9da4-1bcdef123456",
+            "version": "KqlParameterItem/1.0",
+            "name": "BillingCurrency",
+            "label": "Billing currency",
+            "type": 1,
+            "isRequired": false,
+            "description": "Optional. Enter a single billing currency code for FinOps hub billing views, for example USD or NOK. Leave blank to show separate rows by currency.",
+            "value": ""
+          },
+          {
+            "id": "0bd5c4a3-7160-45f4-8c93-0abcdef12345",
+            "version": "KqlParameterItem/1.0",
+            "name": "UseSampleData",
+            "label": "Use sample CRG data",
+            "type": 10,
+            "description": "Set to Yes to preview workbook layout and calculations without live CRGs or ODCRs. Sample data is not connected to Azure billing or resources.",
+            "isRequired": true,
+            "typeSettings": {
+              "additionalResourceOptions": [],
+              "showDefault": false
+            },
+            "jsonData": "[\"No\", \"Yes\"]",
+            "value": "No"
+          },
+          {
+            "id": "3f5e4d3c-0a9f-4e8d-9b2c-34567890abcd",
+            "version": "KqlParameterItem/1.0",
+            "name": "LookbackPeriod",
+            "label": "Lookback period",
+            "type": 4,
+            "isRequired": true,
+            "value": {
+              "durationMs": 2592000000
+            },
+            "typeSettings": {
+              "selectableValues": [
+                {
+                  "durationMs": 604800000
+                },
+                {
+                  "durationMs": 1209600000
+                },
+                {
+                  "durationMs": 2592000000
+                },
+                {
+                  "durationMs": 5184000000
+                },
+                {
+                  "durationMs": 7776000000
+                }
+              ],
+              "allowCustom": true
+            }
+          },
+          {
+            "id": "4a6f5e4d-1b0a-4f9e-8c3d-4567890abcde",
+            "version": "KqlParameterItem/1.0",
+            "name": "Subscription",
+            "label": "Subscription",
+            "type": 6,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
+              ],
+              "includeAll": false,
+              "showDefault": false
+            },
+            "defaultValue": "value::all",
+            "value": [
+              "value::all"
+            ]
+          },
+          {
+            "id": "2df7e6c5-9382-4716-8eb5-2cdef1234567",
+            "version": "KqlParameterItem/1.0",
+            "name": "SelectedCrg",
+            "label": "Capacity reservation group",
+            "type": 5,
+            "isRequired": false,
+            "query": "resources\n| where type =~ 'microsoft.compute/capacityreservationgroups'\n| project id, name = strcat(name, ' (', subscriptionId, '/', resourceGroup, '/', location, ')')\n| order by name asc",
+            "crossComponentResources": [
+              "{Subscription}"
+            ],
+            "typeSettings": {
+              "additionalResourceOptions": [],
+              "showDefault": false
+            },
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources",
+            "value": ""
+          },
+          {
+            "id": "8ea39281-5f4e-43d2-8a71-890abcdef123",
+            "version": "KqlParameterItem/1.0",
+            "name": "SelectedTab",
+            "type": 1,
+            "isRequired": true,
+            "isHiddenWhenLocked": true,
+            "value": "Overview"
+          }
+        ],
+        "style": "above",
+        "queryType": 9
+      },
+      "name": "parameters - workbook-settings"
+    },
+    {
+      "type": 11,
+      "content": {
+        "version": "LinkItem/1.0",
+        "style": "tabs",
+        "links": [
+          {
+            "id": "5b706f5e-2c1b-40af-9d4e-567890abcdef",
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Overview",
+            "subTarget": "Overview",
+            "style": "link"
+          },
+          {
+            "id": "9fb4a392-605f-44e3-9b82-90abcdef1234",
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Cost",
+            "subTarget": "Cost",
+            "style": "link"
+          },
+          {
+            "id": "6c81706f-3d2c-41b0-8e5f-67890abcdef1",
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Capacity",
+            "subTarget": "Capacity",
+            "style": "link"
+          },
+          {
+            "id": "3ea8f7d6-a493-4827-9fc6-3def12345678",
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Consumers",
+            "subTarget": "Consumers",
+            "style": "link"
+          },
+          {
+            "id": "7d928170-4e3d-42c1-9f60-7890abcdef12",
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Guidance",
+            "subTarget": "Guidance",
+            "style": "link"
+          }
+        ]
+      },
+      "name": "links - main-tabs"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "## ODCR operations\n\nStart here for estate inventory and optional financial impact. Azure Resource Graph answers what exists and how it is related, ARM Instance View answers what is allocated now for a selected CRG, and FinOps hub answers what that capacity cost historically.\n\nThe gating question is whether the specific SKU, region, and zone can support ODCR reservation behavior. For constrained GPU inventory or tightly interconnected cluster workloads, validate the capacity and placement path before changing reserved capacity.",
+              "style": "upsell"
+            },
+            "name": "text - overview-intro"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "let CRGs = resources\n| where type =~ 'microsoft.compute/capacityreservationgroups'\n| extend AuthorizedConsumers = array_length(coalesce(properties.sharingProfile.subscriptionIds, dynamic([])))\n| summarize CapacityReservationGroups = count(), SharedCRGs = countif(AuthorizedConsumers > 0), CRGsNearConsumerLimit = countif(AuthorizedConsumers >= 90);\nlet Reservations = resources\n| where type =~ 'microsoft.compute/capacityreservationgroups/capacityreservations'\n| summarize ODCRResources = count(), ReservedVMUnits = sum(toint(sku.capacity));\nCRGs\n| extend JoinKey = 1\n| join kind=fullouter (Reservations | extend JoinKey = 1) on JoinKey\n| project CapacityReservationGroups = coalesce(CapacityReservationGroups, 0), ODCRResources = coalesce(ODCRResources, 0), ReservedVMUnits = coalesce(ReservedVMUnits, 0), SharedCRGs = coalesce(SharedCRGs, 0), CRGsNearConsumerLimit = coalesce(CRGsNearConsumerLimit, 0)",
+              "size": 0,
+              "title": "ODCR estate",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "gridSettings": {
+                "filter": false,
+                "rowLimit": 10
+              }
+            },
+            "customWidth": "50",
+            "name": "query - overview-estate-summary"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "resources\n| where type =~ 'microsoft.compute/capacityreservationgroups/capacityreservations'\n| extend SKU = tostring(sku.name), ReservedUnits = toint(sku.capacity)\n| summarize ReservedVMUnits = sum(ReservedUnits), ODCRResources = count() by SKU\n| top 15 by ReservedVMUnits desc",
+              "size": 0,
+              "title": "Reserved VM units by SKU",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "visualization": "barchart",
+              "showAnalytics": true,
+              "noDataMessage": "No capacity reservations were found in the selected subscriptions.",
+              "noDataMessageStyle": 3
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "No"
+            },
+            "customWidth": "50",
+            "name": "query - overview-reserved-units-by-sku"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "resources\n| where type =~ 'microsoft.compute/capacityreservationgroups'\n| extend Owner = tostring(coalesce(tags['owner'], tags['serviceOwner'], tags['applicationOwner'], tags['costCenterOwner'], 'Unassigned'))\n| summarize CapacityReservationGroups = count() by Owner\n| top 15 by CapacityReservationGroups desc",
+              "size": 0,
+              "title": "CRGs by owner tag",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "visualization": "barchart",
+              "showAnalytics": true,
+              "noDataMessage": "No capacity reservation groups were found in the selected subscriptions.",
+              "noDataMessageStyle": 3
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "No"
+            },
+            "customWidth": "50",
+            "name": "query - overview-crgs-by-owner"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "## Financial enrichment unavailable\n\nFinOps hub billing data is disabled. Capacity inventory and consumer relationships remain available from Azure Resource Graph, and current allocation remains available from ARM Instance View for the selected CRG. Enable **Use FinOps hub billing data** and set the ADX cluster/database parameters to add historical unused ODCR cost.",
+              "style": "warning"
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseFinOpsHub",
+              "comparison": "isEqualTo",
+              "value": "No"
+            },
+            "name": "text - resource-state-mode"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "## Sample data mode\n\nSample CRG data is enabled. The sample tables use a fictional provider subscription with 100 reserved GPU slots, 60 currently allocated VMs, and 40 unused reserved units so you can verify workbook behavior without deploying CRGs or ODCRs.",
+              "style": "warning"
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "Yes"
+            },
+            "name": "text - sample-data-mode"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let SelectedCurrency = tostring('{BillingCurrency}');\\r\\nlet StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nlet odcr = Costs()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| where isnotempty(CapacityReservationId)\\r\\n| where CapacityReservationStatus in~ ('Used', 'Unused')\\r\\n| extend BillingCurrencyCode = tostring(BillingCurrency)\\r\\n| where isempty(SelectedCurrency) or BillingCurrencyCode =~ SelectedCurrency\\r\\n| extend Status = case(CapacityReservationStatus =~ 'Unused', 'Unused ODCR', CapacityReservationStatus =~ 'Used', 'Used ODCR', 'Unknown')\\r\\n| extend CapacityReservationGroupId = tolower(tostring(extract(@'(?i)^(.*/capacityreservationgroups/[^/]+)', 1, CapacityReservationId)));\\r\\nlet totals = odcr\\r\\n| summarize TotalCost = sum(EffectiveCost), UnusedCost = sumif(EffectiveCost, Status == 'Unused ODCR'), UsedCost = sumif(EffectiveCost, Status == 'Used ODCR'), CRGs = dcount(CapacityReservationGroupId), Reservations = dcount(CapacityReservationId) by Currency = BillingCurrencyCode;\\r\\ntotals\\r\\n| extend UnusedPercent = iff(TotalCost > 0, UnusedCost / TotalCost * 100.0, 0.0)\\r\\n| extend Action = case(UnusedCost <= 0, 'No billing waste detected', UnusedPercent >= 25, 'Immediate CRG cleanup review', UnusedPercent >= 10, 'Review workload placement', 'Monitor trend')\\r\\n| project Currency, Metric = 'Unused ODCR cost', Value = round(UnusedCost, 2), Status = Action\\r\\n| union (totals | project Currency, Metric = 'Used ODCR cost', Value = round(UsedCost, 2), Status = 'Capacity consumed by associated compute')\\r\\n| union (totals | extend UnusedPercent = iff(TotalCost > 0, UnusedCost / TotalCost * 100.0, 0.0) | project Currency, Metric = 'Unused percent', Value = round(UnusedPercent, 1), Status = iff(UnusedPercent >= 10, 'Investigate', 'Acceptable'))\\r\\n| union (totals | project Currency, Metric = 'Capacity reservations', Value = todouble(Reservations), Status = 'Distinct reservations in billing window')\\r\\n| union (totals | project Currency, Metric = 'Capacity reservation groups', Value = todouble(CRGs), Status = 'Distinct CRG resource IDs in billing window')\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 0,
+              "title": "Decision summary from billing data",
+              "queryType": 9,
+              "gridSettings": {
+                "filter": true
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseFinOpsHub",
+              "comparison": "isEqualTo",
+              "value": "Yes"
+            },
+            "customWidth": "50",
+            "name": "query - overview-decision-summary"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let SelectedCurrency = tostring('{BillingCurrency}');\\r\\nlet StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nCosts()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| where CapacityReservationStatus =~ 'Unused'\\r\\n| extend BillingCurrencyCode = tostring(BillingCurrency)\\r\\n| where isempty(SelectedCurrency) or BillingCurrencyCode =~ SelectedCurrency\\r\\n| summarize UnusedCost = round(sum(EffectiveCost), 2) by Day = startofday(ChargePeriodStart), Currency = BillingCurrencyCode\\r\\n| order by Day asc, Currency asc\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 0,
+              "title": "Actual unused ODCR cost by day",
+              "queryType": 9,
+              "visualization": "barchart",
+              "showAnalytics": true,
+              "noDataMessage": "No unused ODCR billing rows were found for the selected period.",
+              "noDataMessageStyle": 3
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseFinOpsHub",
+              "comparison": "isEqualTo",
+              "value": "Yes"
+            },
+            "customWidth": "50",
+            "name": "query - overview-unused-cost-trend"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let SelectedCurrency = tostring('{BillingCurrency}');\\r\\nlet StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nCosts()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| where isnotempty(CapacityReservationId)\\r\\n| where CapacityReservationStatus in~ ('Used', 'Unused')\\r\\n| extend BillingCurrencyCode = tostring(BillingCurrency)\\r\\n| where isempty(SelectedCurrency) or BillingCurrencyCode =~ SelectedCurrency\\r\\n| extend SKU = tostring(coalesce(x_SkuInstanceType, x_SkuMeterSubcategory, SkuMeter, SkuId, 'Unknown'))\\r\\n| extend Region = tostring(coalesce(RegionName, 'Unknown'))\\r\\n| summarize UsedCost = round(sumif(EffectiveCost, CapacityReservationStatus =~ 'Used'), 2), UnusedCost = round(sumif(EffectiveCost, CapacityReservationStatus =~ 'Unused'), 2), TotalCost = round(sum(EffectiveCost), 2), Reservations = dcount(CapacityReservationId) by Currency = BillingCurrencyCode, SKU, Region\\r\\n| extend UnusedCostPercent = iff(TotalCost > 0, round(UnusedCost / TotalCost * 100.0, 1), 0.0)\\r\\n| project Currency, SKU, Region, UsedCost, UnusedCost, UnusedCostPercent, TotalCost, Reservations\\r\\n| order by UnusedCost desc, TotalCost desc\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 1,
+              "title": "ODCR cost by SKU and region",
+              "queryType": 9,
+              "showAnalytics": true,
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseFinOpsHub",
+              "comparison": "isEqualTo",
+              "value": "Yes"
+            },
+            "name": "query - overview-cost-by-sku-region"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "### Source of truth\n\n- **Inventory and relationships** come from Azure Resource Graph.\n- **Current allocation** comes from ARM Instance View for the selected CRG and is the operational source of truth.\n- **Actual unused ODCR cost** comes from FinOps hub billing records and is the financial source of truth.\n- **Shared CRG billing split** means running VM charges follow the consumer subscription, while idle reserved units remain billed to the provider subscription.\n\nWhen a workload releases reserved capacity, that capacity becomes available for another eligible workload associated with the shared CRG.\n\nUse Capacity to inspect reservations and current allocation, Consumers to review references and authorization, and Cost to confirm persistent billed waste.",
+              "style": "info"
+            },
+            "customWidth": "35",
+            "name": "text - overview-reading-guide"
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "Overview"
+      },
+      "name": "group - overview"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "## Cost\n\nThese optional views use FOCUS cost and usage records from the FinOps hub. Unused ODCR is identified by `CapacityReservationStatus == 'Unused'`, which the hub derives from Azure capacity reservation object billing rows. Persistence labels are workbook policy: persistent means unused cost occurred on at least seven days and at least half of the selected window; recurring means two or more days; isolated means one day."
+            },
+            "name": "text - billing-intro"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nCosts()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| summarize Rows = count(), RowsWithCapacityReservationId = countif(isnotempty(CapacityReservationId)), RowsWithCapacityReservationStatus = countif(isnotempty(CapacityReservationStatus)), RowsWithBothFields = countif(isnotempty(CapacityReservationId) and isnotempty(CapacityReservationStatus)), FirstRecord = min(ChargePeriodStart), LastRecord = max(ChargePeriodStart)\\r\\n| extend ODCRBillingDataStatus = case(RowsWithBothFields > 0, 'ODCR billing fields available', RowsWithCapacityReservationId > 0 or RowsWithCapacityReservationStatus > 0, 'ODCR billing fields partially populated', 'ODCR billing fields not populated')\\r\\n| project ODCRBillingDataStatus, Rows, RowsWithCapacityReservationId, RowsWithCapacityReservationStatus, RowsWithBothFields, FirstRecord, LastRecord\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 0,
+              "title": "ODCR billing data readiness",
+              "queryType": 9,
+              "gridSettings": {
+                "filter": false,
+                "rowLimit": 10
+              },
+              "noDataMessage": "No Microsoft usage rows were found in the selected period.",
+              "noDataMessageStyle": 3
+            },
+            "name": "query - odcr-billing-data-readiness"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let SelectedCurrency = tostring('{BillingCurrency}');\\r\\nlet StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nlet odcr = Costs()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| where isnotempty(CapacityReservationId)\\r\\n| where CapacityReservationStatus in~ ('Used', 'Unused')\\r\\n| extend BillingCurrencyCode = tostring(BillingCurrency)\\r\\n| where isempty(SelectedCurrency) or BillingCurrencyCode =~ SelectedCurrency\\r\\n| extend ODCRStatus = case(CapacityReservationStatus =~ 'Unused', 'Unused ODCR', CapacityReservationStatus =~ 'Used', 'Used ODCR', 'Unknown');\\r\\nlet totals = odcr\\r\\n| summarize TotalCost = sum(EffectiveCost), UnusedCost = sumif(EffectiveCost, ODCRStatus == 'Unused ODCR'), UsedCost = sumif(EffectiveCost, ODCRStatus == 'Used ODCR'), Reservations = dcount(CapacityReservationId), Resources = dcount(ResourceId) by Currency = BillingCurrencyCode;\\r\\ntotals\\r\\n| extend UnusedPercent = iff(TotalCost > 0, UnusedCost / TotalCost * 100.0, 0.0)\\r\\n| project Currency, TotalCost = round(TotalCost, 2), UsedCost = round(UsedCost, 2), UnusedCost = round(UnusedCost, 2), UnusedPercent = round(UnusedPercent, 1), Reservations, Resources\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 0,
+              "title": "ODCR summary",
+              "queryType": 9,
+              "gridSettings": {
+                "filter": true
+              }
+            },
+            "name": "query - odcr-summary"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let SelectedCurrency = tostring('{BillingCurrency}');\\r\\nlet StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nCosts()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| where isnotempty(CapacityReservationId)\\r\\n| where CapacityReservationStatus in~ ('Used', 'Unused')\\r\\n| extend BillingCurrencyCode = tostring(BillingCurrency)\\r\\n| where isempty(SelectedCurrency) or BillingCurrencyCode =~ SelectedCurrency\\r\\n| extend Status = case(CapacityReservationStatus =~ 'Unused', 'Unused ODCR', CapacityReservationStatus =~ 'Used', 'Used ODCR', 'Unknown')\\r\\n| summarize Cost = round(sum(EffectiveCost), 2) by Day = startofday(ChargePeriodStart), Currency = BillingCurrencyCode, Status\\r\\n| order by Day asc, Currency asc, Status asc\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 0,
+              "showAnalytics": true,
+              "title": "ODCR cost trend",
+              "queryType": 9,
+              "visualization": "barchart",
+              "chartSettings": {
+                "group": "Status"
+              }
+            },
+            "name": "query - odcr-cost-trend"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let SelectedCurrency = tostring('{BillingCurrency}');\\r\\nlet StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nCosts()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| where CapacityReservationStatus =~ 'Unused'\\r\\n| extend BillingCurrencyCode = tostring(BillingCurrency)\\r\\n| where isempty(SelectedCurrency) or BillingCurrencyCode =~ SelectedCurrency\\r\\n| where tolower(x_ResourceType) in ('microsoft.compute/capacityreservationgroups/capacityreservations', 'microsoft.compute/capacityreservations') or ResourceType has 'Capacity reservation'\\r\\n| extend Quantity = iff(isnotempty(ConsumedQuantity) and ConsumedQuantity != 0, ConsumedQuantity, PricingQuantity)\\r\\n| extend SkuName = tostring(coalesce(x_SkuInstanceType, x_SkuMeterSubcategory, SkuMeter, SkuId, 'Unknown'))\\r\\n| summarize UnusedUsageQuantity = round(sum(Quantity), 2), PricingUnit = take_any(PricingUnit), TotalWastedCost = round(sum(EffectiveCost), 2) by Currency = BillingCurrencyCode, SubscriptionName = SubAccountName, ResourceGroupName = x_ResourceGroupName, BilledResourceName = ResourceName, SkuName, Location = RegionName, Day = bin(ChargePeriodStart, 1d)\\r\\n| order by TotalWastedCost desc\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 1,
+              "showAnalytics": true,
+              "title": "Unused ODCR usage details",
+              "showExportToExcel": true,
+              "queryType": 9,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              }
+            },
+            "name": "query - unused-odcr-usage-details"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let SelectedCurrency = tostring('{BillingCurrency}');\\r\\nlet StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nCosts()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| where isnotempty(CapacityReservationId)\\r\\n| where CapacityReservationStatus in~ ('Used', 'Unused')\\r\\n| extend BillingCurrencyCode = tostring(BillingCurrency)\\r\\n| where isempty(SelectedCurrency) or BillingCurrencyCode =~ SelectedCurrency\\r\\n| extend ODCRStatus = case(CapacityReservationStatus =~ 'Unused', 'Unused ODCR', CapacityReservationStatus =~ 'Used', 'Used ODCR', 'Unknown')\\r\\n| extend CapacityReservationGroupId = tolower(tostring(extract(@'(?i)^(.*/capacityreservationgroups/[^/]+)', 1, CapacityReservationId)))\\r\\n| extend CapacityReservationGroup = tostring(extract(@'(?i)/capacityreservationgroups/([^/]+)', 1, CapacityReservationId))\\r\\n| extend CapacityReservationGroup = iff(isempty(CapacityReservationGroup), 'Unallocated', CapacityReservationGroup)\\r\\n| extend SKU = tostring(coalesce(x_SkuInstanceType, x_SkuMeterSubcategory, SkuMeter, 'Unknown'))\\r\\n| summarize UsedCost = round(sumif(EffectiveCost, ODCRStatus == 'Used ODCR'), 2), UnusedCost = round(sumif(EffectiveCost, ODCRStatus == 'Unused ODCR'), 2), TotalCost = round(sum(EffectiveCost), 2), Reservations = dcount(CapacityReservationId), Resources = dcount(ResourceId), Subscription = take_any(SubAccountName), ResourceGroup = take_any(x_ResourceGroupName), Region = take_any(RegionName), SKUs = make_set(SKU, 5), CapacityReservationGroup = take_any(CapacityReservationGroup) by Currency = BillingCurrencyCode, CapacityReservationGroupId\\r\\n| extend UsedCostPercent = iff(TotalCost > 0, round(UsedCost / TotalCost * 100.0, 1), 0.0)\\r\\n| project Currency, CapacityReservationGroup, CapacityReservationGroupId, Subscription, ResourceGroup, Region, SKUs, Reservations, Resources, UsedCost, UnusedCost, TotalCost, UsedCostPercent\\r\\n| order by UnusedCost desc\\r\\n| take 50\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 1,
+              "showAnalytics": true,
+              "title": "Capacity reservation groups by unused ODCR cost",
+              "showExportToExcel": true,
+              "queryType": 9,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              }
+            },
+            "name": "query - crg-unused-cost"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let SelectedCurrency = tostring('{BillingCurrency}');\\r\\nlet StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nlet WindowDays = datetime_diff('day', startofday(EndTime), startofday(StartTime)) + 1;\\r\\nCosts()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| where isnotempty(CapacityReservationId)\\r\\n| where CapacityReservationStatus in~ ('Used', 'Unused')\\r\\n| extend BillingCurrencyCode = tostring(BillingCurrency)\\r\\n| where isempty(SelectedCurrency) or BillingCurrencyCode =~ SelectedCurrency\\r\\n| extend CapacityReservationGroupId = tolower(tostring(extract(@'(?i)^(.*/capacityreservationgroups/[^/]+)', 1, CapacityReservationId)))\\r\\n| extend CapacityReservationGroup = tostring(extract(@'(?i)/capacityreservationgroups/([^/]+)', 1, CapacityReservationId))\\r\\n| extend Day = startofday(ChargePeriodStart)\\r\\n| summarize UnusedCost = round(sumif(EffectiveCost, CapacityReservationStatus =~ 'Unused'), 2), UsedCost = round(sumif(EffectiveCost, CapacityReservationStatus =~ 'Used'), 2), UnusedDays = dcountif(Day, CapacityReservationStatus =~ 'Unused'), FirstUnusedDay = minif(Day, CapacityReservationStatus =~ 'Unused'), LastUnusedDay = maxif(Day, CapacityReservationStatus =~ 'Unused') by Currency = BillingCurrencyCode, CapacityReservationGroupId, CapacityReservationGroup\\r\\n| where UnusedDays > 0\\r\\n| extend UnusedWindowPercent = iff(WindowDays > 0, round(100.0 * todouble(UnusedDays) / todouble(WindowDays), 1), 0.0)\\r\\n| extend Pattern = case(UnusedDays >= 7 and UnusedWindowPercent >= 50.0, 'Persistent', UnusedDays >= 2, 'Recurring', 'Isolated')\\r\\n| extend Action = case(Pattern == 'Persistent', 'Review reservation quantity and placement', Pattern == 'Recurring', 'Investigate workload schedule and scale behavior', 'Monitor for recurrence')\\r\\n| project Currency, CapacityReservationGroup, CapacityReservationGroupId, Pattern, UnusedDays, UnusedWindowPercent, FirstUnusedDay, LastUnusedDay, UnusedCost, UsedCost, Action\\r\\n| order by UnusedCost desc\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 1,
+              "title": "Unused ODCR persistence by CRG",
+              "queryType": 9,
+              "showAnalytics": true,
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              },
+              "noDataMessage": "No unused ODCR cost was found in the selected period.",
+              "noDataMessageStyle": 3
+            },
+            "name": "query - unused-odcr-persistence"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"AzureDataExplorerQuery/1.0\",\"queryText\":\"let SelectedCurrency = tostring('{BillingCurrency}');\\r\\nlet StartTime = todatetime('{LookbackPeriod:startISO}');\\r\\nlet EndTime = todatetime('{LookbackPeriod:endISO}');\\r\\nCosts()\\r\\n| where ChargePeriodStart between (StartTime .. EndTime)\\r\\n| where ProviderName == 'Microsoft'\\r\\n| where ChargeCategory == 'Usage'\\r\\n| where isnotempty(CapacityReservationId)\\r\\n| where CapacityReservationStatus in~ ('Used', 'Unused')\\r\\n| extend BillingCurrencyCode = tostring(BillingCurrency)\\r\\n| where isempty(SelectedCurrency) or BillingCurrencyCode =~ SelectedCurrency\\r\\n| extend Status = case(CapacityReservationStatus =~ 'Unused', 'Unused ODCR', CapacityReservationStatus =~ 'Used', 'Used ODCR', 'Unknown')\\r\\n| extend CapacityReservationGroupId = tolower(tostring(extract(@'(?i)^(.*/capacityreservationgroups/[^/]+)', 1, CapacityReservationId)))\\r\\n| extend CapacityReservationGroup = tostring(extract(@'(?i)/capacityreservationgroups/([^/]+)', 1, CapacityReservationId))\\r\\n| extend CapacityReservationGroup = iff(isempty(CapacityReservationGroup), 'Unallocated', CapacityReservationGroup)\\r\\n| extend CapacityReservation = tostring(extract(@'(?i)/capacityreservations/([^/]+)', 1, CapacityReservationId))\\r\\n| extend CapacityReservation = iff(isempty(CapacityReservation), ResourceName, CapacityReservation)\\r\\n| extend SKU = tostring(coalesce(x_SkuInstanceType, x_SkuMeterSubcategory, SkuMeter, 'Unknown'))\\r\\n| summarize Cost = round(sum(EffectiveCost), 2), ResourceName = take_any(ResourceName), ResourceType = take_any(ResourceType), Subscription = take_any(SubAccountName), ResourceGroup = take_any(x_ResourceGroupName), Region = take_any(RegionName), SKU = take_any(SKU) by Currency = BillingCurrencyCode, Status, CapacityReservationGroupId, CapacityReservationGroup, CapacityReservation, ResourceId\\r\\n| order by Status asc, Cost desc\\r\\n| take 200\",\"clusterName\":\"{AdxClusterName}\",\"databaseName\":\"{AdxDatabaseName}\"}",
+              "size": 1,
+              "showAnalytics": true,
+              "title": "ODCR resource detail",
+              "showExportToExcel": true,
+              "queryType": 9,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              }
+            },
+            "name": "query - odcr-resource-detail"
+          }
+        ]
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "SelectedTab",
+          "comparison": "isEqualTo",
+          "value": "Cost"
+        },
+        {
+          "parameterName": "UseFinOpsHub",
+          "comparison": "isEqualTo",
+          "value": "Yes"
+        }
+      ],
+      "name": "group - cost"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "## Cost requires FinOps hub data\n\nSet **Use FinOps hub billing data** to **Yes**, then enter the ADX cluster name and database name to enable actual unused ODCR cost, trends, and billing-backed CRG rankings.\n\nWithout FinOps hub data, Capacity still provides reservation inventory and selected-CRG Instance View, while Consumers provides sharing authorization and compute references.",
+              "style": "info"
+            },
+            "name": "text - billing-disabled"
+          }
+        ]
+      },
+      "conditionalVisibilities": [
+        {
+          "parameterName": "SelectedTab",
+          "comparison": "isEqualTo",
+          "value": "Cost"
+        },
+        {
+          "parameterName": "UseFinOpsHub",
+          "comparison": "isEqualTo",
+          "value": "No"
+        }
+      ],
+      "name": "group - cost-disabled"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "## Consumers\n\nUse Azure Resource Graph to review which subscriptions are authorized through the CRG sharing profile and which compute resources reference each CRG. These are relationship and scope signals, not authoritative allocation counts.",
+              "style": "info"
+            },
+            "name": "text - crg-inventory-intro"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "resources\n| where type in~ ('microsoft.compute/virtualmachines', 'microsoft.compute/virtualmachinescalesets', 'microsoft.compute/virtualmachinescalesets/virtualmachines')\n| extend CapacityReservationGroupId = tolower(tostring(coalesce(properties.capacityReservation.capacityReservationGroup.id, properties.virtualMachineProfile.capacityReservation.capacityReservationGroup.id)))\n| where isnotempty(CapacityReservationGroupId)\n| extend CapacityReservationGroup = tostring(split(CapacityReservationGroupId, '/')[8])\n| extend SKU = tostring(coalesce(properties.hardwareProfile.vmSize, sku.name))\n| extend Workload = tostring(coalesce(tags['workload'], tags['application'], tags['service'], ''))\n| extend Owner = tostring(coalesce(tags['owner'], tags['serviceOwner'], tags['applicationOwner'], ''))\n| project ConsumerSubscriptionId = subscriptionId, ConsumerResourceGroup = resourceGroup, ResourceType = type, ComputeResource = name, SKU, Region = location, CapacityReservationGroup, CapacityReservationGroupId, Workload, Owner, ResourceId = id\n| order by CapacityReservationGroup asc, ConsumerSubscriptionId asc, ConsumerResourceGroup asc, ComputeResource asc",
+              "size": 1,
+              "title": "Compute associated with CRG",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              },
+              "noDataMessage": "No compute resources referencing a CRG were visible in the selected subscriptions.",
+              "noDataMessageStyle": 3
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "No"
+            },
+            "name": "query - compute-associated-with-crg"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "resources\n| where type in~ ('microsoft.compute/virtualmachines', 'microsoft.compute/virtualmachinescalesets', 'microsoft.compute/virtualmachinescalesets/virtualmachines')\n| extend CapacityReservationGroupId = tolower(tostring(coalesce(properties.capacityReservation.capacityReservationGroup.id, properties.virtualMachineProfile.capacityReservation.capacityReservationGroup.id)))\n| where isnotempty(CapacityReservationGroupId)\n| summarize ComputeReferences = count(), ReferencedCRGs = dcount(CapacityReservationGroupId) by ConsumerSubscriptionId = subscriptionId\n| top 20 by ComputeReferences desc",
+              "size": 0,
+              "title": "Compute references by consumer subscription",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "visualization": "barchart",
+              "showAnalytics": true,
+              "noDataMessage": "No compute resources referencing a CRG were visible in the selected subscriptions.",
+              "noDataMessageStyle": 3
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "No"
+            },
+            "name": "query - consumer-subscription-reference-chart"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"1.0.0\",\"content\":\"[{\\\"ConsumerSubscriptionId\\\":\\\"workload-sub-1\\\",\\\"ConsumerResourceGroup\\\":\\\"rg-ai-prod\\\",\\\"ResourceType\\\":\\\"microsoft.compute/virtualmachinescalesets\\\",\\\"ComputeResource\\\":\\\"vmss-a100-prod\\\",\\\"SKU\\\":\\\"Standard_NC96ads_A100_v4\\\",\\\"Region\\\":\\\"eastus2\\\",\\\"CapacityReservationGroup\\\":\\\"crg-gpu-eastus2-prod\\\",\\\"Workload\\\":\\\"AI training\\\",\\\"Owner\\\":\\\"platform-team\\\"},{\\\"ConsumerSubscriptionId\\\":\\\"workload-sub-2\\\",\\\"ConsumerResourceGroup\\\":\\\"rg-batch\\\",\\\"ResourceType\\\":\\\"microsoft.compute/virtualmachines\\\",\\\"ComputeResource\\\":\\\"vm-t4-001\\\",\\\"SKU\\\":\\\"Standard_NC16as_T4_v3\\\",\\\"Region\\\":\\\"eastus2\\\",\\\"CapacityReservationGroup\\\":\\\"crg-t4-eastus2-batch\\\",\\\"Workload\\\":\\\"Batch inference\\\",\\\"Owner\\\":\\\"ml-platform\\\"}]\",\"transformers\":null}",
+              "size": 1,
+              "title": "Sample compute associated with CRG",
+              "queryType": 8,
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "Yes"
+            },
+            "name": "query - sample-compute-associated-with-crg"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "resources\n| where type =~ 'microsoft.compute/capacityreservationgroups'\n| extend CapacityReservationGroupId = tolower(id)\n| extend ProviderSubscriptionId = subscriptionId\n| extend ProviderResourceGroup = resourceGroup\n| extend CapacityReservationGroup = name\n| extend Owner = tostring(coalesce(tags['owner'], tags['serviceOwner'], tags['applicationOwner'], tags['costCenterOwner'], 'Unassigned'))\n| extend Workload = tostring(coalesce(tags['workload'], tags['application'], tags['service'], 'Unassigned'))\n| extend CostCenter = tostring(coalesce(tags['costCenter'], tags['costcentre'], tags['billingCode'], 'Unassigned'))\n| extend SharingProfile = coalesce(properties.sharingProfile.subscriptionIds, dynamic([]))\n| extend SharedSubscriptionCount = array_length(SharingProfile)\n| extend SharedSubscriptionIds = iff(SharedSubscriptionCount == 0, dynamic([]), SharingProfile)\n| extend ShareLimitStatus = case(SharedSubscriptionCount >= 100, 'At 100 subscription limit', SharedSubscriptionCount >= 90, 'Near 100 subscription limit', SharedSubscriptionCount > 0, 'Shared', 'Not shared or ARG field unavailable')\n| project ProviderSubscriptionId, ProviderResourceGroup, CapacityReservationGroup, CapacityReservationGroupId, Location = location, Owner, Workload, CostCenter, SharedSubscriptionCount, ShareLimitStatus, SharedSubscriptionIds, Tags = tags\n| order by SharedSubscriptionCount desc, ProviderSubscriptionId asc, ProviderResourceGroup asc, CapacityReservationGroup asc",
+              "size": 1,
+              "title": "CRG provider subscription and sharing profile",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "showExportToExcel": true,
+              "noDataMessage": "No capacity reservation groups were found in the selected subscriptions.",
+              "noDataMessageStyle": 3,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "No"
+            },
+            "name": "query - crg-sharing-profile"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "let Reservations = resources\n| where type =~ 'microsoft.compute/capacityreservationgroups/capacityreservations'\n| extend CapacityReservationGroupId = tolower(tostring(split(id, '/capacityReservations/')[0]))\n| summarize ODCRResources = count(), ReservedVMUnits = sum(toint(sku.capacity)), NonSucceededReservations = countif(tostring(properties.provisioningState) !~ 'Succeeded') by CapacityReservationGroupId;\nresources\n| where type =~ 'microsoft.compute/capacityreservationgroups'\n| extend CapacityReservationGroupId = tolower(id)\n| extend Owner = tostring(coalesce(tags['owner'], tags['serviceOwner'], tags['applicationOwner'], tags['costCenterOwner'], 'Unassigned'))\n| extend AuthorizedConsumers = array_length(coalesce(properties.sharingProfile.subscriptionIds, dynamic([])))\n| join kind=leftouter Reservations on CapacityReservationGroupId\n| extend ODCRResources = coalesce(ODCRResources, 0), ReservedVMUnits = coalesce(ReservedVMUnits, 0), NonSucceededReservations = coalesce(NonSucceededReservations, 0)\n| extend Finding = case(Owner == 'Unassigned', 'Missing ownership metadata', AuthorizedConsumers >= 100, 'At consumer subscription limit', AuthorizedConsumers >= 90, 'Near consumer subscription limit', NonSucceededReservations > 0, 'Reservation provisioning issue', ODCRResources == 0, 'CRG has no reservations', 'No governance issue')\n| extend Action = case(Finding == 'Missing ownership metadata', 'Add owner, workload, and cost center tags', Finding == 'At consumer subscription limit', 'Remove obsolete consumers before onboarding another subscription', Finding == 'Near consumer subscription limit', 'Review authorized consumers', Finding == 'Reservation provisioning issue', 'Investigate non-succeeded reservations', Finding == 'CRG has no reservations', 'Validate intent and remove empty CRG if obsolete', 'None')\n| where Finding != 'No governance issue'\n| project ProviderSubscriptionId = subscriptionId, ResourceGroup = resourceGroup, CapacityReservationGroup = name, CapacityReservationGroupId, Location = location, Owner, ODCRResources, ReservedVMUnits, AuthorizedConsumers, NonSucceededReservations, Finding, Action\n| order by Finding asc, ReservedVMUnits desc",
+              "size": 1,
+              "title": "CRG governance action queue",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              },
+              "noDataMessage": "No CRG governance findings were detected in the selected subscriptions.",
+              "noDataMessageStyle": 3
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "No"
+            },
+            "name": "query - crg-governance-action-queue"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"1.0.0\",\"content\":\"[{\\\"ProviderSubscriptionId\\\":\\\"provider-sub\\\",\\\"ProviderResourceGroup\\\":\\\"rg-capacity\\\",\\\"CapacityReservationGroup\\\":\\\"crg-gpu-eastus2-prod\\\",\\\"CapacityReservationGroupId\\\":\\\"/subscriptions/provider-sub/resourcegroups/rg-capacity/providers/microsoft.compute/capacityreservationgroups/crg-gpu-eastus2-prod\\\",\\\"Location\\\":\\\"eastus2\\\",\\\"SharedSubscriptionCount\\\":3,\\\"ShareLimitStatus\\\":\\\"Shared\\\",\\\"SharedSubscriptionIds\\\":[\\\"/subscriptions/workload-sub-1\\\",\\\"/subscriptions/workload-sub-2\\\",\\\"/subscriptions/workload-sub-3\\\"]},{\\\"ProviderSubscriptionId\\\":\\\"provider-sub\\\",\\\"ProviderResourceGroup\\\":\\\"rg-capacity\\\",\\\"CapacityReservationGroup\\\":\\\"crg-t4-eastus2-batch\\\",\\\"CapacityReservationGroupId\\\":\\\"/subscriptions/provider-sub/resourcegroups/rg-capacity/providers/microsoft.compute/capacityreservationgroups/crg-t4-eastus2-batch\\\",\\\"Location\\\":\\\"eastus2\\\",\\\"SharedSubscriptionCount\\\":2,\\\"ShareLimitStatus\\\":\\\"Shared\\\",\\\"SharedSubscriptionIds\\\":[\\\"/subscriptions/workload-sub-2\\\",\\\"/subscriptions/workload-sub-4\\\"]}]\",\"transformers\":null}",
+              "size": 1,
+              "title": "Sample CRG provider subscription and sharing profile",
+              "queryType": 8,
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "Yes"
+            },
+            "name": "query - sample-crg-sharing-profile"
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "Consumers"
+      },
+      "name": "group - consumers"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "## Capacity\n\nAzure Resource Graph provides reservation inventory. Select a CRG above to query ARM Instance View, the authoritative operational snapshot for member reservation allocation, including `virtualMachinesAllocated`. Live utilization is currently reviewed one selected CRG at a time from the raw response; sample mode demonstrates the calculated reserved, allocated, available, and utilization fields.",
+              "style": "info"
+            },
+            "name": "text - instance-view-intro"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "resources\n| where type =~ 'microsoft.compute/capacityreservationgroups/capacityreservations'\n| extend CapacityReservationGroupId = tolower(tostring(split(id, '/capacityReservations/')[0]))\n| extend CapacityReservationGroup = tostring(split(CapacityReservationGroupId, '/')[8])\n| extend ReservedUnits = toint(sku.capacity)\n| extend Zone = tostring(coalesce(zones[0], 'Regional'))\n| extend Owner = tostring(coalesce(tags['owner'], tags['serviceOwner'], tags['applicationOwner'], tags['costCenterOwner'], 'Unassigned'))\n| extend Workload = tostring(coalesce(tags['workload'], tags['application'], tags['service'], 'Unassigned'))\n| extend CostCenter = tostring(coalesce(tags['costCenter'], tags['costcentre'], tags['billingCode'], 'Unassigned'))\n| project ProviderSubscriptionId = subscriptionId, ResourceGroup = resourceGroup, CapacityReservationGroup, CapacityReservationGroupId, Reservation = name, SKU = tostring(sku.name), Region = location, Zone, ReservedUnits, ReservationType = tostring(properties.reservationType), ProvisioningState = tostring(properties.provisioningState), Owner, Workload, CostCenter, Tags = tags, ReservationId = id\n| order by ProviderSubscriptionId asc, ResourceGroup asc, CapacityReservationGroup asc, Reservation asc",
+              "size": 1,
+              "title": "Reserved capacity inventory",
+              "queryType": 1,
+              "resourceType": "microsoft.resourcegraph/resources",
+              "crossComponentResources": [
+                "{Subscription}"
+              ],
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              },
+              "noDataMessage": "No capacity reservations were found in the selected subscriptions.",
+              "noDataMessageStyle": 3
+            },
+            "name": "query - reserved-capacity-inventory"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"ARMEndpoint/1.0\",\"data\":null,\"headers\":[],\"method\":\"GET\",\"path\":\"{SelectedCrg}\",\"urlParams\":[{\"key\":\"$expand\",\"value\":\"instanceView\"},{\"key\":\"api-version\",\"value\":\"2021-04-01\"}],\"batchDisabled\":false,\"transformers\":null}",
+              "size": 1,
+              "title": "Capacity Reservation Group Instance View (raw)",
+              "queryType": 12,
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 1000
+              },
+              "noDataMessage": "Select a capacity reservation group to query Instance View.",
+              "noDataMessageStyle": 3
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "No"
+            },
+            "name": "query - crg-instance-view-raw"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"1.0.0\",\"content\":\"[{\\\"CapacityReservationGroup\\\":\\\"crg-gpu-eastus2-prod\\\",\\\"Reservation\\\":\\\"cr-a100-01\\\",\\\"SKU\\\":\\\"Standard_NC96ads_A100_v4\\\",\\\"Region\\\":\\\"eastus2\\\",\\\"Zone\\\":\\\"1\\\",\\\"ReservedUnits\\\":100,\\\"AllocatedUnits\\\":60,\\\"AvailableSlaBackedUnits\\\":40,\\\"UtilizationPercent\\\":60.0,\\\"State\\\":\\\"Reserved capacity available\\\",\\\"Finding\\\":\\\"Review reservation quantity\\\"},{\\\"CapacityReservationGroup\\\":\\\"crg-t4-eastus2-batch\\\",\\\"Reservation\\\":\\\"cr-t4-01\\\",\\\"SKU\\\":\\\"Standard_NC16as_T4_v3\\\",\\\"Region\\\":\\\"eastus2\\\",\\\"Zone\\\":\\\"Regional\\\",\\\"ReservedUnits\\\":40,\\\"AllocatedUnits\\\":42,\\\"AvailableSlaBackedUnits\\\":0,\\\"UtilizationPercent\\\":105.0,\\\"State\\\":\\\"Reservation overallocated\\\",\\\"Finding\\\":\\\"Workload exceeds SLA-backed capacity\\\"}]\",\"transformers\":null}",
+              "size": 1,
+              "title": "Sample current capacity assessment",
+              "queryType": 8,
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 1000
+              }
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "Yes"
+            },
+            "name": "query - sample-current-capacity-assessment"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"1.0.0\",\"content\":\"[{\\\"CapacityReservationGroup\\\":\\\"crg-gpu-eastus2-prod\\\",\\\"UtilizationPercent\\\":60.0},{\\\"CapacityReservationGroup\\\":\\\"crg-t4-eastus2-batch\\\",\\\"UtilizationPercent\\\":105.0}]\",\"transformers\":null}",
+              "size": 0,
+              "title": "Sample CRG utilization",
+              "queryType": 8,
+              "visualization": "barchart",
+              "showAnalytics": true
+            },
+            "conditionalVisibility": {
+              "parameterName": "UseSampleData",
+              "comparison": "isEqualTo",
+              "value": "Yes"
+            },
+            "name": "query - sample-crg-utilization-chart"
+          },
+          {
+            "type": 1,
+            "content": {
+              "json": "### How to interpret\n\nFor each member reservation, `AllocatedUnits` is the length of `properties.instanceView.capacityReservations[].utilizationInfo.virtualMachinesAllocated`. Calculate `AvailableSlaBackedUnits = max(0, ReservedUnits - AllocatedUnits)`, `OverallocationUnits = max(0, AllocatedUnits - ReservedUnits)`, and `UtilizationPercent = AllocatedUnits / ReservedUnits * 100` when reserved units are greater than zero. Fewer allocated VMs means reserved capacity is available; equal means consumed; greater means overallocated and the excess VMs do not receive the capacity reservation SLA benefit. Low/high thresholds are organizational policy, not Azure limits.",
+              "style": "warning"
+            },
+            "name": "text - instance-view-interpretation"
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "Capacity"
+      },
+      "name": "group - capacity"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "## Guidance\n\n1. Use **Overview** for what is reserved, where it is, estate counts, and optional financial impact.\n2. Use **Capacity** to inspect SKU, region, zone, reserved units, and authoritative current allocation for a selected CRG.\n3. Use **Consumers** for authorized subscriptions, compute references, ownership tags, and the CRG governance action queue.\n4. Use **Cost** for actual unused ODCR cost, CRG rankings, trend, and the isolated/recurring/persistent waste classification.\n5. Before changing capacity, validate workload intent and whether the SKU, region, and zone support the reservation.\n\n### Action model\n\n- Current underuse, pressure, and overallocation come from ARM Instance View for the selected CRG.\n- Missing ownership, sharing-limit pressure, provisioning failures, and empty CRGs come from the governance action queue.\n- Persistent financial waste comes from FinOps hub billing when available.\n\n### Data caveats\n\n- ARG is eventually consistent and limited by selected subscription scope and reader access.\n- ARM Instance View is the source for current reservation allocation. The checked-in live response is raw until a verified JSONPath transform is exported.\n- The workbook relies on the FinOps hub derived `CapacityReservationId` and `CapacityReservationStatus` fields when FinOps hub mode is enabled.\n- Cost values come from `EffectiveCost` in the Hub database.\n- Shared CRGs are in preview and have provider/consumer subscription prerequisites and limits.\n- Low-inventory GPU and interconnect-sensitive workloads require separate capacity and placement validation.\n- This workbook is community-maintained and is not officially supported by Microsoft or the FinOps toolkit team."
+            },
+            "name": "text - how-to-use"
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "Guidance"
+      },
+      "name": "group - guidance"
+    }
+  ],
+  "fallbackResourceIds": [
+    "Azure Monitor"
+  ]
+}
