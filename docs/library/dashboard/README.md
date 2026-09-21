@@ -78,6 +78,8 @@ Use the standalone ODCR operations workbook for:
 - VM and VMSS references to the full CRG resource ID;
 - current allocated units, available SLA-backed units, and overallocation from
 	ARM Instance View for the selected CRG;
+- direct Azure Cost Management actual cost for one selected subscription when
+	FinOps hub is not used;
 - governance findings such as missing ownership, sharing-limit pressure,
 	provisioning failures, and empty CRGs.
 

@@ -4,7 +4,7 @@
     {
       "type": 1,
       "content": {
-        "json": "# ODCR operations\n\nUse Azure Resource Graph and ARM Instance View to manage capacity reservation groups (CRGs), reservation inventory, ownership, consumer relationships, and current allocation. FinOps hub is an optional enrichment layer for historical used and unused ODCR cost.\n\nFor supported pools, provider subscriptions can own and share CRGs with eligible workload subscriptions. Running VM charges follow the consuming subscription; unused ODCR capacity remains billed to the provider subscription."
+        "json": "# ODCR operations\n\nUse Azure Resource Graph and ARM Instance View to manage capacity reservation groups (CRGs), reservation inventory, ownership, consumer relationships, and current allocation. Azure Cost Management provides direct actual cost for capacity reservation resources; FinOps hub is an optional enrichment layer for FOCUS cost and status analysis.\n\nFor supported pools, provider subscriptions can own and share CRGs with eligible workload subscriptions. Running VM charges follow the consuming subscription; unused ODCR capacity remains billed to the provider subscription."
       },
       "name": "text - workbook-title"
     },
@@ -38,7 +38,7 @@
             "name": "UseFinOpsHub",
             "label": "Use FinOps hub billing data",
             "type": 10,
-            "description": "Set to Yes when the FinOps hub ADX database is available. Set to No to use Azure Resource Graph inventory and ARM Instance View without financial enrichment.",
+            "description": "Set to Yes to use FinOps hub FOCUS data. Set to No to use direct Azure Cost Management actual cost for one selected subscription.",
             "isRequired": true,
             "typeSettings": {
               "additionalResourceOptions": [],
@@ -107,7 +107,7 @@
             "id": "4a6f5e4d-1b0a-4f9e-8c3d-4567890abcde",
             "version": "KqlParameterItem/1.0",
             "name": "Subscription",
-            "label": "Subscription",
+            "label": "Subscriptions",
             "type": 6,
             "isRequired": true,
             "multiSelect": true,
@@ -124,6 +124,21 @@
             "value": [
               "value::all"
             ]
+          },
+          {
+            "id": "5b706f5e-2c1b-40af-9d4e-567890abcdea",
+            "version": "KqlParameterItem/1.0",
+            "name": "CostSubscription",
+            "label": "Cost Management subscription",
+            "type": 6,
+            "description": "Select one subscription for direct Cost Management queries when FinOps hub billing data is No. Requires Cost Management Reader or equivalent access.",
+            "isRequired": false,
+            "typeSettings": {
+              "additionalResourceOptions": [],
+              "includeAll": false,
+              "showDefault": false
+            },
+            "value": null
           },
           {
             "id": "2df7e6c5-9382-4716-8eb5-2cdef1234567",
@@ -218,7 +233,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## ODCR operations\n\nStart here for estate inventory and optional financial impact. Azure Resource Graph answers what exists and how it is related, ARM Instance View answers what is allocated now for a selected CRG, and FinOps hub answers what that capacity cost historically.\n\nThe gating question is whether the specific SKU, region, and zone can support ODCR reservation behavior. For constrained GPU inventory or tightly interconnected cluster workloads, validate the capacity and placement path before changing reserved capacity.",
+              "json": "## ODCR operations\n\nStart here for estate inventory and optional financial impact. Azure Resource Graph answers what exists and how it is related, ARM Instance View answers what is allocated now for a selected CRG, Azure Cost Management provides direct cost data, and FinOps hub optionally adds normalized FOCUS analysis and historical used-versus-unused classification.\n\nThe gating question is whether the specific SKU, region, and zone can support ODCR reservation behavior. For constrained GPU inventory or tightly interconnected cluster workloads, validate the capacity and placement path before changing reserved capacity.",
               "style": "upsell"
             },
             "name": "text - overview-intro"
@@ -296,7 +311,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Financial enrichment unavailable\n\nFinOps hub billing data is disabled. Capacity inventory and consumer relationships remain available from Azure Resource Graph, and current allocation remains available from ARM Instance View for the selected CRG. Enable **Use FinOps hub billing data** and set the ADX cluster/database parameters to add historical unused ODCR cost.",
+              "json": "## Direct Cost Management mode\r\n\r\nFinOps hub billing data is disabled. Select one **Cost Management subscription** to query actual cost associated with capacity reservation resources. Capacity inventory and consumer relationships remain available across the selected **Subscriptions** from Azure Resource Graph, and current allocation remains available from ARM Instance View. Enable FinOps hub for cross-estate FOCUS `EffectiveCost`, used-versus-unused status, and persistence classification.",
               "style": "warning"
             },
             "conditionalVisibility": {
@@ -385,7 +400,7 @@
           {
             "type": 1,
             "content": {
-              "json": "### Source of truth\n\n- **Inventory and relationships** come from Azure Resource Graph.\n- **Current allocation** comes from ARM Instance View for the selected CRG and is the operational source of truth.\n- **Actual unused ODCR cost** comes from FinOps hub billing records and is the financial source of truth.\n- **Shared CRG billing split** means running VM charges follow the consumer subscription, while idle reserved units remain billed to the provider subscription.\n\nWhen a workload releases reserved capacity, that capacity becomes available for another eligible workload associated with the shared CRG.\n\nUse Capacity to inspect reservations and current allocation, Consumers to review references and authorization, and Cost to confirm persistent billed waste.",
+              "json": "### Source of truth\n\n- **Inventory and relationships** come from Azure Resource Graph.\n- **Current allocation** comes from ARM Instance View for the selected CRG and is the operational source of truth.\n- **Financial data** comes from Azure Cost Management in direct mode or FinOps hub when enhanced FOCUS analysis is enabled. Direct mode reports actual cost associated with capacity reservation resources. FinOps hub adds `CapacityReservationStatus`, `EffectiveCost`, and historical persistence analysis when those fields are populated.\n- **Shared CRG billing split** means running VM charges follow the consumer subscription, while idle reserved units remain billed to the provider subscription.\n\nWhen a workload releases reserved capacity, that capacity becomes available for another eligible workload associated with the shared CRG.\n\nUse Capacity to inspect reservations and current allocation, Consumers to review references and authorization, and Cost to confirm persistent billed waste.",
               "style": "info"
             },
             "customWidth": "35",
@@ -555,10 +570,59 @@
           {
             "type": 1,
             "content": {
-              "json": "## Cost requires FinOps hub data\n\nSet **Use FinOps hub billing data** to **Yes**, then enter the ADX cluster name and database name to enable actual unused ODCR cost, trends, and billing-backed CRG rankings.\n\nWithout FinOps hub data, Capacity still provides reservation inventory and selected-CRG Instance View, while Consumers provides sharing authorization and compute references.",
+              "json": "## Direct Azure Cost Management\r\n\r\nUnused capacity reservations generate capacity reservation charges. Direct Cost Management mode queries cost associated with capacity reservation resources in the selected **Cost Management subscription**, providing a direct financial signal without requiring FinOps hub.\r\n\r\nDirect mode uses `ActualCost` and `PreTaxCost`; it is not FOCUS `EffectiveCost`. Results are limited by RBAC to one selected subscription. FinOps hub remains the cross-estate path for used-versus-unused status, normalized history, and persistence classification.",
               "style": "info"
             },
             "name": "text - billing-disabled"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"ARMEndpoint/1.0\",\"data\":\"{\\r\\n  \\\"type\\\": \\\"ActualCost\\\",\\r\\n  \\\"timeframe\\\": \\\"Custom\\\",\\r\\n  \\\"timePeriod\\\": {\\r\\n    \\\"from\\\": \\\"{LookbackPeriod:startISO}\\\",\\r\\n    \\\"to\\\": \\\"{LookbackPeriod:endISO}\\\"\\r\\n  },\\r\\n  \\\"dataset\\\": {\\r\\n    \\\"granularity\\\": \\\"None\\\",\\r\\n    \\\"filter\\\": {\\r\\n      \\\"dimensions\\\": {\\r\\n        \\\"name\\\": \\\"ResourceType\\\",\\r\\n        \\\"operator\\\": \\\"In\\\",\\r\\n        \\\"values\\\": [\\\"microsoft.compute/capacityreservationgroups/capacityreservations\\\"]\\r\\n      }\\r\\n    },\\r\\n    \\\"aggregation\\\": {\\r\\n      \\\"totalCost\\\": {\\r\\n        \\\"name\\\": \\\"PreTaxCost\\\",\\r\\n        \\\"function\\\": \\\"Sum\\\"\\r\\n      }\\r\\n    },\\r\\n    \\\"grouping\\\": [\\r\\n      {\\r\\n        \\\"type\\\": \\\"Dimension\\\",\\r\\n        \\\"name\\\": \\\"ResourceId\\\"\\r\\n      }\\r\\n    ]\\r\\n  }\\r\\n}\",\"headers\":[],\"method\":\"POST\",\"path\":\"/subscriptions/{CostSubscription:id}/providers/Microsoft.CostManagement/query?\",\"urlParams\":[{\"key\":\"api-version\",\"value\":\"2023-11-01\"}],\"batchDisabled\":true,\"transformers\":[{\"type\":\"jsonpath\",\"settings\":{\"tablePath\":\"$.properties\",\"columns\":[]}}]}",
+              "size": 0,
+              "title": "Unused ODCR actual cost by reservation resource",
+              "queryType": 12,
+              "showExportToExcel": true,
+              "gridSettings": {
+                "filter": true,
+                "rowLimit": 5000
+              },
+              "noDataMessage": "No capacity reservation resource cost was returned for the selected subscription and period.",
+              "noDataMessageStyle": 3
+            },
+            "conditionalVisibility": {
+              "parameterName": "CostSubscription",
+              "comparison": "isNotEqualTo"
+            },
+            "name": "query - direct-cost-management-reservations"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "{\"version\":\"ARMEndpoint/1.0\",\"data\":\"{\\r\\n  \\\"type\\\": \\\"ActualCost\\\",\\r\\n  \\\"timeframe\\\": \\\"Custom\\\",\\r\\n  \\\"timePeriod\\\": {\\r\\n    \\\"from\\\": \\\"{LookbackPeriod:startISO}\\\",\\r\\n    \\\"to\\\": \\\"{LookbackPeriod:endISO}\\\"\\r\\n  },\\r\\n  \\\"dataset\\\": {\\r\\n    \\\"granularity\\\": \\\"Daily\\\",\\r\\n    \\\"filter\\\": {\\r\\n      \\\"dimensions\\\": {\\r\\n        \\\"name\\\": \\\"ResourceType\\\",\\r\\n        \\\"operator\\\": \\\"In\\\",\\r\\n        \\\"values\\\": [\\\"microsoft.compute/capacityreservationgroups/capacityreservations\\\"]\\r\\n      }\\r\\n    },\\r\\n    \\\"aggregation\\\": {\\r\\n      \\\"totalCost\\\": {\\r\\n        \\\"name\\\": \\\"PreTaxCost\\\",\\r\\n        \\\"function\\\": \\\"Sum\\\"\\r\\n      }\\r\\n    },\\r\\n    \\\"grouping\\\": [\\r\\n      {\\r\\n        \\\"type\\\": \\\"Dimension\\\",\\r\\n        \\\"name\\\": \\\"ResourceId\\\"\\r\\n      }\\r\\n    ]\\r\\n  }\\r\\n}\",\"headers\":[],\"method\":\"POST\",\"path\":\"/subscriptions/{CostSubscription:id}/providers/Microsoft.CostManagement/query?\",\"urlParams\":[{\"key\":\"api-version\",\"value\":\"2023-11-01\"}],\"batchDisabled\":true,\"transformers\":[{\"type\":\"jsonpath\",\"settings\":{\"tablePath\":\"$.properties\",\"columns\":[]}}]}",
+              "size": 0,
+              "title": "Unused ODCR actual cost by day",
+              "queryType": 12,
+              "visualization": "barchart",
+              "showAnalytics": true,
+              "showExportToExcel": true,
+              "chartSettings": {
+                "xAxis": "UsageDate",
+                "yAxis": [
+                  "PreTaxCost"
+                ],
+                "group": "ResourceId"
+              },
+              "noDataMessage": "No daily capacity reservation resource cost was returned for the selected subscription and period.",
+              "noDataMessageStyle": 3
+            },
+            "conditionalVisibility": {
+              "parameterName": "CostSubscription",
+              "comparison": "isNotEqualTo"
+            },
+            "name": "query - direct-cost-management-trend"
           }
         ]
       },
@@ -574,7 +638,7 @@
           "value": "No"
         }
       ],
-      "name": "group - cost-disabled"
+      "name": "group - direct-cost-management"
     },
     {
       "type": 12,
@@ -870,7 +934,7 @@
           {
             "type": 1,
             "content": {
-              "json": "## Guidance\n\n1. Use **Overview** for what is reserved, where it is, estate counts, and optional financial impact.\n2. Use **Capacity** to inspect SKU, region, zone, reserved units, and authoritative current allocation for a selected CRG.\n3. Use **Consumers** for authorized subscriptions, compute references, ownership tags, and the CRG governance action queue.\n4. Use **Cost** for actual unused ODCR cost, CRG rankings, trend, and the isolated/recurring/persistent waste classification.\n5. Before changing capacity, validate workload intent and whether the SKU, region, and zone support the reservation.\n\n### Action model\n\n- Current underuse, pressure, and overallocation come from ARM Instance View for the selected CRG.\n- Missing ownership, sharing-limit pressure, provisioning failures, and empty CRGs come from the governance action queue.\n- Persistent financial waste comes from FinOps hub billing when available.\n\n### Data caveats\n\n- ARG is eventually consistent and limited by selected subscription scope and reader access.\n- ARM Instance View is the source for current reservation allocation. The checked-in live response is raw until a verified JSONPath transform is exported.\n- The workbook relies on the FinOps hub derived `CapacityReservationId` and `CapacityReservationStatus` fields when FinOps hub mode is enabled.\n- Cost values come from `EffectiveCost` in the Hub database.\n- Shared CRGs are in preview and have provider/consumer subscription prerequisites and limits.\n- Low-inventory GPU and interconnect-sensitive workloads require separate capacity and placement validation.\n- This workbook is community-maintained and is not officially supported by Microsoft or the FinOps toolkit team."
+              "json": "## Guidance\r\n\r\n1. Use **Overview** for what is reserved, where it is, estate counts, and financial impact.\r\n2. Use **Capacity** to inspect SKU, region, zone, reserved units, and authoritative current allocation for a selected CRG.\r\n3. Use **Consumers** for authorized subscriptions, compute references, ownership tags, and the CRG governance action queue.\r\n4. Use **Cost** with FinOps hub set to **No** for direct Cost Management actual cost in one selected subscription. Set it to **Yes** for cross-estate FOCUS `EffectiveCost`, used-versus-unused status, and persistence.\r\n5. Before changing capacity, validate workload intent and whether the SKU, region, and zone support the reservation.\r\n\r\n### Action model\r\n\r\n- Current underuse, pressure, and overallocation come from ARM Instance View for the selected CRG.\r\n- Missing ownership, sharing-limit pressure, provisioning failures, and empty CRGs come from the governance action queue.\r\n- Direct capacity-reservation actual cost comes from Cost Management for the selected cost subscription.\r\n- Enhanced financial status and persistence come from FinOps hub when its ODCR fields are populated.\r\n\r\n### Data caveats\r\n\r\n- ARG is eventually consistent and limited by selected subscription scope and reader access.\r\n- ARM Instance View is the source for current reservation allocation. The checked-in live response is raw until a verified JSONPath transform is exported.\r\n- Direct Cost Management mode issues one `ActualCost`/`PreTaxCost` query for the selected Cost Management subscription. Use FinOps hub or an export-based approach for cross-estate historical analysis.\r\n- Direct mode does not provide FOCUS `CapacityReservationStatus`. FinOps mode relies on the hub-derived `CapacityReservationId` and `CapacityReservationStatus` fields and uses `EffectiveCost`.\r\n- Shared CRGs are in preview and have provider/consumer subscription prerequisites and limits.\r\n- Low-inventory GPU and interconnect-sensitive workloads require separate capacity and placement validation.\r\n- This workbook is community-maintained and is not officially supported by Microsoft or the FinOps toolkit team."
             },
             "name": "text - how-to-use"
           }
